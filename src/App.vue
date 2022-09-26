@@ -59,6 +59,7 @@ export default {
 
   mounted() {
     this.getSelectionText()
+    console.log(this.$i18n.locale)
   }
 }
 </script>

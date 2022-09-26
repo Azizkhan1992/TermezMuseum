@@ -9,12 +9,8 @@ import store from './store'
 import './styles/mainStyles.scss'
 import Vuelidate from 'vuelidate'
 
+import {i18n} from "@/plugins/i18n"
 
-import VueI18n from 'vue-i18n'
-
-
-
-Vue.use(VueI18n)
 Vue.use( Vuelidate )
 
 
@@ -23,6 +19,7 @@ Vue.use( Vuelidate )
 Vue.config.productionTip = false
 
 new Vue({
+  i18n,
   router,
   store,
   render: h => h(App)
