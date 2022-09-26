@@ -40,7 +40,7 @@
       </div>
 
       <div class="w-a">
-        <button class="primPaginator w-2 h-48p gap-12">
+        <button class="primPaginator primPagGo w-2 h-48p gap-12">
         <span>Go</span>
         <Icons
           icon="arrRight"

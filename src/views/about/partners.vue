@@ -16,12 +16,12 @@
     </div>
 
 
-    <div class="w-100 d-f fd-c gap-24">
+    <div class="w-100 d-f fd-c gap-24 partner-cards">
     
       <!-- Card Start -->
     
       <div 
-        class="w-100 h-240p bor-r-20 ovr-hidden backgrnd-white"
+        class="w-100 h-240p bor-r-20 ovr-hidden backgrnd-white partner-card"
         v-for="partner in allPartners"
         :key="partner.id"
       >
@@ -42,7 +42,7 @@
             <a target="_blanc" :href="partner.website" class="mainers">{{cuttingUrl(partner.website)}}</a>
           </div>
 
-          <div class="w-100 mt-24 gap-48">
+          <div class="w-100 mt-24 gap-48 partner-phone">
             <div class="w-a d-f fd-r align-c gap-12">
             <Icons
               icon="phone"
