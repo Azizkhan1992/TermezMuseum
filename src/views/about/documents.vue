@@ -11,7 +11,7 @@
       <!-- Card Start -->
 
       <div
-        class="w-100 h-152p backgrnd-white pad-24p ovr-hidden bor-r-20 box-brb align-c justify-c gap-24"
+        class="w-100 h-152p backgrnd-white pad-24p ovr-hidden bor-r-20 box-brb align-c justify-c gap-24 document-card"
         v-for="doc in allDocuments"
         :key="doc.id"
       >
@@ -20,7 +20,7 @@
           
           <p class="commonD bold h-60p">{{doc.title}}</p>
           
-          <div class="w-100 mt-a gap-48">
+          <div class="w-100 mt-a gap-48 document-dates">
             <div class="w-a d-f fd-r align-c gap-12">
               <Icons
                 icon="calendar"

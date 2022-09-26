@@ -45,6 +45,15 @@
     }
     .commonD{
         font-size: 1rem;
+        height: unset;
+    }
+    .vacancy-card{
+        .h-104p {
+            height: unset;
+        }
+        .helpers{
+            white-space: nowrap;
+        }
     }
 }
 @media (max-width: 900px){
@@ -90,5 +99,32 @@
     }
     .h-64p{
         height: 48px;
+    }
+    .commonD{
+        font-size: 0.75rem;
+        height: unset;
+    }
+    .document-card{
+        height: 100%;
+        overflow: unset;
+        .h-104p {
+             width: 246px;
+             height: unset; 
+        }
+    }
+    .document-dates{
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 20px;
+        .ml-a{
+            margin-left: unset;
+        }
+    }
+    
+    .grid-2{
+        grid-template-columns: auto;
+    }
+    .vacancy-card{
+        height: auto;
     }
 }
