@@ -1,11 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import {i18n} from "@/plugins/i18n"
+// const {locale} = i18n
 Vue.use(VueRouter)
 
 const routes = [
+  { path: '/', redirect: `/${i18n.locale}`},
   {
+    path: "/:lang",
+    async beforeEnter(to, from, next) {
+      console.log(i18n.locale);
+      if (!i18n.availableLocales.includes(to.params.lang)) {
+        window.location.replace(`${i18n.fallbackLocale}${to.path}`);
+      } else {
+        next();
+      }
+    },
+    component: {
+      render(c) {
+        return c("router-view");
+      }
+    },
+  children:[{
     path: '/',
     name: 'home',
     meta: {layout: 'main'},
@@ -292,7 +309,7 @@ const routes = [
     name: 'bankCardsSinglePage',
     meta: {layout: 'main'},
     component: () => import('../views/services/bankCardsSingle.vue')
-  },
+  },]}
 ]
 
 const router = new VueRouter({

@@ -104,9 +104,10 @@ export default {
     menuChanger() {
       let len = this.sections.length
       const menus = []
-
       for (let i = 0; i < len; i ++) {
         menus.push(this.sections[i].pages.filter(obj => obj.link == this.currentPath))
+        console.log(88,this.sections[i].pages);
+        console.log(99,this.currentPath);
       }
 
       const index = menus.findIndex((obj) => Object.keys(obj).length !== 0);
@@ -125,14 +126,14 @@ export default {
 
   watch: {
     '$route'() {
-      this.currentPath = '/' + window.location.pathname.split('/')[1]
+      this.currentPath = '/' + window.location.pathname.split('/')[2]
       this.menuChanger()
     }
   },
 
   mounted() {
     this.sectionSelector()
-    this.currentPath = '/' + window.location.pathname.split('/')[1]
+    this.currentPath = '/' + window.location.pathname.split('/')[2]
     this.menuChanger()
   }
 }
