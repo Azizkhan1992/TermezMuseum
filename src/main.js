@@ -1,0 +1,29 @@
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+
+
+
+import './styles/mainStyles.scss'
+import Vuelidate from 'vuelidate'
+
+
+import VueI18n from 'vue-i18n'
+
+
+
+Vue.use(VueI18n)
+Vue.use( Vuelidate )
+
+
+
+
+Vue.config.productionTip = false
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
