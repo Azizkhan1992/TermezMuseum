@@ -105,9 +105,7 @@ export default {
       let len = this.sections.length
       const menus = []
       for (let i = 0; i < len; i ++) {
-        menus.push(this.sections[i].pages.filter(obj => obj.link == this.currentPath))
-        console.log(88,this.sections[i].pages);
-        console.log(99,this.currentPath);
+        menus.push(this.sections[i].pages.filter(obj => obj.link == (this.currentPath)))
       }
 
       const index = menus.findIndex((obj) => Object.keys(obj).length !== 0);

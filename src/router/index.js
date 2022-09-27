@@ -6,23 +6,8 @@ import {i18n} from "@/plugins/i18n"
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', redirect: `/${i18n.locale}`},
+  // { path: '/', redirect: `/${i18n.locale}/`},
   {
-    path: "/:lang",
-    async beforeEnter(to, from, next) {
-      console.log(i18n.locale);
-      if (!i18n.availableLocales.includes(to.params.lang)) {
-        window.location.replace(`${i18n.fallbackLocale}${to.path}`);
-      } else {
-        next();
-      }
-    },
-    component: {
-      render(c) {
-        return c("router-view");
-      }
-    },
-  children:[{
     path: '/',
     name: 'home',
     meta: {layout: 'main'},
@@ -309,9 +294,13 @@ const routes = [
     name: 'bankCardsSinglePage',
     meta: {layout: 'main'},
     component: () => import('../views/services/bankCardsSingle.vue')
-  },]}
+  },
+
 ]
 
+routes.forEach(el=>{
+  el.path = '/'+i18n.locale+el.path
+})
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -320,5 +309,15 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 })
+router.beforeEach((to,from,next)=>{
+  if(to.path == '/'){
+    next('/'+i18n.locale+'/')
+  }else if(to.path.split('/')[1]!=i18n.locale){
+    let path = '/'+i18n.locale+'/'+to.path
+    next(path)
+  }else {
 
+    next()
+  }
+})
 export default router
