@@ -3,7 +3,7 @@
     @click.self="closeMenu"
     class="sideMenu"
   >
-    <div class="menuBar">
+    <div class="menuBar" >
       <div class="w-100 justify-r">
         <div
           @click="closeMenu"
@@ -27,7 +27,7 @@
                 {{lang.name}}
               </p>
         </div>
-              <div class="mobile-icon-btn">
+              <div class="tablet-icon-btn">
                 <button
                     class="icon-btn"
                   >
@@ -63,6 +63,72 @@
                       size="24"
                     />
                   </button>
+              </div>
+              <div class="mobile-icon-btn">
+                <div class="mobile-icon">
+                  <button
+                    class="icon-btn"
+                  >
+                    <Icons
+                      icon="glasses"
+                      size="24"
+                    />
+                  </button>
+
+                  <button
+                    class="icon-btn"
+                    @click="goToSitemap"
+                  >
+                    <Icons
+                      icon="sitemap"
+                      size="24"
+                    />
+                  </button>
+
+                  <button
+                    class="icon-btn"
+                  >
+                    <Icons
+                      icon="vr"
+                      size="24"
+                    />
+                  </button>
+                  <button
+                    class="icon-btn"
+                  >
+                    <Icons
+                      icon="profile"
+                      size="24"
+                    />
+                  </button>
+                </div>
+                  <div class="search__phone">
+                    <div
+                      @click="openSearch"
+                      class="searchInput"
+                    >
+                      <Icons
+                        icon="search"
+                        size="24"
+                      />
+
+                      <p class="placeholder">Искать...</p>
+                    </div>
+                      <a href="tel: +998900073118"
+                        class="icon-txt-btn"
+                      >
+                        <Icons
+                          icon="phone"
+                          size="middle"
+                        />
+                        <span>76 224-30-17</span>
+                      </a>
+                    <button
+                      class="accent-btn"
+                    >
+                      <span>Онлайн билет</span>
+                    </button>
+                  </div>
               </div>
             <div
               v-for="menu in menuLinks"
@@ -205,6 +271,9 @@ export default {
       },
       });
       this.$router.go()
+    },
+    openSearch() {
+      this.$emit('openSearch')
     },
     
     goToSitemap() {

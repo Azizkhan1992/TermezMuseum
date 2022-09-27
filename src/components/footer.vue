@@ -1,7 +1,8 @@
 <template>
   <div class="footer mt-120 pos-rel">
     <div class="w-12 mt-24 z-idx2">
-      <div class="w-100 gap-24 mb-16">
+      <div class="footer-top">
+        <div class="w-4 gap-24 mb-16 footer-logo-img">
         <footerLogo />
 
         <div class="w-100 fd-c justify-sb">
@@ -12,7 +13,25 @@
           <p class="logoTitle">Музей</p>
         </div>
       </div>
+      <div class="w-8">
+        <div class="w-4 d-f fd-r justify-sb site-footer-top-text">
+          <img
+            class="h-32p"
+            src="@/assets/temporary/metrika-badge.png"
+            alt=""
+          />
 
+          <a
+            class="developerCompany d-f fd-r gap-12"
+            :href="developers"
+            target="_blanc"
+          >
+            <h2 class="developers">Developed by</h2>
+            <img class="h-32p" src="@/assets/temporary/daac.png" alt="" />
+          </a>
+        </div>
+      </div>
+      </div>
       <div class="footer-menu-block gap-24">
         <div class="w-9 fd-r gap-24 d-f">
           <div
@@ -133,7 +152,7 @@
 
             <!-- Social Networks Stop -->
           </div>
-          <div class="infoSection mobile">
+          <div class="infoSection tablet">
             <!-- Address Start -->
 
             <div class="footer-contact">
@@ -148,7 +167,7 @@
 
             <!-- Schedule Start -->
             <div class="footer-contact">
-              <h3 class="mt-64">Schedule</h3>
+              <h3>Schedule</h3>
               <div class="infoPart mt-28">
                 <Icons icon="clock" size="middle" color="white" />
                 <div class="d-f fd-c gap-12">
@@ -189,12 +208,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Schedule Stop -->
-
-            <!-- Contacts Start -->
-
-            <div class="footer-contact">
               <div class="infoPart mt-12">
                 <Icons icon="mail" size="middle" color="white" />
                 <div class="d-f fd-c gap-12">
@@ -207,6 +220,10 @@
                 </div>
               </div>
             </div>
+            <!-- Schedule Stop -->
+
+            <!-- Contacts Start -->
+
 
             <!-- Contacts Stop -->
 
@@ -224,7 +241,7 @@
                     >
                       <img
                         :src="
-                          require('@/assets/icons/' + social.network + '.svg')
+                          require('@/assets/icons/' + social.network + '_blue.svg')
                         "
                         alt=""
                       />
