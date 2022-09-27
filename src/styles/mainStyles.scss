@@ -111,7 +111,8 @@ background: $prim;
 	flex-direction: column;
 	align-items: center;
 	height: fit-content;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
+	width: 100vw;
 	background-image: url('../assets/static/BG.png');
 	background-size: 100vw
 }
@@ -294,7 +295,8 @@ background: $prim;
 ///// Component styles /////
 .menu {
 	z-index: 105;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
+	width: 100%;
 	height: max-content;
 	display: flex;
 	flex-direction: column;
@@ -859,7 +861,8 @@ background: $prim;
 	display: flex;
 	flex-direction: row;
 	gap: 24px;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
+	width: 100vw;
 	height: 100vh;
 	background: linear-gradient(244.25deg, #4A391F 0%, #4F83A2 100%);
 	overflow: hidden;
@@ -4396,8 +4399,43 @@ input {
 			width: 100%;
 		}
 	}
+	.slider-item {
+		height: calc(100vh - 48px);
+		left: 24px;
+		right: 24px;
+		.title {
+			width: calc(100% - 30px);
+			left: 20px;
+			font-size: 2rem;
+			line-height: 40px;
+		}
+		button {
+			width: 90%;
+			left: 18px;
+		}
+	}
 }
 @media (max-width:470px){
+	.block[name=museumShop] {
+		.shopCard h3 {
+			height: 24px;
+		}
+	}
+	.newsCard-big .newsContent {
+		width: calc(100% - 48px);
+	}
+	.sliderWrapper {
+		width: 100vw;
+	}
+	.shopCard.shown button{
+		width: 90% !important;
+	}
+	.subscribe,.footer {
+		width: 100vw;
+	}
+	.block{
+		width: 95%;
+	}
 	.feedbackButton.gap-12{
 		display: none;
 	}
@@ -4789,7 +4827,7 @@ input {
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	overflow: scroll;
+	overflow: hidden;
 	top: 0;
 	left: 0;
 	padding: 60px;
