@@ -11,6 +11,7 @@
       v-if="text.length"
       :class="this.color"
     >
+      <span>{{this.title}}</span>
       {{this.text}}
     </p>
   </div>
@@ -32,6 +33,7 @@ export default {
       default: ''
     },
     text: String,
+    title: String,
     lastItem: {
       type: Boolean,
       default: false

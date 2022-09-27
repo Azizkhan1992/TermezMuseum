@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import {i18n} from "@/plugins/i18n"
-// const {locale} = i18n
 Vue.use(VueRouter)
 
 const routes = [
@@ -298,9 +296,6 @@ const routes = [
 
 ]
 
-routes.forEach(el=>{
-  el.path = '/'+i18n.locale+el.path
-})
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -309,15 +304,5 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 })
-router.beforeEach((to,from,next)=>{
-  if(to.path == '/'){
-    next('/'+i18n.locale+'/')
-  }else if(to.path.split('/')[1]!=i18n.locale){
-    let path = '/'+i18n.locale+'/'+to.path
-    next(path)
-  }else {
 
-    next()
-  }
-})
 export default router

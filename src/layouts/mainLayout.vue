@@ -19,8 +19,15 @@
   
     <header-menu
       @openSearch="openSearch"
+      @openSideMenu="sideMenuIsOpen = true"
     />
    
+    <!-- SideBar Menu Component -->
+
+      <sideMenu
+        v-if="sideMenuIsOpen"
+        @closeMenu="sideMenuIsOpen = false"
+      />
     <div class="contentView">
       <router-view/>
     </div>
@@ -52,6 +59,7 @@ import newFeedback from '@/views/modalWindows/newFeedback.vue'
 import scrollToTop from '@/components/scrollToTop.vue'
 import sideBar from '@/components/sideBar.vue'
 import searchWindow from '@/views/modalWindows/searchWindow.vue'
+import sideMenu from '@/components/sideMenu.vue'
 
 export default {
   name: 'mainLayoout',
@@ -63,7 +71,8 @@ export default {
     newFeedback,
     scrollToTop,
     sideBar,
-    searchWindow
+    searchWindow,
+    sideMenu
   },
 
   data() {
@@ -74,7 +83,8 @@ export default {
       sections: [],
       menuList: [],
       currentPage: '',
-      searchModalOpen: false
+      searchModalOpen: false,
+      sideMenuIsOpen: false
     }
   },
 
@@ -124,14 +134,14 @@ export default {
 
   watch: {
     '$route'() {
-      this.currentPath = '/' + window.location.pathname.split('/')[2]
+      this.currentPath = '/' + window.location.pathname.split('/')[1]
       this.menuChanger()
     }
   },
 
   mounted() {
     this.sectionSelector()
-    this.currentPath = '/' + window.location.pathname.split('/')[2]
+    this.currentPath = '/' + window.location.pathname.split('/')[1]
     this.menuChanger()
   }
 }

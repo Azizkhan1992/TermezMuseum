@@ -25,7 +25,8 @@
 
         <iconText
           icon="eye"
-          text="Просмотрели 1 396"
+          title="Просмотрели"
+          text="1 396"
         />
 
         <iconText

@@ -59,6 +59,8 @@ export default {
 
   mounted() {
     this.getSelectionText()
+    this.$i18n.locale = localStorage.lang || 'uz'
+    setTimeout(()=>{this.off()},2000)
   }
 }
 </script>

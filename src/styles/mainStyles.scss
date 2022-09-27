@@ -591,7 +591,9 @@ background: $prim;
 		}
 	}
 }
-
+.burgerMenuBtn {
+	display: none !important;
+}
 .contactsBlock {
 
 	.infoSection {
@@ -602,7 +604,9 @@ background: $prim;
 			letter-spacing: 0.04em;
 			color: $white;
 		}
-
+		&.mobile{
+			display: none;
+		}
 		.infoPart {
 			display: flex;
 			flex-direction: row;
@@ -1851,7 +1855,9 @@ button {
 		transition: all 300ms ease-out;
 	}
 }
-
+.mobile-icon-btn{
+	display: none;
+}
 .paginatorWrapper {
 	display: flex;
 	flex-direction: row;
@@ -3725,7 +3731,214 @@ input {
   user-select: none;
 	animation: validationError 300ms;
 }
+@media (max-width: 1439px){
+    .w-4 {
+        width: 252px;
+    }
+    .contentView{
+        width: 1080px;
+    }
+    .w-12{
+        width: 1080px;
+    }
+	.burgerMenuBtn {
+		display: flex !important;
+	}
 
+	.menu {
+		height: 96px;
+
+		&.hidden {
+			top: -96px;
+		}
+	}
+
+	.header {
+		height: 96px;
+
+		.mediaBar {
+			padding: 24px 60px;
+		}
+	}
+
+	.navBar {
+		display: none;
+	}
+
+	.searchInput {
+		width: 48px;
+		padding: 12px;
+		
+		.placeholder {
+			display: none;
+		}
+	}
+
+	.phoneBtn {
+		width: 48px;
+		span {
+			display: none;
+		}
+	}
+
+	.sideMenu {
+		z-index: 200;
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+		background: rgba(0, 0, 0, 0.48);
+
+		.menuBar {
+			display: flex;
+			flex-direction: column;
+			width: 556px;
+			height: 100%;
+			border-radius: 20px 0 0 20px;
+			background-color: $white;
+			padding: 16px 60px;
+			box-sizing: border-box;
+			overflow: scroll;
+			.accordionBtn {
+				.icon{
+					margin-left: unset;
+				}
+			}
+			.divider {
+				display: none;
+			}
+			.accordionContent{
+				.router-link-active{
+					color: #4582D3;
+				}
+				p{
+					color: #A4ABBD;
+					font-size: 1.14rem;
+					line-height: 24px;
+				}
+			}
+				.closeBtn {
+				width: 48px;
+				height: 48px;
+				justify-content: center;
+				align-items: center;
+				display: flex;
+			}
+
+			.langSwitcher {
+				height: 64px;
+				padding: 4px;
+				border-radius: 32px;
+				background-color: $greyL;
+				justify-content: space-around;
+				align-items: center;
+				box-sizing: border-box;
+				p{
+					height: 56px;
+					width: 107px;
+					display: flex;
+					color: #2F3232;
+					font-weight: bold;
+					justify-content: center;
+					align-items: center;
+					border-radius: 28px;
+					&.active{
+						color: white;
+						background: #4582D3;
+					}
+				}
+			}
+		}
+	}
+	.newsCard-big{
+		width: 1080px;
+	}
+	.shopCard,.otherMuseumsCard {
+		width: 344px;
+	}
+	.sliderWrapper,.slideWrapper{
+		width: 100%;
+		.wr-100{
+			display: flex;
+			justify-content: center;
+		}
+		.shopCard {
+			button{
+				width: 296px;
+			}
+		}
+	}
+	.usefulLinkCard .w-3{
+		width: 252px;
+	}
+	.subscriberContainer{
+		width: 1080px;
+	}
+	.mediaBar .icon-txt-btn {
+		width: 48px;
+		span{
+			display: none;
+		}
+	}
+	//this code temporary
+	.newsInfo {
+
+		.iconText{
+			p span{
+				display: none;
+			}
+		}
+		.tag:nth-child(2){
+			display: none;
+		}
+	}
+}
+@media (max-width: 1100px){
+	.icon-btn{
+		display: none;
+	}
+	.mobile-icon-btn{
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+		gap: 20px;
+		.icon-btn{
+			display: flex;
+		}
+	}
+	.newsCard-big {
+		width: 834px;
+	}
+	.footer-menu-block{
+		flex-direction: column-reverse;
+		.w-9,.w-3{
+			width: 100%;
+		}
+	}
+	.site-footer-text{
+		display: none;
+	}
+	.subscriberContainer{
+		width: 834px;
+	}
+	.footer {
+		.w-12{
+			width: 834px;
+		}
+	}
+	.infoSection{
+		display: none;
+		&.mobile{
+			width: 100%;
+			display: grid !important;
+			grid-template-columns: auto auto;
+		}
+	}
+
+}
 @keyframes validationError {
 	0% {
 		margin-left: 6px;
