@@ -307,7 +307,7 @@ export default {
       let _t = this
       let lastScrollTop = 176
 
-      window.addEventListener("wheel", function(){ 
+      window.addEventListener("scroll", function(){ 
         let st = window.pageYOffset || document.documentElement.scrollTop
         if (st > lastScrollTop){
           _t.headerHidden = true
@@ -352,7 +352,7 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener('wheel', this.hidingHeader())
+    window.removeEventListener('scroll', this.hidingHeader())
   }
 }
 </script>

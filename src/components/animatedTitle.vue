@@ -29,7 +29,7 @@ export default {
   methods: {
     animatingTitle() {
       let _t = this
-      window.addEventListener('wheel', function() {
+      window.addEventListener('scroll', function() {
         let yOffset = window.pageYOffset
 
         if(yOffset >= _t.animateAt) {
@@ -44,7 +44,7 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener('wheel', this.animatingTitle())
+    window.removeEventListener('scroll', this.animatingTitle())
   }
 }
 </script>
