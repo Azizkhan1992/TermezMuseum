@@ -8,6 +8,7 @@ import store from './store'
 
 import './styles/mainStyles.scss'
 import './styles/media.scss'
+import './styles/media1.scss'
 import Vuelidate from 'vuelidate'
 
 import {i18n} from "@/plugins/i18n"

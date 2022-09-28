@@ -16,11 +16,11 @@
     />
 
     <!-- Modal Window -->
-  
+
     <header-menu
       @openSearch="openSearch"
     />
-   
+
     <div class="contentView">
       <router-view/>
     </div>
@@ -31,10 +31,11 @@
       v-if="showSideBar"
       :menuList="menuList"
       :currentPage="currentPage"
+      :class="singlePage ? 'single' : 'main'"
     />
 
     <scrollToTop/>
-    
+
     <feedbackButton
       @click.native="feedbackModal = true"
     />
@@ -74,7 +75,8 @@ export default {
       sections: [],
       menuList: [],
       currentPage: '',
-      searchModalOpen: false
+      searchModalOpen: false,
+      singlePage: false
     }
   },
 
@@ -121,12 +123,20 @@ export default {
     openSearch() {
       this.searchModalOpen = true
     },
+    routerChecker() {
+      if (window.location.pathname.split('/').length === 2) {
+        this.singlePage = false
+      } else if (window.location.pathname.split('/').length === 3) {
+        this.singlePage = true
+      }
+    }
   },
 
   watch: {
     '$route'() {
       this.currentPath = '/' + window.location.pathname.split('/')[1]
       this.menuChanger()
+      this.routerChecker()
     }
   },
 
@@ -134,6 +144,7 @@ export default {
     this.sectionSelector()
     this.currentPath = '/' + window.location.pathname.split('/')[1]
     this.menuChanger()
+    this.routerChecker()
   }
 }
 </script>
