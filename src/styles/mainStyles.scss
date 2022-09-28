@@ -62,8 +62,7 @@ html{
 
 ///// Track /////
 ::-webkit-scrollbar-track {
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
+	background: $white;
 }
 
 ///// Handle /////
@@ -111,7 +110,7 @@ background: $prim;
 	flex-direction: column;
 	align-items: center;
 	height: fit-content;
-	// width: calc(100vw - 10px);
+	// width: 100vw;
 	width: 100vw;
 	background-image: url('../assets/static/BG.png');
 	background-size: 100vw
@@ -294,8 +293,8 @@ background: $prim;
 
 ///// Component styles /////
 .menu {
-	z-index: 105;
-	// width: calc(100vw - 10px);
+	z-index: 200;
+	// width: 100vw;
 	width: 100%;
 	height: max-content;
 	display: flex;
@@ -489,7 +488,7 @@ background: $prim;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	height: auto;
 
 	.w-4 {
@@ -793,7 +792,7 @@ background: $prim;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	height: 528px;
 	margin-bottom: 120px;
 
@@ -826,7 +825,7 @@ background: $prim;
 	display: flex;
 	position: relative;
 	height: 180px;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	overflow: hidden;
 	justify-content: center;
 	margin-bottom: 60px;
@@ -861,7 +860,7 @@ background: $prim;
 	display: flex;
 	flex-direction: row;
 	gap: 24px;
-	// width: calc(100vw - 10px);
+	// width: 100vw;
 	width: 100vw;
 	height: 100vh;
 	background: linear-gradient(244.25deg, #4A391F 0%, #4F83A2 100%);
@@ -2031,7 +2030,7 @@ button {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	height: fit-content;
 	background-color: $prim;
 }
@@ -3777,7 +3776,7 @@ input {
 	.searchInput {
 		width: 48px;
 		padding: 12px;
-		
+
 		.placeholder {
 			display: none;
 		}
@@ -3791,7 +3790,7 @@ input {
 	}
 
 	.sideMenu {
-		z-index: 200;
+		z-index: 201;
 		display: flex;
 		flex-direction: row;
 		justify-content: end;
@@ -4210,7 +4209,7 @@ input {
 	button.prim.w-4,button.prim.w-3 {
 		width: 100%;
 	}
-	
+
 	.block[name=newsBlock] {
 		.wrapper-h{
 			flex-direction: column;
@@ -4483,7 +4482,7 @@ input {
 		}
 	}
 
-	
+
 }
 @media (max-width:470px){
 	.block[name=museumShop] {
