@@ -1,7 +1,7 @@
 <template>
   <div class="mainPage">
 
-    
+
     <pageTitleAnimated
       :titleName="title"
       background="museumHistory"
@@ -11,24 +11,24 @@
 
     <p v-html="this.description" class="commonD"></p>
 
-    <div class="w-100 pos-rel ovr-hidden h-664p mt-60 bor-r-20 box-brb">
+    <div class="w-100 pos-rel ovr-hidden h-664p mt-60 bor-r-20 box-brb m__history_cards">
       <div class="dark-layer z-idx1"></div>
       <img class="back-img" src="@/assets/static/main.jpg" alt="">
     </div>
 
-    <div class="w-100 gap-24">
-      <div class="w-50 pos-rel ovr-hidden h-326p mt-24 bor-r-20 box-brb">
+    <div class="w-100 gap-24 m__his_card_wrapper">
+      <div class="w-50 pos-rel ovr-hidden h-326p mt-24 bor-r-20 box-brb m__history_cards">
         <div class="dark-layer z-idx1"></div>
         <img class="back-img" src="@/assets/static/media.png" alt="">
       </div>
 
-      <div class="w-50 pos-rel ovr-hidden h-326p mt-24 bor-r-20 box-brb">
+      <div class="w-50 pos-rel ovr-hidden h-326p mt-24 bor-r-20 box-brb m__history_cards">
         <div class="dark-layer z-idx1"></div>
         <img class="back-img" src="@/assets/static/museums-collection.png" alt="">
       </div>
     </div>
 
-    <div class="w-100 pos-rel ovr-hidden h-664p mt-24 bor-r-20 box-brb">
+    <div class="w-100 pos-rel ovr-hidden h-664p mt-24 bor-r-20 box-brb m__history_cards">
       <div class="dark-layer z-idx1"></div>
       <img class="back-img" src="@/assets/static/main.jpg" alt="">
     </div>

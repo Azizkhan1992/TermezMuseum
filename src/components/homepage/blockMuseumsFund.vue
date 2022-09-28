@@ -9,20 +9,20 @@
     <div class="w-100 bor-r-20 ovr-hidden pos-rel h-680p">
 
       <div class="w-50 pad-48p box-brb ml-a z-idx2">
-        
+
         <h3 class="commonT">Акция "Подари скамейку"</h3>
 
         <p class="commonP mt-60">«Даст неповторимую возможность всем любителям истории и культуры не только помочь дому музею в благородном деле воссоздания исторического облика музея Ойбека, но и позволит всем желающим навсегда вписать своё имя в историю музея, ведь на каждой скамейке будет именная табличка!</p>
 
-        <button class="white-ghost mt-a ml-a w-3 h-48p">
+        <button class="white-ghost mt-a ml-a w-3 h-48p m__btn_100">
           <span>Пожертвовать</span>
         </button>
 
       </div>
-      
+
       <div class="dark-layer-hrz"></div>
       <img class="back-img" src="@/assets/static/main.jpg" alt="">
-    
+
     </div>
 
   </div>

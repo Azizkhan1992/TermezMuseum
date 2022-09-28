@@ -1,26 +1,26 @@
 <template>
   <div class="mainPage">
-    
+
     <pageTitleAnimated
       :titleName="title"
       background="management"
     />
 
-    <div class="grid-2 w-100">
+    <div class="grid-2 grid-1 w-100">
       <div
         v-for="manager in managers"
         :key="manager.id"
-        class="w-100 h-480p ovr-hidden bor-r-20 backgrnd-white gap-24"
+        class="w-100 h-480p ovr-hidden bor-r-20 backgrnd-white gap-24 m__management_card"
       >
-        <img class="w-50" :src="require('@/assets/temporary/' + manager.img + '.jpg')" alt="">
+        <img class="w-50 m__management_card_img" :src="require('@/assets/temporary/' + manager.img + '.jpg')" alt="">
 
-        <div class="w-50 box-brb h-100 ovr-hidden pad-t-24p pad-b-24p pad-r-24p">
+        <div class="w-50 box-brb h-100 ovr-hidden pad-t-24p pad-b-24p pad-r-24p m__management_card_items">
 
           <h3 class="commonT colorType h-72p line-h-36 mt-24">{{manager.name}}</h3>
 
           <h3 class="commonP mt-24 h-60p colorGreyD line-h-30 bold">{{manager.post}}</h3>
 
-          <div class="w-100 mt-12 gap-12">
+          <div class="w-100 mt-12 gap-12 m__management_card_info">
             <Icons
               size="middle"
               icon="clock"
@@ -38,7 +38,7 @@
             </div>
           </div>
 
-          <div class="w-100 mt-24 gap-12">
+          <div class="w-100 mt-24 gap-12 m__management_card_info">
             <Icons
               size="middle"
               icon="phone"
@@ -51,7 +51,7 @@
             </div>
           </div>
 
-          <div class="w-100 mt-24 gap-12">
+          <div class="w-100 mt-24 gap-12 m__management_card_info">
             <Icons
               size="middle"
               icon="mail"

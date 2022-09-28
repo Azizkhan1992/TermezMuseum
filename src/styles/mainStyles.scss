@@ -62,15 +62,14 @@ html{
 
 ///// Track /////
 ::-webkit-scrollbar-track {
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
+	background: $white;
 }
 
 ///// Handle /////
 ::-webkit-scrollbar-thumb {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background: $prim; 
+	background: $prim;
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 background: $prim;
@@ -111,7 +110,7 @@ background: $prim;
 	flex-direction: column;
 	align-items: center;
 	height: fit-content;
-	// width: calc(100vw - 10px);
+	// width: 100vw;
 	width: 100vw;
 	background-image: url('../assets/static/BG.png');
 	background-size: 100vw
@@ -294,8 +293,8 @@ background: $prim;
 
 ///// Component styles /////
 .menu {
-	z-index: 105;
-	// width: calc(100vw - 10px);
+	z-index: 200;
+	// width: 100vw;
 	width: 100%;
 	height: max-content;
 	display: flex;
@@ -489,7 +488,7 @@ background: $prim;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	height: auto;
 
 	.w-4 {
@@ -551,7 +550,7 @@ background: $prim;
 
 .footer-menu-block {
 	display: flex;
-	
+
 	.w-9 {
 		width: calc((100% - 72px) / 4 * 3 + 48px);
 		display: grid !important;
@@ -793,7 +792,7 @@ background: $prim;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	height: 528px;
 	margin-bottom: 120px;
 
@@ -804,7 +803,7 @@ background: $prim;
 		line-height: 60px;
 		text-align: center;
 		letter-spacing: 0.04em;
-		color: $greyD;
+		color: $white;
 	}
 
 	.animated {
@@ -826,7 +825,7 @@ background: $prim;
 	display: flex;
 	position: relative;
 	height: 180px;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	overflow: hidden;
 	justify-content: center;
 	margin-bottom: 60px;
@@ -861,7 +860,7 @@ background: $prim;
 	display: flex;
 	flex-direction: row;
 	gap: 24px;
-	// width: calc(100vw - 10px);
+	// width: 100vw;
 	width: 100vw;
 	height: 100vh;
 	background: linear-gradient(244.25deg, #4A391F 0%, #4F83A2 100%);
@@ -918,7 +917,7 @@ background: $prim;
 		left: calc(75% + 24px);
 		right: auto;
 		width: calc(25% - 48px);
-		
+
 		.title {
 			font-family: 'Casper Bold';
 			font-style: normal;
@@ -928,7 +927,7 @@ background: $prim;
 			transition: all 800ms ease-in-out;
 		}
 	}
-	
+
 	&.hidden-right {
 		left: calc(100vw + 25% - 10px);
 		width: calc(25% - 48px);
@@ -1080,7 +1079,7 @@ background: $prim;
 }
 
 .accordionBtn {
-	
+
 	&.open {
 		p {
 			color: $prim !important;
@@ -1154,7 +1153,7 @@ background: $prim;
 	ul {
 		z-index: 3;
 		margin-top: 56px;
-		box-sizing: border-box;	
+		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -1167,7 +1166,7 @@ background: $prim;
 		overflow-y: scroll;
 		opacity: 0;
 		transition: all 200ms ease-in;
-		
+
 		&.open {
 			max-height: 300px;
 			padding-top: 24px;
@@ -1951,7 +1950,7 @@ button {
 		letter-spacing: 0.04em;
 		color: $greyD;
 		margin: 0;
-		
+
 		&.white {
 			color: $white;
 		}
@@ -2004,7 +2003,7 @@ button {
 }
 
 .mt-28 {
-	margin-top: 28px;	
+	margin-top: 28px;
 }
 
 .mt-24 {
@@ -2031,7 +2030,7 @@ button {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(100vw - 10px);
+	width: 100vw;
 	height: fit-content;
 	background-color: $prim;
 }
@@ -2215,7 +2214,7 @@ textarea {
 		font-size: 1.14rem;
 		line-height: 20px;
 		letter-spacing: 0.12em;
-	
+
 		&.golden {
 			color: #A8926A;
 		}
@@ -2246,7 +2245,7 @@ textarea {
 .iconedButton {
 
 	&:hover {
-		
+
 		.icon {
 			path {
 				stroke: $white !important;
@@ -2404,7 +2403,7 @@ label {
 	font-size: 1.14rem;
 	line-height: 20px;
 	letter-spacing: 0.04em;
-	
+
 	&.white {
 		color: $white;
 	}
@@ -3005,6 +3004,10 @@ input {
 	}
 }
 
+.m__management_card_img {
+	object-fit: cover;
+}
+
 .grid-2 {
 	display: grid !important;
 	grid-gap: 24px;
@@ -3225,7 +3228,7 @@ input {
 .logoForMediasFiles {
 	display: flex;
 	align-items: center;
-	
+
 	a {
 		border: none;
 	}
@@ -3773,7 +3776,7 @@ input {
 	.searchInput {
 		width: 48px;
 		padding: 12px;
-		
+
 		.placeholder {
 			display: none;
 		}
@@ -3787,7 +3790,7 @@ input {
 	}
 
 	.sideMenu {
-		z-index: 200;
+		z-index: 201;
 		display: flex;
 		flex-direction: row;
 		justify-content: end;
@@ -4206,7 +4209,7 @@ input {
 	button.prim.w-4,button.prim.w-3 {
 		width: 100%;
 	}
-	
+
 	.block[name=newsBlock] {
 		.wrapper-h{
 			flex-direction: column;
@@ -4479,7 +4482,7 @@ input {
 		}
 	}
 
-	
+
 }
 @media (max-width:470px){
 	.block[name=museumShop] {
@@ -4633,7 +4636,7 @@ input {
 		fill: $greyD;
 		transition: all 200ms ease-in-out;
 	}
-	
+
 	&:hover {
 		path {
 			fill: $prim;

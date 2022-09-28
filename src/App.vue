@@ -1,15 +1,15 @@
 <template>
-  <div id="app" style="-webkit-overflow-scrolling: touch;overflow-y: scroll;">
-  
+  <div id="app">
+
     <preLoaderWindow
       v-if="state"
       @click.native="off"
     />
-    
+
     <component :is="layout">
       <router-view/>
     </component>
-  
+
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
     },
 
     async off() {
-      await 
+      await
         this.$store.dispatch('preloaderOff')
         this.state = this.$store.state.preLoader
     }
