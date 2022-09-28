@@ -70,7 +70,7 @@ html{
 ::-webkit-scrollbar-thumb {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background: $prim; 
+	background: $prim;
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 background: $prim;
@@ -551,7 +551,7 @@ background: $prim;
 
 .footer-menu-block {
 	display: flex;
-	
+
 	.w-9 {
 		width: calc((100% - 72px) / 4 * 3 + 48px);
 		display: grid !important;
@@ -804,7 +804,7 @@ background: $prim;
 		line-height: 60px;
 		text-align: center;
 		letter-spacing: 0.04em;
-		color: $greyD;
+		color: $white;
 	}
 
 	.animated {
@@ -918,7 +918,7 @@ background: $prim;
 		left: calc(75% + 24px);
 		right: auto;
 		width: calc(25% - 48px);
-		
+
 		.title {
 			font-family: 'Casper Bold';
 			font-style: normal;
@@ -928,7 +928,7 @@ background: $prim;
 			transition: all 800ms ease-in-out;
 		}
 	}
-	
+
 	&.hidden-right {
 		left: calc(100vw + 25% - 10px);
 		width: calc(25% - 48px);
@@ -1080,7 +1080,7 @@ background: $prim;
 }
 
 .accordionBtn {
-	
+
 	&.open {
 		p {
 			color: $prim !important;
@@ -1154,7 +1154,7 @@ background: $prim;
 	ul {
 		z-index: 3;
 		margin-top: 56px;
-		box-sizing: border-box;	
+		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -1167,7 +1167,7 @@ background: $prim;
 		overflow-y: scroll;
 		opacity: 0;
 		transition: all 200ms ease-in;
-		
+
 		&.open {
 			max-height: 300px;
 			padding-top: 24px;
@@ -1951,7 +1951,7 @@ button {
 		letter-spacing: 0.04em;
 		color: $greyD;
 		margin: 0;
-		
+
 		&.white {
 			color: $white;
 		}
@@ -2004,7 +2004,7 @@ button {
 }
 
 .mt-28 {
-	margin-top: 28px;	
+	margin-top: 28px;
 }
 
 .mt-24 {
@@ -2215,7 +2215,7 @@ textarea {
 		font-size: 1.14rem;
 		line-height: 20px;
 		letter-spacing: 0.12em;
-	
+
 		&.golden {
 			color: #A8926A;
 		}
@@ -2246,7 +2246,7 @@ textarea {
 .iconedButton {
 
 	&:hover {
-		
+
 		.icon {
 			path {
 				stroke: $white !important;
@@ -2404,7 +2404,7 @@ label {
 	font-size: 1.14rem;
 	line-height: 20px;
 	letter-spacing: 0.04em;
-	
+
 	&.white {
 		color: $white;
 	}
@@ -3005,6 +3005,10 @@ input {
 	}
 }
 
+.m__management_card_img {
+	object-fit: cover;
+}
+
 .grid-2 {
 	display: grid !important;
 	grid-gap: 24px;
@@ -3225,7 +3229,7 @@ input {
 .logoForMediasFiles {
 	display: flex;
 	align-items: center;
-	
+
 	a {
 		border: none;
 	}
@@ -4633,7 +4637,7 @@ input {
 		fill: $greyD;
 		transition: all 200ms ease-in-out;
 	}
-	
+
 	&:hover {
 		path {
 			fill: $prim;

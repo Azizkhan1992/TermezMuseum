@@ -1,0 +1,125 @@
+@media (max-width: 900px) {
+  .scrollToTop  {
+    display: none !important;
+  }
+  .feedbackButton{
+    width: 72px;
+    height: 72px;
+
+    p{
+      display: none;
+    }
+  }
+  .icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  .pageTitleAnimated{
+    height: 152px;
+
+    h2 {
+      font-size: 2.125rem;
+    }
+
+    .animated{
+      font-size: 7.5rem !important;
+      bottom: 0;
+
+      &.shrunked {
+        line-height: 152px;
+      }
+    }
+
+    .mb-80 {
+      margin-bottom: 24px;
+    }
+  }
+  .m__history_cards{
+    height: 260px;
+    width: 100%;
+  }
+  .m__his_card_wrapper{
+    flex-direction: column;
+    gap: 0;
+  }
+  .grandTitle{
+    font-size: 2.125rem;
+  }
+  .sideBar {
+    position: absolute;
+    width: calc(100% - 48px);
+    margin: 0 24px;
+    flex-direction: column-reverse;
+
+    &.single{
+      top: 216px;
+    }
+
+    &.main{
+      top: 368px;
+    }
+
+    .sideBarBtn{
+      width: 100%;
+      border-radius: 4px;
+      justify-content: space-between;
+      gap: 0;
+      padding: 0 24px;
+    }
+    .sideBarMenu{
+      width: 100%;
+      border-radius: 4px;
+    }
+  }
+  .m__management_card{
+    flex-direction: column;
+    height: auto;
+
+    &_img {
+      width: 100%;
+    }
+
+    &_items {
+      width: 100%;
+      padding: 0 24px 24px 24px;
+    }
+
+    &_info{
+      align-items: center;
+    }
+
+    .commonT{
+      font-weight: 700;
+      font-size: 16px !important;
+      line-height: 24px !important;
+      letter-spacing: 0.04em;
+      height: auto;
+    }
+  }
+  .contentView{
+    width: 340px;
+  }
+}
+
+@media (max-width: 1439px) {
+  .pageTitleAnimated{
+    width: 100vw;
+  }
+  button.prim {
+    width: 289px;
+    margin-left: auto;
+  }
+  .grid-1 {
+    display: grid !important;
+    grid-gap: 24px;
+    grid-row: 1;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
+}
+@media (max-width: 1099px) {
+  button.prim {
+    width: 100%;
+    margin-left: 0;
+  }
+}
