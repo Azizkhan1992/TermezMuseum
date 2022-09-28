@@ -1,5 +1,23 @@
 @media (max-width: 900px) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
   .scrollToTop  {
+    display: none !important;
+  }
+  .m__btn_100{
+    width: 100%;
+  }
+  .sideMenu {
+    .menuBar {
+      padding: 16px 20px;
+    }
+  }
+  .animated {
     display: none !important;
   }
   .feedbackButton{
@@ -52,11 +70,11 @@
     flex-direction: column-reverse;
 
     &.single{
-      top: 216px;
+      top: 135px;
     }
 
     &.main{
-      top: 368px;
+      top: 290px;
     }
 
     .sideBarBtn{
@@ -102,6 +120,9 @@
 }
 
 @media (max-width: 1439px) {
+  .mainPage {
+    padding-top: 95px;
+  }
   .pageTitleAnimated{
     width: 100vw;
   }
