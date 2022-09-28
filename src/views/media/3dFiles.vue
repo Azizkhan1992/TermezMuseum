@@ -14,7 +14,7 @@
 
 
 
-    <div class="grid-4 w-100 mt-60">
+    <div class="grid-4 w-100 mt-60 mobile-grid">
       <div
         @click="goToSingle"
         v-for="xhbt in allExhibits"

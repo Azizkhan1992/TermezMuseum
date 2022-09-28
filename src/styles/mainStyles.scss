@@ -4215,6 +4215,9 @@ input {
 			flex-wrap: wrap;
 		}
 	}
+	.newsCard-big .newsContent {
+		width: calc(100% - 48px);
+	}
 	.newsCard-big {
 		width: 100%;
 		height: unset;
@@ -4245,6 +4248,15 @@ input {
 				width: 100%;
 				margin-left: 0;
 			}
+		}
+	}
+	.animatedTitle {
+		h2{
+			font-size: 34px;
+		}
+		.animated.shrunked {
+			line-height: 111px;
+			font-size: 4.3rem;
 		}
 	}
 	.block[name=vrTour] {
@@ -4307,6 +4319,7 @@ input {
 	.block[name=museumsFundBlock] {
 		.mt-60 {
 			margin-top: 30px;
+			text-align: left;
 		}
 	}
 	.footer{
@@ -4374,6 +4387,7 @@ input {
 		}
 		.prim.mt-a.w-4.h-48p{
 			width: 100%;
+			margin-top: 20px;
 		}
 	}
 	.block[name=museumsFundBlock] {
@@ -4414,6 +4428,58 @@ input {
 			left: 18px;
 		}
 	}
+	.newsCard-sm{
+		height: unset;
+		.newsContent{
+			height: unset;
+			.description {
+				font-family: "Casper Reg";
+				display: unset;
+				font-style: normal;
+				font-size: 1.14rem;
+				line-height: 30px;
+				color: #A4ABBD;
+			}
+		}
+	}
+	.mobile-grid{
+		grid-template-columns: auto !important;
+	}
+	.mobile-flex{
+		flex-direction: column;
+		gap: 24px;
+		.w-6,.w-2 {
+			width: 100%;
+		}
+	}
+	.grandTitle{
+		font-size: 1.8rem !important;
+	}
+	.flex-wrap{
+		flex-wrap: wrap;
+	}
+	.h-auto{
+		height: auto;
+	}
+	.cw-t{
+		height: 532px;
+		flex-direction: column;
+		.w-4{
+			height: 280px;
+			width: 100%;
+		}
+		.w-8c {
+			width: 100%;
+			gap: 24px;
+			padding-top: 10px;
+		}
+		.w-a.d-f.fd-r.gap-48{
+			flex-wrap: wrap;
+			gap: 24px;
+		}
+	}
+
+	
 }
 @media (max-width:470px){
 	.block[name=museumShop] {
@@ -4421,8 +4487,8 @@ input {
 			height: 24px;
 		}
 	}
-	.newsCard-big .newsContent {
-		width: calc(100% - 48px);
+	.animatedTitle{
+		margin-bottom: 30px;
 	}
 	.sliderWrapper {
 		width: 100vw;
@@ -4447,6 +4513,9 @@ input {
 	}
 	.subscriberContainer {
 		width: 301px;
+	}
+	.infoSection.tablet{
+		padding: 25px;
 	}
 }
 @keyframes validationError {

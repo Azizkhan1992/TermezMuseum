@@ -7,7 +7,7 @@
 
     <div class="wrapper-h mb-60">
       <button class="prim w-3 a-left">
-        <span>Click me</span>
+        <span>Все новости</span>
       </button>
 
       <topTags

@@ -35,7 +35,7 @@
       </l-map>
     </div>
 
-    <div class="w-100 grid-3 r-gap-60 mt-60">
+    <div class="w-100 grid-3 r-gap-60 mt-60 mobile-grid">
       
       <div class="w-100 fd-c gap-24">
         <h4 class="commonT colorGreyD">Адрес</h4>
@@ -177,7 +177,7 @@
     </div>
 
     <div class="w-100 fd-c bor-r-20 ovr-hidden box-brb mt-24 backgrnd-white pad-24p">
-      <div class="w-100 grid-3">
+      <div class="w-100 grid-3 mobile-grid">
         <div class="w-100 fd-c gap-4">
           <label class="commonP colorGreyD">Фамилия</label>
           <input

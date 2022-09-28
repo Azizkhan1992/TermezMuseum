@@ -13,7 +13,7 @@
         <button
           class="prim w-4 mt-a"
         >
-          <span>Click me</span>
+          <span>Перейти к просмотру</span>
         </button>
       </div>
 

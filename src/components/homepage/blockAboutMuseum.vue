@@ -11,7 +11,7 @@
       <div class="dark-layer"></div>
     </div>
 
-    <button class="prim w-4"><span>Click me</span></button>
+    <button class="prim w-4"><span>Подробно</span></button>
     
   </div>
 </template>

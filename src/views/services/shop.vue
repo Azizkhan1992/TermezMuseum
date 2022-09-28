@@ -32,7 +32,7 @@
     </div>
 
 
-    <div class="w-100 grid-4 mt-60">
+    <div class="w-100 grid-4 mt-60 mobile-grid">
     
       <div
         @click="goToSingle"
