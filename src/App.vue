@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="-webkit-overflow-scrolling: touch;overflow-y: scroll;">
   
     <preLoaderWindow
       v-if="state"
@@ -59,7 +59,8 @@ export default {
 
   mounted() {
     this.getSelectionText()
-    console.log(this.$i18n.locale)
+    this.$i18n.locale = localStorage.lang || 'uz'
+    setTimeout(()=>{this.off()},1500)
   }
 }
 </script>

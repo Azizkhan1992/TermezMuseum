@@ -79,6 +79,15 @@
               size="24"
             />
           </button>
+          <button
+            @click="openSideMenu"
+            class="burgerMenuBtn icon-btn"
+          >
+            <Icons
+              icon="burgerMenu"
+              size="24"
+            />
+          </button>
         </div>
 
       </div>
@@ -120,7 +129,7 @@
             :class="languageSwitcher ? 'open' : 'closed'"
           >
             <p
-              @click="languageSwitcher = false"
+              @click="changeLang(lang)"
               v-for="lang in locales"
               :key="lang.id"
             >
@@ -257,6 +266,18 @@ export default {
   },
 
   methods: {
+    changeLang(val){
+      this.languageSwitcher = false
+      this.$i18n.locale = val.lang
+      localStorage.lang = this.$i18n.locale
+        this.$router.push({
+          query: {
+        ...this.$route.query,
+        lang: this.$i18n.locale,
+      },
+      });
+      this.$router.go()
+    },
     dropdown(menu) {
       const selectedMenuId = menu.id
       
@@ -305,6 +326,9 @@ export default {
 
     openSearch() {
       this.$emit('openSearch')
+    },
+    openSideMenu() {
+      this.$emit('openSideMenu')
     }
   },
 

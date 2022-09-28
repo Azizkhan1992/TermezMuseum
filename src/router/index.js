@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
+  // { path: '/', redirect: `/${i18n.locale}/`},
   {
     path: '/',
     name: 'home',
@@ -293,6 +293,7 @@ const routes = [
     meta: {layout: 'main'},
     component: () => import('../views/services/bankCardsSingle.vue')
   },
+
 ]
 
 const router = new VueRouter({

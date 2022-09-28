@@ -9,7 +9,7 @@
 
     <!-- Input Bar Start -->
 
-    <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb">
+    <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb mobile-flex">
       
       <div class="w-2 d-f fd-c">
         <label class="colorGreyD mb-4">Год</label>
@@ -66,7 +66,7 @@
 
       <!-- Card Start -->
 
-      <div class="w-100 h-320p bor-r-20 gap-24 ovr-hidden backgrnd-white">
+      <div class="w-100 h-320p bor-r-20 gap-24 ovr-hidden backgrnd-white cw-t">
         <div class="w-4 pos-rel">
           <div class="dark-layer-solid z-idx1"></div>
           <img class="back-img" src="@/assets/temporary/samovar.jpg" alt="">
@@ -199,6 +199,10 @@ export default {
     optionChanged(opt) {
       console.log(opt);
     },
+    goToSingle() {
+      console.log("Single");
+      // this.$router.push({ path: '/articles/' + this.articlesID})
+    }
   }
 }
 </script>

@@ -5,9 +5,9 @@
     <img src="@/assets/static/media.png" alt="">
 
     <div class="newsContent">
-      <h3>News' Title</h3>
+      <h3>Музей - центр культуры и просвещения</h3>
 
-      <p class="description">News' description</p>
+      <p class="description">Сурханский оазис известен не только своими археологическими памятниками, такими как пещеры Тешикташ, Мачай...</p>
 
       <div class="newsInfo">
         <tags
@@ -25,7 +25,8 @@
 
         <iconText
           icon="eye"
-          text="Просмотрели 1 396"
+          title="Просмотрели"
+          text="1 396"
         />
 
         <iconText

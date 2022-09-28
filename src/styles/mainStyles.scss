@@ -111,7 +111,8 @@ background: $prim;
 	flex-direction: column;
 	align-items: center;
 	height: fit-content;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
+	width: 100vw;
 	background-image: url('../assets/static/BG.png');
 	background-size: 100vw
 }
@@ -294,7 +295,8 @@ background: $prim;
 ///// Component styles /////
 .menu {
 	z-index: 105;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
+	width: 100%;
 	height: max-content;
 	display: flex;
 	flex-direction: column;
@@ -591,7 +593,9 @@ background: $prim;
 		}
 	}
 }
-
+.burgerMenuBtn {
+	display: none !important;
+}
 .contactsBlock {
 
 	.infoSection {
@@ -602,7 +606,9 @@ background: $prim;
 			letter-spacing: 0.04em;
 			color: $white;
 		}
-
+		&.tablet{
+			display: none;
+		}
 		.infoPart {
 			display: flex;
 			flex-direction: row;
@@ -855,7 +861,8 @@ background: $prim;
 	display: flex;
 	flex-direction: row;
 	gap: 24px;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
+	width: 100vw;
 	height: 100vh;
 	background: linear-gradient(244.25deg, #4A391F 0%, #4F83A2 100%);
 	overflow: hidden;
@@ -1851,7 +1858,9 @@ button {
 		transition: all 300ms ease-out;
 	}
 }
-
+.tablet-icon-btn,.mobile-icon-btn{
+	display: none;
+}
 .paginatorWrapper {
 	display: flex;
 	flex-direction: row;
@@ -2026,7 +2035,9 @@ button {
 	height: fit-content;
 	background-color: $prim;
 }
-
+.site-footer-top-text{
+	display: none !important;
+}
 .subscriberContainer {
 	display: flex;
 	flex-direction: column;
@@ -3729,7 +3740,785 @@ input {
   user-select: none;
 	animation: validationError 300ms;
 }
+@media (max-width: 1439px){
+    .w-4 {
+        width: 252px;
+    }
+    .contentView{
+        width: 1080px;
+    }
+    .w-12{
+        width: 1080px;
+    }
+	.burgerMenuBtn {
+		display: flex !important;
+	}
 
+	.menu {
+		height: 96px;
+
+		&.hidden {
+			top: -96px;
+		}
+	}
+
+	.header {
+		height: 96px;
+
+		.mediaBar {
+			padding: 24px 60px;
+		}
+	}
+
+	.navBar {
+		display: none;
+	}
+
+	.searchInput {
+		width: 48px;
+		padding: 12px;
+		
+		.placeholder {
+			display: none;
+		}
+	}
+
+	.phoneBtn {
+		width: 48px;
+		span {
+			display: none;
+		}
+	}
+
+	.sideMenu {
+		z-index: 200;
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+		background: rgba(0, 0, 0, 0.48);
+
+		.menuBar {
+			display: flex;
+			transition: 1s;
+			flex-direction: column;
+			width: 556px;
+			height: 100%;
+			border-radius: 20px 0 0 20px;
+			background-color: $white;
+			padding: 16px 60px;
+			box-sizing: border-box;
+			overflow: scroll;
+			.accordionBtn {
+				.icon{
+					margin-left: unset;
+				}
+			}
+			.divider {
+				display: none;
+			}
+			.accordionContent{
+				.router-link-active{
+					color: #4582D3;
+				}
+				p{
+					color: #A4ABBD;
+					font-size: 1.14rem;
+					line-height: 24px;
+				}
+			}
+				.closeBtn {
+				width: 48px;
+				height: 48px;
+				justify-content: center;
+				align-items: center;
+				display: flex;
+			}
+
+			.langSwitcher {
+				height: 64px;
+				padding: 4px;
+				border-radius: 32px;
+				background-color: $greyL;
+				justify-content: space-around;
+				align-items: center;
+				box-sizing: border-box;
+				p{
+					height: 56px;
+					width: 107px;
+					display: flex;
+					color: #2F3232;
+					font-weight: bold;
+					justify-content: center;
+					align-items: center;
+					border-radius: 28px;
+					&.active{
+						color: white;
+						background: #4582D3;
+					}
+				}
+			}
+		}
+	}
+	.newsCard-big{
+		width: 1080px;
+	}
+	.shopCard,.otherMuseumsCard {
+		width: 344px;
+	}
+	.sliderWrapper,.slideWrapper{
+		width: 100%;
+		.wr-100{
+			display: flex;
+			justify-content: center;
+		}
+		.shopCard {
+			button{
+				width: 296px;
+			}
+		}
+	}
+	.usefulLinkCard .w-3{
+		width: 252px;
+	}
+	.subscriberContainer{
+		width: 1080px;
+	}
+	.mediaBar .icon-txt-btn {
+		width: 48px;
+		span{
+			display: none;
+		}
+	}
+	//this code temporary
+	.newsInfo {
+
+		.iconText{
+			p span{
+				display: none;
+			}
+		}
+		.tag:nth-child(2){
+			display: none;
+		}
+	}
+}
+@media (max-width: 1100px){
+.sideMenu .menuBar{
+	width: 486px;
+}
+	.icon-btn{
+		display: none;
+	}
+	.footer-logo-img{
+		display: flex;
+	}
+	.footer-top{
+		display: flex;
+	}
+	.tablet-icon-btn{
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+		gap: 20px;
+		.icon-btn{
+			display: flex;
+		}
+	}
+	.newsCard-big {
+		width: 834px;
+	}
+	.newsInfo {
+		gap: 12px;
+		.icon{
+			width: 16px;
+			height: 16px;
+		}
+		.iconText p{
+			font-size: 0.75rem;
+			white-space: nowrap;
+		}
+	}
+	.footer-menu-block{
+		flex-direction: column-reverse;
+		.w-9,.w-3{
+			width: 100%;
+		}
+	}
+	.site-footer-text{
+		display: none;
+	}
+	.site-footer-top-text{
+		width: 100% !important;
+		height: 100%;
+		gap: 50px;
+		display: flex !important;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.subscriberContainer{
+		width: 834px;
+	}
+	.footer {
+		.w-12{
+			width: 834px;
+		}
+	}
+	.infoSection{
+		display: none;
+		h3{
+			color: #A4ABBD !important;
+		}
+		&.tablet{
+			display: grid !important;
+			background: #FFFFFF;
+			padding: 48px;
+			border-radius: 20px;
+			grid-template-columns: auto auto;
+		}
+		.infoPart{
+			width: 75%;
+			.accented{
+				color: #2F3232 !important;
+			}
+			.icon{
+				display: none;
+			}
+		}
+	}
+	.slider-item{
+		&.first {
+			left: calc(73% + 24px);
+		    width: calc(27% - 48px);
+			.title {
+				font-size: 1rem;
+				left: 24px;
+				width: 140px;
+			}
+			button{
+				left: 24px;
+			}
+		}
+		button{
+			width: 135px;
+		}
+	}
+	.shopCard{
+		width: 287px;
+		height: 538px;
+		button{
+			width: 239px !important;
+		}
+		&.hidden-r{
+			margin-left: -350px;
+		}
+	}
+	.otherMuseumsCard{
+		width: 287px;
+		height: 400px;
+		&.hidden-r{
+			margin-left: -350px;
+		}
+	}
+	.block[name="museumsPride"]{
+		.mainPride {
+			height: 420px;
+		}
+		.wr-100{
+			flex-direction: column;
+			&.mr-s-48.mb-48.mt-24.align-c.gap-12{
+				flex-direction: row;
+			}
+		}
+		.wc-4 {
+			flex-direction: row;
+			width: 100%;
+		}
+		.wc-100 {
+			height: 380px;
+		}
+	}
+	.block[name="eventsBlock"]{
+		.w-100.h-420p.gap-24{
+			height: unset;
+			flex-direction: column;
+			.wc-4,.w-8{
+				width: 100%;
+				height: 360px;
+			}
+		}
+	}
+	.block[name="galleryBlock"]{
+		.h-sqrd{
+			height: 800px;
+		}
+		.wc-4,.w-8{
+			width: 390px;
+		}
+	}
+	.block[name="museumsFundBlock"]{
+		.w-50{
+			width: 100%;
+			text-align: center;
+			margin: auto auto 0 auto;
+			button{
+				margin: 20px auto 0 auto;
+			}
+		}
+	}
+	.block[name="mobileAppBlock"]{
+	    .w-100{
+			flex-direction: column !important;
+			height: unset;
+			.w-50{
+				width: 100%;
+				&.w-50.pos-rel.bor-r-20.ovr-hidden{
+					height: 720px;
+				}
+				.ta-r{
+					text-align: left;
+					margin-top: 36px;
+				}
+				.mt-a.h-72p.gap-24{
+					margin-top: 60px;
+					flex-direction: row;
+					align-items: center;
+				}
+			}
+		}
+	}
+	.block[name="usefulLinksBlock"]{
+		.usefulLinkCard.hidden-r {
+		margin-left: -220px;
+		}
+	}
+	button.prim.w-4{
+		width: 287px;
+	}
+	.subscriberContainer{
+		.w-50{
+			width: 100%;
+			&.align-r{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				.justify-r{
+					justify-content: flex-start	;
+				}
+			}
+		}
+		input.w-4 {
+			width: 70%;
+		}
+		.mb-24{
+			flex-direction: column;
+			justify-content: center;
+			gap: 20px;
+		}
+	}
+
+}
+@media (max-width: 900px){
+	.searchInput,.icon-txt-btn{
+		display: none;
+	}
+	.tablet-icon-btn{
+		display: none !important;
+	}
+	.menuBar{
+		width: 100%;
+	}
+	.mobile-icon-btn{
+		display: block !important;
+		.mobile-icon{
+			display: grid;
+			grid-template-columns: auto auto auto auto;
+			gap: 20px;
+			.icon-btn{
+				display: flex;
+			}
+		}
+		.search__phone{
+			margin-top: 24px;
+			.searchInput, .icon-txt-btn{
+				margin: 12px 0;
+				.placeholder{
+					display: block;
+				}
+				display: flex !important;
+				width: 100%;
+			}
+		}
+	}
+	.footer-menu-block .w-9{
+		grid-template-columns: auto auto;
+	}
+	.block[name=museumsPride] {
+		.wc-4 {
+			flex-direction: column;
+		}
+		.mainPride {
+			width: 100%;
+			.mr-s-48 {
+				margin-left: 25px;
+				h3{
+					font-size: 1.14rem;
+				}
+			}
+		}
+		.wr-100.mr-s-48.mb-48.mt-24.align-c.gap-12{
+			margin-left: 30px;
+			margin-right: 30px;
+			width: 306px;
+			flex-wrap: wrap;
+		}
+		.white-ghost{
+			margin-left: unset;
+			width: 100%;
+		}
+	}
+	.animatedTitle {
+		h2{
+			font-size: 3rem;
+			}
+			.animated.shrunked{
+			font-size: 7.3rem;
+			}
+	}
+	.slider-item.main {
+		width: calc(100% - 47px);
+	}
+	.slider-item.first {
+		left: calc(100% + 24px);
+	}
+	.block .mainPhoto{
+		height: 640px;
+		p{
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			max-height: 300px;
+			-webkit-line-clamp: 11;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			word-break: break-all;
+			width: calc(100% - 85px);
+		}
+	}
+	button.prim.w-4,button.prim.w-3 {
+		width: 100%;
+	}
+	
+	.block[name=newsBlock] {
+		.wrapper-h{
+			flex-direction: column;
+		}
+		.topTags{
+			flex-wrap: wrap;
+		}
+	}
+	.newsCard-big .newsContent {
+		width: calc(100% - 48px);
+	}
+	.newsCard-big {
+		width: 100%;
+		height: unset;
+		flex-direction: column;
+		.newsContent h3,.description{
+			height: unset !important;
+		}
+		img{
+			width: 100%;
+		}
+	}
+	.row-3.mb-24{
+		flex-direction: column;
+		.newsCard-sm{
+			width: 100%;
+		}
+	}
+	.subscriberContainer {
+		width: 356px;
+		.w-50 .wr-100{
+			flex-wrap: wrap;
+			input{
+				width: 100%;
+			}
+			button{
+				height: 48px;
+				margin-top: 20px;
+				width: 100%;
+				margin-left: 0;
+			}
+		}
+	}
+	.animatedTitle {
+		h2{
+			font-size: 34px;
+		}
+		.animated.shrunked {
+			line-height: 111px;
+			font-size: 4.3rem;
+		}
+	}
+	.block[name=vrTour] {
+		.wr-100{
+			flex-direction: column-reverse;
+			.w-50{
+				width: 100%;
+			}
+		}
+		button.prim.w-4, button.prim.w-3{
+			margin-top: 20px;
+		}
+	}
+	.shopCard ,.shopCard img{
+		// width: 318px !important;
+		button {
+			width: 210px !important;
+		}
+	}
+	.shopCard.shown{
+		width: 318px !important;
+		button {
+			width: 210px !important;
+		}
+	}
+	.shopCard.hidden-r{
+		margin-left: -150%;
+		width: 0;
+	}
+	.usefulLinkCard.hidden-r{
+		width: 0;
+	}
+	.usefulLinkCard.shown {
+		width: 550px;
+	}
+	.shopCard.hidden-l {
+		margin-right: -684px;
+	}
+	.block[name=galleryBlock] .h-sqrd {
+		height: 366px;
+	}
+	.otherMuseumsCard {
+		width: 318px;
+		h3 {
+		font-size: 1.14rem;
+		width: 90%;
+	}}
+	.otherMuseumsCard.hidden-r {
+		margin-left: -431px;
+	}
+	.slideWrapper {
+		width: 100vw;
+	}
+	.sliderWrapper {
+		width: 98vw;
+		.shopCard.hidden-r {
+			margin-left: -110%;
+		}
+	}
+	.block[name=museumsFundBlock] {
+		.mt-60 {
+			margin-top: 30px;
+			text-align: left;
+		}
+	}
+	.footer{
+		.w-12{
+			width: 366px;
+		}
+		.footer-top{
+			.w-8{
+				display: none;
+			}
+		}
+		.site-footer-text {
+			display: unset;
+		}
+		.fd-r {
+			flex-direction: row;
+		}
+		.w-12.d-f.fd-r.gap-24.mt-24{
+			flex-direction: column;
+		}
+		.footer-contact {
+			margin-bottom: 20px;
+		}
+		.infoSection.tablet{
+			grid-template-columns: auto;
+		}
+	}
+	.infoSection h3 {
+		margin-top: 30px;
+	}
+	.infoSection .infoPart {
+		width: 100%;
+	}
+	.w-12.d-f.fd-r.mt-24.gap-24 {
+		.w-8 {
+			width: 100%;
+			flex-wrap: wrap;
+		}
+		.site-footer-text {
+			display: flex;
+		}
+	}
+	.scrollToTop{
+		display: none;
+	}
+	.block[name=usefulLinksBlock] {
+		.paginatorWrapper.mt-60{
+			margin-top: 0;
+		}
+	}
+	.block[name=usefulLinksBlock] .usefulLinkCard.hidden-r {
+		margin-left: -180px;
+	}
+	.block[name=volunteersProgramBlock] {
+		.w-100{
+			flex-direction: column-reverse;
+		}
+		.w-50{
+			gap: 10px;
+			width: 100%;
+		}
+		.w-50.pos-rel.bor-r-20.ovr-hidden{
+			height: 100%;
+			width: 100%;
+		}
+		.prim.mt-a.w-4.h-48p{
+			width: 100%;
+			margin-top: 20px;
+		}
+	}
+	.block[name=museumsFundBlock] {
+		.pad-48p {
+			padding: 25px;
+		}
+	}
+	.block[name=mobileAppBlock] {
+		.market-btn.w-3{
+			width: 100%;
+			padding: 10px;
+		}
+		.w-100 .w-50.w-50.pos-rel.bor-r-20.ovr-hidden {
+			height: 366px;
+		}
+	}
+	.accent-btn{
+		display: none;
+	}
+	.mobile-icon-btn{
+		.accent-btn{
+			display: unset;
+			width: 100%;
+		}
+	}
+	.slider-item {
+		height: calc(100vh - 48px);
+		left: 24px;
+		right: 24px;
+		.title {
+			width: calc(100% - 30px);
+			left: 20px;
+			font-size: 2rem;
+			line-height: 40px;
+		}
+		button {
+			width: 90%;
+			left: 18px;
+		}
+	}
+	.newsCard-sm{
+		height: unset;
+		.newsContent{
+			height: unset;
+			.description {
+				font-family: "Casper Reg";
+				display: unset;
+				font-style: normal;
+				font-size: 1.14rem;
+				line-height: 30px;
+				color: #A4ABBD;
+			}
+		}
+	}
+	.mobile-grid{
+		grid-template-columns: auto !important;
+	}
+	.mobile-flex{
+		flex-direction: column;
+		gap: 24px;
+		.w-6,.w-2 {
+			width: 100%;
+		}
+	}
+	.grandTitle{
+		font-size: 1.8rem !important;
+	}
+	.flex-wrap{
+		flex-wrap: wrap;
+	}
+	.h-auto{
+		height: auto;
+	}
+	.cw-t{
+		height: 532px;
+		flex-direction: column;
+		.w-4{
+			height: 280px;
+			width: 100%;
+		}
+		.w-8c {
+			width: 100%;
+			gap: 24px;
+			padding-top: 10px;
+		}
+		.w-a.d-f.fd-r.gap-48{
+			flex-wrap: wrap;
+			gap: 24px;
+		}
+	}
+
+	
+}
+@media (max-width:470px){
+	.block[name=museumShop] {
+		.shopCard h3 {
+			height: 24px;
+		}
+	}
+	.animatedTitle{
+		margin-bottom: 30px;
+	}
+	.sliderWrapper {
+		width: 100vw;
+	}
+	.shopCard.shown button{
+		width: 90% !important;
+	}
+	.subscribe,.footer {
+		width: 100vw;
+	}
+	.block{
+		width: 95%;
+	}
+	.footer .w-4 {
+		width: 300px;
+	}
+	.footer .w-12 {
+		width: 301px;
+	}
+	.subscriberContainer {
+		width: 301px;
+	}
+	.infoSection.tablet{
+		padding: 25px;
+	}
+}
 @keyframes validationError {
 	0% {
 		margin-left: 6px;
@@ -4108,7 +4897,7 @@ input {
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	overflow: scroll;
+	overflow: hidden;
 	top: 0;
 	left: 0;
 	padding: 60px;

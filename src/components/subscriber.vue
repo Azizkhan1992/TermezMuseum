@@ -12,7 +12,7 @@
               type="email"
               placeholder="Введите вашу электронную почту"
             >
-            <button class="white-ghost w-2 ml-24"><span>Click me</span></button>
+            <button class="white-ghost w-2 ml-24"><span>Подписаться</span></button>
           </div>
         </div>
 

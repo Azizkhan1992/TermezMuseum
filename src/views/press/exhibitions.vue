@@ -45,7 +45,7 @@
 
     <!-- Input Bar Start -->
 
-    <div class="w-100 mt-60 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb">
+    <div class="w-100 mt-60 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb mobile-flex">
       
       <div class="w-2 d-f fd-c">
         <label class="colorGreyD mb-4">Год</label>
@@ -93,7 +93,7 @@
     <!-- Input Bar Stop -->
 
 
-    <div class="w-100 h-48p mt-60 align-c gap-24  ">
+    <div class="w-100 h-48p mt-60 align-c gap-24 flex-wrap h-auto ">
       <p class="commonP colorGreyD bold line-h-20">Топ-5 популярных тэгов:</p>
 
       <button class="top5TagBtn">
@@ -122,7 +122,7 @@
 
       <!-- Card Start -->
 
-      <div class="w-100 h-320p bor-r-20 gap-24 ovr-hidden backgrnd-white">
+      <div class="w-100 h-320p bor-r-20 gap-24 ovr-hidden backgrnd-white cw-t">
         <div class="w-4 pos-rel">
           <div class="dark-layer-solid z-idx1"></div>
           <img class="back-img" src="@/assets/temporary/samovar.jpg" alt="">
@@ -131,7 +131,7 @@
         <div class="w-8c d-f fd-c box-brb pad-l-24p pad-r-48 pad-t-48 pad-b-48">
           <h4 class="commonT colorGreyD">This is title</h4>
 
-          <div class="w-100 justify-sb mt-a">
+          <div class="w-100 justify-sb mt-a mobile-flex">
             
             <div class="w-a d-f fd-r gap-48">
               <div class="w-a d-f fd-r align-c gap-12">
