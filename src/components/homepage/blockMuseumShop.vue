@@ -3,7 +3,7 @@
     
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
 
     <div class="sliderWrapper">
@@ -46,7 +46,12 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: 'Магазин музея',
+      title:{
+        uz: 'Muzey do\'koni',
+        ru: 'Магазин музея',
+        uzcyr: 'Музей дўкони',
+        en: 'Museum shop',
+      },
       hiddenR: 1,
       playInterval: '',
 

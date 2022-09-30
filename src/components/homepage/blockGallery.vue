@@ -2,7 +2,7 @@
   <div name="galleryBlock" class="block">
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
 
     <div class="wr-100 gap-24">
@@ -63,7 +63,12 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: 'Галерея'
+      title:{
+        uz: 'Galereya',
+        ru: 'Галерея',
+        uzcyr: 'Галерея',
+        en: 'Gallery',
+      }
     }
   },
 

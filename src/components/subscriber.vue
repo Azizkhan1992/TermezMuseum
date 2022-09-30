@@ -3,21 +3,21 @@
     <div class="subscriberContainer">
       <div class="wr-100 mb-24">
         <div class="w-50">
-          <label class="white mb-12" for="">Подпишитесь на новости музея</label>
+          <label class="white mb-12" for="">{{$t("subscribeMuseum")}}</label>
 
           <div class="wr-100">
             <input
               v-model="usersEmail"
               class="w-4"
               type="email"
-              placeholder="Введите вашу электронную почту"
+              :placeholder="$t('subscribePlaceholder')"
             >
-            <button class="white-ghost w-2 ml-24"><span>Подписаться</span></button>
+            <button class="white-ghost w-2 ml-24"><span>{{$t("subscribe")}}</span></button>
           </div>
         </div>
 
         <div class="w-50 align-r">
-          <label class="white mb-12" for="">Также, подпишитесь на нас в социальных сетях</label>
+          <label class="white mb-12" for="">{{$t("subsSocialNet")}}</label>
 
           <div class="wr-100 justify-r gap-48">
             
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <p class="subs-text">Подпишитесь на новости музея и получайте новости археологии в вашу электронную почту. Никакого спама и никакой ложной информации. Только новости археологии!</p>
+      <p class="subs-text">{{$t("subsInfo")}}</p>
     
     </div>
   </div>

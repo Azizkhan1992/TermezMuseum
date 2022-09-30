@@ -24,6 +24,12 @@ const uz = {
   tags: 'Teglar',
   allNews: 'Barcha yangiliklar',
   showed: 'Koʻrildi',
-  
+  subscribeMuseum: 'Muzey yangiliklariga obuna bo\'ling',
+  subscribe: 'Obuna boʻling',
+  subscribePlaceholder: 'Elektron pochtangizni kiriting',
+  subsSocialNet: 'Shuningdek, bizni ijtimoiy tarmoqlarda kuzatib boring',
+  subsInfo: `Muzey yangiliklariga obuna bo'ling va elektron pochtangizda arxeologiya yangiliklarini oling. Spam va yolg'on ma'lumotlar yo'q. Faqat arxeologiya yangiliklari!`,
+  year: 'Yil',
+  author: 'Muallif',
 }
 export default uz
