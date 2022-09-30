@@ -1,12 +1,12 @@
 import uz from "./messages/uz"
-import oz from "./messages/oz"
+import uzcyr from "./messages/uzcyr"
 import ru from "./messages/ru"
 import en from "./messages/en"
 
 const messages = {
   uz,
   ru,
-  oz,
+  uzcyr,
   en
 }
 
