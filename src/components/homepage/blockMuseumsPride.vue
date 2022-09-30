@@ -3,7 +3,7 @@
 
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
 
     <div class="wr-100 gap-24">
@@ -91,7 +91,12 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: 'Гордость музея',
+      title:{
+        uz: 'Muzeyning faxri',
+        ru: 'Гордость музея',
+        uzcyr: 'Музейнинг фахри',
+        en: 'The pride of the museum',
+      }
     }
   },
 

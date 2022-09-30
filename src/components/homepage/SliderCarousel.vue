@@ -14,12 +14,12 @@
       "
     >
       <img :src="require('@/assets/temporary/' + slideItem.img + '.png')" alt="">
-      <h3 class="title">{{slideItem.title}}</h3>
+      <h3 class="title">{{slideItem.title[$i18n.locale]}}</h3>
       
       <button
         @click="moveToPage(slideItem.link)"
       >
-        <span>Подробно</span>
+        <span>{{$t("more")}}</span>
       </button>
 
       <div class="dark-layer"></div>
@@ -38,11 +38,11 @@ export default {
       mainItemIdChecker: 2,
       firstItemIdChecker: 3,
       sliderItems: [
-        {id: 1, img: 1, title: 'Музей - центр культуры и просвещения', link: ''},
-        {id: 2, img: 2, title: 'Музей - центр культуры и просвещения', link: ''},
-        {id: 3, img: 3, title: 'Музей - центр культуры и просвещения', link: ''},
-        {id: 4, img: 4, title: 'Музей - центр культуры и просвещения', link: ''},
-        {id: 5, img: 5, title: 'Музей - центр культуры и просвещения', link: ''},
+        {id: 1, img: 1, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
+        {id: 2, img: 2, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
+        {id: 3, img: 3, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
+        {id: 4, img: 4, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
+        {id: 5, img: 5, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
       ]
     }
   },

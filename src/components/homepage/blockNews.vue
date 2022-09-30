@@ -2,12 +2,12 @@
   <div name="newsBlock" class="block">
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
 
     <div class="wrapper-h mb-60">
       <button class="prim w-3 a-left">
-        <span>Все новости</span>
+        <span>{{$t("allNews")}}</span>
       </button>
 
       <topTags
@@ -45,12 +45,40 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: 'Новости',
-      topTags: [
-        {name: 'Важно', id: 1},
-        {name: 'Конкурс', id: 2},
-        {name: 'История Узбекистана', id: 3},
-      ]
+      title:{
+        uz: 'Yangiliklar',
+        ru: 'Новости',
+        uzcyr: 'Янгиликлар',
+        en: 'News',
+      },
+      topTags:
+      //  [
+      //   {name: 'Важно', id: 1},
+      //   {name: 'Конкурс', id: 2},
+      //   {name: 'История Узбекистана', id: 3},
+      // ]
+      [
+      { id: 1,
+        name:{
+          uz: 'Muhim',
+          ru: 'Важно',
+          uzcyr: 'Муҳим',
+          en: 'Important',
+        }},
+        {id: 2,
+          name:{
+          uz: 'Konkurs',
+          ru: 'Конкурс',
+          uzcyr: 'Конкурс',
+          en: 'Competition',
+        }},
+        {id: 3,
+        name:{
+        uz: 'O\'zbekiston tarixi',
+        ru: 'История Узбекистана',
+        uzcyr: 'Ўзбекистон тарихи',
+        en: 'History of Uzbekistan',
+        }}]
     }
   },
 

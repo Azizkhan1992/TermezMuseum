@@ -112,7 +112,7 @@
                         size="24"
                       />
 
-                      <p class="placeholder">Искать...</p>
+                      <p class="placeholder">{{$t('search')}}...</p>
                     </div>
                       <a href="tel: +998900073118"
                         class="icon-txt-btn"
@@ -126,7 +126,7 @@
                     <button
                       class="accent-btn"
                     >
-                      <span>Онлайн билет</span>
+                      <span>{{$t("onTicket")}}</span>
                     </button>
                   </div>
               </div>

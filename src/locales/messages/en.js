@@ -24,6 +24,13 @@ const en = {
   tags: 'Tags',
   allNews: 'All news',
   showed: 'Viewed',
+  subscribeMuseum: 'Subscribe to museum news',
+  subscribe: 'Subscribe',
+  subscribePlaceholder: 'Enter your email',
+  subsSocialNet: 'Also, follow us on social networks',
+  subsInfo: 'Subscribe to museum news and receive archeology news in your email. No spam and no false information. Archeology news only!',
+  year: 'Year',
+  author: 'Author',
   
 }
 

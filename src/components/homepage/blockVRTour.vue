@@ -3,17 +3,19 @@
 
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
 
     <div class="wr-100 gap-24">
       <div class="w-50">
-        <span class="vr-text">Хотите путешествовать в прошлое Сурхандарьи и получить неописуемые впечатления и при этом не выходя из дома? Тогда мы приглашаем вас в 3D Тур по музею.</span>
+        <span class="vr-text">
+            {{text[$i18n.locale]}}
+        </span>
         
         <button
           class="prim w-4 mt-a"
         >
-          <span>Перейти к просмотру</span>
+          <span>{{$t("gotoView")}}</span>
         </button>
       </div>
 
@@ -38,7 +40,18 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: '3D Тур по музею',
+      title:{
+        uzcyr: 'Музей бўйлаб 3D саёҳат',
+        ru: '3D Тур по музею',
+        uz: 'Muzey bo\'ylab 3D sayohat',
+        en: '3D Tour in museum',
+      },
+      text:{
+        uzcyr: 'Уйингиздан чиқмасдан Сурхондарёнинг ўтмишига саёҳат қилиб, таърифлаб бўлмас таассуротлар олишни хоҳлайсизми? Унда сизни 3Д музей экскурсиясига таклиф қиламиз.',
+        ru: 'Хотите путешествовать в прошлое Сурхандарьи и получить неописуемые впечатления и при этом не выходя из дома? Тогда мы приглашаем вас в 3D Тур по музею.',
+        uz: `Uyingizdan chiqmasdan Surxondaryoning o'tmishiga sayohat qilib, ta'riflab bo'lmas taassurotlar olishni xohlaysizmi? Unda sizni 3D muzey ekskursiyasiga taklif qilamiz.`,
+        en: 'Do you want to travel into the past of Surkhandarya and get indescribable impressions without leaving your home? Then we invite you to the 3D Museum Tour.',
+      },
     }
   },
 

@@ -1,13 +1,13 @@
 <template>
   <div class="topTags">
-    <p>Tags</p>
+    <p>{{$t("tags")}}</p>
 
     <button
       class="tag-btn"
       v-for="tag in topTags"
       :key="tag.id"
     >
-      <span>{{tag.name}}</span>
+      <span>{{tag.name[$i18n.locale]}}</span>
     </button>
 
 

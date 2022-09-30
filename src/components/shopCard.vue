@@ -15,7 +15,7 @@
     <h4>{{price}}<span> {{currency}}</span></h4>
 
     <button class="prim w-4-48 mt-a mb-24">
-      <span>Подробно</span>
+      <span>{{$t("more")}}</span>
     </button>
 
   </div>
