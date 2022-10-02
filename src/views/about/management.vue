@@ -27,12 +27,12 @@
             />
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
-                <p class="helpers mw-fit">Дни приема:</p>
+                <p class="helpers mw-fit">{{$t("recDays")}}:</p>
                 <p class="mainers">{{manager.info.receptionDays}}</p>
               </div>
 
               <div class="w-100 gap-12">
-                <p class="helpers mw-fit">Часы приема:</p>
+                <p class="helpers mw-fit">{{$t("recHours")}}:</p>
                 <p class="mainers">{{manager.info.receptionHours}}</p>
               </div>
             </div>
@@ -45,7 +45,7 @@
             />
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
-                <p class="helpers mw-fit">Номер телефона:</p>
+                <p class="helpers mw-fit">{{$t("phoneNumber")}}:</p>
                 <a :href="'tel:' + manager.info.phone" class="mainers">{{manager.info.phone}}</a>
               </div>
             </div>
@@ -58,7 +58,7 @@
             />
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
-                <p class="helpers mw-fit">Э-почта:</p>
+                <p class="helpers mw-fit">{{$t("email")}}:</p>
                 <a :href="'mailto:' + manager.info.email" class="mainers">{{manager.info.email}}</a>
               </div>
             </div>
@@ -68,7 +68,7 @@
             @click="goToSingle(manager.id)"
             class="prim h-48p mt-36"
           >
-            <span>Click me</span>
+            <span>{{$t("more")}}</span>
           </button>
 
         </div>

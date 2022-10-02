@@ -32,7 +32,10 @@ const uzcyr = {
   year: 'Йил',
   author: 'Муаллиф',
   buy: 'Сотиб олиш',
-
+  recDays: 'Қабул кунлари',
+  recHours: 'Иш вақти',
+  phoneNumber: 'Телефон рақами',
+  email: 'Э-почта',
 }
 
 export default uzcyr

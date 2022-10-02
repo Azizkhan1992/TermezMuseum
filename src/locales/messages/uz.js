@@ -32,5 +32,9 @@ const uz = {
   year: 'Yil',
   author: 'Muallif',
   buy: 'Sotib olish',
+  recDays: 'Qabul kunlari',
+  recHours: 'Ish vaqti',
+  phoneNumber: 'Telefon raqami',
+  email: 'E-mail',
 }
 export default uz

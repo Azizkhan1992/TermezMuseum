@@ -4165,6 +4165,12 @@ input {
 			}
 		}
 	}
+	.manage_single{
+		flex-direction: column;
+		.w-4,.w-8{
+			width: 100%;
+		}
+	}
 	.footer-menu-block .w-9{
 		grid-template-columns: auto auto;
 	}

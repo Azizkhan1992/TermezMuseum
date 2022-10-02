@@ -1,7 +1,7 @@
 <template>
   <div class="mainPage">
 
-    <div class="w-100 mt-120 gap-24">
+    <div class="w-100 mt-120 gap-24 manage_single">
       <div class="w-4 pos-rel h-652p bor-r-20 ovr-hidden">
         <img class="back-img" :src="require('@/assets/temporary/' + this.managerInfo.img + '.jpg')" alt="">
       </div>

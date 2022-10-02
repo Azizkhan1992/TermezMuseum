@@ -32,7 +32,10 @@ const en = {
   year: 'Year',
   author: 'Author',
   buy: 'Buy',
-  
+  recDays: 'Reception days',
+  recHours: 'Reception hours',
+  phoneNumber: 'Phone number',
+  email: 'E-mail',
 }
 
 export default en

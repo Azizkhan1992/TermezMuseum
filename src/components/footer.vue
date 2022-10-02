@@ -44,7 +44,7 @@
           >
             <h3 class="mb-28">{{ section.name[$i18n.locale] }}</h3>
 
-            <div class="pageLinks gap-12">
+            <div class="pageLinks gap-12" v-if="section.pages.length">
               <router-link
                 v-for="page in section.pages"
                 :key="page.id"

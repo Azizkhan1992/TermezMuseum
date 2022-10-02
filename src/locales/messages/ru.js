@@ -32,6 +32,10 @@ const ru = {
   year: 'Год',
   author: 'Автор',
   buy: 'Купить',
+  recDays: 'Дни приема',
+  recHours: 'Часы приема',
+  phoneNumber: 'Номер телефона',
+  email: 'Э-почта',
 }
 
 export default ru
