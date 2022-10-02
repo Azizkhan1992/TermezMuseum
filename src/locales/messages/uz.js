@@ -31,5 +31,6 @@ const uz = {
   subsInfo: `Muzey yangiliklariga obuna bo'ling va elektron pochtangizda arxeologiya yangiliklarini oling. Spam va yolg'on ma'lumotlar yo'q. Faqat arxeologiya yangiliklari!`,
   year: 'Yil',
   author: 'Muallif',
+  buy: 'Sotib olish',
 }
 export default uz

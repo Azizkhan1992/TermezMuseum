@@ -75,7 +75,6 @@ export default {
 
     moveToPage(link) {
       const currentPage = this.$route.path
-      console.log(currentPage);
 
       if(link !== currentPage) {
         this.$router.push({ path: link })

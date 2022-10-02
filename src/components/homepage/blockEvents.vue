@@ -3,7 +3,7 @@
     
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
 
     <div class="w-100 h-420p gap-24">
@@ -11,7 +11,7 @@
       <div class="wc-4 ovr-hidden bor-r-20 pos-rel">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
-          <h3>This is title</h3>
+          <h3>Буддийские монахи в Археологическом музее Термеза</h3>
         </div>
 
         <div class="wr-100 w--48p mt-24 mb-24 z-idx2 mr-s-24 justify-sb">
@@ -23,7 +23,7 @@
 
           <iconText
             icon="share"
-            text="Поделиться"
+            :text="$t('share')"
             color="white"
           />
         </div>
@@ -38,7 +38,7 @@
       <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
-          <h3>This is title</h3>
+          <h3>Буддийские монахи в Археологическом музее Термеза</h3>
         </div>
 
         <div class="wr-100 w--48p mt-24 mb-24 z-idx2 mr-s-24 justify-sb">
@@ -50,7 +50,7 @@
 
           <iconText
             icon="share"
-            text="Поделиться"
+            :text="$t('share')"
             color="white"
           />
         </div>
@@ -66,7 +66,7 @@
       <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
-          <h3>This is title</h3>
+          <h3>Полная реставрация шахматной доски времен Темуридов</h3>
         </div>
 
         <div class="wr-100 w--48p mt-24 mb-24 z-idx2 mr-s-24 justify-sb">
@@ -78,7 +78,7 @@
 
           <iconText
             icon="share"
-            text="Поделиться"
+            :text="$t('share')"
             color="white"
           />
         </div>
@@ -92,7 +92,7 @@
       <div class="wc-4 ovr-hidden bor-r-20 pos-rel">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
-          <h3>This is title</h3>
+          <h3>Изучение древних чашек правителей древней Бактрии</h3>
         </div>
 
         <div class="wr-100 w--48p mt-24 mb-24 z-idx2 mr-s-24 justify-sb">
@@ -104,7 +104,7 @@
 
           <iconText
             icon="share"
-            text="Поделиться"
+            :text="$t('share')"
             color="white"
           />
         </div>
@@ -134,7 +134,12 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: 'Мероприятия'
+      title:{
+        ru:'Мероприятия',
+        uz:'Voqealar',
+        en:'Events',
+        uzcyr:'Воқеалар',
+      }
     }
   },
 

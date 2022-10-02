@@ -91,7 +91,6 @@ export default {
 
       
       this.hghts = arr
-      console.log(this.hghts);
     },
 
     getHeight(id) {

@@ -31,6 +31,7 @@ const en = {
   subsInfo: 'Subscribe to museum news and receive archeology news in your email. No spam and no false information. Archeology news only!',
   year: 'Year',
   author: 'Author',
+  buy: 'Buy',
   
 }
 

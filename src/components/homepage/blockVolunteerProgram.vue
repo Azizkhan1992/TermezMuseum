@@ -48,9 +48,9 @@ export default {
         en: 'Volunteers',
       },
       txt:{
-        uz: 'Кўнгилли бўлиш',
+        uzcyr: 'Кўнгилли бўлиш',
         ru: 'Стать волонтером',
-        uzcyr: 'Ko\'ngilli bo\'lish',
+        uz: 'Ko\'ngilli bo\'lish',
         en: 'Become a volunteer',
       },
       txt2:{

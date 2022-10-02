@@ -265,7 +265,6 @@ export default {
         this.hiddenR ++
       } else this.hiddenR = 1
 
-      console.log(this.imgs);
     },
 
     play() {

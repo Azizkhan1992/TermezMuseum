@@ -100,11 +100,11 @@ export default {
     return {
       title: 'Руководство',
       managers: [
-        {id: 1, name: 'Файзиева Васила Солиховна', post: 'Директор музея', img: 'manager-2', info: {
+        {id: 1, name: 'Файзиева Васила Солиховна', post: 'Директор музея', img: 'manager-1', info: {
           receptionDays: 'Понедельник - Пятница', receptionHours: '09:00 - 16:00', phone: '+998 71 236 74 36',
           email: 'tmi2007@mail.ru'
         }},
-        {id: 2, name: 'Каримов Равшан Иргашевич', post: 'Заместитель директора по общим вопросам', img: 'manager-3', info: {
+        {id: 2, name: 'Каримов Равшан Иргашевич', post: 'Заместитель директора по общим вопросам', img: 'manager-1', info: {
           receptionDays: 'Понедельник - Пятница', receptionHours: '09:00 - 16:00', phone: '+998 71 236 74 36',
           email: 'tmi2007@mail.ru'
         }},

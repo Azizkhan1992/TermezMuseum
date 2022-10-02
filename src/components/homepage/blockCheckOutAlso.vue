@@ -3,7 +3,7 @@
 
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title"
+      :titleName="this.title[$i18n.locale]"
     />
     <div class="slideWrapper">
       <div class="wr-100 gap-24 ovr-hidden">
@@ -12,7 +12,7 @@
           v-for="museumCard in museums"
           :key="museumCard.id"
           :id="museumCard.id"
-          :museumsTitle="museumCard.name"
+          :museumsTitle="museumCard.name[$i18n.locale]"
           :img="museumCard.img"
           :link="museumCard.link"
           :hiddenR="hiddenRChecker(museumCard.id)"
@@ -45,16 +45,21 @@ export default {
   data() {
     return {
       offTop: 1,
-      title: 'Посмотрите также',
+      title:{
+        uz: 'Shuningdek, tomosha qiling',
+        ru: 'Посмотрите также',
+        uzcyr: 'Шунингдек, томоша қилинг',
+        en: 'Check out also',
+      },
       hiddenR: 1,
       playInterval: '',
 
       museums: [
-        {id: 1, name: 'Музей Вооруженных Сил Узбекистана', img: 'armedForcesMuseum.png', link: ''},
-        {id: 2, name: 'Музей Прикладного Искусттва', img: 'artMuseum.png', link: ''},
-        {id: 3, name: 'Государстенный Музей Природы', img: 'natureMuseum.png', link: ''},
-        {id: 4, name: 'Музей Железнодорожной Техники', img: 'railwaysMuseum.png', link: ''},
-        {id: 5, name: 'Государственный Музей Тимуридов', img: 'timuridMuseum.png', link: ''},
+        {id: 1, name: {ru:'Музей Вооруженных Сил Узбекистана',uz:'Oʻzbekiston Qurolli Kuchlari muzeyi',uzcyr:'Ўзбекистон Қуролли Кучлари музейи',en:'Museum of the Armed Forces of Uzbekistan'}, img: 'armedForcesMuseum.png', link: ''},
+        {id: 2, name: {ru:'Музей Прикладного Искусттва',uz:'Amaliy san\'at muzeyi',uzcyr:'Амалий санъат музейи',en:'Museum of Applied Arts'}, img: 'artMuseum.png', link: ''},
+        {id: 3, name: {ru:'Государстенный Музей Природы',uz:'Davlat tabiat muzeyi',uzcyr:'Давлат табиат музейи',en:'State Museum of Nature'}, img: 'natureMuseum.png', link: ''},
+        {id: 4, name: {ru:'Музей Железнодорожной Техники',uz:'Temir yo\'l muhandisligi muzeyi',uzcyr:'Темир йўл муҳандислиги музейи',en:'Museum of Railway Engineering'}, img: 'railwaysMuseum.png', link: ''},
+        {id: 5, name: {ru:'Государственный Музей Тимуридов',uz:'Temuriylar davlat muzeyi',uzcyr:'Темурийлар давлат музейи',en:'Timurid State Museum'}, img: 'timuridMuseum.png', link: ''},
       ]
     }
   },

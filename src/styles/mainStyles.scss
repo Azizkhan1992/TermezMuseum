@@ -1660,6 +1660,7 @@ button {
 	flex-direction: column;
 	position: relative;
 	align-items: center;
+	width: 100%;
 	gap: 24px;
 	height: 286px;
 	overflow: hidden;
@@ -1682,6 +1683,7 @@ button {
 
 	img {
 		filter: grayscale(100%);
+		object-fit: contain;
 	}
 
 	h3 {
@@ -3905,6 +3907,17 @@ input {
 			display: none;
 		}
 	}
+	.usefulLinkCard{
+		&.hidden-r{
+			margin-left: -270px;
+		}
+		&.hidden-l{
+			margin-right: -270px;
+		}
+		.w-3 {
+			width: 252px;
+		}
+	}
 }
 @media (max-width: 1100px){
 .sideMenu .menuBar{
@@ -4091,7 +4104,7 @@ input {
 	}
 	.block[name="usefulLinksBlock"]{
 		.usefulLinkCard.hidden-r {
-		margin-left: -220px;
+		margin-left: -260px;
 		}
 	}
 	button.prim.w-4{
@@ -4369,12 +4382,20 @@ input {
 		display: none;
 	}
 	.block[name=usefulLinksBlock] {
+		h3{
+			width: 75%;
+		}
 		.paginatorWrapper.mt-60{
 			margin-top: 0;
 		}
-	}
-	.block[name=usefulLinksBlock] .usefulLinkCard.hidden-r {
-		margin-left: -180px;
+		.usefulLinkCard{
+			&.hidden-l {
+				margin-right: -540px;
+			}
+			&.hidden-r {
+				margin-left: -390px;
+			}
+		}
 	}
 	.block[name=volunteersProgramBlock] {
 		.w-100{
@@ -4516,6 +4537,11 @@ input {
 	}
 	.infoSection.tablet{
 		padding: 25px;
+	}
+	.block[name=usefulLinksBlock] {
+		.usefulLinkCard.shown{
+			width: 100%;
+		}
 	}
 }
 @keyframes validationError {

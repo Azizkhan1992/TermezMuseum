@@ -45,7 +45,6 @@ export default {
           if(event.ctrlKey && event.key == "Enter") {
           _t.text = window.getSelection().toString()
 
-          console.log(_t.text);
         }
       });
     },
