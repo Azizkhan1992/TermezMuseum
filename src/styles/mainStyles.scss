@@ -1073,7 +1073,8 @@ background: $prim;
 }
 
 .router-link-active {
-	a {
+		color: $prim !important;
+		a {
 		color: $prim;
 	}
 }

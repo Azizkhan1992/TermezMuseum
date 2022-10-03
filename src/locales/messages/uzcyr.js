@@ -36,6 +36,21 @@ const uzcyr = {
   recHours: 'Иш вақти',
   phoneNumber: 'Телефон рақами',
   email: 'Э-почта',
+  numberReview: 'Кўриб чиқишлар сони',
+  sort: 'Тартиб',
+  pubDate: 'Нашр санаси бўйича',
+  amountLikes: 'Лайклар сони бўйича',
+  wouldShare: 'Музей ҳақида фикрингизни билдирмоқчимисиз?',
+  comment: 'Изоҳ қолдириш',
+  read: 'Ўқиш',
+  downloads: 'Юклаб олишлар сони',
+  downloadDoc: 'Ҳужжатни юклаб олиш',
+  prev: 'Олдинги саҳифа',
+  next: 'Кейинги саҳифа',
+  page: 'саҳифа',
+  from: 'дан',
+  go: 'Ўтиш',
+  mainPage: 'Бош саҳифа',
 }
 
 export default uzcyr

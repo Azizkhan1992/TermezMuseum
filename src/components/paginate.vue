@@ -11,14 +11,14 @@
           icon="arrLeft"
           size="middle"
         />
-        <span>Previous</span>
+        <span>{{$t("prev")}}</span>
       </button>
 
       <button
         class="primPaginator w-2 h-48p gap-12"
         :disabled="currentPageNumber === pages ? true : false"
       >
-        <span>Next</span>
+        <span>{{$t("next")}}</span>
         <Icons
           icon="arrRight"
           size="middle"
@@ -28,7 +28,7 @@
 
     <div class="w-a d-f fd-r ml-a gap-72">
       <div class="w-a d-f fd-r ml-a align-c gap-24">
-        <p class="commonP colorGreyD">page</p>
+        <p class="commonP colorGreyD">{{$t("page")}}</p>
         <input
           v-model="goToPage"
           type="number"
@@ -36,12 +36,12 @@
           min="1"
           :max="this.pages"
         >
-        <p class="commonP colorGreyD">from {{pages}}</p>
+        <p class="commonP colorGreyD">{{$t("from")}} {{pages}}</p>
       </div>
 
       <div class="w-a">
         <button class="primPaginator primPagGo w-2 h-48p gap-12">
-        <span>Go</span>
+        <span>{{$t("go")}}</span>
         <Icons
           icon="arrRight"
           size="middle"

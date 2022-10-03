@@ -36,6 +36,21 @@ const en = {
   recHours: 'Reception hours',
   phoneNumber: 'Phone number',
   email: 'E-mail',
+  numberReview: 'Number of reviews',
+  sort: 'Sorted by',
+  pubDate: 'Publication date',
+  amountLikes: 'Amount of likes',
+  wouldShare: 'Would you like to share your opinion about the museum?',
+  comment: 'Comment',
+  read: 'Read',
+  downloads: 'Downloads',
+  downloadDoc: 'Download document',
+  prev: 'Prev. page',
+  next: 'Next page',
+  page: 'page',
+  from: 'from',
+  go: 'Go',
+  mainPage: 'Main page',
 }
 
 export default en

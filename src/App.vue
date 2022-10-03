@@ -58,8 +58,9 @@ export default {
 
   mounted() {
     this.getSelectionText()
-    this.$i18n.locale = this.$route.query.lang || 'uz'
     setTimeout(()=>{this.off()},1500)
+    this.$i18n.locale = this.$route.query.lang || 'uz'
+    console.log(888,this.$route);
   }
 }
 </script>

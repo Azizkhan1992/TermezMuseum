@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="documents"
     />
 
@@ -34,7 +34,7 @@
                 icon="download"
                 size="middle"
               />
-              <p class="helpers">Количество скачиваний:</p>
+              <p class="helpers">{{$t("downloads")}}:</p>
               <p class="mainers">{{doc.downloadsNumber}}</p>
             </div>
 
@@ -43,7 +43,7 @@
                 icon="download"
                 size="middle"
               />
-              <p class="helpers colorPrim">Скачать документ</p>
+              <p class="helpers colorPrim">{{$t("downloadDoc")}}</p>
             </div>
           </div>
 
@@ -61,7 +61,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -82,7 +82,12 @@ export default {
 
   data() {
     return {
-      title: 'Документы',
+      title:{
+        uz: 'Hujjatlar',
+        ru: 'Документы',
+        uzcyr: 'Ҳужжатлар',
+        en: 'Documents',
+      },
       curPage: 3,
       pages: 384,
       allDocuments: this.$store.state.documents

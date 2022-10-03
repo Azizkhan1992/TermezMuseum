@@ -36,6 +36,21 @@ const ru = {
   recHours: 'Часы приема',
   phoneNumber: 'Номер телефона',
   email: 'Э-почта',
+  numberReview: 'Количество отзывов',
+  sort: 'Сортировка',
+  pubDate: 'По дате публикации',
+  amountLikes: 'По количеству лайков',
+  wouldShare: 'Хотите поделиться своим мнением о музее?',
+  comment: 'Оставить отзыв',
+  read: 'Читать',
+  downloads: 'Количество скачиваний',
+  downloadDoc: 'Скачать документ',
+  prev: 'Пред. стр',
+  next: 'След. стр',
+  page: 'страница',
+  from: 'из',
+  go: 'Перейти',
+  mainPage: 'Главная страница',
 }
 
 export default ru

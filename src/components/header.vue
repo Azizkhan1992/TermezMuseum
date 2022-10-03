@@ -132,6 +132,7 @@
               @click="changeLang(lang)"
               v-for="lang in locales"
               :key="lang.id"
+              :class="{active:lang.lang==$i18n.locale}"
             >
               {{lang.name}}
             </p>

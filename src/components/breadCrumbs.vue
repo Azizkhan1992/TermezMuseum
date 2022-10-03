@@ -6,7 +6,7 @@
         class="mr-12"
         icon="home"
       />
-      Главная страница
+      {{$t("mainPage")}}
     </a>
 
     <a

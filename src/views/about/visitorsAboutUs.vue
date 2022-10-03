@@ -11,42 +11,42 @@
     <!-- Modal Window -->
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="visitors-about-us"
     />
 
     <div class="w-100 mb-60 h-a align-c">
       <div class="w-a d-f fd-r gap-48">
-        <p class="commonP colorGreyD">Количество отзывов:</p>
+        <p class="commonP colorGreyD">{{$t("numberReview")}}:</p>
         <p class="commonP bold colorType">1 694</p>
       </div>
 
       <div class="w-a d-f fd-r gap-48 ml-120 align-c">
-        <p class="commonP colorGreyD">Сортировка:</p>
+        <p class="commonP colorGreyD">{{$t("sort")}}:</p>
         <button
           class="ghost w-2 h-54p"
           :class="sortedBy == 1 ? 'active' : ''"
         >
-          <span>Click me</span>
+          <span>{{$t("pubDate")}}</span>
         </button>
 
         <button
           class="ghost w-2 h-54p"
           :class="sortedBy == 2 ? 'active' : ''"
         >
-          <span>Click me</span>
+          <span>{{$t("amountLikes")}}</span>
         </button>
       </div>
     </div>
 
     <div class="w-100 mb-60 align-c gap-120">
-      <h3 class="commonT colorGreyD">Хотите поделиться своим мнением о музее?</h3>
+      <h3 class="commonT colorGreyD">{{$t("wouldShare")}}</h3>
 
       <button
         @click="modalIsOpen = true"
         class="prim w-3"
       >
-        <span>Click me</span>
+        <span>{{$t("comment")}}</span>
       </button>
     </div>
 
@@ -100,7 +100,7 @@
             @click="goToSingle(comment.id)"
             class="w-a d-f fd-r align-c cur-ptr gap-12 ml-a"
           >
-            <p class="commonP colorGreyD line-h-20">Читать</p>
+            <p class="commonP colorGreyD line-h-20">{{$t("read")}}</p>
             <Icons
               icon="arrRight"
               size="middle"
@@ -120,7 +120,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
   </div>
 </template>
@@ -145,7 +145,12 @@ export default {
       curPage: 3,
       pages: 384,
       sortedBy: 1,
-      title: 'Посетители о нас',
+      title:{
+        ru:'Посетители о нас',
+        uz:'Biz haqimizda tashrif buyuruvchilar',
+        uzcyr:'Биз ҳақимизда ташриф буюрувчилар',
+        en:'Visitors about us',
+      },
       comments: this.$store.state.comments
     }
   },
