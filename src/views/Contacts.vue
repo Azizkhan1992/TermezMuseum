@@ -38,7 +38,7 @@
     <div class="w-100 grid-3 r-gap-60 mt-60 mobile-grid">
       
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT colorGreyD">Адрес</h4>
+        <h4 class="commonT colorGreyD">{{$t("address")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             icon="location"
@@ -49,7 +49,7 @@
       </div>
 
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT bold colorGreyD">График работы</h4>
+        <h4 class="commonT bold colorGreyD">{{$t("schedule")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             icon="clock"
@@ -65,7 +65,7 @@
               <p class="commonP colorType bold line-h-20">09:00 - 18:00</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
-              <p class="commonP colorGreyD line-h-20">Выходной день:</p>
+              <p class="commonP colorGreyD line-h-20">{{$t("dayoff")}}:</p>
               <p class="commonP colorType bold line-h-20">Воскресенье</p>
             </div>
           </div>
@@ -82,11 +82,11 @@
           
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
-              <p class="commonP colorGreyD line-h-20">Тел:</p>
+              <p class="commonP colorGreyD line-h-20">{{$t("telephone")}}:</p>
               <a href="tel: +998 71 236 74 36" class="contactPhone commonP colorType line-h-20">+998 71 236 74 36</a>
             </div>
             <div class="w-a d-f fd-r gap-12">
-              <p class="commonP colorGreyD line-h-20">Факс:</p>
+              <p class="commonP colorGreyD line-h-20">{{$t("fax")}}:</p>
               <p class="commonP colorType bold line-h-20">+998 71 233 62 81</p>
             </div>
           </div>
@@ -100,7 +100,7 @@
           
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
-              <p class="commonP colorGreyD line-h-20">Э-почта:</p>
+              <p class="commonP colorGreyD line-h-20">{{$t("email")}}:</p>
               <a href="mailto: tmi2007@mail.ru" class="contactPhone commonP bold colorType line-h-20">tmi2007@mail.ru</a>
             </div>
           </div>
@@ -108,7 +108,7 @@
       </div>
 
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT colorGreyD">Ориентир</h4>
+        <h4 class="commonT colorGreyD">{{$t("refPoint")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             icon="oriental"
@@ -119,7 +119,7 @@
       </div>
 
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT colorGreyD">Автобусы</h4>
+        <h4 class="commonT colorGreyD">{{$t("bus")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             icon="bus"
@@ -130,7 +130,7 @@
       </div>
 
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT colorGreyD">Метро</h4>
+        <h4 class="commonT colorGreyD">{{$t("metro")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             icon="subway"
@@ -141,7 +141,7 @@
       </div>
 
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT bold colorGreyD">Мы в социальных сетях</h4>
+        <h4 class="commonT bold colorGreyD">{{$t("social")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             @click.native="goToSocial(socialNetworks[0])"
@@ -172,14 +172,14 @@
     </div>
 
     <div class="w-100 fd-c mt-60 gap-24">
-      <h4 class="commonT colorGreyD">Обратная связь</h4>
+      <h4 class="commonT colorGreyD">{{$t("feedback")}}</h4>
       <h4 class="commonD colorGreyD">Режим работы электронных обращений с 09:00 до 18:00 с понедельника по пятницу. Время обработки обращения - три рабочих дня.</h4>
     </div>
 
     <div class="w-100 fd-c bor-r-20 ovr-hidden box-brb mt-24 backgrnd-white pad-24p">
       <div class="w-100 grid-3 mobile-grid">
         <div class="w-100 fd-c gap-4">
-          <label class="commonP colorGreyD">Фамилия</label>
+          <label class="commonP colorGreyD">{{$t("surname")}}</label>
           <input
             v-model="surName"
             type="text"
@@ -189,7 +189,7 @@
         </div>
 
         <div class="w-100 fd-c gap-4">
-          <label class="commonP colorGreyD">Имя</label>
+          <label class="commonP colorGreyD">{{$t("name")}}</label>
           <input
             v-model="name"
             type="text"
@@ -199,7 +199,7 @@
         </div>
 
         <div class="w-100 fd-c gap-4">
-          <label class="commonP colorGreyD">Отчество</label>
+          <label class="commonP colorGreyD">{{$t("middle")}}</label>
           <input
             v-model="secondName"
             type="text"
@@ -208,7 +208,7 @@
         </div>
 
         <div class="w-100 fd-c gap-4">
-          <label class="commonP colorGreyD">Электронная почта</label>
+          <label class="commonP colorGreyD">{{$t("email")}}</label>
           <input
             v-model="email"
             type="text"
@@ -228,7 +228,7 @@
         </div>
 
         <div class="w-100 fd-c gap-4">
-          <label class="commonP colorGreyD">Тема обращения</label>
+          <label class="commonP colorGreyD">{{$t("topic")}}</label>
           <input
             v-model="appealTitle"
             type="text"
@@ -239,7 +239,7 @@
       </div>
 
       <div class="w-100 fd-c gap-4 mt-24">
-        <label class="commonP colorGreyD">Текст обращения</label>
+        <label class="commonP colorGreyD">{{$t("textAppeal")}}</label>
         <textarea
           placeholder="Введите текст обращения"
           class="w-100"
