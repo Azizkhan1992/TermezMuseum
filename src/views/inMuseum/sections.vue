@@ -2,14 +2,14 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="sections"
     />
 
     
     <div class="w-100 z-idx100 fd-c backgrnd-white bor-r-20 pad-24p box-brb">
       
-      <label class="colorGreyD mb-4">Section</label>
+      <label class="colorGreyD mb-4">{{$t("section")}}</label>
       
       <selector
         @optionChanged="optionChanged"
@@ -35,7 +35,7 @@
           @click="goToSingle"
           class="prim w-100 h-48p mt-a"
         >
-          <span>Click me</span>
+          <span>{{$t("moreAbSec")}}</span>
         </button>
       </div>
     </div>
@@ -68,7 +68,7 @@
                 icon="download"
                 size="middle"
               />
-              <p class="helpers">Количество скачиваний:</p>
+              <p class="helpers">{{$t("downloads")}}:</p>
               <p class="mainers">{{doc.downloadsNumber}}</p>
             </div>
 
@@ -77,7 +77,7 @@
                 icon="download"
                 size="middle"
               />
-              <p class="helpers colorPrim">Скачать документ</p>
+              <p class="helpers colorPrim">{{$t("downloadDoc")}}</p>
             </div>
           </div>
 
@@ -90,7 +90,7 @@
 
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -111,7 +111,12 @@ export default {
 
   data() {
     return {
-      title: 'Разделы',
+      title: {
+        uz: 'Bo\'limlar',
+        uzcyr: 'Бўлимлар',
+        en: 'Sections',
+        ru: 'Разделы',
+      },
       options: [
         {value: '1', label: 'Option 1'},
         {value: '2', label: 'Option 2'},

@@ -11,7 +11,7 @@
     </h3>
 
     <div class="w-100 mt-80 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество экпонатов:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countExibits")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -26,7 +26,7 @@
           <p class="commonP bold line-h-24 mt-a">{{xhbt.title}}</p>
           
           <div class="w-100 gap-12 mt-24">
-            <p class="helpers">Год находки:</p>
+            <p class="helpers">{{$t("discoverIn")}}:</p>
             <p class="mainers colorWhite">{{xhbt.year}}</p>
           </div>
         </div>
@@ -46,7 +46,7 @@
 
     <breadCrumbs
       :currentPage="title"
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :prevPageLink="prevPage.link"
     />
     
@@ -68,7 +68,12 @@ export default {
     return {
       allExhibits: this.$store.state.exhibits,
       prevPage: {
-        name: 'Разделы',
+        name: {
+          uz: 'Bo\'limlar',
+          uzcyr: 'Бўлимлар',
+          en: 'Sections',
+          ru: 'Разделы',
+        },
         link: '/sections'
       },
       title: this.$route.params.id,

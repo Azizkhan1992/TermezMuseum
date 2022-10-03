@@ -51,6 +51,13 @@ const ru = {
   from: 'из',
   go: 'Перейти',
   mainPage: 'Главная страница',
+  hall: 'Зал',
+  moreAbHall: 'Подробнее о зале',
+  countExibits: 'Количество экпонатов',
+  discoverIn: 'Год находки',
+  section: 'Раздел',
+  moreAbSec: 'Подробнее о разделе',
+  send: 'Отправить',
 }
 
 export default ru

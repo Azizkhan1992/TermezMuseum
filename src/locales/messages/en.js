@@ -51,6 +51,13 @@ const en = {
   from: 'from',
   go: 'Go',
   mainPage: 'Main page',
+  hall: 'Hall',
+  moreAbHall: 'More about hall',
+  countExibits: 'Exhibits',
+  discoverIn: 'Discovered in',
+  section: 'Section',
+  moreAbSec: 'More about section',
+  send: 'Send',
 }
 
 export default en

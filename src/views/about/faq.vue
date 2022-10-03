@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="faq"
     />
 
@@ -44,7 +44,7 @@
 
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -65,7 +65,12 @@ export default {
   data() {
     return {
       openAccrdn: 1,
-      title: 'Часто задаваемые вопросы',
+      title: {
+        uz:'Savollar va javoblar',
+        uzcyr:'Саволлар ва жавоблар',
+        ru:'Часто задаваемые вопросы',
+        en:'FAQ',
+      },
       curPage: 3,
       pages: 384,
       hghts: [],

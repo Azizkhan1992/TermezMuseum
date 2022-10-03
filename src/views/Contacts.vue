@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="$t('contacts')"
       background="contacts"
     />
 
@@ -57,11 +57,11 @@
           />
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
-              <p class="commonP colorGreyD line-h-20">Рабочие дни:</p>
+              <p class="commonP colorGreyD line-h-20">{{$t("workdays")}}:</p>
               <p class="commonP colorType bold line-h-20">Пн-Сб</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
-              <p class="commonP colorGreyD line-h-20">Часы работы:</p>
+              <p class="commonP colorGreyD line-h-20">{{$t("workhours")}}:</p>
               <p class="commonP colorType bold line-h-20">09:00 - 18:00</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
@@ -73,7 +73,7 @@
       </div>
 
       <div class="w-100 fd-c gap-24">
-        <h4 class="commonT colorGreyD">Контакты</h4>
+        <h4 class="commonT colorGreyD">{{$t("contacts")}}</h4>
         <div class="w-100 gap-24">
           <Icons
             icon="phone"
@@ -219,7 +219,7 @@
         </div>
 
         <div class="w-100 fd-c gap-4">
-          <label class="commonP colorGreyD">Номер телефона</label>
+          <label class="commonP colorGreyD">{{$t("phoneNumber")}}</label>
           <input
             v-model="phoneNumber"
             type="text"
@@ -253,7 +253,7 @@
           class="prim w-4"
           @click="sendAppeal"
         >
-          <span>Click me</span>
+          <span>{{$t("send")}}</span>
         </button>
       </div>
         
@@ -261,7 +261,7 @@
 
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="$t('contacts')"
     />
       
   </div>

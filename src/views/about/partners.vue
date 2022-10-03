@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="partners"
     />
 
@@ -48,7 +48,7 @@
               icon="phone"
               size="middle"
             />
-            <p class="helpers">Phone number:</p>
+            <p class="helpers">{{$t("phoneNumber")}}:</p>
             <a :href="'tel:' + partner.phoneNumber" class="mainers">{{partner.phoneNumber}}</a>
           </div>
           <div class="w-a d-f fd-r align-c gap-12">
@@ -56,7 +56,7 @@
               icon="mail"
               size="middle"
             />
-            <p class="helpers">Email:</p>
+            <p class="helpers">{{$t("email")}}:</p>
             <a :href="'mailto:' + partner.email" class="mainers">{{partner.email}}</a>
           </div>
           </div>
@@ -74,7 +74,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
   </div>
 </template>
@@ -96,7 +96,12 @@ export default {
     return {
       curPage: 3,
       pages: 384,
-      title: 'Партнеры музея',
+      title:{
+        uz:'Muzey hamkorlari',
+        ru:'Партнеры музея',
+        uzcyr:'Музей ҳамкорлари',
+        en:'Museum partners',
+      },
       comments: this.$store.state.comments,
       allPartners: this.$store.state.partners
     }

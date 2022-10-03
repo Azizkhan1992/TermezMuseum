@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="vacancies"
     />
 
@@ -34,7 +34,7 @@
                 icon="download"
                 size="middle"
               />
-              <p class="helpers colorPrim">Скачать документ</p>
+              <p class="helpers colorPrim">{{$t("downloadDoc")}}</p>
             </div>
           </div>
 
@@ -52,7 +52,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -73,7 +73,12 @@ export default {
 
   data() {
     return {
-      title: 'Вакансии',
+      title:{
+        uz: 'Bo\'sh ish o\'rinlari',
+        uzcyr: 'Бўш иш ўринлари',
+        ru: 'Вакансии',
+        en: 'Vacancies',
+      },
       curPage: 3,
       pages: 384,
       allVacancies: this.$store.state.vacancies

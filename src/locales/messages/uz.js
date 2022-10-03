@@ -51,5 +51,12 @@ const uz = {
   from: 'dan',
   go: 'O\'tish',
   mainPage: 'Bosh sahifa',
+  hall: 'Zal',
+  moreAbHall: 'Zal haqida',
+  countExibits: 'Eksponatlar soni',
+  discoverIn: 'Topilgan yil',
+  section: 'Bo\'lim',
+  moreAbSec: 'Bo\'lim haqida',
+  send: 'Yuborish',
 }
 export default uz

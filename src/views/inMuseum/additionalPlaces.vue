@@ -3,7 +3,7 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="additional"
     />
 
@@ -35,12 +35,12 @@
               />
               <div class="w-100 fd-c gap-12">
                 <div class="w-100 gap-12">
-                  <p class="helpers mw-fit">Рабочие дни:</p>
+                  <p class="helpers mw-fit">{{$t("workdays")}}:</p>
                   <p class="mainers colorWhite">{{place.info.workingDays}}</p>
                 </div>
 
                 <div class="w-100 gap-12">
-                  <p class="helpers mw-fit">Рабочие часы:</p>
+                  <p class="helpers mw-fit">{{$t("workhours")}}:</p>
                   <p class="mainers colorWhite">{{place.info.workingHours}}</p>
                 </div>
               </div>
@@ -54,7 +54,7 @@
               />
               <div class="w-100 fd-c gap-12">
                 <div class="w-100 gap-12">
-                  <p class="helpers mw-fit">Номер телефона:</p>
+                  <p class="helpers mw-fit">{{$t('phoneNumber')}}:</p>
                   <a :href="'tel:' + place.info.phoneNumber" class="mainers colorWhite">{{place.info.phoneNumber}}</a>
                 </div>
               </div>
@@ -68,7 +68,7 @@
               />
               <div class="w-100 fd-c gap-12">
                 <div class="w-100 gap-12">
-                  <p class="helpers mw-fit">Э-почта::</p>
+                  <p class="helpers mw-fit">{{$t("email")}}:</p>
                   <a :href="'mailto:' + place.info.email" class="mainers colorWhite">{{place.info.email}}</a>
                 </div>
               </div>
@@ -88,7 +88,7 @@
     
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -108,7 +108,12 @@ export default {
 
   data() {
     return {
-      title: 'Дополнительно',
+      title: {
+        uz: 'Qo\'shimcha',
+        uzcyr: 'Қўшимча',
+        en: 'Additional',
+        ru: 'Дополнительно',
+      },
       allAddPlaces: this.$store.state.addPlaces
     }
   }

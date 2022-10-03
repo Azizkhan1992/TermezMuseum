@@ -51,6 +51,13 @@ const uzcyr = {
   from: 'дан',
   go: 'Ўтиш',
   mainPage: 'Бош саҳифа',
+  hall: 'Зал',
+  moreAbHall: 'Зал ҳақида',
+  countExibits: 'Экспонатлар сони',
+  discoverIn: 'Топилган йил',
+  section: 'Бўлим',
+  moreAbSec: 'Бўлим ҳақида',
+  send: 'Юбориш',
 }
 
 export default uzcyr
