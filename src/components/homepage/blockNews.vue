@@ -7,93 +7,91 @@
 
     <div class="wrapper-h mb-60">
       <button class="prim w-3 a-left">
-        <span>{{$t("allNews")}}</span>
+        <span>{{ $t("allNews") }}</span>
       </button>
 
-      <topTags
-        :topTags="this.topTags"
-      />
+      <topTags :topTags="this.topTags" />
     </div>
 
-    <newsCard
-      :bigCard="true"
-    />
+    <newsCard :bigCard="true" />
 
     <div class="row-3 mb-24">
-      <newsCard/>
-      <newsCard/>
-      <newsCard/>
+      <newsCard />
+      <newsCard />
+      <newsCard />
     </div>
 
-    <subscriberComponent/>
-    
+    <subscriberComponent />
   </div>
 </template>
 
 <script>
-import animatedTitle from '../animatedTitle.vue';
-import topTags from '../topTags.vue'
-import newsCard from '../newsCard.vue'
-import subscriberComponent from '../subscriber.vue'
+import animatedTitle from "../animatedTitle.vue";
+import topTags from "../topTags.vue";
+import newsCard from "../newsCard.vue";
+import subscriberComponent from "../subscriber.vue";
 
 export default {
-  name: 'newsBlock',
+  name: "newsBlock",
   components: {
-    animatedTitle, topTags, newsCard, subscriberComponent
+    animatedTitle,
+    topTags,
+    newsCard,
+    subscriberComponent,
   },
 
   data() {
     return {
       offTop: 1,
-      title:{
-        uz: 'Yangiliklar',
-        ru: 'Новости',
-        uzcyr: 'Янгиликлар',
-        en: 'News',
+      title: {
+        uz: "Yangiliklar",
+        ru: "Новости",
+        uzcyr: "Янгиликлар",
+        en: "News",
       },
-      topTags:
-      //  [
-      //   {name: 'Важно', id: 1},
-      //   {name: 'Конкурс', id: 2},
-      //   {name: 'История Узбекистана', id: 3},
-      // ]
-      [
-      { id: 1,
-        name:{
-          uz: 'Muhim',
-          ru: 'Важно',
-          uzcyr: 'Муҳим',
-          en: 'Important',
-        }},
-        {id: 2,
-          name:{
-          uz: 'Konkurs',
-          ru: 'Конкурс',
-          uzcyr: 'Конкурс',
-          en: 'Competition',
-        }},
-        {id: 3,
-        name:{
-        uz: 'O\'zbekiston tarixi',
-        ru: 'История Узбекистана',
-        uzcyr: 'Ўзбекистон тарихи',
-        en: 'History of Uzbekistan',
-        }}]
-    }
+      topTags: [
+          {
+            id: 1,
+            name: {
+              uz: "Muhim",
+              ru: "Важно",
+              uzcyr: "Муҳим",
+              en: "Important",
+            },
+          },
+          {
+            id: 2,
+            name: {
+              uz: "Konkurs",
+              ru: "Конкурс",
+              uzcyr: "Конкурс",
+              en: "Competition",
+            },
+          },
+          {
+            id: 3,
+            name: {
+              uz: "O'zbekiston tarixi",
+              ru: "История Узбекистана",
+              uzcyr: "Ўзбекистон тарихи",
+              en: "History of Uzbekistan",
+            },
+          },
+        ],
+    };
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('newsBlock')[0].offsetTop - 400
-    }
+      this.offTop = document.getElementsByName("newsBlock")[0].offsetTop - 400;
+    },
   },
 
   mounted() {
-    this.getOffsetTop()
-  }
-}
+    this.getOffsetTop();
+  },
+};
 </script>
 
 <style>
-
 </style>

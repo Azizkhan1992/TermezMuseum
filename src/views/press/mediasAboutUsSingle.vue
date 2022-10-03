@@ -21,7 +21,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Посмотрели  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  1 358</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -55,7 +55,7 @@
             icon="share"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Поделиться</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("share")}}</p>
         </div>
       </div>
 
@@ -70,7 +70,7 @@
     </div>
 
     <div class="w-100 gap-24 mt-60">
-      <h3 class="commonT colorGreyD line-h-36">Источник информации:</h3>
+      <h3 class="commonT colorGreyD line-h-36">{{$t("infoSource")}}:</h3>
       <a href="" class="mediasAboutUsLink commonT colorGreyD line-h-36">kun.uz</a>
     </div>
 
@@ -146,7 +146,7 @@
 
     <breadCrumbs
       :currentPage="title"
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :prevPageLink="prevPage.link"
     />
 
@@ -180,7 +180,12 @@ export default {
       playInterval: '',
 
       prevPage: {
-        name: 'СМИ о нас',
+        name: {
+          uz: 'OAV biz haqimizda',
+          uzcyr: 'ОАВ биз ҳақимизда',
+          ru: 'СМИ о нас',
+          en: 'Mass Medias about Us',
+        },
         link: '/medias-about-us'
       },
       description: `

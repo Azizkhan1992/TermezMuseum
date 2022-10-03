@@ -3,14 +3,14 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="photogallery"
     />
 
 
 
     <div class="w-100 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество изображений:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countPicture")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -83,7 +83,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -103,7 +103,12 @@ export default {
 
   data() {
     return {
-      title: 'Фотогалерея',
+      title:{
+        uz: 'Fotogalereya',
+        uzcyr: 'Фотогалерея',
+        ru: 'Фотогалерея',
+        en: 'Photo gallery',
+      },
 
       curPage: 4,
       pages: 156

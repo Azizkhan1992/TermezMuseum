@@ -3,13 +3,13 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="vr-tour"
     />
 
 
     <div class="w-100 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество файлов:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countFiles")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -35,7 +35,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -55,7 +55,12 @@ export default {
 
   data() {
     return {
-      title: '3D Тур по музею',
+      title: {
+        uz: '3D muzey sayohati',
+        uzcyr: '3D музей саёҳати',
+        ru: '3D Тур по музею',
+        en: '3D Museum Tour',
+      },
       curPage: 9,
       pages: 922,
 

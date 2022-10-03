@@ -368,6 +368,7 @@ export default {
         this.hideHeader()
       }, 3000);
     }
+    this.$i18n.locale = this.$route.query.lang || 'uz'
   },
 
   beforeDestroy() {

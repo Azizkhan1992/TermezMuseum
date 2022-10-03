@@ -183,9 +183,9 @@
           <input
             v-model="surName"
             type="text"
-            placeholder="Введите фамилию"
+            :placeholder="$t('enterSurname')"
           />
-          <span v-if="$v.surName.$dirty && !$v.surName.required" class="validation-error">Пожалуйста, укажите фамилию</span>
+          <span v-if="$v.surName.$dirty && !$v.surName.required" class="validation-error">{{$t("validateSurname")}}</span>
         </div>
 
         <div class="w-100 fd-c gap-4">
@@ -193,9 +193,9 @@
           <input
             v-model="name"
             type="text"
-            placeholder="Введите имя"
+            :placeholder="$t('enterName')"
           />
-          <span v-if="$v.name.$dirty && !$v.name.required" class="validation-error">Пожалуйста, укажите имя</span>
+          <span v-if="$v.name.$dirty && !$v.name.required" class="validation-error">{{$t("validateName")}}</span>
         </div>
 
         <div class="w-100 fd-c gap-4">
@@ -203,7 +203,7 @@
           <input
             v-model="secondName"
             type="text"
-            placeholder="Введите отчество"
+            :placeholder="$t('enterMiddle')"
           />
         </div>
 
@@ -212,10 +212,10 @@
           <input
             v-model="email"
             type="text"
-            placeholder="Введите электронную почту"
+            :placeholder="$t('enterEmail')"
           />
-          <span v-if="$v.email.$dirty && !$v.email.required" class="validation-error">Пожалуйста, укажите электронную почту</span>
-          <span v-if="$v.email.$dirty && !$v.email.email" class="validation-error">Неверная почта</span>
+          <span v-if="$v.email.$dirty && !$v.email.required" class="validation-error">{{$t("validateEmail")}}</span>
+          <span v-if="$v.email.$dirty && !$v.email.email" class="validation-error">{{$t("errorEmail")}}</span>
         </div>
 
         <div class="w-100 fd-c gap-4">
@@ -223,7 +223,7 @@
           <input
             v-model="phoneNumber"
             type="text"
-            placeholder="Введите номер телефона"
+            :placeholder="$t('enterPhone')"
           />
         </div>
 
@@ -232,20 +232,20 @@
           <input
             v-model="appealTitle"
             type="text"
-            placeholder="Введите краткую тему обращения"
+            :placeholder="$t('enterTopic')"
           />
-          <span v-if="$v.appealTitle.$dirty && !$v.appealTitle.required" class="validation-error">Пожалуйста, укажите тему обращения</span>
+          <span v-if="$v.appealTitle.$dirty && !$v.appealTitle.required" class="validation-error">{{$t("validateTopic")}}</span>
         </div>
       </div>
 
       <div class="w-100 fd-c gap-4 mt-24">
         <label class="commonP colorGreyD">{{$t("textAppeal")}}</label>
         <textarea
-          placeholder="Введите текст обращения"
+          :placeholder="$t('enterTextAppeal')"
           class="w-100"
           v-model="text">
         </textarea>
-        <span v-if="$v.text.$dirty && !$v.text.required" class="validation-error">Пожалуйста, укажите текст обращения</span>
+        <span v-if="$v.text.$dirty && !$v.text.required" class="validation-error">{{$t("validateAppeal")}}</span>
       </div>
 
       <div class="w-100 mt-48 justify-c">

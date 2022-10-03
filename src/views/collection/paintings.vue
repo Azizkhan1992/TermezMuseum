@@ -3,7 +3,7 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="paintings"
     />
 
@@ -12,7 +12,7 @@
     <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb">
       
       <div class="w-3 d-f fd-c">
-        <label class="colorGreyD mb-4">Жанр картины</label>
+        <label class="colorGreyD mb-4">{{$t("paintingGenre")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -22,7 +22,7 @@
       </div>
 
       <div class="w-3 d-f fd-c">
-        <label class="colorGreyD mb-4">Категория поиска</label>
+        <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -33,12 +33,12 @@
       
       <div class="w-6 d-f fd-c">
 
-        <label class="colorGreyD mb-4">Section</label>
+        <label class="colorGreyD mb-4">{{$t("section")}}</label>
 
         <iconedInput
         v-model="search"
         icon="search"
-        placeholder="Введите текст поиска"
+        :placeholder="$t('enterTextSearch')"
       />
       </div>
       
@@ -47,7 +47,7 @@
     <!-- Input Bar Stop -->
 
     <div class="w-100 mt-80 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество картин:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countPainting")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -63,7 +63,7 @@
         <p class="commonP bold line-h-24 mt-a">{{xhbt.title}}</p>
         
         <div class="w-100 gap-12 mt-24">
-          <p class="helpers">Год находки:</p>
+          <p class="helpers">{{$t("discoverIn")}}:</p>
           <p class="mainers colorWhite">{{xhbt.year}}</p>
         </div>
       </div>
@@ -82,7 +82,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
 
@@ -106,7 +106,12 @@ export default {
   data() {
     return {
       allExhibits: this.$store.state.exhibits,
-      title: 'Картины',
+      title:{
+        uz: 'Rasmlar',
+        uzcyr: 'Расмлар',
+        ru: 'Картины',
+        en: 'Paintings',
+      },
       curPage: 3,
       pages: 658,
       search: '',

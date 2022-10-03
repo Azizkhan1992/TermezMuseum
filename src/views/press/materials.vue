@@ -3,13 +3,13 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="materials-for-mms"
     />
 
 
     <div class="w-100 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество файлов:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countFiles")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -39,7 +39,7 @@
               class="ml-24 d-f fd-r gap-12"
               href=""
             >
-              <p class="commonP line-h-20 bold colorGreyD">Скачать .{{file.type}}</p>
+              <p class="commonP line-h-20 bold colorGreyD">{{$t("downloadF")}} .{{file.type}}</p>
               <p class="commonP line-h-20 colorType">({{file.size}})</p>
             </a>
           </div>
@@ -75,7 +75,7 @@
               icon="download"
               size="middle"
             />
-            <p class="helpers">Количество скачиваний:</p>
+            <p class="helpers">{{$t("downloads")}}:</p>
             <p class="mainers">{{doc.downloadsNumber}}</p>
           </div>
 
@@ -84,7 +84,7 @@
               icon="download"
               size="middle"
             />
-            <p class="helpers colorPrim">Скачать документ</p>
+            <p class="helpers colorPrim">{{$t("downloadDoc")}}</p>
           </div>
         </div>
 
@@ -94,7 +94,7 @@
     <!-- Card Stop -->
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -114,7 +114,12 @@ export default {
 
   data() {
     return {
-      title: 'Материалы для СМИ',
+      title:{
+        uz: 'OAV materiallari',
+        uzcyr: 'ОАВ материаллари',
+        ru: 'Материалы для СМИ',
+        en: 'Media materials',
+      },
       allLogoFiles: this.$store.state.logoFile,
 
       allDocuments: [

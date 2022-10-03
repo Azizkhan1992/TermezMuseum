@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="video-gallery"
     />
 
@@ -12,7 +12,7 @@
     <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb mobile-flex">
       
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Год</label>
+        <label class="colorGreyD mb-4">{{$t("year")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -22,7 +22,7 @@
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Месяц</label>
+        <label class="colorGreyD mb-4">{{$t("month")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -32,7 +32,7 @@
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Категория поиска</label>
+        <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -43,12 +43,12 @@
       
       <div class="w-6 d-f fd-c">
 
-        <label class="colorGreyD mb-4">Section</label>
+        <label class="colorGreyD mb-4">{{$t("section")}}</label>
 
         <iconedInput
           v-model="search"
           icon="search"
-          placeholder="Введите текст поиска"
+          :placeholder="$t('enterTextSearch')"
         />
       </div>
       
@@ -57,7 +57,7 @@
     <!-- Input Bar Stop -->
 
     <div class="w-100 gap-48 mt-80">
-      <p class="commonP line-h-30 colorGreyD">Количество видео-файлов:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countVideoFiles")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -120,7 +120,7 @@
                     icon="share"
                     size="middle"
                   />
-                  <p class="helpers">Поделиться</p>
+                  <p class="helpers">{{$t("share")}}</p>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@
                 icon="play"
                 size="middle"
               />
-              <span>Посмотреть</span>
+              <span>{{$t("look")}}</span>
             </button>
             
           </div>
@@ -152,7 +152,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -175,7 +175,12 @@ export default {
 
   data() {
     return {
-      title: 'Видео галерея',
+      title: {
+        uz: 'Video galereya',
+        uzcyr: 'Видео галерея',
+        ru: 'Видео галерея',
+        en: 'Video gallery',
+      },
       search: '',
       curPage: 7,
       pages: 498,
