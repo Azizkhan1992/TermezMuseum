@@ -3,7 +3,7 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="museumHistory"
     />
 
@@ -34,7 +34,7 @@
     </div>
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -53,7 +53,12 @@ export default {
 
   data() {
     return {
-      title: 'История музея',
+      title: {
+        uz: 'Muzey tarixi',
+        uzcyr: 'Музей тарихи',
+        ru: 'История музея',
+        en: 'History museum',
+      },
       description: `
         Термезский археологический музей является единственным археологическим музеем в нашей стране и относится к числу специализированных музеев. Этот музей является одним из самых замечательных мест нашего города, в котором возрождается история древнего Сурханского оазиса на протяжении тысячелетий.
         <br/>

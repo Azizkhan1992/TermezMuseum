@@ -19,12 +19,12 @@
           />
           <div class="w-100 fd-c gap-12">
             <div class="w-100 gap-12">
-              <p class="helpers font-s-16p mw-fit">Дни приема:</p>
+              <p class="helpers font-s-16p mw-fit">{{$t("recDays")}}:</p>
               <p class="mainers font-s-16p">{{managerInfo.info.receptionDays}}</p>
             </div>
 
             <div class="w-100 gap-12">
-              <p class="helpers font-s-16p mw-fit">Часы приема:</p>
+              <p class="helpers font-s-16p mw-fit">{{$t("recHours")}}:</p>
               <p class="mainers font-s-16p">{{managerInfo.info.receptionHours}}</p>
             </div>
           </div>
@@ -41,7 +41,7 @@
           />
           <div class="w-100 fd-c gap-12 justify-c">
             <div class="w-100 gap-12">
-              <p class="helpers font-s-16p mw-fit">Номер телефона:</p>
+              <p class="helpers font-s-16p mw-fit">{{$t("phoneNumber")}}:</p>
               <a :href="'tel:' + managerInfo.info.phone" class="mainers font-s-16p">{{managerInfo.info.phone}}</a>
             </div>
           </div>
@@ -58,7 +58,7 @@
           />
           <div class="w-100 fd-c gap-12 justify-c">
             <div class="w-100 gap-12">
-              <p class="helpers font-s-16p mw-fit">Э-почта:</p>
+              <p class="helpers font-s-16p mw-fit">{{$t("email")}}:</p>
               <a :href="'mailto:' + managerInfo.info.email" class="mainers font-s-16p">{{managerInfo.info.email}}</a>
             </div>
           </div>
@@ -84,7 +84,7 @@
 
     <breadCrumbs
       :currentPage="managerInfo.name"
-      prevPageName="Руководство"
+      :prevPageName="name[$i18n.locale]"
       :prevPageLink="'/management'"
     />  
   </div>
@@ -104,6 +104,12 @@ export default {
   data() {
     return {
       title: this.$route.params.id,
+      name: {
+        uz: 'Rahbariyat',
+        uzcyr: 'Раҳбарият',
+        ru: 'Руководство',
+        en: 'Management',
+      },
     }
   },
 

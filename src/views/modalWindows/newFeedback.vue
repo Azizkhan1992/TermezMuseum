@@ -24,8 +24,8 @@
 
 
           <div class="w-100 fd-c align-c gap-24">
-            <h3 class="commonT colorType">Центр связи</h3>
-            <p class="commonP bold colorGreyD">Отправьте свои вопросы, жалобы и предложения касаемо деятельности музея. Мы ответим Вам как можно скорее</p>
+            <h3 class="commonT colorType">{{title[$i18n.locale]}}</h3>
+            <p class="commonP bold colorGreyD">{{$t("sendyourQuest")}}</p>
           </div>
 
           <div class="w-100 mt-24 grid-2">
@@ -35,7 +35,7 @@
                 icon="location"
                 size="middle"
               />
-              <p class="commonP bold colorType line-h-20">г.Ташкент, проспект Амира Темура, 16</p>
+              <p class="commonP bold colorType line-h-20">{{location[$i18n.locale]}}</p>
             </div>
 
             <div class="w-100 gap-24">
@@ -46,11 +46,11 @@
               
               <div class="w-100 fd-c gap-12">
                 <div class="w-a d-f fd-r gap-12">
-                  <p class="commonP colorGreyD line-h-20">Тел:</p>
+                  <p class="commonP colorGreyD line-h-20">{{$t("telephone")}}:</p>
                   <a href="tel: +998 71 236 74 36" class="contactPhone commonP colorType line-h-20">+998 71 236 74 36</a>
                 </div>
                 <div class="w-a d-f fd-r gap-12">
-                  <p class="commonP colorGreyD line-h-20">Факс:</p>
+                  <p class="commonP colorGreyD line-h-20">{{$t("fax")}}:</p>
                   <p class="commonP colorType bold line-h-20">+998 71 233 62 81</p>
                 </div>
               </div>
@@ -64,7 +64,7 @@
               
               <div class="w-100 fd-c gap-12">
                 <div class="w-a d-f fd-r gap-12">
-                  <p class="commonP colorGreyD line-h-20">Э-почта:</p>
+                  <p class="commonP colorGreyD line-h-20">{{$t("email")}}:</p>
                   <a href="mailto: tmi2007@mail.ru" class="contactPhone commonP bold colorType line-h-20">tmi2007@mail.ru</a>
                 </div>
               </div>
@@ -77,15 +77,15 @@
               />
               <div class="w-100 fd-c gap-12">
                 <div class="w-a d-f fd-r gap-12">
-                  <p class="commonP colorGreyD line-h-20">Рабочие дни:</p>
+                  <p class="commonP colorGreyD line-h-20">{{$t("workdays")}}:</p>
                   <p class="commonP colorType bold line-h-20">Пн-Сб</p>
                 </div>
                 <div class="w-a d-f fd-r gap-12">
-                  <p class="commonP colorGreyD line-h-20">Часы работы:</p>
+                  <p class="commonP colorGreyD line-h-20">{{$t("workhours")}}:</p>
                   <p class="commonP colorType bold line-h-20">09:00 - 18:00</p>
                 </div>
                 <div class="w-a d-f fd-r gap-12">
-                  <p class="commonP colorGreyD line-h-20">Выходной день:</p>
+                  <p class="commonP colorGreyD line-h-20">{{$t("dayoff")}}:</p>
                   <p class="commonP colorType bold line-h-20">Воскресенье</p>
                 </div>
               </div>
@@ -106,12 +106,12 @@
               <label
                 class="colorGreyD"
               >
-                Имя
+                {{$t("name")}}
               </label>
               <input
                 v-model="name"
                 type="text"
-                placeholder="Введите ваше имя"
+                :placeholder="$t('enterName')"
               >
             </div>
 
@@ -122,12 +122,12 @@
               <label
                 class="colorGreyD"
               >
-                Фамилия
+                {{$t("surname")}}
               </label>
               <input
                 v-model="surName"
                 type="text"
-                placeholder="Введите вашу фамилию"
+                :placeholder="$t('enterSurname')"
               >
             </div>
 
@@ -138,12 +138,12 @@
               <label
                 class="colorGreyD"
               >
-                Отчество
+                {{$t("middle")}}
               </label>
               <input
                 v-model="secondName"
                 type="text"
-                placeholder="Введите вашу отчество"
+                :placeholder="$t('enterMiddle')"
               >
             </div>
 
@@ -154,12 +154,12 @@
               <label
                 class="colorGreyD"
               >
-                Электронная почта
+                {{$t("email")}}
               </label>
               <input
                 v-model="email"
                 type="text"
-                placeholder="Введите электронную почту"
+                :placeholder="$t('enterEmail')"
               >
             </div>
 
@@ -170,12 +170,12 @@
               <label
                 class="colorGreyD"
               >
-                Номер телефона
+                {{$t("phoneNumber")}}
               </label>
               <input
                 v-model="phoneNumber"
                 type="text"
-                placeholder="Введите ваш номер телефона"
+                :placeholder="$t('enterPhone')"
               >
             </div>
 
@@ -186,12 +186,12 @@
               <label
                 class="colorGreyD"
               >
-                Тема обращения
+                {{$t("topic")}}
               </label>
               <input
                 v-model="feedbackTitle"
                 type="text"
-                placeholder="Введите направление волонтерства"
+                :placeholder="$t('directionVlounteering')"
               >
             </div>
           </div>
@@ -203,12 +203,12 @@
             <label
               class="colorGreyD"
             >
-              Текст обращения
+              {{$t("textAppeal")}}
             </label>
             <textarea
               v-model="feedbackText"
               type="text"
-              placeholder="Введите текст обращения"
+              :placeholder="$t('enterTextAppeal')"
             ></textarea>
           </div>
 
@@ -221,9 +221,9 @@
             v-if="submitted"
             class="w-100 fd-c gap-24 justify-c mt-80"
           >
-            <h3 class="commonT colorPrim txt-align-c line-h-30">Спасибо за ваше обращение. Постараемся ответить вам как можно скорее</h3>
+            <h3 class="commonT colorPrim txt-align-c line-h-30">{{$t("thankFeedback")}}</h3>
             <div class="w-100 gap-8 justify-c">
-              <h3 class="commonT colorGreyD line-h-30">Номер вашего обращения:</h3>
+              <h3 class="commonT colorGreyD line-h-30">{{$t("reqNumber")}}:</h3>
               <h3 class="commonT colorPrim line-h-30">#008619</h3>
             </div>
           </div>
@@ -235,7 +235,7 @@
             class="prim w-4 h-48"
             :class="submitted ? 'mt-a' : 'mt-48'"
           >
-            <span>Click me</span>
+            <span>{{$t('send')}}</span>
           </button>
 
         </div>
@@ -267,8 +267,20 @@ export default {
       email: '',
       feedbackTitle: '',
       feedbackText: '',
+      location: {
+        uz: "Toshkent sh., Amir Temur shoh ko‘chasi, 16-uy",
+        ru: "г.Ташкент, проспект Амира Темура, 16",
+        uzcyr: "Тошкент ш., Амир Темур шоҳ кўчаси, 16-уй",
+        en: "Tashkent, Amir Temur Avenue, 16"
+      },
 
-      submitted: false
+      submitted: false,
+      title: {
+        uz: 'Aloqa markazi',
+        uzcyr: 'Алоқа маркази',
+        en: 'Communication center',
+        ru: 'Центр связи',
+      }
     }
   },
 

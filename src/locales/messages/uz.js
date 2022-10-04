@@ -124,5 +124,9 @@ const uz = {
   cardType: 'Karta turi',
   briefDescDesign: 'Dizayn qisqa tavsifi',
   purchasedBank: 'Quyidagi banklardan olish mumkin',
+  directionVlounteering: 'Ko\'ngillilik yonalishini kiriting',
+  sendyourQuest: 'Muzey faoliyatiga oid savol, shikoyat va takliflaringizni yuboring. Sizga imkon qadar tezroq javob beramiz',
+  reqNumber: 'Sizning so\'rov raqamingiz',
+  thankFeedback: 'Murojaatingiz uchun tashakkur. Sizga imkon qadar tezroq javob berishga harakat qilamiz',
 }
 export default uz

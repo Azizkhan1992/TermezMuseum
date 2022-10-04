@@ -44,7 +44,7 @@
             icon="location"
             size="middle"
           />
-          <p class="commonP bold colorType line-h-20">г.Ташкент, проспект Амира Темура, 16</p>
+          <p class="commonP bold colorType line-h-20">{{location[$i18n.locale]}}</p>
         </div>
       </div>
 
@@ -58,7 +58,7 @@
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("workdays")}}:</p>
-              <p class="commonP colorType bold line-h-20">Пн-Сб</p>
+              <p class="commonP colorType bold line-h-20">{{weekwork[$i18n.locale]}}</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("workhours")}}:</p>
@@ -66,7 +66,7 @@
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("dayoff")}}:</p>
-              <p class="commonP colorType bold line-h-20">Воскресенье</p>
+              <p class="commonP colorType bold line-h-20">{{weekout[$i18n.locale]}}</p>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@
 
     <div class="w-100 fd-c mt-60 gap-24">
       <h4 class="commonT colorGreyD">{{$t("feedback")}}</h4>
-      <h4 class="commonD colorGreyD">Режим работы электронных обращений с 09:00 до 18:00 с понедельника по пятницу. Время обработки обращения - три рабочих дня.</h4>
+      <h4 class="commonD colorGreyD">{{txt[$i18n.locale]}}</h4>
     </div>
 
     <div class="w-100 fd-c bor-r-20 ovr-hidden box-brb mt-24 backgrnd-white pad-24p">
@@ -309,6 +309,30 @@ export default {
       phoneNumber: '',
       appealTitle: '',
       text: '',
+      location: {
+        uz: "Toshkent sh., Amir Temur shoh ko‘chasi, 16-uy",
+        ru: "г.Ташкент, проспект Амира Темура, 16",
+        uzcyr: "Тошкент ш., Амир Темур шоҳ кўчаси, 16-уй",
+        en: "Tashkent, Amir Temur Avenue, 16"
+      },
+      weekwork: {
+        uz: "Dush-shan",
+        uzcyr: "Душ-шан",
+        ru: "Пн-сб",
+        en: "Mon-Sat"
+      },
+      weekout: {
+        uzcyr: "Якшанба",
+        uz: "Yakshanba",
+        ru: "Воскресенье",
+        en: "Sunday"
+      },
+      txt:{
+        uz: 'Elektron murojaatlarni ko\'rib chiqish tartibi Dushanbadan Jumagacha soat 09:00 dan 18:00 gacha. Murojaatni ko\'rib chiqish muddati - uch ish kuni.',
+        ru: 'Режим работы электронных обращений с 09:00 до 18:00 с понедельника по пятницу. Время обработки обращения - три рабочих дня.',
+        uzcyr: 'Електрон мурожаатларни кўриб чиқиш тартиби Душанбадан Жумагача соат 09:00 дан 18:00 гача. Мурожаатни кўриб чиқиш муддати - уч иш куни.',
+        en: 'Operation of applications from 09:00 to 18:00 from Monday to Friday. Application processing time is three working days.'
+      },
 
       title: 'Контакты',
       linkToMaps: 'https://www.google.com/maps/place/%D0%90%D1%80%D1%85%D0%B5%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9+%D0%BC%D1%83%D0%B7%D0%B5%D0%B9/@37.2441787,67.2804665,17z/data=!3m1!4b1!4m5!3m4!1s0x3f3531f8464048f3:0xeb4d97a66c0a3152!8m2!3d37.2441665!4d67.2826439',

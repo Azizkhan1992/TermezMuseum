@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="management"
     />
 
@@ -76,7 +76,7 @@
     </div>
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -98,7 +98,12 @@ export default {
 
   data() {
     return {
-      title: 'Руководство',
+      title: {
+        uz: 'Rahbariyat',
+        uzcyr: 'Раҳбарият',
+        ru: 'Руководство',
+        en: 'Management',
+      },
       managers: [
         {id: 1, name: 'Файзиева Васила Солиховна', post: 'Директор музея', img: 'manager-1', info: {
           receptionDays: 'Понедельник - Пятница', receptionHours: '09:00 - 16:00', phone: '+998 71 236 74 36',
