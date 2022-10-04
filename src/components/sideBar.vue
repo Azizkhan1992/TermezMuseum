@@ -14,7 +14,7 @@
         class="commonP colorGreyD line-h-20"
         :class="menu.page == currentPage ? 'active' : ''"
       >
-        {{menu.page}}
+        {{menu.page[$i18n.locale]}}
       </a>
     </div>
 
@@ -24,7 +24,7 @@
       :class="open ? 'open' : ''"
     >
 
-      <p class="commonP bold line-h-20">{{currentPage}}</p>
+      <p class="commonP bold line-h-20">{{currentPage[$i18n.locale]}}</p>
       <Icons
         icon="arrUp"
         size="sm"

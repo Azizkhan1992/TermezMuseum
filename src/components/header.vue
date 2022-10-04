@@ -236,7 +236,7 @@ export default {
           {id: 7, page: {ru:'Часто задаваемые вопросы',uzcyr:'Саволлар ва жавоблар',uz:'Savollar va javoblar',en:'FAQ'}, link: '/faq'},
         ]},
         {id: 3, name: {ru:'В музее',uzcyr:'Музейда',uz:'Muzeyda',en:'In museum'}, link: '', bg: 'in-museum', page: true, pages: [
-          {id: 1, page: {ur:'Залы',uzcyr:'Заллар',uz:'Zallar',en:'Halls'}, link: '/halls'},
+          {id: 1, page: {ru:'Залы',uzcyr:'Заллар',uz:'Zallar',en:'Halls'}, link: '/halls'},
           {id: 2, page: {ru:'Разделы',uzcyr:'Бўлимлар',uz:'Bo\'limlar',en:'Sections'}, link: '/sections'},
           {id: 3, page: {ru:'Дополнительно',uzcyr:'Қўшимча',uz:'Qo\'shimcha',en:'Additional'}, link: '/additional'},
         ]},
