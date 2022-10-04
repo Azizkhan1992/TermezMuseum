@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="volunteers-program"
     />
 
@@ -21,7 +21,7 @@
     </div>
 
     <div class="w-100 mt-80">
-      <h4 class="commonT colorGreyD">Ожидаемые мероприятия</h4>
+      <h4 class="commonT colorGreyD">{{$t("expectEvents")}}</h4>
     </div>
 
     <!-- Events List Start -->
@@ -69,7 +69,7 @@
             @click="openModal()"
             class="w-3 prim"
           >
-            <span>Click me</span>
+            <span>{{txt[$i18n.locale]}}</span>
           </button>
 
         </div>
@@ -86,7 +86,7 @@
     <!-- No Events Start -->
 
     <div class="w-100 mt-60">
-      <h2 class="grandTitle line-h-68 txt-align-l">На данный момент запланированных мероприятий нет. Спасибо за Ваш интерес к помощи Музею!</h2>
+      <h2 class="grandTitle line-h-68 txt-align-l">{{$t("noEvents")}}</h2>
     </div>
 
 
@@ -97,7 +97,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -120,7 +120,18 @@ export default {
   data() {
     return {
       modalIsOpen: false,
-      title: 'Волонтерам',
+      title:{
+        uz: 'Ko\'ngillilar',
+        uzcyr: 'Кўнгиллилар',
+        ru: 'Волонтерам',
+        en: 'Volunteers',
+      },
+      txt:{
+        uzcyr: 'Кўнгилли бўлиш',
+        ru: 'Стать волонтером',
+        uz: 'Ko\'ngilli bo\'lish',
+        en: 'Become a volunteer',
+      },
 
       curPage: 2,
       pages: 122,

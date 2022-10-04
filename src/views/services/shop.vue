@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="shop"
     />
 
@@ -12,12 +12,12 @@
     <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb">
       <div class="w-100 d-f fd-c">
 
-        <label class="colorGreyD mb-4">Section</label>
+        <label class="colorGreyD mb-4">{{$t("section")}}</label>
 
         <iconedInput
           v-model="search"
           icon="search"
-          placeholder="Введите текст поиска"
+          :placeholder="$t('enterTextSearch')"
         />
 
       </div>
@@ -27,7 +27,7 @@
 
 
     <div class="w-100 gap-48 mt-80">
-      <p class="commonP line-h-30 colorGreyD">Количество товаров:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countItem")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -44,7 +44,7 @@
           <p class="commonP bold line-h-24 mt-a">{{xhbt.title}}</p>
           
           <div class="w-100 gap-12 mt-24">
-            <p class="helpers">Категория:</p>
+            <p class="helpers">{{$t("category")}}:</p>
             <p class="mainers colorWhite">{{xhbt.year}}</p>
           </div>
         </div>
@@ -62,7 +62,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -86,7 +86,12 @@ export default {
       allExhibits: this.$store.state.exhibits,
       itemsID: 'Статуя будды',
 
-      title: 'Магазин',
+      title:{
+        uz: 'Do\'kon',
+        uzcyr: 'Дўкон',
+        ru: 'Магазин',
+        en: 'Shop',
+      },
       search: '',
       curPage: 11,
       pages: 84

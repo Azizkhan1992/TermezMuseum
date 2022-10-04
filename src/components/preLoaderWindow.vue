@@ -10,9 +10,9 @@
       <img class="h-120p" src="@/assets/logo-white.svg" alt="">
       
       <div class="w-100 fd-c align-c gap-3">
-        <h2>Термезский</h2>
-        <h2>Археологический</h2>
-        <h2>Музей</h2>
+        <h2>{{title1[$i18n.locale]}}</h2>
+        <h2>{{title2[$i18n.locale]}}</h2>
+        <h2>{{title3[$i18n.locale]}}</h2>
       </div>
 
     </div>
@@ -22,6 +22,28 @@
 <script>
 export default {
   name: 'preLoaderWindowModal',
+  data(){
+    return{
+      title1:{
+        uz: 'Termiz',
+        uzcyr: 'Термиз',
+        ru: 'Термезский',
+        en: 'Termez',
+      },
+      title2:{
+        uz: 'Arxeologik',
+        uzcyr: 'Археологик',
+        ru: 'Археологический',
+        en: 'Archaeological',
+      },
+      title3:{
+        uz: 'Muzeyi',
+        uzcyr: 'Музейи',
+        ru: 'Музей',
+        en: 'Museum',
+      }
+    }
+  }
 }
 </script>
 

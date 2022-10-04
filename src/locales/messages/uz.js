@@ -115,5 +115,18 @@ const uz = {
   countPicture: 'Rasmlar soni',
   countVideoFiles: 'Video fayllar soni',
   look: 'Ko\'rish',
+  countItem: 'Maxsulotlar soni',
+  category: 'Kategoriyasi',
+  ticketPrice: 'Kattalar uchun chipta narxi',
+  childrenTicketPrice: 'Bolalar uchun chipta narxi (0-8 yosh)',
+  expectEvents: 'Kutilayotgan tadbirlar',
+  noEvents: 'Hozirda kutilayotgan tadbirlar mavjud emas. Muzeyga yordam berishga qiziqishingiz uchun tashakkur!',
+  cardType: 'Karta turi',
+  briefDescDesign: 'Dizayn qisqa tavsifi',
+  purchasedBank: 'Quyidagi banklardan olish mumkin',
+  directionVlounteering: 'Ko\'ngillilik yonalishini kiriting',
+  sendyourQuest: 'Muzey faoliyatiga oid savol, shikoyat va takliflaringizni yuboring. Sizga imkon qadar tezroq javob beramiz',
+  reqNumber: 'Sizning so\'rov raqamingiz',
+  thankFeedback: 'Murojaatingiz uchun tashakkur. Sizga imkon qadar tezroq javob berishga harakat qilamiz',
 }
 export default uz

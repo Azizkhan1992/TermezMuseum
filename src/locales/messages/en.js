@@ -115,6 +115,19 @@ const en = {
   countPicture: 'Number of images',
   countVideoFiles: 'Number of video files',
   look: 'View',
+  countItem: 'Amount of items',
+  category: 'Category',
+  ticketPrice: 'Adult ticket price',
+  childrenTicketPrice: 'Ticket price for children (0-8 years old)',
+  expectEvents: 'Expected events',
+  noEvents: 'There are no events scheduled currently. Thank you for your interest in helping the Museum!',
+  cardType: 'Card type',
+  briefDescDesign: 'Brief description of design',
+  purchasedBank: 'Can be purchased at the bank',
+  directionVlounteering: 'Enter the direction of volunteering',
+  sendyourQuest: 'Send your questions, complaints and suggestions regarding the activities of the museum. We will reply to you as soon as possible',
+  reqNumber: 'Your request number',
+  thankFeedback: 'Thank you for your feedback. We will try to answer you as soon as possible',
 }
 
 export default en

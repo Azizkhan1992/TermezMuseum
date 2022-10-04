@@ -5,7 +5,7 @@
       color="white"
       size="middle"
     />
-    <p class="commonP line-h-20">Обращение</p>
+    <p class="commonP line-h-20">{{title[$i18n.locale]}}</p>
   </div>
 </template>
 
@@ -21,7 +21,12 @@ export default {
 
   data() {
     return {
-
+      title:{
+        uz: 'Shikoyat qilish',
+        uzcyr: 'Шикоят қилиш',
+        ru: 'Обращение',
+        en: 'Appeal',
+      }
     }
   }
 }
