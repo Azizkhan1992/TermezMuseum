@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="visiting-museum"
     />
 
@@ -14,19 +14,19 @@
     <div class="w-100 mt-60 gap-24">
       <div class="w-50">
         <div class="w-100 fd-c gap-12">
-          <h4 class="commonT colorGreyD">Рабочие дни:</h4>
+          <h4 class="commonT colorGreyD">{{$t('workdays')}}:</h4>
           <h4 class="commonD bold colorType">Понедельник-Суббота</h4>
         </div>
 
         <div class="w-100 fd-c gap-12 mt-60">
-          <h4 class="commonT colorGreyD">Рабочие часы:</h4>
+          <h4 class="commonT colorGreyD">{{$t('workhours')}}:</h4>
           <h4 class="commonD bold colorType">09:00 - 18:00</h4>
         </div>
       </div>
 
       <div class="w-50">
         <div class="w-100 fd-c gap-12">
-          <h4 class="commonT colorGreyD">Стоимость билета для взрослых:</h4>
+          <h4 class="commonT colorGreyD">{{$t("ticketPrice")}}:</h4>
           <div class="w-a d-f fd-r gap-8">
             <h4 class="commonD bold colorType">25 000.00</h4>
             <h4 class="commonD colorGreyD">UZS</h4>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="w-100 fd-c gap-12 mt-60">
-          <h4 class="commonT colorGreyD">Стоимость билета для детей (0-8 лет)::</h4>
+          <h4 class="commonT colorGreyD">{{$t("childrenTicketPrice")}} (0-8 лет):</h4>
           <div class="w-a d-f fd-r gap-8">
             <h4 class="commonD bold colorType">15 000.00</h4>
             <h4 class="commonD colorGreyD">UZS</h4>
@@ -44,12 +44,12 @@
     </div>
 
     <button class="w-4 prim mt-60">
-      <span>Click me</span>
+      <span>{{$t('buy')}}</span>
     </button>
 
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -68,7 +68,12 @@ export default {
 
   data() {
     return {
-      title: 'Посещение музея',
+      title: {
+        uz: 'Muzeyga tashrif',
+        uzcyr: 'Музейга ташриф',
+        ru: 'Посещение музея',
+        en: 'Visiting museum',
+      },
       description: `
         Термезский археологический музей является единственным археологическим музеем в нашей стране и относится к числу специализированных музеев. Этот музей является одним из самых замечательных мест нашего города, в котором возрождается история древнего Сурханского оазиса на протяжении тысячелетий.
         <br/><br/>

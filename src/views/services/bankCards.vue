@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="bank-cards"
     />
 
@@ -108,7 +108,7 @@
                   icon="share"
                   size="middle"
                 />
-                <p class="helpers">Поделиться</p>
+                <p class="helpers">{{$t("share")}}</p>
               </div>
             </div>
 
@@ -116,7 +116,7 @@
               @click="goToSingle"
               class="prim w-3"
             >
-              <span>Click me</span>
+              <span>{{$t("look")}}</span>
             </button>
             
           </div>
@@ -134,7 +134,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -155,7 +155,12 @@ export default {
 
   data() {
     return {
-      title: 'Банковские карты',
+      title:{
+        uz: 'Bank kartalari',
+        uzcyr: 'Банк карталари',
+        ru: 'Банковские карты',
+        en: 'Bank cards',
+      },
       chosenTab: 1,
       cardsID: 'Карты VISA с авторским дизайном',
 

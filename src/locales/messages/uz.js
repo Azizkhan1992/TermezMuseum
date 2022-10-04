@@ -117,5 +117,12 @@ const uz = {
   look: 'Ko\'rish',
   countItem: 'Maxsulotlar soni',
   category: 'Kategoriyasi',
+  ticketPrice: 'Kattalar uchun chipta narxi',
+  childrenTicketPrice: 'Bolalar uchun chipta narxi (0-8 yosh)',
+  expectEvents: 'Kutilayotgan tadbirlar',
+  noEvents: 'Hozirda kutilayotgan tadbirlar mavjud emas. Muzeyga yordam berishga qiziqishingiz uchun tashakkur!',
+  cardType: 'Karta turi',
+  briefDescDesign: 'Dizayn qisqa tavsifi',
+  purchasedBank: 'Quyidagi banklardan olish mumkin',
 }
 export default uz

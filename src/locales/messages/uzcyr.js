@@ -117,6 +117,13 @@ const uzcyr = {
   look: 'Кўриш',
   countItem: 'Махсулотлар сони',
   category: 'Категорияси',
+  ticketPrice: 'Катталар учун чипта нархи',
+  childrenTicketPrice: 'Болалар учун чипта нархи (0-8 ёш)',
+  expectEvents: 'Кутилаётган тадбирлар',
+  noEvents: 'Ҳозирда кутилаётган тадбирлар мавжуд эмас. Музейга ёрдам беришга қизиқишингиз учун ташаккур!',
+  cardType: 'Карта тури',
+  briefDescDesign: 'Дизайн қисқа тавсифи',
+  purchasedBank: 'Қуйидаги банклардан олиш мумкин',
 }
 
 export default uzcyr

@@ -6,7 +6,7 @@
     </div>
 
     <div class="w-100 mt-80 gap-48">
-      <h4 class="commonT colorGreyD">Вид карты:</h4>
+      <h4 class="commonT colorGreyD">{{$t("cardType")}}:</h4>
       <div class="w-a d-f fd-r gap-8">
         <h4 class="commonT colorType">VISA</h4>
       </div>
@@ -21,7 +21,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Посмотрели  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  1 358</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -29,7 +29,7 @@
             icon="share"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Поделиться</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("share")}}</p>
         </div>
 
       </div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="w-100 mt-60">
-      <h4 class="commonT colorGreyD">Краткое описание дизайна:</h4>
+      <h4 class="commonT colorGreyD">{{$t("briefDescDesign")}}:</h4>
     </div>
 
     <div class="w-100 mt-24">
@@ -51,7 +51,7 @@
 
 
     <div class="w-100 mt-80 gap-48">
-      <h4 class="commonT colorGreyD">Можно приобрести в банке:</h4>
+      <h4 class="commonT colorGreyD">{{$t("purchasedBank")}}:</h4>
     </div>
 
 
@@ -73,7 +73,7 @@
 
     <breadCrumbs
       :prevPageLink="prevPage.link"
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :currentPage="title"
     />
 
@@ -97,7 +97,12 @@ export default {
       title: this.$route.params.id,
 
       prevPage: {
-        name: 'Банковские карты',
+        name:{
+          uz: 'Bank kartalari',
+          uzcyr: 'Банк карталари',
+          ru: 'Банковские карты',
+          en: 'Bank cards',
+        },
         link: '/bank-cards'
       },
 
