@@ -115,6 +115,8 @@ const ru = {
   countPicture: 'Количество изображений',
   countVideoFiles: 'Количество видео-файлов',
   look: 'Посмотреть',
+  countItem: 'Количество товаров',
+  category: 'Категория',
 }
 
 export default ru

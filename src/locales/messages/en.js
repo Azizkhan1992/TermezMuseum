@@ -115,6 +115,8 @@ const en = {
   countPicture: 'Number of images',
   countVideoFiles: 'Number of video files',
   look: 'View',
+  countItem: 'Amount of items',
+  category: 'Category',
 }
 
 export default en

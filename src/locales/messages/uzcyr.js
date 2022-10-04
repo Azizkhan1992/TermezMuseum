@@ -115,6 +115,8 @@ const uzcyr = {
   countPicture: 'Расмлар сони',
   countVideoFiles: 'Видео файллар сони',
   look: 'Кўриш',
+  countItem: 'Махсулотлар сони',
+  category: 'Категорияси',
 }
 
 export default uzcyr

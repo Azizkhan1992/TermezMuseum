@@ -115,5 +115,7 @@ const uz = {
   countPicture: 'Rasmlar soni',
   countVideoFiles: 'Video fayllar soni',
   look: 'Ko\'rish',
+  countItem: 'Maxsulotlar soni',
+  category: 'Kategoriyasi',
 }
 export default uz
