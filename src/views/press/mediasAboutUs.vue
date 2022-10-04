@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="mms-about-us"
     />
 
@@ -11,7 +11,7 @@
     <div class="w-100 mt-60 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb">
       
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Год</label>
+        <label class="colorGreyD mb-4">{{$t("year")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -21,7 +21,7 @@
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Месяц</label>
+        <label class="colorGreyD mb-4">{{$t("month")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -31,7 +31,7 @@
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Категория поиска</label>
+        <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -42,12 +42,12 @@
       
       <div class="w-6 d-f fd-c">
 
-        <label class="colorGreyD mb-4">Section</label>
+        <label class="colorGreyD mb-4">{{$t("section")}}</label>
 
         <iconedInput
           v-model="search"
           icon="search"
-          placeholder="Введите текст поиска"
+          :placeholder="$t('enterTextSearch')"
         />
       </div>
       
@@ -57,7 +57,7 @@
 
 
     <div class="w-100 h-48p mt-60 align-c gap-24  ">
-      <p class="commonP colorGreyD bold line-h-20">Топ-5 популярных тэгов:</p>
+      <p class="commonP colorGreyD bold line-h-20">{{$t("top5Tag")}}:</p>
 
       <button class="top5mmBtn">
         <span>kun.uz</span>
@@ -77,7 +77,7 @@
     </div>
 
     <div class="w-100 gap-48 mt-80">
-      <p class="commonP line-h-30 colorGreyD">Количество публикаций:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countPublicate")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -132,7 +132,7 @@
                 icon="eye"
                 size="middle"
               />
-              <p class="helpers">Посмотрели 1 396</p>
+              <p class="helpers">{{$t("viewed")}} 1 396</p>
             </div>
 
             <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr">
@@ -140,7 +140,7 @@
                 icon="share"
                 size="middle"
               />
-              <p class="helpers">Поделиться</p>
+              <p class="helpers">{{$t("share")}}</p>
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@
                   icon="eye"
                   size="middle"
                 />
-                <p class="helpers">Посмотрели 1 396</p>
+                <p class="helpers">{{$t("viewed")}} 1 396</p>
               </div>
 
               <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr">
@@ -220,7 +220,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -243,7 +243,12 @@ export default {
 
   data() {
     return {
-      title: 'СМИ о нас',
+      title: {
+        uz: 'OAV biz haqimizda',
+        uzcyr: 'ОАВ биз ҳақимизда',
+        ru: 'СМИ о нас',
+        en: 'Mass Medias about Us',
+      },
       curPage: 7,
       pages: 122,
       search: '',

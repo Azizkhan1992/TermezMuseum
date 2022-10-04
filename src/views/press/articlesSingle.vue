@@ -21,7 +21,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Посмотрели  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t('viewed')}}  1 358</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24">
@@ -37,7 +37,7 @@
             icon="share"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Поделиться</p>
+          <p class="commonP colorGreyD line-h-20">{{$t('share')}}</p>
         </div>
 
       </div>
@@ -60,24 +60,24 @@
       
       <div class="w-50 gap-24">
         <div class="w-100 gap-24">
-          <p class="commonP line-h-20 colorGreyD">Количество страниц:</p>
+          <p class="commonP line-h-20 colorGreyD">{{$t("countPage")}}:</p>
           <p class="commonP line-h-20 colorType bold">{{articlesnfo.pagesCount}} стр.</p>
         </div>
 
         <div class="w-100 gap-24">
-          <p class="commonP line-h-20 colorGreyD">Дата публикации:</p>
+          <p class="commonP line-h-20 colorGreyD">{{$t("datePublicate")}}:</p>
           <p class="commonP line-h-20 colorType bold">{{articlesnfo.publishedDate}} стр.</p>
         </div>
       </div>
 
       <div class="w-50 gap-24">
         <div class="w-100 gap-24">
-          <p class="commonP line-h-20 colorGreyD">Дисциплина:</p>
+          <p class="commonP line-h-20 colorGreyD">{{$t("discipline")}}:</p>
           <p class="commonP line-h-20 colorType bold">{{articlesnfo.discipline}} стр.</p>
         </div>
 
         <div class="w-100 gap-24">
-          <p class="commonP line-h-20 colorGreyD">Номер продукта:</p>
+          <p class="commonP line-h-20 colorGreyD">{{$t("numberProduct")}}:</p>
           <p class="commonP line-h-20 colorType bold">{{articlesnfo.productNumber}} стр.</p>
         </div>
       </div>
@@ -112,7 +112,7 @@
               icon="download"
               size="middle"
             />
-            <p class="helpers">Количество скачиваний:</p>
+            <p class="helpers">{{$t("downloads")}}:</p>
             <p class="mainers">{{doc.downloadsNumber}}</p>
           </div>
 
@@ -121,7 +121,7 @@
               icon="download"
               size="middle"
             />
-            <p class="helpers colorPrim">Скачать документ</p>
+            <p class="helpers colorPrim">{{$t("downloadDoc")}}</p>
           </div>
         </div>
 
@@ -132,7 +132,7 @@
 
     <breadCrumbs
       :prevPageLink="prevPage.link"
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :currentPage="title"
     />
 
@@ -160,7 +160,12 @@ export default {
         productNumber: 'F1U31-PGE-UZ'
       },
       prevPage: {
-        name: 'Статьи',
+        name: {
+          uzcyr: 'Мақолалар',
+          uz: 'Maqolalar',
+          ru: 'Статьи',
+          en: 'Articles',
+        },
         link: '/articles'
       },
 

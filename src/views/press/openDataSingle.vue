@@ -11,7 +11,7 @@
           icon="eye"
         />
 
-        <p class="commonP colorGreyD">Посмотрели  1 358</p>
+        <p class="commonP colorGreyD">{{$t("viewed")}}  1 358</p>
       </div>
 
       <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -19,7 +19,7 @@
           icon="share"
         />
 
-        <p class="commonP colorGreyD">Поделиться</p>
+        <p class="commonP colorGreyD">{{$t("share")}}</p>
       </div>
     </div>
 
@@ -38,11 +38,11 @@
         </div>
         
         <div class="description">
-          <h4>Описание</h4>
+          <h4>{{$t("description")}}</h4>
         </div>
 
         <div class="content">
-          <h4>Содеражение</h4>
+          <h4>{{$t("content")}}</h4>
         </div>
 
       </th>
@@ -69,14 +69,14 @@
               :key="file.id"
             >
               <p v-if="file.type !== 'link'">
-                Скачать файл ({{file.type}})
+                {{$t("downloadFile")}} ({{file.type}})
               </p>
               <a
                 v-else
                 href=""
                 target="_blanc"
               >
-                Ссылка на источник
+                {{$t("sourceLink")}}
               </a>
             </div>
           </div>
@@ -101,11 +101,11 @@
         </div>
         
         <div class="description">
-          <h4>Название отчета</h4>
+          <h4>{{$T("reportTitle")}}</h4>
         </div>
 
         <div class="content">
-          <h4>Файл</h4>
+          <h4>{{$t("file")}}</h4>
         </div>
 
       </th>
@@ -128,7 +128,7 @@
             href=""
             target="_blanc"
           >
-            Скачать файл ({{data.file.type}})
+            {{$t("downloadFile")}} ({{data.file.type}})
           </a>
         </div>
       </tr>
@@ -139,12 +139,12 @@
     <div class="dataUpdateInfo mt-80">
       <div class="updateRow">
         <div class="w-50 d-f fd-r gap-24">
-          <p class="published">Дата публикации:</p>
+          <p class="published">{{$t("datePublicate")}}:</p>
           <p class="publishedDate">{{chosenOpenData.publishingDates.publishedDate}}</p>
         </div>
 
         <div class="w-50 d-f fd-r gap-24">
-          <p class="published">Дата последнего обновления:</p>
+          <p class="published">{{$t("lastUpdateDate")}}:</p>
           <p class="publishedDate">{{chosenOpenData.publishingDates.updatedDate}}</p>
         </div>
       </div>
@@ -152,7 +152,7 @@
 
 
     <breadCrumbs
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :prevPageLink="prevPage.link"
       :currentPage="chosenOpenData.title"
     />
@@ -176,7 +176,12 @@ export default {
       openDataID: this.$route.params.id,
       chosenOpenData: {},
       prevPage: {
-        name: 'Открытые данные',
+        name: {
+          uzcyr: 'Очиқ маълумотлар',
+          uz: 'Ochiq ma\'lumotlar',
+          ru: 'Открытые данные',
+          en: 'Open data',
+        },
         link: '/open-data'
       }
     }

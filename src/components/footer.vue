@@ -2,7 +2,7 @@
   <div class="footer mt-120 pos-rel">
     <div class="w-12 mt-24 z-idx2">
       <div class="footer-top">
-        <div class="w-4 gap-24 mb-16 footer-logo-img">
+        <div class="d-f w-4 gap-24 mb-16 footer-logo-img">
         <footerLogo />
   
         <div class="logo">

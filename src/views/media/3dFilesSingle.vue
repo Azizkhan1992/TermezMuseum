@@ -13,7 +13,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Посмотрели  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  1 358</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -21,7 +21,7 @@
             icon="share"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Поделиться</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("share")}}</p>
         </div>
 
       </div>
@@ -67,7 +67,7 @@
 
     <breadCrumbs
       :prevPageLink="prevPage.link"
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :currentPage="title"
     />
 
@@ -96,7 +96,12 @@ export default {
         productNumber: 'F1U31-PGE-UZ'
       },
       prevPage: {
-        name: '3D файлы',
+        name: {
+          uz: '3D fayllar',
+          uzcyr: '3D файллар',
+          ru: '3D файлы',
+          en: '3D files',
+        },
         link: '/3d-files'
       },
 

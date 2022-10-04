@@ -29,31 +29,15 @@
             icon="share"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">Поделиться</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("share")}}</p>
         </div>
       </div>
 
       <div class="w-a d-f fd-r gap-24 align-c">
-        <p class="commonP colorGreyD line-h-20">Тэги:</p>
+        <p class="commonP colorGreyD line-h-20">{{$t("tags")}}:</p>
 
-        <button class="singlePageTags">
-          <span>Важно</span>
-        </button>
-
-        <button class="singlePageTags">
-          <span>Конкурс</span>
-        </button>
-
-        <button class="singlePageTags">
-          <span>История Узбекистана</span>
-        </button>
-
-        <button class="singlePageTags">
-          <span>ururururu</span>
-        </button>
-
-        <button class="singlePageTags">
-          <span>ururururu</span>
+        <button class="singlePageTags" v-for="el,index in topTags" :key="index">
+          <span>{{el.name[$i18n.locale]}}</span>
         </button>
       </div>
 
@@ -147,7 +131,7 @@
 
     <breadCrumbs
       :currentPage="title"
-      :prevPageName="prevPage.name"
+      :prevPageName="prevPage.name[$i18n.locale]"
       :prevPageLink="prevPage.link"
     />
 
@@ -179,9 +163,38 @@ export default {
       
       hiddenR: 1,
       playInterval: '',
+      topTags: [
+          {
+            id: 1,
+            name: {
+              uz: "Muhim",
+              ru: "Важно",
+              uzcyr: "Муҳим",
+              en: "Important",
+            },
+          },
+          {
+            id: 2,
+            name: {
+              uz: "Konkurs",
+              ru: "Конкурс",
+              uzcyr: "Конкурс",
+              en: "Competition",
+            },
+          },
+          {
+            id: 3,
+            name: {
+              uz: "O'zbekiston tarixi",
+              ru: "История Узбекистана",
+              uzcyr: "Ўзбекистон тарихи",
+              en: "History of Uzbekistan",
+            },
+          },
+        ],
 
       prevPage: {
-        name: 'Выставки',
+        name:{ru:'Выставки',uzcyr:'Кўргазмалар',uz:'Ko\'rgazmalar',en:'Exhibitions'},
         link: '/exhibitions'
       },
       description: `

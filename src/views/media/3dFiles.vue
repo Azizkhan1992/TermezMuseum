@@ -2,13 +2,13 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="3d-files"
     />
 
 
     <div class="w-100 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество файлов:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countFiles")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -34,7 +34,7 @@
           <p class="commonP bold line-h-24 mt-a">{{xhbt.title}}</p>
           
           <div class="w-100 gap-12 mt-24">
-            <p class="helpers">Год находки:</p>
+            <p class="helpers">{{$t("discoverIn")}}:</p>
             <p class="mainers colorWhite">{{xhbt.year}}</p>
           </div>
         </div>
@@ -52,7 +52,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -74,7 +74,12 @@ export default {
   data() {
     return {
       allExhibits: this.$store.state.exhibits,
-      title: '3D файлы',
+      title: {
+        uz: '3D fayllar',
+        uzcyr: '3D файллар',
+        ru: '3D файлы',
+        en: '3D files',
+      },
       curPage: 5,
       pages: 522,
 

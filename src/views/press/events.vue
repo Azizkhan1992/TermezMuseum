@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="events"
     />
 
@@ -18,7 +18,7 @@
           class="commonP bold"
           :class="chosenTab !== 1 ? 'colorGreyD' : ''"
         >
-          Запланированные мероприятия
+          {{$t("plannedEvents")}}
         </p>
       </div>
 
@@ -30,7 +30,7 @@
           class="commonP bold"
           :class="chosenTab !== 2 ? 'colorGreyD' : ''"
         >
-          Проведенные мероприятия
+          {{$t("eventsHeld")}}
         </p>
       </div>
 
@@ -48,7 +48,7 @@
     <div class="w-100 mt-60 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb mobile-flex">
       
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Год</label>
+        <label class="colorGreyD mb-4">{{$t("year")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -58,7 +58,7 @@
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Месяц</label>
+        <label class="colorGreyD mb-4">{{$t("month")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -68,7 +68,7 @@
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">Категория поиска</label>
+        <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
         
         <selector
           @optionChanged="optionChanged"
@@ -79,12 +79,12 @@
       
       <div class="w-6 d-f fd-c">
 
-        <label class="colorGreyD mb-4">Section</label>
+        <label class="colorGreyD mb-4">{{$t('section')}}</label>
 
         <iconedInput
           v-model="search"
           icon="search"
-          placeholder="Введите текст поиска"
+          :placeholder="$t('enterTextSearch')"
         />
       </div>
       
@@ -94,12 +94,12 @@
 
 
     <div class="w-100 h-48p mt-60 align-c gap-24  flex-wrap h-auto">
-      <p class="commonP colorGreyD bold line-h-20">Топ-5 популярных тэгов:</p>
+      <p class="commonP colorGreyD bold line-h-20">{{$t("top5Tag")}}:</p>
 
-      <button class="top5TagBtn">
-        <span>Важно</span>
+      <button class="top5TagBtn" v-for="el,index in topTags" :key="index">
+        <span>{{el.name[$i18n.locale]}}</span>
       </button>
-      <button class="top5TagBtn">
+      <!-- <button class="top5TagBtn">
         <span>Конкурс</span>
       </button>
       <button class="top5TagBtn">
@@ -110,11 +110,11 @@
       </button>
       <button class="top5TagBtn">
         <span>Новые экспонаты</span>
-      </button>
+      </button> -->
     </div>
 
     <div class="w-100 gap-48 mt-80">
-      <p class="commonP line-h-30 colorGreyD">Количество книг:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countBook")}}:</p>
       <p class="commonP line-h-30 bold colorType">355</p>
     </div>
 
@@ -147,7 +147,7 @@
                   icon="share"
                   size="middle"
                 />
-                <p class="helpers">Поделиться</p>
+                <p class="helpers">{{$t("share")}}</p>
               </div>
             </div>
 
@@ -155,7 +155,7 @@
               @click="goToSingle"
               class="prim w-3"
             >
-              <span>Click me</span>
+              <span>{{$t('more')}}</span>
             </button>
             
           </div>
@@ -174,7 +174,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -197,13 +197,47 @@ export default {
 
   data() {
     return {
-      title: 'Мероприятия',
+      title:{
+        uz: 'Voqealar',
+        uzcyr: 'Воқеалар',
+        ru: 'Мероприятия',
+        en: 'Events',
+      },
       curPage: 7,
       pages: 122,
       search: '',
       eventsID: 'Встреча с заместителем директора по научной работе Института востоковедения Российской Академии Наук',
 
       chosenTab: 1,
+      topTags: [
+          {
+            id: 1,
+            name: {
+              uz: "Muhim",
+              ru: "Важно",
+              uzcyr: "Муҳим",
+              en: "Important",
+            },
+          },
+          {
+            id: 2,
+            name: {
+              uz: "Konkurs",
+              ru: "Конкурс",
+              uzcyr: "Конкурс",
+              en: "Competition",
+            },
+          },
+          {
+            id: 3,
+            name: {
+              uz: "O'zbekiston tarixi",
+              ru: "История Узбекистана",
+              uzcyr: "Ўзбекистон тарихи",
+              en: "History of Uzbekistan",
+            },
+          },
+        ],
 
       options: [
         {value: '1', label: 'Option 1'},

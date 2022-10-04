@@ -2,13 +2,13 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="articles"
     />
 
 
     <div class="w-100 gap-48 mt-80">
-      <p class="commonP line-h-30 colorGreyD">Количество публикаций:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countPublicate")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
@@ -49,7 +49,7 @@
                   icon="share"
                   size="middle"
                 />
-                <p class="helpers">Поделиться</p>
+                <p class="helpers">{{$t("share")}}</p>
               </div>
             </div>
 
@@ -57,7 +57,7 @@
               @click="goToSingle"
               class="prim w-3"
             >
-              <span>Click me</span>
+              <span>{{$t('more')}}</span>
             </button>
             
           </div>
@@ -76,7 +76,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -97,7 +97,12 @@ export default {
 
   data() {
     return {
-      title: 'Статьи',
+      title: {
+        uzcyr: 'Мақолалар',
+        uz: 'Maqolalar',
+        ru: 'Статьи',
+        en: 'Articles',
+      },
       articlesID: 'Технологии древних скульпторов. Как они прилумывали новые технологии и применяли в широком круге',
 
       curPage: 4,

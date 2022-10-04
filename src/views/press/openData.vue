@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="open-data"
     />
 
@@ -32,7 +32,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -53,7 +53,12 @@ export default {
 
   data() {
     return {
-      title: 'Открытые данные',
+        title: {
+          uzcyr: 'Очиқ маълумотлар',
+          uz: 'Ochiq ma\'lumotlar',
+          ru: 'Открытые данные',
+          en: 'Open data',
+        },
       allOpenData: this.$store.state.openData,
 
       curPage: 4,

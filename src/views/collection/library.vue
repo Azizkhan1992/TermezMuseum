@@ -3,12 +3,12 @@
 
 
     <pageTitleAnimated
-      :titleName="title"
+      :titleName="title[$i18n.locale]"
       background="library"
     />
 
     <div class="w-100 gap-48">
-      <p class="commonP line-h-30 colorGreyD">Количество книг:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countBook")}}:</p>
       <p class="commonP line-h-30 bold colorType">355</p>
     </div>
 
@@ -36,27 +36,27 @@
           <p class="commonP mt-24 h-60p bold colorGreyD">{{book.description}}</p>
 
           <div class="w-100 mt-12 gap-12">
-            <p class="helpers">Год:</p>
+            <p class="helpers">{{$t("year")}}:</p>
             <p class="mainers bold">{{book.year}}</p>
           </div>
 
           <div class="w-100 mt-24 gap-12">
-            <p class="helpers">Автор:</p>
+            <p class="helpers">{{$t("author")}}:</p>
             <p class="mainers bold">{{book.author}}</p>
           </div>
 
           <div class="w-100 mt-24 gap-12">
-            <p class="helpers">Количество страниц:</p>
+            <p class="helpers">{{$t("countPage")}}:</p>
             <p class="mainers bold">{{book.pagescount}}</p>
           </div>
 
           <div class="w-100 mt-24 gap-12">
-            <p class="helpers">Языки:</p>
+            <p class="helpers">{{$t("langs")}}:</p>
             <p class="mainers bold">{{book.langs}}</p>
           </div>
 
           <button class="prim w-100 mt-a">
-            <span>Click me</span>
+            <span>{{$t("buy2")}}</span>
           </button>
         </div>
       </div>
@@ -71,7 +71,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -91,7 +91,12 @@ export default {
 
   data() {
     return {
-      title: 'Библиотека',
+      title:{
+        uz: 'Kutubxona',
+        uzcyr: 'Кутубхона',
+        ru: 'Библиотека',
+        en: 'Library',
+      },
       curPage: 4,
       pages: 122,
 
