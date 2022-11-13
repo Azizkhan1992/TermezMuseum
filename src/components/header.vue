@@ -219,10 +219,10 @@ export default {
       idChecker: '',
       openMenuPages: '',
       locales: [
-        {id: 1, lang: 'uz', name: `O'zbekcha`},
-        {id: 2, lang: 'uzcyr', name: 'Ўзбекча'},
-        {id: 3, lang: 'ru', name: 'Русский'},
-        {id: 4, lang: 'en', name: 'English'},
+        {id: 1, lang: 'language_uzlatin', name: `O'zbekcha`},
+        {id: 2, lang: 'language_uzCyrillic', name: 'Ўзбекча'},
+        {id: 3, lang: 'language_ru', name: 'Русский'},
+        {id: 4, lang: 'language_en', name: 'English'},
       ],
       menuLinks: [
         {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -368,7 +368,7 @@ export default {
         this.hideHeader()
       }, 3000);
     }
-    this.$i18n.locale = this.$route.query.lang || 'uz'
+    this.$i18n.locale = this.$route.query.lang || 'language_uzlatin'
   },
 
   beforeDestroy() {
