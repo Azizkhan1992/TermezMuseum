@@ -1,7 +1,9 @@
 import Vue from "vue";
+import VueAxios from "vue-axios";
 import axios from "axios";
 
-Vue.use(axios);
+
+Vue.use(VueAxios, axios);
 
 const BASE_URL= 'https://termezmuseum.daac.uz/api/v1';
 

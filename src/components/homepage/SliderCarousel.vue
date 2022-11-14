@@ -49,8 +49,8 @@ export default {
   },
 
   methods: {
-    async getSliderData(){
-      await this.$api.get('/home/slider')
+    getSliderData(){
+      this.$api.get('/home/slider')
       .then(resp=> {
         this.sliderItems = resp.data.result
         for(let i=1; i<= this.sliderItems.length; i++){

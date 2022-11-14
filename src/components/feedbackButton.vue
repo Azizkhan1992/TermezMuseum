@@ -22,10 +22,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'Shikoyat qilish',
-        uzcyr: 'Шикоят қилиш',
-        ru: 'Обращение',
-        en: 'Appeal',
+        language_uzlatin: 'Shikoyat qilish',
+        language_uzCyrillic: 'Шикоят қилиш',
+        language_ru: 'Обращение',
+        language_en: 'Appeal',
       }
     }
   }
