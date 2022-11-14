@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       feedbackModal: false,
-      allMenu: this.$store.state.menuLinks,
+      allMenu: [],
       currentPath: '',
       sections: [],
       menuList: [],
@@ -99,32 +99,39 @@ export default {
   },
 
   methods: {
+    getMenu(){
+      this.$api.get('/menu')
+      .then(resp => {
+        this.allMenu = resp?.data?.menuDocument
+        this.sectionSelector()
+        this.menuChanger()
+      }).catch(err => {console.log(err)})
+    },
     closeModal() {
       this.feedbackModal = false
     },
 
     sectionSelector() {
-      const len = this.allMenu.length
+      const len = this.allMenu?.length
 
       for(let i = 0; i < len; i++) {
-        if(this.allMenu[i].page !== false) {
+        if(this.allMenu[i].category == 'section') {
           this.sections.push(this.allMenu[i])
         }
       }
+      
     },
 
     menuChanger() {
       let len = this.sections.length
       const menus = []
       for (let i = 0; i < len; i ++) {
-        menus.push(this.sections[i].pages.filter(obj => obj.link == (this.currentPath)))
+        menus.push(this.sections[i].subMenu.filter(obj => obj.link == (this.currentPath)))
       }
-
       const index = menus.findIndex((obj) => Object.keys(obj).length !== 0);
-
       if(this.currentPath !== '/contacts' && this.currentPath !== '/sitemap' && this.currentPath !== '/') {
-        this.menuList = this.sections[index].pages
-        this.currentPage = this.sections[index].pages.find(obj => obj.link == this.currentPath).page
+        this.menuList = this.sections[index]?.subMenu
+        this.currentPage = this.sections[index]?.subMenu.find(obj => obj.link == this.currentPath).name
       }
 
     },
@@ -150,8 +157,9 @@ export default {
   },
 
   mounted() {
-    this.sectionSelector()
     this.currentPath = '/' + window.location.pathname.split('/')[1]
+    this.getMenu()
+    this.sectionSelector()
     this.menuChanger()
     this.routerChecker()
   }

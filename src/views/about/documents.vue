@@ -83,10 +83,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'Hujjatlar',
-        ru: 'Документы',
-        uzcyr: 'Ҳужжатлар',
-        en: 'Documents',
+      language_uzlatin: 'Hujjatlar',
+        language_ru: 'Документы',
+        language_uzCyrillic: 'Ҳужжатлар',
+        language_en: 'Documents',
       },
       curPage: 3,
       pages: 384,

@@ -9,7 +9,7 @@
     "
   >
     <div class="dark-layer-solid"></div>
-    <img class="back-img" :src="require('@/assets/temporary/' + this.img)" alt="">
+    <img class="back-img" :src="img" alt="err">
 
     <h3 class="mb-48 mr-s-48 mt-a z-idx2">{{museumsTitle}}</h3>
 

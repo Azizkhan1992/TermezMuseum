@@ -1,18 +1,19 @@
 <template>
   <div name="usefulLinksBlock" class="block">
     <animatedTitle
-      :animateAt="this.offTop"
-      :titleName="this.title[$i18n.locale]"
+      :animateAt="offTop"
+      :titleName="title[$i18n.locale]"
     />
 
     <div class="sliderWrapper">
       <div class="wr-100 gap-24">
+
         <usefulLinkCard
           v-for="item in usefulLinks"
           :key="item.id"
           :id="item.id"
-          :itemTitle="item.name[$i18n.locale]"
-          :img="item.img"
+          :itemTitle="item.title[$i18n.locale]"
+          :img="item.image.path"
           :link="item.link"
           :hiddenR="hiddenRChecker(item.id)"
           :hiddenL="hiddenLChecker(item.id)"
@@ -42,91 +43,33 @@ export default {
     return {
       offTop: 1,
       title: {
-        uz: "Foydali havolalar",
-        ru: "Полезные ссылки",
-        uzcyr: "Фойдали ҳаволалар",
-        en: "Useful links",
+        language_uzlatin: "Foydali havolalar",
+        language_ru: "Полезные ссылки",
+        language_uzCyrillic: "Фойдали ҳаволалар",
+        language_en: "Useful links",
       },
       hiddenR: 1,
       playInterval: "",
-
-      usefulLinks: [
-        {
-          id: 1,
-          name: {
-            uz: "O'zbekiston Respublikasi Oliy Majlisi",
-            ru: "Олий Мажлис Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси Олий Мажлиси",
-            en: "Oliy Majlis of the Republic of Uzbekistan",
-          },
-          link: "",
-          img: "logo_small 2.png",
-        },
-        {
-          id: 2,
-          name: {
-            uz: "O‘zbekiston Respublikasi Turizm va madaniy meros vazirligi",
-            ru: "Министерство Туризма и культурного наследия Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси Туризм ва маданий мерос вазирлиги",
-            en: "Ministry of Tourism and Cultural Heritage of the Republic of Uzbekistan",
-          },
-          link: "",
-          img: "Turizm_va_madaniy_meros_vazirligi (1).png",
-        },
-        {
-          id: 3,
-          name: {
-            uz: "O'zbekiston Respublikasi PREZIDENTI sayti",
-            ru: "Веб-сайт ПРЕЗИДЕНТА Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси ПРEЗИДEНТИ сайти",
-            en: "Website of the PRESIDENT of the Republic of Uzbekistan",
-          },
-          link: "",
-          img: "image 110.png",
-        },
-        {
-          id: 4,
-          name: {
-            uz: "O‘zbekiston Respublikasi qonun hujjatlari ma’lumotlari milliy bazasi",
-            ru: "Национальная база данных законодательства Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси қонун ҳужжатлари маълумотлари миллий базаси",
-            en: "National database of legislation of the Republic of Uzbekistan",
-          },
-          link: "",
-          img: "lex 1.png",
-        },
-        {
-          id: 5,
-          name: {
-            uz: "O‘zbekiston Respublikasi Turizm va madaniy meros vazirligi",
-            ru: "Министерство Туризма и культурного наследия Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси Туризм ва маданий мерос вазирлиги",
-            en: "Ministry of Tourism and Cultural Heritage of the Republic of Uzbekistan",
-          },
-          link: "",
-          img: "Turizm_va_madaniy_meros_vazirligi (1).png",
-        },
-        {
-          id: 6,
-          name: {
-            uz: "O'zbekiston Respublikasi PREZIDENTI sayti",
-            ru: "Веб-сайт ПРЕЗИДЕНТА Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси ПРEЗИДEНТИ сайти",
-            en: "Website of the PRESIDENT of the Republic of Uzbekistan",
-          },
-          link: "",
-          img: "image 110.png",
-        },
-      ],
+      usefulLinks: []
     };
   },
 
   methods: {
     getOffsetTop() {
       this.offTop =
-        document.getElementsByName("usefulLinksBlock")[0].offsetTop - 400;
+        document.getElementsByName("usefulLinksBlock")[0]?.offsetTop - 400;
     },
+    async getUsefulLinks() {
+      const data = await this.$api('/home/usefulLink');
 
+      this.usefulLinks = data.data.usefulLinkDocument
+
+
+      for(let i=1; i<=  this.usefulLinks.length; i++){
+        this.usefulLinks[i-1].id = i
+      }
+
+    },
     prev() {
       clearInterval(this.playInterval);
 
@@ -165,7 +108,7 @@ export default {
 
     hiddenLChecker(id) {
       const shown = [];
-      if(window.innerWidth>1100){
+      if(window.innerWidth > 1100){
         for (let i = 1; i <= 4; i++) {
             shown.push(this.usefulLinks[i].id);
         }
@@ -201,6 +144,7 @@ export default {
   mounted() {
     this.getOffsetTop();
     this.play();
+    this.getUsefulLinks()
   },
 };
 </script>

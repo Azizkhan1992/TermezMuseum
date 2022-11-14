@@ -6,7 +6,7 @@
         <footerLogo />
   
         <div class="logo">
-          <h4> {{logotxt1[$i18n.locale]}} <br> <span> {{logotxt2[$i18n.locale]}}</span> <br> {{logotxt3[$i18n.locale]}} </h4>
+          <h4> {{logotxt1?.[$i18n.locale]}} <br> <span> {{logotxt2[$i18n.locale]}}</span> <br> {{logotxt3[$i18n.locale]}} </h4>
         </div>
         <!-- <div class="w-100 fd-c justify-sb">
           <p class="logoTitle">Государственный</p>
@@ -41,17 +41,18 @@
             class="sections mt-48"
             v-for="section in sections"
             :key="section.id"
+            v-show="section.category == 'section'"
           >
-            <h3 class="mb-28">{{ section.name[$i18n.locale] }}</h3>
+            <h3 class="mb-28" >{{ section?.name?.[$i18n.locale] }}</h3>
 
-            <div class="pageLinks gap-12" v-if="section.pages.length">
+            <div class="pageLinks gap-12" v-if="section.category == 'section'">
               <router-link
-                v-for="page in section.pages"
-                :key="page.id"
+                v-for="page, idx in section?.subMenu"
+                :key="idx"
                 tag="a"
                 :to="page.link"
               >
-                {{ page.page[$i18n.locale] }}
+                {{ page?.name?.[$i18n.locale] }}
               </router-link>
             </div>
           </div>
@@ -64,7 +65,7 @@
             <h3>{{$t("address")}}</h3>
             <div class="infoPart mt-28">
               <Icons icon="location" size="middle" color="white" />
-              <p class="accented">{{location[$i18n.locale]}}</p>
+              <p class="accented">{{contacts?.address?.text?.[$i18n.locale]}}</p>
             </div>
 
             <!-- Address Stop -->
@@ -77,17 +78,17 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("workdays")}}:</p>
-                  <p class="accented">{{weekwork[$i18n.locale]}}</p>
+                  <p class="accented">{{contacts?.schedule?.workingDays.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays.end?.[$i18n.locale]}}</p>
                 </div>
 
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("workhours")}}:</p>
-                  <p class="accented">09:00 - 18:00</p>
+                  <p class="accented">{{contacts?.schedule?.workingHours.start}} - {{contacts?.schedule?.workingHours.end}}</p>
                 </div>
 
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("dayoff")}}:</p>
-                  <p class="accented">{{weekout[$i18n.locale]}}</p>
+                  <p class="accented">{{weekout?.[$i18n.locale]}}</p>
                 </div>
               </div>
             </div>
@@ -102,15 +103,15 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("telephone")}}:</p>
-                  <a :href="'tel:' + { telephone }" class="accented"
-                    >+998 71 236 74 36</a
+                  <a :href="item" v-for="item, idx in contacts?.contact?.phoneNumber" :key="idx" class="accented"
+                    >{{item}}</a
                   >
                 </div>
 
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">Fax:</p>
-                  <a :href="'tel:' + { fax }" class="accented"
-                    >+998 71 233 62 81</a
+                  <a :href="item" v-for="item, idy in contacts?.contact?.fax" :key="idy" class="accented"
+                    >{{item}}</a
                   >
                 </div>
               </div>
@@ -121,8 +122,8 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">Email:</p>
-                  <a :href="'mailto:' + { mail }" class="accented"
-                    >info@tam.uz</a
+                  <a :href="contacts?.contact?.email" class="accented"
+                    >{{contacts?.contact?.email}}</a
                   >
                 </div>
               </div>
@@ -137,10 +138,11 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-24">
                   <a
-                    v-for="social in socialNetworks"
-                    :key="social.id"
+                    v-for="social, idz in contacts?.socialNetworks?.links"
+                    :key="idz"
                     :href="social.link"
                     target="_blank"
+                    v-show="contacts?.socialNetworks?.links.length > 0"
                   >
                     <img
                       :src="
@@ -162,7 +164,7 @@
               <h3>{{$t("address")}}</h3>
               <div class="infoPart mt-28">
                 <Icons icon="location" size="middle" color="white" />
-                <p class="accented">{{location[$i18n.locale]}}</p>
+                <p class="accented">{{contacts?.address?.text?.[$i18n.locale]}}</p>
               </div>
             </div>
 
@@ -176,17 +178,17 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("workdays")}}:</p>
-                    <p class="accented">{{weekwork[$i18n.locale]}}</p>
+                    <p class="accented">{{contacts?.schedule?.workingDays?.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays?.end?.[$i18n.locale]}}</p>
                   </div>
 
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("workhours")}}:</p>
-                    <p class="accented">09:00 - 18:00</p>
+                    <p class="accented">{{contacts?.schedule?.workingHours?.start}} - {{contacts?.schedule?.workingHours?.end}}</p>
                   </div>
 
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("dayoff")}}:</p>
-                    <p class="accented">{{weekout[$i18n.locale]}}</p>
+                    <p class="accented">{{weekout?.[$i18n.locale]}}</p>
                   </div>
                 </div>
               </div>
@@ -198,15 +200,15 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("telephone")}}:</p>
-                    <a :href="'tel:' + { telephone }" class="accented"
-                      >+998 71 236 74 36</a
+                    <a :href="item" v-for="item, idx in contacts?.contact?.phoneNumber" :key="idx" class="accented"
+                      >{{item}}</a
                     >
                   </div>
 
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">Fax:</p>
-                    <a :href="'tel:' + { fax }" class="accented"
-                      >+998 71 233 62 81</a
+                    <a :href="item" v-for="item, idy in contacts?.contact?.fax" :key="idy" class="accented"
+                      >{{item}}</a
                     >
                   </div>
                 </div>
@@ -216,8 +218,8 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">Email:</p>
-                    <a :href="'mailto:' + { mail }" class="accented"
-                      >info@tam.uz</a
+                    <a :href="contacts?.contact?.email" class="accented"
+                      >{{contacts?.contact?.email}}</a
                     >
                   </div>
                 </div>
@@ -237,10 +239,11 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-24">
                     <a
-                      v-for="social in socialNetworks"
-                      :key="social.id"
+                      v-for="social, idz in contacts?.socialNetworks?.links"
+                      :key="idz"
                       :href="social.link"
                       target="_blank"
+                      v-show="contacts?.socialNetworks?.links.length>0"
                     >
                       <img
                         :src="
@@ -261,13 +264,13 @@
 
       <div class="w-12 d-f fd-r gap-24 mt-24">
         <div class="w-100">
-          <p v-html="textCE[$i18n.locale]">
+          <p v-html="textCE?.[$i18n.locale]">
             
           </p>
         </div>
 
         <div class="w-100 site-footer-text">
-          <h4 v-html="textCEC[$i18n.locale]">
+          <h4 v-html="textCEC?.[$i18n.locale]">
           </h4>
         </div>
       </div>
@@ -327,186 +330,82 @@ export default {
   data() {
     return {
       developers: "https://daac.uz/",
-      location: {
-        uz: "Toshkent sh., Amir Temur shoh ko‘chasi, 16-uy",
-        ru: "г.Ташкент, проспект Амира Темура, 16",
-        uzcyr: "Тошкент ш., Амир Темур шоҳ кўчаси, 16-уй",
-        en: "Tashkent, Amir Temur Avenue, 16"
-      },
-      weekwork: {
-        uz: "Dush-shan",
-        uzcyr: "Душ-шан",
-        ru: "Пн-сб",
-        en: "Mon-Sat"
-      },
+      contacts: {},
+      weekDays: [
+        {id: 1, name: 'Yakshanba', val: 'Yak'},
+        {id: 2, name: 'Dushanba', val: 'Du'},
+        {id: 3, name: 'Seshanba', val: 'Se'},
+        {id: 4, name: 'Chorshanba', val: 'Chor'},
+        {id: 5, name: 'Payshanba', val: 'Pay'},
+        {id: 6, name: 'Juma', val: 'Ju'},
+        {id: 7, name: 'Shanba', val: 'Shan'}
+      ],
       weekout: {
-        uzcyr: "Якшанба",
-        uz: "Yakshanba",
-        ru: "Воскресенье",
-        en: "Sunday"
+        language_uzCyrillic: "Якшанба",
+        language_uzlatin: "Yakshanba",
+        language_ru: "Воскресенье",
+        language_en: "Sunday"
       },
       
       textCE:{
-        uz: "© 2022 Barcha huquqlar himoyalangan. <br /> Veb-sayt materiallaridan foydalanganda manbaga havola kerak.",
-        ru: "© 2022 Все права защищены. <br /> При использовании материалов веб-сайта, ссылка на источник обязательна.",
-        uzcyr: "© 2022 Барча ҳуқуқлар ҳимояланган. <br /> Веб-сайт материалларидан фойдаланганда манбага ҳавола керак.",
-        en: "© 2022 All rights reserved. <br /> When using materials from the website, a link to the source is required.",
+        language_uzlatin: "© 2022 Barcha huquqlar himoyalangan. <br /> Veb-sayt materiallaridan foydalanganda manbaga havola kerak.",
+        language_ru: "© 2022 Все права защищены. <br /> При использовании материалов веб-сайта, ссылка на источник обязательна.",
+        language_uzCyrillic: "© 2022 Барча ҳуқуқлар ҳимояланган. <br /> Веб-сайт материалларидан фойдаланганда манбага ҳавола керак.",
+        language_en: "© 2022 All rights reserved. <br /> When using materials from the website, a link to the source is required.",
       },
       textCEC:{
-        ru: "Нашли в тексте ошибку? Выделите её и нажмите <span>Ctrl+Enter</span>, а затем отправьте нам для уведомления администрации.",
-        uz: "Matnda xatolik topdingizmi? Uni tanlang va <span>Ctrl+Enter</span> tugmalarini bosing va keyin ma'muriyatni xabardor qilish uchun uni bizga yuboring.",
-        uzcyr: "Матнда хатолик топдингизми? Уни танланг ва <span>Ctrl+Enter</span> тугмаларини босинг ва кейин маъмуриятни хабардор қилиш учун уни бизга юборинг.",
-        en: "Did you find an error in the text? Select it and press <span>Ctrl+Enter</span>, and then send it to us to notify the administration.",
+        language_ru: "Нашли в тексте ошибку? Выделите её и нажмите <span>Ctrl+Enter</span>, а затем отправьте нам для уведомления администрации.",
+        language_uzlatin: "Matnda xatolik topdingizmi? Uni tanlang va <span>Ctrl+Enter</span> tugmalarini bosing va keyin ma'muriyatni xabardor qilish uchun uni bizga yuboring.",
+        language_uzCyrillic: "Матнда хатолик топдингизми? Уни танланг ва <span>Ctrl+Enter</span> тугмаларини босинг ва кейин маъмуриятни хабардор қилиш учун уни бизга юборинг.",
+        language_en: "Did you find an error in the text? Select it and press <span>Ctrl+Enter</span>, and then send it to us to notify the administration.",
       },
       
       logotxt1:{
-        uz: "Termiz",
-        ru: "Термезский",
-        uzcyr: "Термиз",
-        en: "Termez",
+        language_uzlatin: "Termiz",
+        language_ru: "Термезский",
+        language_uzCyrillic: "Термиз",
+        language_en: "Termez",
       },
       logotxt2:{
-        uz: "Arxeologik",
-        ru: "Археологический",
-        uzcyr: "Археологик",
-        en: "Archaeological",
+        language_uzlatin: "Arxeologik",
+        language_ru: "Археологический",
+        language_uzCyrillic: "Археологик",
+        language_en: "Archaeological",
       },
       logotxt3:{
-        uz: "Muzey",
-        ru: "Музей",
-        uzcyr: "Музей",
-        en: "Museum",
+        language_uzlatin: "Muzey",
+        language_ru: "Музей",
+        language_uzCyrillic: "Музей",
+        language_en: "Museum",
       },
-      telephone: "+998712367436",
-      fax: "+998712336281",
-      mail: "tmi@mail.ru",
-      socialNetworks: [
-        {
-          id: 1,
-          network: "facebook",
-          link: "https://www.facebook.com/termizarxeologiyamuzeyi",
-        },
-        {
-          id: 2,
-          network: "youtube",
-          link: "https://www.youtube.com/channel/UCz7I4TVUUhgOpsldM28WtPA",
-        },
-        {
-          id: 3,
-          network: "instagram",
-          link: "https://www.instagram.com/termez_archaeologycal_museum/?hl=ru",
-        },
-        { id: 4, network: "telegram", link: "https://t.me/Arxeologiya_muzeyi" },
-      ],
       sections: [],
-      menuLinks: [
-        {
-          id: 1,
-          name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'},
-          bg: "about-museum",
-          link: "/",
-          page: false,
-        },
-        {
-          id: 2,
-          name: {ru:'О музее',uzcyr:'Музей ҳақида',uz:'Muzey haqida',en:'About museum'},
-          link: "",
-          bg: "about-museum",
-          page: true,
-          pages: [
-            {id: 1, page: {ru:'История музея',uzcyr:'Музей тарихи',uz:'Muzey tarixi',en:'History of museum'}, link: '/museum-history'},
-          {id: 2, page: {ru:'Руководство',uzcyr:'Раҳбарият',uz:'Rahbariyat',en:'Management'}, link: '/management'},
-          {id: 3, page: {ru:'Посетители о нас' ,uzcyr:'Tashrif buyuruvchilar fikri',uz:'Tashrif buyuruvchilar fikri',en:'Visitors about Us'}, link: '/visitors-about-us'},
-          {id: 4, page: {ru:'Партнеры',uzcyr:'Ҳамкорлар',uz:'Hamkorlar',en:'Partners'}, link: '/partners'},
-          {id: 5, page: {ru:'Документы',uzcyr:'Ҳужжатлар',uz:'Hujjatlar',en:'Documents'}, link: '/documents'},
-          {id: 6, page: {ru:'Вакансии',uzcyr:'Бўш иш ўринлари',uz:'Bo\'sh ish o\'rinlari',en:'Vacancies'}, link: '/vacancies'},
-          {id: 7, page: {ru:'Часто задаваемые вопросы',uzcyr:'Саволлар ва жавоблар',uz:'Savollar va javoblar',en:'FAQ'}, link: '/faq'},
-          ],
-        },
-        {
-          id: 3,
-          name: {ru:'В музее',uzcyr:'Музейда',uz:'Muzeyda',en:'In museum'},
-          link: "",
-          bg: "in-museum",
-          page: true,
-          pages: [
-           {id: 1, page: {ru:'Залы',uzcyr:'Заллар',uz:'Zallar',en:'Halls'}, link: '/halls'},
-          {id: 2, page: {ru:'Разделы',uzcyr:'Бўлимлар',uz:'Bo\'limlar',en:'Sections'}, link: '/sections'},
-          {id: 3, page: {ru:'Дополнительно',uzcyr:'Қўшимча',uz:'Qo\'shimcha',en:'Additional'}, link: '/additional'},
-          ],
-        },
-        {
-          id: 4,
-          name: {ru:'Коллекция музея',uzcyr:'Музей коллексияси',uz:'Muzey kolleksiyasi',en:'Museum\'s collection'},
-          link: "",
-          bg: "museums-collection",
-          page: true,
-          pages: [
-            {id: 1, page: {ru:'Экспонаты',uzcyr:'Экспонатлар',uz:'Eksponatlar',en:'Exhibits'}, link: '/exhibits'},
-          {id: 2, page: {ru:'Картины',uzcyr:'Расмлар',uz:'Rasmlar',en:'Paintings'}, link: '/paintings'},
-          {id: 3, page: {ru:'Статуи',uzcyr:'Ҳайкаллар',uz:'Haykallar',en:'Statues'}, link: '/statues'},
-          {id: 4, page: {ru:'Библиотека',uzcyr:'Кутубхона',uz:'Kutubxona',en:'Library'}, link: '/library'},
-          ],
-        },
-        {
-          id: 5,
-          name: {ru:'Пресс-служба',uzcyr:'Матбуот хизмати',uz:'Matbuot xizmati',en:'Press'},
-          link: "",
-          bg: "press",
-          page: true,
-          pages: [
-            {id: 1, page: {ru:'Мероприятия',uzcyr:'Тадбирлар',uz:'Tadbirlar',en:'Events'}, link: '/events'},
-            {id: 2, page: {ru:'Выставки',uzcyr:'Кўргазмалар',uz:'Ko\'rgazmalar',en:'Exhibitions'}, link: '/exhibitions'},
-            {id: 3, page: {ru:'Новости',uzcyr:'Янгиликлар',uz:'Yangiliklar',en:'News'}, link: '/news'},
-            {id: 4, page: {ru:'СМИ о нас',uzcyr:'ОАВ биз ҳақимизда',uz:'OAV biz haqimizda',en:'Mass Medias about Us'}, link: '/medias-about-us'},
-            {id: 5, page: {ru:'Открытые данные',uzcyr:'Очиқ маълумотлар',uz:'Ochiq ma\'lumotlar',en:'Open data'}, link: '/open-data'},
-            {id: 6, page: {ru:'Статьи',uzcyr:'Мақолалар',uz:'Maqolalar',en:'Articles'}, link: '/articles'},
-            {id: 7, page: {ru:'Материалы для СМИ',uzcyr:'ОАВ учун материаллар',uz:'OAV uchun materiallar',en:'Materials for Mass Media'}}
-          ],
-        },
-        {
-          id: 7,
-          name:  {ru:'Медиатека',uzcyr:'Медиатека',uz:'Mediateka',en:'Media library'},
-          link: "",
-          bg: "media",
-          page: true,
-          pages: [
-           {id: 1, page: {ru:'Фотогалерея',uzcyr:'Расм галереяси',uz:'Rasm galereyasi',en:'Photo gallery'}, link: '/photo-gallery'},
-            {id: 2, page: {ru:'3D файлы',uzcyr:'3D файллар',uz:'3D fayllar',en:'3D files'}, link: '/3d-files'},
-            {id: 3, page: {ru:'3D Тур по музею',uzcyr:'Музей бўйлаб 3D саёҳат',uz:'Muzey bo\'ylab 3D sayohat',en:'3D Tour in museum'}, link: '/vr-tour'},
-            {id: 4, page: {ru:'Видео галерея',uzcyr:'Видео галерея',uz:'Video galereya',en:'Video gallery'}, link: '/video-gallery'},
-          ],
-        },
-        {
-          id: 8,
-          name: {ru:'Услуги',uzcyr:'Хизматлар',uz:'Xizmatlar',en:'Services'},
-          link: "",
-          bg: "services",
-          page: true,
-          pages: [
-            {id: 1, page: {ru:'Магазин',uzcyr:'Дўкон',uz:'Do\'kon',en:'Shop'}, link: '/shop'},
-          {id: 2, page: {ru:'Посещение музея',uzcyr:'Музейга ташриф',uz:'Muzeyga tashrif',en:'Visiting museum'}, link: '/visiting-museum'},
-          {id: 3, page: {ru:'Волонтерам',uzcyr:'Кўнгиллилар',uz:'Ko\'ngillilar',en:'Volunteers'}, link: '/volunteers-program'},
-          {id: 4, page: {ru:'Банковские карты',uzcyr:'Банк карталари',uz:'Bank kartalari',en:'Bank cards'}, link: '/bank-cards'},
-          ],
-        },
-        {
-          id: 9,
-          name: {ru:'Контакты',uzcyr:'Банк карталари',uz:'Kontaktlar',en:'Contacts'},
-          link: "/contacts",
-          bg: "about-museum",
-          page: false,
-        },
-      ],
+      menuLinks: [],
     };
   },
 
   methods: {
+    getMenuLinks(){
+      this.$api.get('/footer')
+      .then(resp => {
+        this.menuLinks = resp.data.menuDocuments
+        for(let i=1; i<= this.menuLinks.length; i++){
+          this.menuLinks[i-1].id = i
+        }
+        this.sectionSelector()
+      }).catch(err => {console.log(err)})
+    },
+    getContactData(){
+      this.$api.get('/contact')
+      .then(resp => {
+        this.contacts = resp.data.result
+        // console.log(this.contacts)
+      }).catch(err => {console.log(err)})
+    },
     sectionSelector() {
       const len = this.menuLinks.length;
 
       for (let i = 0; i < len; i++) {
-        if (this.menuLinks[i].page !== false) {
+        if (this.menuLinks[i].category == 'section') {
           this.sections.push(this.menuLinks[i]);
         }
       }
@@ -514,7 +413,8 @@ export default {
   },
 
   mounted() {
-    this.sectionSelector();
+    this.getMenuLinks()
+    this.getContactData()
   },
 };
 </script>

@@ -98,10 +98,10 @@ export default {
   data() {
     return {
       title: {
-        uzcyr: 'Мақолалар',
-        uz: 'Maqolalar',
-        ru: 'Статьи',
-        en: 'Articles',
+        language_uzCyrillic: 'Мақолалар',
+        language_uzlatin: 'Maqolalar',
+        language_ru: 'Статьи',
+        language_en: 'Articles',
       },
       articlesID: 'Технологии древних скульпторов. Как они прилумывали новые технологии и применяли в широком круге',
 

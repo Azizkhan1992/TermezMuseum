@@ -13,8 +13,9 @@
         slideItem.id == mainItemIdChecker ? 'main' : ''
       "
     >
-      <img :src="require('@/assets/temporary/' + slideItem.img + '.png')" alt="">
-      <h3 class="title">{{slideItem.title[$i18n.locale]}}</h3>
+      <img :src="slideItem?.imagePath?.path" alt="">
+      <!-- <h3 class="title">{{slideItem?.title}}</h3> -->
+      <h3 class="title">{{slideItem?.title[$i18n.locale]}}</h3>
       
       <button
         @click="moveToPage(slideItem.link)"
@@ -37,17 +38,21 @@ export default {
       hiddenLeftIdChecker: 1,
       mainItemIdChecker: 2,
       firstItemIdChecker: 3,
-      sliderItems: [
-        {id: 1, img: 1, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
-        {id: 2, img: 2, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
-        {id: 3, img: 3, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
-        {id: 4, img: 4, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
-        {id: 5, img: 5, title: {ru:'Музей - центр культуры и просвещения',en:'Museum - the center of culture and education',uz:`Muzey - madaniyat va ta'lim markazi`,uzcyr:'Музей - маданият ва таълим маркази'}, link: ''},
-      ]
+      sliderItems: []
     }
   },
 
   methods: {
+    getSliderData(){
+      this.$api.get('/home/slider')
+      .then(resp=> {
+        this.sliderItems = resp.data.result
+        for(let i=1; i<= this.sliderItems.length; i++){
+          this.sliderItems[i-1].id = i
+        }
+        // console.log(this.sliderItems)
+      }).catch(err => {console.log(err)})
+    },
     animation() {
       let shiftedItem = this.sliderItems.shift()
       this.sliderItems.push(shiftedItem)
@@ -89,6 +94,7 @@ export default {
   },
 
   mounted() {
+    this.getSliderData()
     this.play()
   }
 }

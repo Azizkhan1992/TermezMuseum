@@ -9,7 +9,7 @@
     "
   >
     <div class="w-3 pos-rel h-182p">
-      <img class="back-img" :src="require('@/assets/temporary/' + this.img)" alt="">
+      <img class="back-img" :src="img" alt="">
     </div>
 
     <h3 class="mb-24 z-idx2">{{itemTitle}}</h3>

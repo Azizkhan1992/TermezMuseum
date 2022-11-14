@@ -112,10 +112,10 @@ export default {
   data() {
     return {
       title: {
-        uz: 'Bo\'limlar',
-        uzcyr: 'Бўлимлар',
-        en: 'Sections',
-        ru: 'Разделы',
+        language_uzlatin: 'Bo\'limlar',
+        language_uzCyrillic: 'Бўлимлар',
+        language_en: 'Sections',
+        language_ru: 'Разделы',
       },
       options: [
         {value: '1', label: 'Option 1'},

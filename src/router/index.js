@@ -12,7 +12,7 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/contacts',
+    path: '/contact',
     name: 'contacts',
     meta: {layout: 'main'},
     component: () => import('../views/Contacts.vue')

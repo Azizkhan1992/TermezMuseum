@@ -1,9 +1,9 @@
 <template>
-  <div name="volunteersProgramBlock" class="block">
+  <div name="volunteersProgramBlock" class="block" v-if="volunteer != null">
 
     <animatedTitle
-      :animateAt="this.offTop"
-      :titleName="this.title[$i18n.locale]"
+      :animateAt="offTop"
+      :titleName="title[$i18n.locale]"
     />
 
     <div class="w-100 gap-24   h-620p">
@@ -14,13 +14,13 @@
 
         </p>
 
-        <button class="prim mt-a w-4 h-48p">
+        <button class="prim mt-a w-4 h-48p" @click="$router.push('/volunteers-program')">
           <span>{{txt[$i18n.locale]}}</span>
         </button>
       </div>
 
       <div class="w-50 pos-rel bor-r-20 ovr-hidden">
-        <img class="back-img" src="@/assets/temporary/volunteer.png" alt="">
+        <img class="back-img" :src="volunteer.imageVolunteer?.extraImage?.path" alt="">
       </div>
 
     </div>
@@ -41,35 +41,41 @@ export default {
   data() {
     return {
       offTop: 1,
+      volunteer: [],
       title:{
-        uz: 'Ko\'ngillilar',
-        ru: 'Волонтерам',
-        uzcyr: 'Кўнгиллилар',
-        en: 'Volunteers',
+        language_uzCyrillic: 'Кўнгиллилар',
+        language_ru: 'Волонтерам',
+        language_uzlatin: 'Ko\'ngillilar',
+        language_en: 'Volunteers',
       },
       txt:{
-        uzcyr: 'Кўнгилли бўлиш',
-        ru: 'Стать волонтером',
-        uz: 'Ko\'ngilli bo\'lish',
-        en: 'Become a volunteer',
+        language_uzCyrillic: 'Кўнгилли бўлиш',
+        language_ru: 'Стать волонтером',
+        language_uzlatin: 'Ko\'ngilli bo\'lish',
+        language_en: 'Become a volunteer',
       },
       txt2:{
-        uz:`San'atshunoslar emas (muzeyda san'at yo'nalishi bo'yicha talabalar uchun amaliyot va amaliyot o'tash tizimi mavjud), balki muzeyga tez-tez tashrif buyurishni xohlaydigan, biznesni zavq bilan birlashtirgan turli kasb egalari (asosan, texnik funktsiyalarni bajaradilar va tashrif buyuruvchilar bilan muloqot qilishadi).`,
-        uzcyr:'Санъатшунослар эмас (музейда санъат йўналиши бўйича талабалар учун амалиёт ва амалиёт ўташ тизими мавжуд), балки музейга тез-тез ташриф буюришни хоҳлайдиган, бизнесни завқ билан бирлаштирган турли касб эгалари (асосан, техник функцияларни бажарадилар ва ташриф буюрувчилар билан мулоқот қилишади).',
-        ru:'Не искусствоведы (для студентов-искусствоведов в музее есть система практик и стажировок), а люди самых разных профессий, которые хотят чаще бывать в музее, совмещая приятное с полезным (выполняя в основном технические функции и общаясь с посетителями).',
-        en:'Not art historians (the museum has a system of internships and internships for art students), but people of various professions who want to visit the museum more often, combining business with pleasure (mainly performing technical functions and communicating with visitors).',
+        language_uzlatin:`San'atshunoslar emas (muzeyda san'at yo'nalishi bo'yicha talabalar uchun amaliyot va amaliyot o'tash tizimi mavjud), balki muzeyga tez-tez tashrif buyurishni xohlaydigan, biznesni zavq bilan birlashtirgan turli kasb egalari (asosan, texnik funktsiyalarni bajaradilar va tashrif buyuruvchilar bilan muloqot qilishadi).`,
+        language_uzCyrillic:'Санъатшунослар эмас (музейда санъат йўналиши бўйича талабалар учун амалиёт ва амалиёт ўташ тизими мавжуд), балки музейга тез-тез ташриф буюришни хоҳлайдиган, бизнесни завқ билан бирлаштирган турли касб эгалари (асосан, техник функцияларни бажарадилар ва ташриф буюрувчилар билан мулоқот қилишади).',
+        language_ru:'Не искусствоведы (для студентов-искусствоведов в музее есть система практик и стажировок), а люди самых разных профессий, которые хотят чаще бывать в музее, совмещая приятное с полезным (выполняя в основном технические функции и общаясь с посетителями).',
+        language_en:'Not art historians (the museum has a system of internships and internships for art students), but people of various professions who want to visit the museum more often, combining business with pleasure (mainly performing technical functions and communicating with visitors).',
       }
     }
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('volunteersProgramBlock')[0].offsetTop - 400
+      this.offTop = document.getElementsByName('volunteersProgramBlock')[0]?.offsetTop - 400
+    },
+    async getVolunteers() {
+      const data = await this.$api('/home/mobileApp');
+      this.volunteer = data.data.mobileAppDocument
     },
   },
 
   mounted() {
     this.getOffsetTop()
+    this.getVolunteers()
   }
 }
 </script>

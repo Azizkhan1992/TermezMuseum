@@ -104,10 +104,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'Fotogalereya',
-        uzcyr: 'Фотогалерея',
-        ru: 'Фотогалерея',
-        en: 'Photo gallery',
+        language_uzlatin: 'Fotogalereya',
+        language_uzCyrillic: 'Фотогалерея',
+        language_ru: 'Фотогалерея',
+        language_en: 'Photo gallery',
       },
 
       curPage: 4,

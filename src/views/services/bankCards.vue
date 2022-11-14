@@ -156,10 +156,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'Bank kartalari',
-        uzcyr: 'Банк карталари',
-        ru: 'Банковские карты',
-        en: 'Bank cards',
+        language_uzlatin: 'Bank kartalari',
+        language_uzCyrillic: 'Банк карталари',
+        language_ru: 'Банковские карты',
+        language_en: 'Bank cards',
       },
       chosenTab: 1,
       cardsID: 'Карты VISA с авторским дизайном',

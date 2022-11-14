@@ -25,22 +25,22 @@ export default {
   data(){
     return{
       title1:{
-        uz: 'Termiz',
-        uzcyr: 'Термиз',
-        ru: 'Термезский',
-        en: 'Termez',
+        language_uzlatin: 'Termiz',
+        language_uzCyrillic: 'Термиз',
+        language_ru: 'Термезский',
+        language_en: 'Termez',
       },
       title2:{
-        uz: 'Arxeologik',
-        uzcyr: 'Археологик',
-        ru: 'Археологический',
-        en: 'Archaeological',
+        language_uzlatin: 'Arxeologik',
+        language_uzCyrillic: 'Археологик',
+        language_ru: 'Археологический',
+        language_en: 'Archaeological',
       },
       title3:{
-        uz: 'Muzeyi',
-        uzcyr: 'Музейи',
-        ru: 'Музей',
-        en: 'Museum',
+        language_uzlatin: 'Muzeyi',
+        language_uzCyrillic: 'Музейи',
+        language_ru: 'Музей',
+        language_en: 'Museum',
       }
     }
   }

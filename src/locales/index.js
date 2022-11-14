@@ -1,13 +1,13 @@
-import uz from "./messages/uz"
-import uzcyr from "./messages/uzcyr"
-import ru from "./messages/ru"
-import en from "./messages/en"
+import language_uzlatin from "./messages/uz"
+import language_uzCyrillic from "./messages/uzcyr"
+import language_ru from "./messages/ru"
+import language_en from "./messages/en"
 
 const messages = {
-  uz,
-  ru,
-  uzcyr,
-  en
+  language_uzlatin,
+  language_ru,
+  language_uzCyrillic,
+  language_en
 }
 
 export default messages

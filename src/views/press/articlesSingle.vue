@@ -161,10 +161,10 @@ export default {
       },
       prevPage: {
         name: {
-          uzcyr: 'Мақолалар',
-          uz: 'Maqolalar',
-          ru: 'Статьи',
-          en: 'Articles',
+          language_uzCyrillic: 'Мақолалар',
+          language_uzlatin: 'Maqolalar',
+          language_ru: 'Статьи',
+          language_en: 'Articles',
         },
         link: '/articles'
       },

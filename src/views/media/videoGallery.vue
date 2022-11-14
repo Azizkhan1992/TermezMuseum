@@ -176,10 +176,10 @@ export default {
   data() {
     return {
       title: {
-        uz: 'Video galereya',
-        uzcyr: 'Видео галерея',
-        ru: 'Видео галерея',
-        en: 'Video gallery',
+        language_uzlatin: 'Video galereya',
+        language_uzCyrillic: 'Видео галерея',
+        language_ru: 'Видео галерея',
+        language_en: 'Video gallery',
       },
       search: '',
       curPage: 7,

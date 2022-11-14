@@ -177,10 +177,10 @@ export default {
       chosenOpenData: {},
       prevPage: {
         name: {
-          uzcyr: 'Очиқ маълумотлар',
-          uz: 'Ochiq ma\'lumotlar',
-          ru: 'Открытые данные',
-          en: 'Open data',
+          language_uzCyrillic: 'Очиқ маълумотлар',
+          language_uzlatin: 'Ochiq ma\'lumotlar',
+          language_ru: 'Открытые данные',
+          language_en: 'Open data',
         },
         link: '/open-data'
       }

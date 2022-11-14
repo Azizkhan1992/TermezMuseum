@@ -74,10 +74,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'Bo\'sh ish o\'rinlari',
-        uzcyr: 'Бўш иш ўринлари',
-        ru: 'Вакансии',
-        en: 'Vacancies',
+        language_uzlatin: 'Bo\'sh ish o\'rinlari',
+        language_uzCyrillic: 'Бўш иш ўринлари',
+        language_ru: 'Вакансии',
+        language_en: 'Vacancies',
       },
       curPage: 3,
       pages: 384,

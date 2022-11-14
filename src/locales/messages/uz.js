@@ -33,7 +33,7 @@ const uz = {
   author: 'Muallif',
   buy: 'Sotib olish',
   recDays: 'Qabul kunlari',
-  recHours: 'Ish vaqti',
+  recHours: 'Qabul vaqti',
   phoneNumber: 'Telefon raqami',
   email: 'E-mail',
   numberReview: 'Ko\'rib chiqishlar soni',
