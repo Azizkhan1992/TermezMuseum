@@ -2,19 +2,20 @@
   <div
     class="sideBar"
   >
+  
     
     <div
       class="sideBarMenu"
       :class="open ? '' : 'closed'"
     >
       <a
-        v-for="menu in menuList"
-        :key="menu.id"
-        :href="menu.link"
+        v-for="menu, idx in menuList"
+        :key="idx"
+        :href="menu?.link"
         class="commonP colorGreyD line-h-20"
-        :class="menu.page == currentPage ? 'active' : ''"
+        :class="menu?.link == currentPage ? 'active' : ''"
       >
-        {{menu.page[$i18n.locale]}}
+        {{menu?.name?.[$i18n.locale]}}
       </a>
     </div>
 
@@ -24,7 +25,7 @@
       :class="open ? 'open' : ''"
     >
 
-      <p class="commonP bold line-h-20">{{currentPage[$i18n.locale]}}</p>
+      <p class="commonP bold line-h-20">{{currentPage?.[$i18n.locale]}}</p>
       <Icons
         icon="arrUp"
         size="sm"
@@ -48,13 +49,27 @@ export default {
 
   data() {
     return {
-      open: false
+      open: false,
+      SideBarMenu: []
     }
   },
 
   props: {
     menuList: Array,
-    currentPage: String
+    currentPage: [String,Object]
+  },
+
+  mounted(){
+    this.logMenu()
+  },
+  methods: {
+    logMenu(){
+      console.log(this.menuList)
+      this.menuList.forEach(elem => {
+        this.SideBarMenu = elem.subMenu 
+        // console.log(this.SideBarMenu)
+      })
+    }
   }
 }
 </script>

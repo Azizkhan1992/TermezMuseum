@@ -146,10 +146,10 @@ export default {
       pages: 384,
       sortedBy: 1,
       title:{
-        ru:'Посетители о нас',
-        uz:'Biz haqimizda tashrif buyuruvchilar',
-        uzcyr:'Биз ҳақимизда ташриф буюрувчилар',
-        en:'Visitors about us',
+        language_ru:'Посетители о нас',
+        language_uzlatin:'Biz haqimizda tashrif buyuruvchilar',
+        language_uzCyrillic:'Биз ҳақимизда ташриф буюрувчилар',
+        language_en:'Visitors about us',
       },
       comments: this.$store.state.comments
     }

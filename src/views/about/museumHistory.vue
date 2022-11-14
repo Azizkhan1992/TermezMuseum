@@ -7,11 +7,18 @@
       background="museumHistory"
     />
 
-    <h1 class="grandTitle mb-60">Термезский Археологический Музей</h1>
+    <h1 class="grandTitle mb-60">{{history?.title?.[$i18n.locale]}}</h1>
 
-    <p v-html="this.description" class="commonD"></p>
+    <p v-html="history?.text?.[$i18n.locale]" class="commonD"></p>
 
-    <div class="w-100 pos-rel ovr-hidden h-664p mt-60 bor-r-20 box-brb m__history_cards">
+    <div class="w-100 history-images">
+      <div v-for="item, idx in history.imageUrls" class="img-wrapper" :key="idx">
+        <div class="dark-layer z-idx1"></div>
+        <img :src="item.path" alt="" >
+      </div>
+    </div>
+
+    <!-- <div class="w-100 pos-rel ovr-hidden h-664p mt-60 bor-r-20 box-brb m__history_cards">
       <div class="dark-layer z-idx1"></div>
       <img class="back-img" src="@/assets/static/main.jpg" alt="">
     </div>
@@ -31,7 +38,7 @@
     <div class="w-100 pos-rel ovr-hidden h-664p mt-24 bor-r-20 box-brb m__history_cards">
       <div class="dark-layer z-idx1"></div>
       <img class="back-img" src="@/assets/static/main.jpg" alt="">
-    </div>
+    </div> -->
 
     <breadCrumbs
       :currentPage="title[$i18n.locale]"
@@ -53,11 +60,12 @@ export default {
 
   data() {
     return {
+      history: {},
       title: {
-        uz: 'Muzey tarixi',
-        uzcyr: 'Музей тарихи',
-        ru: 'История музея',
-        en: 'History museum',
+        language_uzlatin: 'Muzey tarixi',
+        language_uzCyrillic: 'Музей тарихи',
+        language_ru: 'История музея',
+        language_en: 'History museum',
       },
       description: `
         Термезский археологический музей является единственным археологическим музеем в нашей стране и относится к числу специализированных музеев. Этот музей является одним из самых замечательных мест нашего города, в котором возрождается история древнего Сурханского оазиса на протяжении тысячелетий.
@@ -97,6 +105,18 @@ export default {
         <br/>
         По состоянию на 2020 год общее количество экспонатов в фонде Термезского археологического музея составляет более 100 тысяч. Из них более 70 000 экспонатов археологии и около 30 000 экспонатов, принадлежащих нумизматическому фонду.
       `
+    }
+  },
+  mounted(){
+    this.getMuseumHistory()
+  },
+  methods: {
+    getMuseumHistory(){
+      this.$api.get('/about/history')
+      .then(resp => {
+        this.history = resp.data.historyDocument
+        // console.log(this.history)
+      }).catch(err => {console.log(err)})
     }
   }
 }

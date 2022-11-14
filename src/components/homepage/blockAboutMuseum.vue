@@ -30,13 +30,13 @@ export default {
       offTop: 1,
       title:
       {
-        uz: 'Muzey haqida',
-        ru: 'О музее',
-        en: 'About museum',
-        uzcyr: 'Музей ҳақида',
+        language_uzlatin: 'Muzey haqida',
+        language_ru: 'О музее',
+        language_en: 'About museum',
+        language_uzCyrillic: 'Музей ҳақида',
       },
       txt:{
-        ru: `Термезский археологический музей является единственным археологическим музеем в 
+        language_ru: `Термезский археологический музей является единственным археологическим музеем в 
       нашей стране и относится к числу специализированных музеев. Этот музей является одним 
       из самых замечательных мест нашего города, в котором возрождается история древнего Сурханского 
       оазиса на протяжении тысячелетий. Термезский археологический музей состоит из вестибюля, 9 основных 
@@ -45,7 +45,7 @@ export default {
       библиотека с редкими рукописями и литературой. По состоянию на 2020 год общее количество экспонатов 
       в фонде Термезского археологического музея составляет более 100 тысяч. Из них более 70 000 экспонатов 
       археологии и около 30 000 экспонатов, принадлежащих нумизматическому фонду.`,
-        uz: `Termiz arxeologiya muzeyi mamlakatdagi yagona arxeologiya muzeyidir
+        language_uzlatin: `Termiz arxeologiya muzeyi mamlakatdagi yagona arxeologiya muzeyidir
       mamlakatimiz va ixtisoslashgan muzeylardan biri hisoblanadi. Bu muzey bitta
       shahrimizning eng diqqatga sazovor joylari, qadimiy Surxon tarixi
       ming yillar davomida voha. Termiz arxeologiya muzeyi vestibyul, 9 ta asosiy
@@ -54,7 +54,7 @@ export default {
       nodir qoʻlyozma va adabiyotlarga ega kutubxona. 2020 yil holatiga ko'ra, eksponatlarning umumiy soni
       Termiz arxeologiya muzeyi fondida 100 mingdan ortiq. Ulardan 70 mingdan ortiq eksponatlar
       arxeologiya va numizmatika fondiga tegishli 30 mingga yaqin eksponatlar.`,
-        uzcyr: `Термиз археология музейи мамлакатдаги ягона археология музейидир
+        language_uzCyrillic: `Термиз археология музейи мамлакатдаги ягона археология музейидир
       мамлакатимиз ва ихтисослашган музейлардан бири ҳисобланади. Бу музей битта
       шаҳримизнинг энг диққатга сазовор жойлари, қадимий Сурхон тарихи
       минг йиллар давомида воҳа. Термиз археология музейи вестибюл, 9 та асосий
@@ -63,7 +63,7 @@ export default {
       нодир қўлёзма ва адабиётларга эга кутубхона. 2020 йил ҳолатига кўра, экспонатларнинг умумий сони
       Термиз археология музейи фондида 100 мингдан ортиқ. Улардан 70 мингдан ортиқ экспонатлар
       археология ва нумизматика фондига тегишли 30 мингга яқин экспонатлар.`,
-        en: `Termez Archaeological Museum is the only archaeological museum in
+        language_en: `Termez Archaeological Museum is the only archaeological museum in
       our country and is one of the specialized museums. This museum is one
       of the most remarkable places of our city, in which the history of the ancient Surkhan
       oasis for thousands of years. Termez Archaeological Museum consists of a vestibule, 9 main

@@ -97,10 +97,10 @@ export default {
       curPage: 3,
       pages: 384,
       title:{
-        uz:'Muzey hamkorlari',
-        ru:'Партнеры музея',
-        uzcyr:'Музей ҳамкорлари',
-        en:'Museum partners',
+        language_uzlatin:'Muzey hamkorlari',
+        language_ru:'Партнеры музея',
+        language_uzCyrillic:'Музей ҳамкорлари',
+        language_en:'Museum partners',
       },
       comments: this.$store.state.comments,
       allPartners: this.$store.state.partners

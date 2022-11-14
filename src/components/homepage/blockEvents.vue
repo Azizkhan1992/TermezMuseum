@@ -135,10 +135,10 @@ export default {
     return {
       offTop: 1,
       title:{
-        ru:'Мероприятия',
-        uz:'Voqealar',
-        en:'Events',
-        uzcyr:'Воқеалар',
+        language_ru:'Мероприятия',
+        language_uzlatin:'Voqealar',
+        language_en:'Events',
+        language_uzCyrillic:'Воқеалар',
       }
     }
   },

@@ -92,10 +92,10 @@ export default {
     return {
       offTop: 1,
       title:{
-        uz: 'Muzeyning faxri',
-        ru: 'Гордость музея',
-        uzcyr: 'Музейнинг фахри',
-        en: 'The pride of the museum',
+        language_uzlatin: 'Muzeyning faxri',
+        language_ru: 'Гордость музея',
+        language_uzCyrillic: 'Музейнинг фахри',
+        language_en: 'The pride of the museum',
       }
     }
   },

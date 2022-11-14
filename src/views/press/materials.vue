@@ -115,10 +115,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'OAV materiallari',
-        uzcyr: 'ОАВ материаллари',
-        ru: 'Материалы для СМИ',
-        en: 'Media materials',
+        language_uzlatin: 'OAV materiallari',
+        language_uzCyrillic: 'ОАВ материаллари',
+        language_ru: 'Материалы для СМИ',
+        language_en: 'Media materials',
       },
       allLogoFiles: this.$store.state.logoFile,
 

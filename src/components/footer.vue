@@ -6,7 +6,7 @@
         <footerLogo />
   
         <div class="logo">
-          <h4> {{logotxt1[$i18n.locale]}} <br> <span> {{logotxt2[$i18n.locale]}}</span> <br> {{logotxt3[$i18n.locale]}} </h4>
+          <h4> {{logotxt1?.[$i18n.locale]}} <br> <span> {{logotxt2[$i18n.locale]}}</span> <br> {{logotxt3[$i18n.locale]}} </h4>
         </div>
         <!-- <div class="w-100 fd-c justify-sb">
           <p class="logoTitle">Государственный</p>
@@ -65,7 +65,7 @@
             <h3>{{$t("address")}}</h3>
             <div class="infoPart mt-28">
               <Icons icon="location" size="middle" color="white" />
-              <p class="accented">{{contacts?.address?.text[$i18n.locale]}}</p>
+              <p class="accented">{{contacts?.address?.text?.[$i18n.locale]}}</p>
             </div>
 
             <!-- Address Stop -->
@@ -78,7 +78,7 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("workdays")}}:</p>
-                  <p class="accented">{{contacts?.schedule?.workingDays.start[$i18n.locale]}} - {{contacts?.schedule?.workingDays.end[$i18n.locale]}}</p>
+                  <p class="accented">{{contacts?.schedule?.workingDays.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays.end?.[$i18n.locale]}}</p>
                 </div>
 
                 <div class="d-f fd-r gap-12">
@@ -88,7 +88,7 @@
 
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("dayoff")}}:</p>
-                  <p class="accented">{{weekout[$i18n.locale]}}</p>
+                  <p class="accented">{{weekout?.[$i18n.locale]}}</p>
                 </div>
               </div>
             </div>
@@ -178,17 +178,17 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("workdays")}}:</p>
-                    <p class="accented">{{contacts?.schedule?.workingDays.start[$i18n.locale]}} - {{contacts?.schedule?.workingDays.end[$i18n.locale]}}</p>
+                    <p class="accented">{{contacts?.schedule?.workingDays?.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays?.end?.[$i18n.locale]}}</p>
                   </div>
 
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("workhours")}}:</p>
-                    <p class="accented">{{contacts?.schedule?.workingHours.start}} - {{contacts?.schedule?.workingHours.end}}</p>
+                    <p class="accented">{{contacts?.schedule?.workingHours?.start}} - {{contacts?.schedule?.workingHours?.end}}</p>
                   </div>
 
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("dayoff")}}:</p>
-                    <p class="accented">{{weekout[$i18n.locale]}}</p>
+                    <p class="accented">{{weekout?.[$i18n.locale]}}</p>
                   </div>
                 </div>
               </div>
@@ -264,13 +264,13 @@
 
       <div class="w-12 d-f fd-r gap-24 mt-24">
         <div class="w-100">
-          <p v-html="textCE[$i18n.locale]">
+          <p v-html="textCE?.[$i18n.locale]">
             
           </p>
         </div>
 
         <div class="w-100 site-footer-text">
-          <h4 v-html="textCEC[$i18n.locale]">
+          <h4 v-html="textCEC?.[$i18n.locale]">
           </h4>
         </div>
       </div>
@@ -331,6 +331,15 @@ export default {
     return {
       developers: "https://daac.uz/",
       contacts: {},
+      weekDays: [
+        {id: 1, name: 'Yakshanba', val: 'Yak'},
+        {id: 2, name: 'Dushanba', val: 'Du'},
+        {id: 3, name: 'Seshanba', val: 'Se'},
+        {id: 4, name: 'Chorshanba', val: 'Chor'},
+        {id: 5, name: 'Payshanba', val: 'Pay'},
+        {id: 6, name: 'Juma', val: 'Ju'},
+        {id: 7, name: 'Shanba', val: 'Shan'}
+      ],
       weekout: {
         language_uzCyrillic: "Якшанба",
         language_uzlatin: "Yakshanba",
@@ -345,10 +354,10 @@ export default {
         language_en: "© 2022 All rights reserved. <br /> When using materials from the website, a link to the source is required.",
       },
       textCEC:{
-        ru: "Нашли в тексте ошибку? Выделите её и нажмите <span>Ctrl+Enter</span>, а затем отправьте нам для уведомления администрации.",
-        uz: "Matnda xatolik topdingizmi? Uni tanlang va <span>Ctrl+Enter</span> tugmalarini bosing va keyin ma'muriyatni xabardor qilish uchun uni bizga yuboring.",
-        uzcyr: "Матнда хатолик топдингизми? Уни танланг ва <span>Ctrl+Enter</span> тугмаларини босинг ва кейин маъмуриятни хабардор қилиш учун уни бизга юборинг.",
-        en: "Did you find an error in the text? Select it and press <span>Ctrl+Enter</span>, and then send it to us to notify the administration.",
+        language_ru: "Нашли в тексте ошибку? Выделите её и нажмите <span>Ctrl+Enter</span>, а затем отправьте нам для уведомления администрации.",
+        language_uzlatin: "Matnda xatolik topdingizmi? Uni tanlang va <span>Ctrl+Enter</span> tugmalarini bosing va keyin ma'muriyatni xabardor qilish uchun uni bizga yuboring.",
+        language_uzCyrillic: "Матнда хатолик топдингизми? Уни танланг ва <span>Ctrl+Enter</span> тугмаларини босинг ва кейин маъмуриятни хабардор қилиш учун уни бизга юборинг.",
+        language_en: "Did you find an error in the text? Select it and press <span>Ctrl+Enter</span>, and then send it to us to notify the administration.",
       },
       
       logotxt1:{
@@ -396,7 +405,7 @@ export default {
       const len = this.menuLinks.length;
 
       for (let i = 0; i < len; i++) {
-        if (this.menuLinks[i].page !== false) {
+        if (this.menuLinks[i].category == 'section') {
           this.sections.push(this.menuLinks[i]);
         }
       }

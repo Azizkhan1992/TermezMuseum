@@ -42,10 +42,10 @@ export default {
     return {
       offTop: 1,
       title: {
-        uz: "Foydali havolalar",
-        ru: "Полезные ссылки",
-        uzcyr: "Фойдали ҳаволалар",
-        en: "Useful links",
+        language_uzlatin: "Foydali havolalar",
+        language_ru: "Полезные ссылки",
+        language_uzCyrillic: "Фойдали ҳаволалар",
+        language_en: "Useful links",
       },
       hiddenR: 1,
       playInterval: "",
@@ -54,10 +54,10 @@ export default {
         {
           id: 1,
           name: {
-            uz: "O'zbekiston Respublikasi Oliy Majlisi",
-            ru: "Олий Мажлис Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси Олий Мажлиси",
-            en: "Oliy Majlis of the Republic of Uzbekistan",
+            language_uzlatin: "O'zbekiston Respublikasi Oliy Majlisi",
+            language_ru: "Олий Мажлис Республики Узбекистан",
+            language_uzCyrillic: "Ўзбекистон Республикаси Олий Мажлиси",
+            language_en: "Oliy Majlis of the Republic of Uzbekistan",
           },
           link: "",
           img: "logo_small 2.png",
@@ -65,10 +65,10 @@ export default {
         {
           id: 2,
           name: {
-            uz: "O‘zbekiston Respublikasi Turizm va madaniy meros vazirligi",
-            ru: "Министерство Туризма и культурного наследия Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси Туризм ва маданий мерос вазирлиги",
-            en: "Ministry of Tourism and Cultural Heritage of the Republic of Uzbekistan",
+            language_uzlatin: "O‘zbekiston Respublikasi Turizm va madaniy meros vazirligi",
+            language_ru: "Министерство Туризма и культурного наследия Республики Узбекистан",
+            language_uzCyrillic: "Ўзбекистон Республикаси Туризм ва маданий мерос вазирлиги",
+            language_en: "Ministry of Tourism and Cultural Heritage of the Republic of Uzbekistan",
           },
           link: "",
           img: "Turizm_va_madaniy_meros_vazirligi (1).png",
@@ -76,10 +76,10 @@ export default {
         {
           id: 3,
           name: {
-            uz: "O'zbekiston Respublikasi PREZIDENTI sayti",
-            ru: "Веб-сайт ПРЕЗИДЕНТА Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси ПРEЗИДEНТИ сайти",
-            en: "Website of the PRESIDENT of the Republic of Uzbekistan",
+            language_uzlatin: "O'zbekiston Respublikasi PREZIDENTI sayti",
+            language_ru: "Веб-сайт ПРЕЗИДЕНТА Республики Узбекистан",
+            language_uzCyrillic: "Ўзбекистон Республикаси ПРEЗИДEНТИ сайти",
+            language_en: "Website of the PRESIDENT of the Republic of Uzbekistan",
           },
           link: "",
           img: "image 110.png",
@@ -87,10 +87,10 @@ export default {
         {
           id: 4,
           name: {
-            uz: "O‘zbekiston Respublikasi qonun hujjatlari ma’lumotlari milliy bazasi",
-            ru: "Национальная база данных законодательства Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси қонун ҳужжатлари маълумотлари миллий базаси",
-            en: "National database of legislation of the Republic of Uzbekistan",
+            language_uzlatin: "O‘zbekiston Respublikasi qonun hujjatlari ma’lumotlari milliy bazasi",
+            language_ru: "Национальная база данных законодательства Республики Узбекистан",
+            language_uzCyrillic: "Ўзбекистон Республикаси қонун ҳужжатлари маълумотлари миллий базаси",
+            language_en: "National database of legislation of the Republic of Uzbekistan",
           },
           link: "",
           img: "lex 1.png",
@@ -98,10 +98,10 @@ export default {
         {
           id: 5,
           name: {
-            uz: "O‘zbekiston Respublikasi Turizm va madaniy meros vazirligi",
-            ru: "Министерство Туризма и культурного наследия Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси Туризм ва маданий мерос вазирлиги",
-            en: "Ministry of Tourism and Cultural Heritage of the Republic of Uzbekistan",
+            language_uzlatin: "O‘zbekiston Respublikasi Turizm va madaniy meros vazirligi",
+            language_ru: "Министерство Туризма и культурного наследия Республики Узбекистан",
+            language_uzCyrillic: "Ўзбекистон Республикаси Туризм ва маданий мерос вазирлиги",
+            language_en: "Ministry of Tourism and Cultural Heritage of the Republic of Uzbekistan",
           },
           link: "",
           img: "Turizm_va_madaniy_meros_vazirligi (1).png",
@@ -109,10 +109,10 @@ export default {
         {
           id: 6,
           name: {
-            uz: "O'zbekiston Respublikasi PREZIDENTI sayti",
-            ru: "Веб-сайт ПРЕЗИДЕНТА Республики Узбекистан",
-            uzcyr: "Ўзбекистон Республикаси ПРEЗИДEНТИ сайти",
-            en: "Website of the PRESIDENT of the Republic of Uzbekistan",
+            language_uzlatin: "O'zbekiston Respublikasi PREZIDENTI sayti",
+            language_ru: "Веб-сайт ПРЕЗИДЕНТА Республики Узбекистан",
+            language_uzCyrillic: "Ўзбекистон Республикаси ПРEЗИДEНТИ сайти",
+            language_en: "Website of the PRESIDENT of the Republic of Uzbekistan",
           },
           link: "",
           img: "image 110.png",

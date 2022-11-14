@@ -42,22 +42,22 @@ export default {
     return {
       offTop: 1,
       title:{
-        uz: 'Ko\'ngillilar',
-        ru: 'Волонтерам',
-        uzcyr: 'Кўнгиллилар',
-        en: 'Volunteers',
+        language_uzlatin: 'Ko\'ngillilar',
+        language_ru: 'Волонтерам',
+        language_uzCyrillic: 'Кўнгиллилар',
+        language_en: 'Volunteers',
       },
       txt:{
-        uzcyr: 'Кўнгилли бўлиш',
-        ru: 'Стать волонтером',
-        uz: 'Ko\'ngilli bo\'lish',
-        en: 'Become a volunteer',
+        language_uzCyrillic: 'Кўнгилли бўлиш',
+        language_ru: 'Стать волонтером',
+        language_uzlatin: 'Ko\'ngilli bo\'lish',
+        language_en: 'Become a volunteer',
       },
       txt2:{
-        uz:`San'atshunoslar emas (muzeyda san'at yo'nalishi bo'yicha talabalar uchun amaliyot va amaliyot o'tash tizimi mavjud), balki muzeyga tez-tez tashrif buyurishni xohlaydigan, biznesni zavq bilan birlashtirgan turli kasb egalari (asosan, texnik funktsiyalarni bajaradilar va tashrif buyuruvchilar bilan muloqot qilishadi).`,
-        uzcyr:'Санъатшунослар эмас (музейда санъат йўналиши бўйича талабалар учун амалиёт ва амалиёт ўташ тизими мавжуд), балки музейга тез-тез ташриф буюришни хоҳлайдиган, бизнесни завқ билан бирлаштирган турли касб эгалари (асосан, техник функцияларни бажарадилар ва ташриф буюрувчилар билан мулоқот қилишади).',
-        ru:'Не искусствоведы (для студентов-искусствоведов в музее есть система практик и стажировок), а люди самых разных профессий, которые хотят чаще бывать в музее, совмещая приятное с полезным (выполняя в основном технические функции и общаясь с посетителями).',
-        en:'Not art historians (the museum has a system of internships and internships for art students), but people of various professions who want to visit the museum more often, combining business with pleasure (mainly performing technical functions and communicating with visitors).',
+        language_uzlatin:`San'atshunoslar emas (muzeyda san'at yo'nalishi bo'yicha talabalar uchun amaliyot va amaliyot o'tash tizimi mavjud), balki muzeyga tez-tez tashrif buyurishni xohlaydigan, biznesni zavq bilan birlashtirgan turli kasb egalari (asosan, texnik funktsiyalarni bajaradilar va tashrif buyuruvchilar bilan muloqot qilishadi).`,
+        language_uzCyrillic:'Санъатшунослар эмас (музейда санъат йўналиши бўйича талабалар учун амалиёт ва амалиёт ўташ тизими мавжуд), балки музейга тез-тез ташриф буюришни хоҳлайдиган, бизнесни завқ билан бирлаштирган турли касб эгалари (асосан, техник функцияларни бажарадилар ва ташриф буюрувчилар билан мулоқот қилишади).',
+        language_ru:'Не искусствоведы (для студентов-искусствоведов в музее есть система практик и стажировок), а люди самых разных профессий, которые хотят чаще бывать в музее, совмещая приятное с полезным (выполняя в основном технические функции и общаясь с посетителями).',
+        language_en:'Not art historians (the museum has a system of internships and internships for art students), but people of various professions who want to visit the museum more often, combining business with pleasure (mainly performing technical functions and communicating with visitors).',
       }
     }
   },

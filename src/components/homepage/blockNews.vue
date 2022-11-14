@@ -44,37 +44,37 @@ export default {
     return {
       offTop: 1,
       title: {
-        uz: "Yangiliklar",
-        ru: "Новости",
-        uzcyr: "Янгиликлар",
-        en: "News",
+        language_uzlatin: "Yangiliklar",
+        language_ru: "Новости",
+        language_uzCyrillic: "Янгиликлар",
+        language_en: "News",
       },
       topTags: [
           {
             id: 1,
             name: {
-              uz: "Muhim",
-              ru: "Важно",
-              uzcyr: "Муҳим",
-              en: "Important",
+              language_uzlatin: "Muhim",
+              language_ru: "Важно",
+              language_uzCyrillic: "Муҳим",
+              language_en: "Important",
             },
           },
           {
             id: 2,
             name: {
-              uz: "Konkurs",
-              ru: "Конкурс",
-              uzcyr: "Конкурс",
-              en: "Competition",
+              language_uzlatin: "Konkurs",
+              language_ru: "Конкурс",
+              language_uzCyrillic: "Конкурс",
+              language_en: "Competition",
             },
           },
           {
             id: 3,
             name: {
-              uz: "O'zbekiston tarixi",
-              ru: "История Узбекистана",
-              uzcyr: "Ўзбекистон тарихи",
-              en: "History of Uzbekistan",
+              language_uzlatin: "O'zbekiston tarixi",
+              language_ru: "История Узбекистана",
+              language_uzCyrillic: "Ўзбекистон тарихи",
+              language_en: "History of Uzbekistan",
             },
           },
         ],

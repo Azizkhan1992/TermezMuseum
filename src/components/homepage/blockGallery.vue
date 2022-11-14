@@ -64,10 +64,10 @@ export default {
     return {
       offTop: 1,
       title:{
-        uz: 'Galereya',
-        ru: 'Галерея',
-        uzcyr: 'Галерея',
-        en: 'Gallery',
+        language_uzlatin: 'Galereya',
+        language_ru: 'Галерея',
+        language_uzCyrillic: 'Галерея',
+        language_en: 'Gallery',
       }
     }
   },

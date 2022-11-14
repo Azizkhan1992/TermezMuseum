@@ -41,16 +41,16 @@ export default {
     return {
       offTop: 1,
       title:{
-        uzcyr: 'Музей бўйлаб 3D саёҳат',
-        ru: '3D Тур по музею',
-        uz: 'Muzey bo\'ylab 3D sayohat',
-        en: '3D Tour in museum',
+        language_uzCyrillic: 'Музей бўйлаб 3D саёҳат',
+        language_ru: '3D Тур по музею',
+        language_uzlatin: 'Muzey bo\'ylab 3D sayohat',
+        language_en: '3D Tour in museum',
       },
       text:{
-        uzcyr: 'Уйингиздан чиқмасдан Сурхондарёнинг ўтмишига саёҳат қилиб, таърифлаб бўлмас таассуротлар олишни хоҳлайсизми? Унда сизни 3Д музей экскурсиясига таклиф қиламиз.',
-        ru: 'Хотите путешествовать в прошлое Сурхандарьи и получить неописуемые впечатления и при этом не выходя из дома? Тогда мы приглашаем вас в 3D Тур по музею.',
-        uz: `Uyingizdan chiqmasdan Surxondaryoning o'tmishiga sayohat qilib, ta'riflab bo'lmas taassurotlar olishni xohlaysizmi? Unda sizni 3D muzey ekskursiyasiga taklif qilamiz.`,
-        en: 'Do you want to travel into the past of Surkhandarya and get indescribable impressions without leaving your home? Then we invite you to the 3D Museum Tour.',
+        language_uzCyrillic: 'Уйингиздан чиқмасдан Сурхондарёнинг ўтмишига саёҳат қилиб, таърифлаб бўлмас таассуротлар олишни хоҳлайсизми? Унда сизни 3Д музей экскурсиясига таклиф қиламиз.',
+        language_ru: 'Хотите путешествовать в прошлое Сурхандарьи и получить неописуемые впечатления и при этом не выходя из дома? Тогда мы приглашаем вас в 3D Тур по музею.',
+        language_uzlatin: `Uyingizdan chiqmasdan Surxondaryoning o'tmishiga sayohat qilib, ta'riflab bo'lmas taassurotlar olishni xohlaysizmi? Unda sizni 3D muzey ekskursiyasiga taklif qilamiz.`,
+        language_en: 'Do you want to travel into the past of Surkhandarya and get indescribable impressions without leaving your home? Then we invite you to the 3D Museum Tour.',
       },
     }
   },

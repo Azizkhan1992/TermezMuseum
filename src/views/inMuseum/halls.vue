@@ -112,10 +112,10 @@ export default {
   data() {
     return {
       title:{
-        uz:'Zallar',
-        uzcyr:'Заллар',
-        ru:'Залы',
-        en:'Halls',
+        language_uzlatin:'Zallar',
+        language_uzCyrillic:'Заллар',
+        language_ru:'Залы',
+        language_en:'Halls',
       },
       options: [
         {value: '1', label: 'Option 1'},

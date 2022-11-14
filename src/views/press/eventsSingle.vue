@@ -158,10 +158,10 @@ export default {
 
       prevPage: {
         name:{
-          uz: 'Tadbirlar',
-          uzcyr: 'Тадбирлар',
-          ru: 'Мероприятия',
-          en: 'Events',
+          language_uzlatin: 'Tadbirlar',
+          language_uzCyrillic: 'Тадбирлар',
+          language_ru: 'Мероприятия',
+          language_en: 'Events',
         },
         link: '/events'
       },
@@ -169,28 +169,28 @@ export default {
           {
             id: 1,
             name: {
-              uz: "Muhim",
-              ru: "Важно",
-              uzcyr: "Муҳим",
-              en: "Important",
+              language_uzlatin: "Muhim",
+              language_ru: "Важно",
+              language_uzCyrillic: "Муҳим",
+              language_en: "Important",
             },
           },
           {
             id: 2,
             name: {
-              uz: "Konkurs",
-              ru: "Конкурс",
-              uzcyr: "Конкурс",
-              en: "Competition",
+              language_uzlatin: "Konkurs",
+              language_ru: "Конкурс",
+              language_uzCyrillic: "Конкурс",
+              language_en: "Competition",
             },
           },
           {
             id: 3,
             name: {
-              uz: "O'zbekiston tarixi",
-              ru: "История Узбекистана",
-              uzcyr: "Ўзбекистон тарихи",
-              en: "History of Uzbekistan",
+              language_uzlatin: "O'zbekiston tarixi",
+              language_ru: "История Узбекистана",
+              language_uzCyrillic: "Ўзбекистон тарихи",
+              language_en: "History of Uzbekistan",
             },
           },
         ],

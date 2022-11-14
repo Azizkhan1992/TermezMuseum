@@ -44,7 +44,7 @@
             icon="location"
             size="middle"
           />
-          <p class="commonP bold colorType line-h-20">{{location[$i18n.locale]}}</p>
+          <p class="commonP bold colorType line-h-20">{{contacts?.address?.text?.[$i18n.locale]}}</p>
         </div>
       </div>
 
@@ -58,11 +58,11 @@
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("workdays")}}:</p>
-              <p class="commonP colorType bold line-h-20">{{weekwork[$i18n.locale]}}</p>
+              <p class="commonP colorType bold line-h-20">{{contacts?.schedule?.workingDays?.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays?.end?.[$i18n.locale]}}</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("workhours")}}:</p>
-              <p class="commonP colorType bold line-h-20">09:00 - 18:00</p>
+              <p class="commonP colorType bold line-h-20">{{contacts?.schedule?.workingHours?.start}} - {{contacts?.schedule?.workingHours?.end}}</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("dayoff")}}:</p>
@@ -83,11 +83,11 @@
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("telephone")}}:</p>
-              <a href="tel: +998 71 236 74 36" class="contactPhone commonP colorType line-h-20">+998 71 236 74 36</a>
+              <a :href="item" class="contactPhone commonP colorType line-h-20" v-for="item, idx in contacts?.contact?.phoneNumber" :key="idx">{{item}}</a>
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("fax")}}:</p>
-              <p class="commonP colorType bold line-h-20">+998 71 233 62 81</p>
+              <p class="commonP colorType bold line-h-20" v-for="item, idy in contacts?.contact?.fax" :key="idy">{{item}}</p>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("email")}}:</p>
-              <a href="mailto: tmi2007@mail.ru" class="contactPhone commonP bold colorType line-h-20">tmi2007@mail.ru</a>
+              <a :href="contacts?.contact?.email" class="contactPhone commonP bold colorType line-h-20">{{contacts?.contact?.email  }}</a>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
             icon="oriental"
             size="middle"
           />
-          <p class="commonP bold colorType line-h-20">Ташкентский Государственный университет Востоковедении</p>
+          <p class="commonP bold colorType line-h-20">{{contacts?.landmark?.text[$i18n.locale]}}</p>
         </div>
       </div>
 
@@ -125,7 +125,7 @@
             icon="bus"
             size="middle"
           />
-          <p class="commonP bold colorType line-h-20">51, 67, 93, 113, 144</p>
+          <p class="commonP bold colorType line-h-20">{{contacts?.bus?.numbers}}</p>
         </div>
       </div>
 
@@ -136,7 +136,7 @@
             icon="subway"
             size="middle"
           />
-          <p class="commonP bold colorType line-h-20">Станция метро “Ойбек”</p>
+          <p class="commonP bold colorType line-h-20">{{contacts?.subway?.text[$i18n.locale]}}</p>
         </div>
       </div>
 
@@ -144,12 +144,14 @@
         <h4 class="commonT bold colorGreyD">{{$t("social")}}</h4>
         <div class="w-100 gap-24">
           <Icons
-            @click.native="goToSocial(socialNetworks[0])"
+          v-for="item, idz in contacts?.socialNetworks?.links"
+          :key="idz"
+            @click.native="goToSocial(socialNetworks[idz])"
             class="contactSocials cur-ptr"
             icon="facebook"
             size="large"
           />
-          <Icons
+          <!-- <Icons
             @click.native="goToSocial(socialNetworks[1])"
             class="contactSocials cur-ptr"
             icon="youtube"
@@ -166,7 +168,7 @@
             class="contactSocials cur-ptr"
             icon="telegram"
             size="large"
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -309,29 +311,18 @@ export default {
       phoneNumber: '',
       appealTitle: '',
       text: '',
-      location: {
-        uz: "Toshkent sh., Amir Temur shoh ko‘chasi, 16-uy",
-        ru: "г.Ташкент, проспект Амира Темура, 16",
-        uzcyr: "Тошкент ш., Амир Темур шоҳ кўчаси, 16-уй",
-        en: "Tashkent, Amir Temur Avenue, 16"
-      },
-      weekwork: {
-        uz: "Dush-shan",
-        uzcyr: "Душ-шан",
-        ru: "Пн-сб",
-        en: "Mon-Sat"
-      },
+      contacts: {},
       weekout: {
-        uzcyr: "Якшанба",
-        uz: "Yakshanba",
-        ru: "Воскресенье",
-        en: "Sunday"
+        language_uzCyrillic: "Якшанба",
+        language_uzlatin: "Yakshanba",
+        language_ru: "Воскресенье",
+        language_en: "Sunday"
       },
       txt:{
-        uz: 'Elektron murojaatlarni ko\'rib chiqish tartibi Dushanbadan Jumagacha soat 09:00 dan 18:00 gacha. Murojaatni ko\'rib chiqish muddati - uch ish kuni.',
-        ru: 'Режим работы электронных обращений с 09:00 до 18:00 с понедельника по пятницу. Время обработки обращения - три рабочих дня.',
-        uzcyr: 'Електрон мурожаатларни кўриб чиқиш тартиби Душанбадан Жумагача соат 09:00 дан 18:00 гача. Мурожаатни кўриб чиқиш муддати - уч иш куни.',
-        en: 'Operation of applications from 09:00 to 18:00 from Monday to Friday. Application processing time is three working days.'
+        language_uzlatin: 'Elektron murojaatlarni ko\'rib chiqish tartibi Dushanbadan Jumagacha soat 09:00 dan 18:00 gacha. Murojaatni ko\'rib chiqish muddati - uch ish kuni.',
+        language_ru: 'Режим работы электронных обращений с 09:00 до 18:00 с понедельника по пятницу. Время обработки обращения - три рабочих дня.',
+        language_uzCyrillic: 'Електрон мурожаатларни кўриб чиқиш тартиби Душанбадан Жумагача соат 09:00 дан 18:00 гача. Мурожаатни кўриб чиқиш муддати - уч иш куни.',
+        language_en: 'Operation of applications from 09:00 to 18:00 from Monday to Friday. Application processing time is three working days.'
       },
 
       title: 'Контакты',
@@ -343,12 +334,6 @@ export default {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       iconSize: [52, 74],
 
-      socialNetworks: [
-        {id: 1, network: 'facebook', link: 'https://www.facebook.com/termizarxeologiyamuzeyi'},
-        {id: 2, network: 'youtube', link: 'https://www.youtube.com/channel/UCz7I4TVUUhgOpsldM28WtPA'},
-        {id: 3, network: 'instagram', link: 'https://www.instagram.com/termez_archaeologycal_museum/?hl=ru'},
-        {id: 4, network: 'telegram', link: 'https://t.me/Arxeologiya_muzeyi'},
-      ],
     }
   },
 
@@ -359,6 +344,13 @@ export default {
   },
 
   methods: {
+    getContactData(){
+      this.$api.get('/contact')
+      .then(resp => {
+        this.contacts = resp.data.result
+        console.log(this.contacts)
+      }).catch(err => {console.log(err)})
+    },
     goToSocial(obj) {
       window.open(obj.link, '_blank');
     },
@@ -372,6 +364,7 @@ export default {
   },
 
   mounted() {
+    this.getContactData()
   }
 }
 </script>

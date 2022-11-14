@@ -47,10 +47,10 @@ export default {
     return {
       offTop: 1,
       title:{
-        uz: 'Muzey do\'koni',
-        ru: 'Магазин музея',
-        uzcyr: 'Музей дўкони',
-        en: 'Museum shop',
+        language_uzlatin: 'Muzey do\'koni',
+        language_ru: 'Магазин музея',
+        language_uzCyrillic: 'Музей дўкони',
+        language_en: 'Museum shop',
       },
       hiddenR: 1,
       playInterval: '',

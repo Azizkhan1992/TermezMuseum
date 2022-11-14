@@ -121,16 +121,16 @@ export default {
     return {
       modalIsOpen: false,
       title:{
-        uz: 'Ko\'ngillilar',
-        uzcyr: 'Кўнгиллилар',
-        ru: 'Волонтерам',
-        en: 'Volunteers',
+        language_uzlatin: 'Ko\'ngillilar',
+        language_uzCyrillic: 'Кўнгиллилар',
+        language_ru: 'Волонтерам',
+        language_en: 'Volunteers',
       },
       txt:{
-        uzcyr: 'Кўнгилли бўлиш',
-        ru: 'Стать волонтером',
-        uz: 'Ko\'ngilli bo\'lish',
-        en: 'Become a volunteer',
+        language_uzCyrillic: 'Кўнгилли бўлиш',
+        language_ru: 'Стать волонтером',
+        language_uzlatin: 'Ko\'ngilli bo\'lish',
+        language_en: 'Become a volunteer',
       },
 
       curPage: 2,

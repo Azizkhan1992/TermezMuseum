@@ -66,10 +66,10 @@ export default {
     return {
       openAccrdn: 1,
       title: {
-        uz:'Savollar va javoblar',
-        uzcyr:'Саволлар ва жавоблар',
-        ru:'Часто задаваемые вопросы',
-        en:'FAQ',
+        language_uzlatin:'Savollar va javoblar',
+        language_uzCyrillic:'Саволлар ва жавоблар',
+        language_ru:'Часто задаваемые вопросы',
+        language_en:'FAQ',
       },
       curPage: 3,
       pages: 384,

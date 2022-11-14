@@ -42,10 +42,10 @@ export default {
     return {
       offTop: 1,
       title:{
-        uz:'Muzey fondi',
-        uzcyr:'Музей фонди',
-        en:'Museum Foundation',
-        ru:'Фонд музея',
+      language_uzlatin:'Muzey fondi',
+        language_uzCyrillic:'Музей фонди',
+        language_en:'Museum Foundation',
+        language_ru:'Фонд музея',
       },
 
 

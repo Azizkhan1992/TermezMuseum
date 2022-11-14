@@ -105,10 +105,10 @@ export default {
     return {
       title: this.$route.params.id,
       name: {
-        uz: 'Rahbariyat',
-        uzcyr: 'Раҳбарият',
-        ru: 'Руководство',
-        en: 'Management',
+        language_uzlatin: 'Rahbariyat',
+        language_uzCyrillic: 'Раҳбарият',
+        language_ru: 'Руководство',
+        language_en: 'Management',
       },
     }
   },
