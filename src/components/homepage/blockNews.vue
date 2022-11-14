@@ -1,5 +1,6 @@
 <template>
-  <div name="newsBlock" class="block">
+  <div name="newsBlock" class="block" v-if="news.length > 0"
+  >
     <animatedTitle
       :animateAt="this.offTop"
       :titleName="this.title[$i18n.locale]"
@@ -44,10 +45,10 @@ export default {
     return {
       offTop: 1,
       title: {
-        uz: "Yangiliklar",
-        ru: "Новости",
-        uzcyr: "Янгиликлар",
-        en: "News",
+        language_uzlatin: "Yangiliklar",
+        language_ru: "Новости",
+        language_uzCyrillic: "Янгиликлар",
+        language_en: "News",
       },
       topTags: [
           {
@@ -78,17 +79,23 @@ export default {
             },
           },
         ],
+      news: [],
     };
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName("newsBlock")[0].offsetTop - 400;
+      this.offTop = document.getElementsByName("newsBlock")[0]?.offsetTop - 400;
+    },
+    async getNews() {
+      const data = await this.$api('/press/news');
+      this.news = data.data.result.results
     },
   },
 
   mounted() {
     this.getOffsetTop();
+    this.getNews()
   },
 };
 </script>
