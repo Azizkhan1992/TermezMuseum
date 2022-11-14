@@ -92,10 +92,10 @@ export default {
   data() {
     return {
       title:{
-        uz: 'Kutubxona',
-        uzcyr: 'Кутубхона',
-        ru: 'Библиотека',
-        en: 'Library',
+        language_uzlatin: 'Kutubxona',
+        language_uzCyrillic: 'Кутубхона',
+        language_ru: 'Библиотека',
+        language_en: 'Library',
       },
       curPage: 4,
       pages: 122,

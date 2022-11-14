@@ -107,10 +107,10 @@ export default {
     return {
       allExhibits: this.$store.state.exhibits,
       title:{
-        uz: 'Haykallar',
-        uzcyr: 'Ҳайкаллар',
-        ru: 'Статуи',
-        en: 'Statues',
+        language_uzlatin: 'Haykallar',
+        language_uzCyrillic: 'Ҳайкаллар',
+        language_ru: 'Статуи',
+        language_en: 'Statues',
       },
       curPage: 3,
       pages: 658,

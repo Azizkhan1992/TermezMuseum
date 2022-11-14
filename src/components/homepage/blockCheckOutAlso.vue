@@ -40,7 +40,9 @@ export default {
   name: 'blockCheckOutAlso',
 
   components: {
-    animatedTitle, otherMuseumsCard, paginatorDots
+    animatedTitle,
+    otherMuseumsCard,
+    paginatorDots,
   },
 
   data() {
@@ -81,15 +83,15 @@ export default {
 
       this.otherMuseums.unshift(firstItem)
 
-      if(this.hiddenR !== 1) {
-        this.hiddenR --;
-      } else this.hiddenR = slideLen
+      if (this.hiddenR !== 1) {
+        this.hiddenR--;
+      } else this.hiddenR = slideLen;
 
-      this.play()
+      this.play();
     },
 
     next() {
-      clearInterval(this.playInterval)
+      clearInterval(this.playInterval);
 
       const slideLen = this.otherMuseums.length
       let firstItem = this.otherMuseums.shift()

@@ -268,18 +268,18 @@ export default {
       feedbackTitle: '',
       feedbackText: '',
       location: {
-        uz: "Toshkent sh., Amir Temur shoh ko‘chasi, 16-uy",
-        ru: "г.Ташкент, проспект Амира Темура, 16",
-        uzcyr: "Тошкент ш., Амир Темур шоҳ кўчаси, 16-уй",
-        en: "Tashkent, Amir Temur Avenue, 16"
+        language_uzlatin: "Toshkent sh., Amir Temur shoh ko‘chasi, 16-uy",
+        language_ru: "г.Ташкент, проспект Амира Темура, 16",
+        language_uzCyrillic: "Тошкент ш., Амир Темур шоҳ кўчаси, 16-уй",
+        language_en: "Tashkent, Amir Temur Avenue, 16"
       },
 
       submitted: false,
       title: {
-        uz: 'Aloqa markazi',
-        uzcyr: 'Алоқа маркази',
-        en: 'Communication center',
-        ru: 'Центр связи',
+        language_uzlatin: 'Aloqa markazi',
+        language_uzCyrillic: 'Алоқа маркази',
+        language_en: 'Communication center',
+        language_ru: 'Центр связи',
       }
     }
   },

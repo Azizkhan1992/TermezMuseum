@@ -109,10 +109,10 @@ export default {
   data() {
     return {
       title: {
-        uz: 'Qo\'shimcha',
-        uzcyr: 'Қўшимча',
-        en: 'Additional',
-        ru: 'Дополнительно',
+        language_uzlatin: 'Qo\'shimcha',
+        language_uzCyrillic: 'Қўшимча',
+        language_en: 'Additional',
+        language_ru: 'Дополнительно',
       },
       allAddPlaces: this.$store.state.addPlaces
     }

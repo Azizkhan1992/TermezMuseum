@@ -56,10 +56,10 @@ export default {
   data() {
     return {
       title: {
-        uz: '3D muzey sayohati',
-        uzcyr: '3D музей саёҳати',
-        ru: '3D Тур по музею',
-        en: '3D Museum Tour',
+        language_uzlatin: '3D muzey sayohati',
+        language_uzCyrillic: '3D музей саёҳати',
+        language_ru: '3D Тур по музею',
+        language_en: '3D Museum Tour',
       },
       curPage: 9,
       pages: 922,

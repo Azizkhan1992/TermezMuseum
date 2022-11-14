@@ -33,7 +33,7 @@ const uzcyr = {
   author: 'Муаллиф',
   buy: 'Сотиб олиш',
   recDays: 'Қабул кунлари',
-  recHours: 'Иш вақти',
+  recHours: 'Қабул вақти',
   phoneNumber: 'Телефон рақами',
   email: 'Э-почта',
   numberReview: 'Кўриб чиқишлар сони',

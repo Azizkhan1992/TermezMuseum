@@ -87,10 +87,10 @@ export default {
       itemsID: 'Статуя будды',
 
       title:{
-        uz: 'Do\'kon',
-        uzcyr: 'Дўкон',
-        ru: 'Магазин',
-        en: 'Shop',
+        language_uzlatin: 'Do\'kon',
+        language_uzCyrillic: 'Дўкон',
+        language_ru: 'Магазин',
+        language_en: 'Shop',
       },
       search: '',
       curPage: 11,

@@ -63,22 +63,22 @@ export default {
       },
       mobileApp: null,
       txt: {
-        ru:`Узбекистан расположена в раю культурных и природных богатств, которые считаются общим достоянием всего человечества и имеют общечеловеческие ценности. Со своей древней историей, культурными кодами, географическими исследованиями и расширениями она обладает характеристиками очень ценной страны для всего мира.
+        language_ru:`Узбекистан расположена в раю культурных и природных богатств, которые считаются общим достоянием всего человечества и имеют общечеловеческие ценности. Со своей древней историей, культурными кодами, географическими исследованиями и расширениями она обладает характеристиками очень ценной страны для всего мира.
 
 Музеи Узбекистан, которые ждут с распростертыми объятиями тысячи лет, теперь находятся всего в одном приложении. Загрузите приложение сейчас и познакомьтесь со своим прошлым.
 
 Узбекистан расположена в раю культурных и природных богатств, которые считаются общим достоянием всего человечества и имеют общечеловеческие ценности. Со своей древней историей, культурными кодами, географическими исследованиями и расширениями она обладает характеристиками очень ценной страны для всего мира.`,
-          uz: `O‘zbekiston butun insoniyatning umumiy merosi hisoblangan, umuminsoniy qadriyatlarga ega bo‘lgan madaniy va tabiiy boyliklar jannatida joylashgan. Oʻzining qadimiy tarixi, madaniy kodlari, geografik izlanishlari va kengayishlari bilan butun dunyo uchun juda qadrli mamlakat xususiyatlariga ega.
+          language_uzlatin: `O‘zbekiston butun insoniyatning umumiy merosi hisoblangan, umuminsoniy qadriyatlarga ega bo‘lgan madaniy va tabiiy boyliklar jannatida joylashgan. Oʻzining qadimiy tarixi, madaniy kodlari, geografik izlanishlari va kengayishlari bilan butun dunyo uchun juda qadrli mamlakat xususiyatlariga ega.
 
 Ming yillar davomida quchoq ochib intiqlik bilan kutgan O‘zbekiston muzeylari endi faqat bitta ilovada. Ilovani hozir yuklab oling va o'tmishingizni bilib oling.
 
 O‘zbekiston butun insoniyatning umumiy merosi hisoblangan, umuminsoniy qadriyatlarga ega bo‘lgan madaniy va tabiiy boyliklar jannatida joylashgan. Oʻzining qadimiy tarixi, madaniy kodlari, geografik izlanishlari va kengayishlari bilan butun dunyo uchun juda qadrli mamlakat xususiyatlariga ega.`,
-          uzcyr: `Ўзбекистон бутун инсониятнинг умумий мероси ҳисобланган, умуминсоний қадриятларга эга бўлган маданий ва табиий бойликлар жаннатида жойлашган. Ўзининг қадимий тарихи, маданий кодлари, географик изланишлари ва кенгайишлари билан бутун дунё учун жуда қадрли мамлакат хусусиятларига эга.
+          language_uzCyrillic: `Ўзбекистон бутун инсониятнинг умумий мероси ҳисобланган, умуминсоний қадриятларга эга бўлган маданий ва табиий бойликлар жаннатида жойлашган. Ўзининг қадимий тарихи, маданий кодлари, географик изланишлари ва кенгайишлари билан бутун дунё учун жуда қадрли мамлакат хусусиятларига эга.
 
 Минг йиллар давомида қучоқ очиб интиқлик билан кутган Ўзбекистон музейлари энди фақат битта иловада. Иловани ҳозир юклаб олинг ва ўтмишингизни билиб олинг.
 
 Ўзбекистон бутун инсониятнинг умумий мероси ҳисобланган, умуминсоний қадриятларга эга бўлган маданий ва табиий бойликлар жаннатида жойлашган. Ўзининг қадимий тарихи, маданий кодлари, географик изланишлари ва кенгайишлари билан бутун дунё учун жуда қадрли мамлакат хусусиятларига эга.`,
-          en: `Uzbekistan is located in a paradise of cultural and natural resources, which are considered the common heritage of all mankind and have universal values. With its ancient history, cultural codes, geographical explorations and expansions, it has the characteristics of a very valuable country for the whole world.
+          language_en: `Uzbekistan is located in a paradise of cultural and natural resources, which are considered the common heritage of all mankind and have universal values. With its ancient history, cultural codes, geographical explorations and expansions, it has the characteristics of a very valuable country for the whole world.
 
 Museums of Uzbekistan, which have been waiting with open arms for thousands of years, are now in just one application. Download the app now and get to know your past.
 

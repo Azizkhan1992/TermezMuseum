@@ -181,10 +181,10 @@ export default {
 
       prevPage: {
         name: {
-          uz: 'OAV biz haqimizda',
-          uzcyr: 'ОАВ биз ҳақимизда',
-          ru: 'СМИ о нас',
-          en: 'Mass Medias about Us',
+          language_uzlatin: 'OAV biz haqimizda',
+          language_uzCyrillic: 'ОАВ биз ҳақимизда',
+          language_ru: 'СМИ о нас',
+          language_en: 'Mass Medias about Us',
         },
         link: '/medias-about-us'
       },

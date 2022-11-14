@@ -75,10 +75,10 @@ export default {
     return {
       allExhibits: this.$store.state.exhibits,
       title: {
-        uz: '3D fayllar',
-        uzcyr: '3D файллар',
-        ru: '3D файлы',
-        en: '3D files',
+        language_uzlatin: '3D fayllar',
+        language_uzCyrillic: '3D файллар',
+        language_ru: '3D файлы',
+        language_en: '3D files',
       },
       curPage: 5,
       pages: 522,

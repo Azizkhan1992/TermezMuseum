@@ -69,10 +69,10 @@ export default {
       allExhibits: this.$store.state.exhibits,
       prevPage: {
         name: {
-          uz: 'Zallar',
-          uzcyr: 'Заллар',
-          en: 'Halls',
-          ru: 'Залы',
+          language_uzlatin: 'Zallar',
+          language_uzCyrillic: 'Заллар',
+          language_en: 'Halls',
+          language_ru: 'Залы',
         },
         link: '/halls'
       },
