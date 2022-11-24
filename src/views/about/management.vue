@@ -30,7 +30,7 @@
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
                 <p class="helpers mw-fit">{{$t("recDays")}}:</p>
-                <p class="mainers" v-for="day, idx in workDays" :key="idx">{{day.val}}</p>
+                <p class="mainers" >{{workDays[0]?.val}} - {{workDays[1]?.val}}</p>
               </div>
 
               <div class="w-100 gap-12">
@@ -134,17 +134,16 @@ export default {
           this.getWeekendDay(elem.workingTime)
           this.getWorkDays(elem.workingTime)
         })
-        // console.log(this.managers)
       }).catch(err => {console.log(err)})
     },
     getWorkDays(time){
-      this.workDays = this.weekDays.slice(time.startDate, time.finishDate+1)
+      this.workDays = this.weekDays.filter(val => (val.id == time.startDate+1 || val.id == time.finishDate+1))
+      // console.log(this.workDays)
     },
     getWeekendDay(time){
       this.weekEnd = this.weekDays.filter(val => {
         return val.id>time.finishDate
       })
-      // console.log(this.weekEnd)
     },
     goToSingle(id) {
       this.$router.push( {path: '/management/' + id})
