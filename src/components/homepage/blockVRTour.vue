@@ -1,5 +1,5 @@
 <template>
-  <div name="vrTour" class="block">
+  <div name="vrTour" class="block" v-if="threeD.length > 0">
 
     <animatedTitle
       :animateAt="this.offTop"
@@ -11,7 +11,7 @@
         <span class="vr-text">
             {{text[$i18n.locale]}}
         </span>
-        
+
         <button
           class="prim w-4 mt-a"
         >
@@ -52,17 +52,23 @@ export default {
         language_uzlatin: `Uyingizdan chiqmasdan Surxondaryoning o'tmishiga sayohat qilib, ta'riflab bo'lmas taassurotlar olishni xohlaysizmi? Unda sizni 3D muzey ekskursiyasiga taklif qilamiz.`,
         language_en: 'Do you want to travel into the past of Surkhandarya and get indescribable impressions without leaving your home? Then we invite you to the 3D Museum Tour.',
       },
+      threeD: [],
     }
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('vrTour')[0].offsetTop - 400
-    }
+      this.offTop = document.getElementsByName('vrTour')[0]?.offsetTop - 400
+    },
+    async getThreeD() {
+      const data = await this.$api('/home/threeD');
+      this.threeD = data.data.result
+    },
   },
 
   mounted() {
-    this.getOffsetTop()
+    this.getOffsetTop();
+    this.getThreeD();
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div name="galleryBlock" class="block">
+  <div name="galleryBlock" class="block" v-if="gallery.length > 0">
     <animatedTitle
       :animateAt="this.offTop"
       :titleName="this.title[$i18n.locale]"
@@ -68,18 +68,24 @@ export default {
         language_ru: 'Галерея',
         language_uzCyrillic: 'Галерея',
         language_en: 'Gallery',
-      }
+      },
+      gallery: []
     }
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('galleryBlock')[0].offsetTop - 400
-    }
+      this.offTop = document.getElementsByName('galleryBlock')[0]?.offsetTop - 400
+    },
+    async getGallery() {
+      const data = await this.$api('/home/threeD');
+      this.gallery = data.data.result
+    },
   },
 
   mounted() {
     this.getOffsetTop()
+    this.getGallery()
   }
 }
 </script>

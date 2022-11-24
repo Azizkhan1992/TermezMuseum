@@ -2,21 +2,23 @@
   <div name="museumsFundBlock" class="block">
 
     <animatedTitle
-      :animateAt="this.offTop"
-      :titleName="this.title[$i18n.locale]"
+      :animateAt="offTop"
+      :titleName="title[$i18n.locale]"
     />
 
     <div class="w-100 bor-r-20 ovr-hidden pos-rel h-680p">
 
       <div class="w-50 pad-48p box-brb ml-a z-idx2">
 
-        <h3 class="commonT">Акция "Подари скамейку"</h3>
+        <h3 class="commonT"> {{ fond?.title[$i18n.locale] }} </h3>
 
-        <p class="commonP mt-60">«Даст неповторимую возможность всем любителям истории и культуры не только помочь дому музею в благородном деле воссоздания исторического облика музея Ойбека, но и позволит всем желающим навсегда вписать своё имя в историю музея, ведь на каждой скамейке будет именная табличка!</p>
+        <p class="commonP mt-60">
+          {{ fond?.text[$i18n.locale] }}
+        </p>
 
-        <button class="white-ghost mt-a ml-a w-3 h-48p m__btn_100">
+        <a :href="fond?.link" target="_blank" class="white-ghost mt-a ml-a w-3 h-48p m__btn_100 put_center">
           <span>{{$t("donate")}}</span>
-        </button>
+        </a>
 
       </div>
 
@@ -42,24 +44,28 @@ export default {
     return {
       offTop: 1,
       title:{
-      language_uzlatin:'Muzey fondi',
-        language_uzCyrillic:'Музей фонди',
-        language_en:'Museum Foundation',
-        language_ru:'Фонд музея',
+        language_uzCyrillic: 'Музей фонди',
+        language_ru: 'Фонд музея',
+        language_uzlatin: 'Muzey fondi',
+        language_en: 'Museum Foundation',
       },
-
-
+      fond: null
     }
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('museumsFundBlock')[0].offsetTop - 400
+      this.offTop = document.getElementsByName('museumsFundBlock')[0]?.offsetTop - 400
+    },
+    async getFondMuseum() {
+      const data = await this.$api('/home/fondMuseum');
+      this.fond = data.data.result
     },
   },
 
   mounted() {
     this.getOffsetTop()
+    this.getFondMuseum()
   }
 }
 </script>

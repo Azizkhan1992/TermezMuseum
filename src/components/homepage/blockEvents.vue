@@ -1,6 +1,6 @@
 <template>
-  <div name="eventsBlock" class="block">
-    
+  <div name="eventsBlock" class="block" v-if="events.length > 0">
+
     <animatedTitle
       :animateAt="this.offTop"
       :titleName="this.title[$i18n.locale]"
@@ -27,10 +27,10 @@
             color="white"
           />
         </div>
-        
+
         <div class="dark-layer z-idx1"></div>
         <img class="back-img" src="@/assets/static/museums-collection.png" alt="">
-      
+
       </div>
 <!-- First item -->
 
@@ -113,7 +113,7 @@
         <img class="back-img" src="@/assets/static/museums-collection.png" alt="">
 
       </div>
-      
+
 <!-- Fourth item -->
     </div>
 
@@ -139,18 +139,24 @@ export default {
         language_uzlatin:'Voqealar',
         language_en:'Events',
         language_uzCyrillic:'Воқеалар',
-      }
+      },
+      events: [],
     }
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('eventsBlock')[0].offsetTop - 400
-    }
+      this.offTop = document.getElementsByName('eventsBlock')[0]?.offsetTop - 400
+    },
+    async getEvents() {
+      const data = await this.$api('/press/events');
+      this.events = data.data.result.results
+    },
   },
 
   mounted() {
     this.getOffsetTop()
+    this.getEvents()
   }
 }
 </script>

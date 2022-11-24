@@ -1,9 +1,9 @@
 <template>
-  <div name="volunteersProgramBlock" class="block">
+  <div name="volunteersProgramBlock" class="block" v-if="volunteer != null">
 
     <animatedTitle
-      :animateAt="this.offTop"
-      :titleName="this.title[$i18n.locale]"
+      :animateAt="offTop"
+      :titleName="title[$i18n.locale]"
     />
 
     <div class="w-100 gap-24   h-620p">
@@ -14,13 +14,13 @@
 
         </p>
 
-        <button class="prim mt-a w-4 h-48p">
+        <button class="prim mt-a w-4 h-48p" @click="$router.push('/volunteers-program')">
           <span>{{txt[$i18n.locale]}}</span>
         </button>
       </div>
 
       <div class="w-50 pos-rel bor-r-20 ovr-hidden">
-        <img class="back-img" src="@/assets/temporary/volunteer.png" alt="">
+        <img class="back-img" :src="volunteer.imageVolunteer?.extraImage?.path" alt="">
       </div>
 
     </div>
@@ -41,10 +41,11 @@ export default {
   data() {
     return {
       offTop: 1,
+      volunteer: [],
       title:{
-        language_uzlatin: 'Ko\'ngillilar',
-        language_ru: 'Волонтерам',
         language_uzCyrillic: 'Кўнгиллилар',
+        language_ru: 'Волонтерам',
+        language_uzlatin: 'Ko\'ngillilar',
         language_en: 'Volunteers',
       },
       txt:{
@@ -64,12 +65,17 @@ export default {
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('volunteersProgramBlock')[0].offsetTop - 400
+      this.offTop = document.getElementsByName('volunteersProgramBlock')[0]?.offsetTop - 400
+    },
+    async getVolunteers() {
+      const data = await this.$api('/home/mobileApp');
+      this.volunteer = data.data.mobileAppDocument
     },
   },
 
   mounted() {
     this.getOffsetTop()
+    this.getVolunteers()
   }
 }
 </script>

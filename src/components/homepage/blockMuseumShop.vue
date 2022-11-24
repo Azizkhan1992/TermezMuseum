@@ -1,6 +1,6 @@
 <template>
-  <div name="museumShop" class="block">
-    
+  <div name="museumShop" class="block" v-if="shop.length > 0">
+
     <animatedTitle
       :animateAt="this.offTop"
       :titleName="this.title[$i18n.locale]"
@@ -54,22 +54,25 @@ export default {
       },
       hiddenR: 1,
       playInterval: '',
-
       shopItems: [
         {id: 1, itemTitle: 'Золотистые самовары', img: 'samovar.jpg', price: '21 564 890.20', currency: 'UZS', link: ''},
         {id: 2, itemTitle: 'Фигурки слонов', img: 'stones.jpg', price: '21 595 842.20', currency: 'UZS', link: ''},
         {id: 3, itemTitle: 'Древние монеты', img: 'monety.jpg', price: '21 525 970.20', currency: 'UZS', link: ''},
         {id: 4, itemTitle: 'Старинные тандуры', img: '1.png', price: '21 120 120.20', currency: 'UZS', link: ''},
         {id: 5, itemTitle: 'Скелеты мамонта', img: '2.png', price: '21 212 212.20', currency: 'UZS', link: ''},
-      ]
+      ],
+      shop: []
     }
   },
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('museumShop')[0].offsetTop - 400
+      this.offTop = document.getElementsByName('museumShop')[0]?.offsetTop - 400
     },
-
+    async getShop() {
+      const data = await this.$api('/services/shop');
+      this.shop = data.data.result.results
+    },
     prev() {
       clearInterval(this.playInterval)
 
@@ -161,6 +164,7 @@ export default {
   mounted() {
     this.getOffsetTop()
     this.play()
+    this.getShop()
   }
 }
 </script>

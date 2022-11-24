@@ -5007,6 +5007,19 @@ input {
 	}
 }
 
+.line__clap_8 {
+	display: -webkit-box;
+	-webkit-line-clamp: 8;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.put_center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 @keyframes lighterScale {
 	0% {
 		transform: scale(1);

@@ -1,5 +1,5 @@
 <template>
-  <div name="museumsPride" class="block">
+  <div name="museumsPride" class="block" v-if="false">
 
     <animatedTitle
       :animateAt="this.offTop"
@@ -29,7 +29,7 @@
       <div class="wc-4 gap-24">
 
         <div class="wc-100 ovr-hidden bor-r-20 pos-rel h-50">
-          
+
           <div class="w-100 mt-a gap-24">
             <h4>«Наконечники копий древних воинов»</h4>
           </div>
@@ -47,7 +47,7 @@
 
           <div class="dark-layer"></div>
           <img src="@/assets/static/main.jpg" alt="">
-        
+
         </div>
 
         <div class="wc-100 ovr-hidden bor-r-20 pos-rel h-50">
@@ -69,7 +69,7 @@
 
           <div class="dark-layer"></div>
           <img src="@/assets/static/museums-collection.png" alt="">
-        
+
         </div>
 
       </div>
@@ -102,7 +102,7 @@ export default {
 
   methods: {
     getOffsetTop() {
-      this.offTop = document.getElementsByName('museumsPride')[0].offsetTop - 400
+      this.offTop = document.getElementsByName('museumsPride')[0]?.offsetTop - 400
     }
   },
 
