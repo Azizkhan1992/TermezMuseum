@@ -12,7 +12,8 @@
         :key="idx"
         class="w-100 h-480p ovr-hidden bor-r-20 backgrnd-white gap-24 m__management_card"
       >
-        <img class="w-50 m__management_card_img" :src="manager?.img.path" alt="">
+        <img v-if="manager?.img?.path" class="w-50 m__management_card_img" :src="manager?.img.path" alt="">
+        <img v-else class="w-50 m__management_card_img" src="@/assets/temporary/manager-1.jpg" alt="">
 
         <div class="w-50 box-brb h-100 ovr-hidden pad-t-24p pad-b-24p pad-r-24p m__management_card_items">
 
@@ -133,6 +134,7 @@ export default {
         this.managers.forEach(elem => {
           this.getWeekendDay(elem.workingTime)
           this.getWorkDays(elem.workingTime)
+          // console.log(this.managers)
         })
       }).catch(err => {console.log(err)})
     },
