@@ -68,7 +68,7 @@
           </div>
 
           <button
-            @click="goToSingle(manager.id)"
+            @click="goToSingle(manager._id)"
             class="prim h-48p mt-36"
           >
             <span>{{$t("more")}}</span>
@@ -79,7 +79,7 @@
     </div>
 
     <breadCrumbs
-      :currentPage="title[$i18n.locale]"
+      :currentPage="title?.[$i18n.locale]"
     />
 
   </div>
@@ -148,6 +148,7 @@ export default {
       })
     },
     goToSingle(id) {
+      console.log(id)
       this.$router.push( {path: '/management/' + id})
     }
   }

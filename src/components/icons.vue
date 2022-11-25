@@ -256,6 +256,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+.icon{
 
+  svg{
+    transition: transform 0.35s ease-in-out;
+  }
+
+
+&.active{
+  svg{
+    transform: rotate(180deg);
+    transition: transform 0.35s ease-in-out;
+  }
+}
+}
 </style>

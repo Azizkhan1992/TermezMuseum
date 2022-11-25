@@ -1,6 +1,6 @@
 <template>
-    <div class="modall-gallery" @click="modalDeactive()">
-        <div class="modal-slider-content">
+  <div class="modall-gallery" @click="modalDeactive()">
+    <div class="modal-slider-content">
       <button class="left-btn" @click.stop="moveL">
         <Icons icon="arrLeft" size="24  " />
       </button>
@@ -25,40 +25,41 @@
         <Icons icon="arrRight" size="24  " />
       </button>
     </div>
-    </div>
+  </div>
 </template>
 <script>
 import Icons from "@/components/icons.vue";
 export default {
-    name: 'gallery-modal',
-    components: {Icons},
-    props: {
-        modalImages: {
-            type: Array,
-            default: () => []
-        },
-        selectedId: {
-            type: Number,
-            default: 1
-        }
+  name: "gallery-modal",
+  components: { Icons },
+  props: {
+    modalImages: {
+      type: Array,
+      default: () => [],
     },
-    data(){
-        return {
-            imgStepper: 1
-        }
+    selectedId: {
+      type: Number,
+      default: 1,
     },
-    mounted(){
-        this.logProps()
-    },
+  },
+  data() {
+    return {
+      imgStepper: 1,
+    };
+  },
+  mounted(){
+    this.getImageStepper()
+  },
 
-    methods:{
-        // logProps(){
-        //     console.log(this.modalImages)
-        // },
-        modalDeactive(){
-            this.$emit("modalDeactive");
-        },
-        moveR() {
+  methods: {
+    modalDeactive() {
+      this.$emit("modalDeactive");
+    },
+    getImageStepper() {
+
+      this.imgStepper = this.selectedId;
+    },
+    moveR() {
       if (this.imgStepper < this.modalImages.length) {
         this.imgStepper++;
       } else this.imgStepper = 1;
@@ -68,8 +69,8 @@ export default {
         this.imgStepper--;
       } else this.imgStepper = this.modalImages.length;
     },
-    }
-}
+  },
+};
 </script>
 <style lang="scss">
 .modall-gallery {
@@ -101,7 +102,7 @@ export default {
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      background: #4582D3;
+      background: #4582d3;
       border: 0;
 
       &:hover {
