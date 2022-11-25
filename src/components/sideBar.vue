@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     logMenu(){
-      console.log(this.menuList)
       this.menuList.forEach(elem => {
         this.SideBarMenu = elem.subMenu 
         // console.log(this.SideBarMenu)

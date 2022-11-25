@@ -141,8 +141,8 @@
                 class="accordionBtn w-100 cur-ptr gap-24 align-c backgrnd-white"
                 :class="openAccrdn == menu.id ? 'open' : ''"
               >
-                <p v-if="menu?.name" class="commonP us-none colorGreyD bold">{{menu?.name[$i18n.locale]}}</p>
-                <router-link @click.native="closeMenu" v-else tag="p" :to="menu.link" class="commonP us-none colorGreyD bold">{{menu?.name?.[$i18n.locale]}}</router-link>
+                <p v-if="menu?.subMenu.length>0" class="commonP us-none colorGreyD bold">{{menu?.name[$i18n.locale]}}</p>
+                <router-link @click.native="closeMenu" v-else tag="p" :to="menu.url" class="commonP us-none colorGreyD bold">{{menu?.name?.[$i18n.locale]}}</router-link>
 
                 <Icons
                   class="ml-a"
@@ -212,7 +212,7 @@ export default {
       this.$emit('closeMenu')
     },
     switcher(id) {
-      console.log(id)
+      // console.log(id)
       if(this.openAccrdn !== id) {
         this.openAccrdn = id
       } else this.openAccrdn = 0

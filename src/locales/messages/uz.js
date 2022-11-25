@@ -128,5 +128,14 @@ const uz = {
   sendyourQuest: 'Muzey faoliyatiga oid savol, shikoyat va takliflaringizni yuboring. Sizga imkon qadar tezroq javob beramiz',
   reqNumber: 'Sizning so\'rov raqamingiz',
   thankFeedback: 'Murojaatingiz uchun tashakkur. Sizga imkon qadar tezroq javob berishga harakat qilamiz',
+  respons: 'Mas\'uliyat',
+  workPl: 'Ish joyi, lavozimi',
+  birthY: 'Tug\'ilgan yil',
+  eduStage: 'Ta\'lim',
+  speciality: 'Mutaxassislik',
+  awards: 'Davlat mukofotlari',
+  inPos: 'Lavozimda',
+  since1: 'dan',
+  year1: 'yil'
 }
 export default uz

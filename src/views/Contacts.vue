@@ -348,7 +348,7 @@ export default {
       this.$api.get('/contact')
       .then(resp => {
         this.contacts = resp.data.result
-        console.log(this.contacts)
+        // console.log(this.contacts)
       }).catch(err => {console.log(err)})
     },
     goToSocial(obj) {

@@ -69,7 +69,7 @@ export default {
       const data = await this.$api('/home/otherMuseums');
       this.otherMuseums = data.data.otherWebsiteDocument
 
-      console.log(this.otherMuseums)
+      // console.log(this.otherMuseums)
 
       for(let i=1; i<=  this.otherMuseums.length; i++){
         this.otherMuseums[i-1].id = i
@@ -78,8 +78,8 @@ export default {
     prev() {
       clearInterval(this.playInterval)
 
-      const slideLen = this.museums.length
-      let firstItem = this.museums.pop()
+      const slideLen = this.otherMuseums.length
+      let firstItem = this.otherMuseums.pop()
 
       this.otherMuseums.unshift(firstItem)
 
