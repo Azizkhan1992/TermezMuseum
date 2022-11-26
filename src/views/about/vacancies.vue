@@ -81,7 +81,22 @@ export default {
       },
       curPage: 3,
       pages: 384,
-      allVacancies: this.$store.state.vacancies
+      allVacancies: this.$store.state.vacancies,
+      // allVacancies: []
+    }
+  },
+  mounted(){
+    // this.getAllVacancies()
+  },
+
+
+  methods: {
+    async getAllVacancies(){
+      await this.$api.get('/about/vacancies')
+      .then(resp => {
+        this.allVacancies = resp.data.result.results  
+        // console.log(this.allVacancies)
+      })
     }
   }
 }
