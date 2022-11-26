@@ -136,7 +136,8 @@ const ru = {
   awards: 'Государственные награды',
   inPos: 'В занимаемой должности',
   since1: 'с',
-  year1: 'года'
+  year1: 'года',
+  fullY: 'г'
 }
 
 export default ru

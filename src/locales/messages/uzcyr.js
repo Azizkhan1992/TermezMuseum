@@ -136,7 +136,8 @@ const uzcyr = {
   awards: 'Давлат мукофотлари',
   inPos: 'Лавозимда',
   since1: 'дан',
-  year1: 'йил'
+  year1: 'йил',
+  fullY: 'й'
 }
 
 export default uzcyr

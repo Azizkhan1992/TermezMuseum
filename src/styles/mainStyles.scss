@@ -3972,6 +3972,18 @@ input {
   }
 }
 @media (max-width: 1100px) {
+
+  .commonD{
+    i{
+      font-size: 1rem !important;
+
+      &.since{
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+  }
+
   .sideMenu .menuBar {
     width: 486px;
   }
@@ -4188,6 +4200,18 @@ input {
   }
 }
 @media (max-width: 900px) {
+
+  .commonD{
+    i{
+      font-size: 0.75rem !important;
+
+      &.since{
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+  }
+
   .searchInput,
   .icon-txt-btn {
     display: none;
@@ -4603,6 +4627,18 @@ input {
   }
 }
 @media (max-width: 470px) {
+
+  .commonD{
+    i{
+      font-size: 0.75rem !important;
+
+      &.since{
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+  }
+
   .block[name="museumShop"] {
     .shopCard h3 {
       height: 24px;
