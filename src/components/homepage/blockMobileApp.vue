@@ -8,7 +8,7 @@
 
     <div class="w-100 gap-24   h-720p">
 
-      <div class="w-50 pos-rel bor-r-20 ovr-hidden">
+      <div class="w-50 pos-rel bor-r-20 ovr-hidden mobile-bg">
         <img class="back-img" :src="mobileApp?.imageMobileApp?.extraImage?.path ? mobileApp.imageMobileApp.extraImage.path : mobileApp?.imageMobileApp?.mainImage?.path" alt="err">
       </div>
 

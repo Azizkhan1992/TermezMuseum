@@ -5188,3 +5188,11 @@ input {
       width: 10px;
     }
   }
+
+  .mobile-bg{
+    background: url('@/assets/temporary/appbg.png');
+
+    .back-img{
+      object-fit: contain;
+    }
+  }
