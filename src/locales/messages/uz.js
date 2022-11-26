@@ -136,6 +136,7 @@ const uz = {
   awards: 'Davlat mukofotlari',
   inPos: 'Lavozimda',
   since1: 'dan',
-  year1: 'yil'
+  year1: 'yil',
+  fullY: 'y'
 }
 export default uz

@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title[$i18n.locale]"
+      :titleName="title?.[$i18n.locale]"
       background="faq"
     />
 
@@ -17,7 +17,7 @@
           class="accordionBtn w-100 cur-ptr gap-24 align-c backgrnd-white"
           :class="openAccrdn == faq.id ? 'open' : ''"
         >
-          <p class="commonP us-none colorGreyD bold">{{faq.question}}</p>
+          <p class="commonP us-none colorGreyD bold">{{faq?.question?.[$i18n.locale]}}</p>
 
           <Icons
             class="ml-a"
@@ -32,8 +32,11 @@
           :style="{height: hghts[faq.id - 1] + 'px'}"
         >
           <div :id="'faqAccr' + faq.id">
-            <p v-html="faq.answer" class="commonD mt-24 mb-12">
-            </p>
+            <ul class="commonD mt-24 mb-12">
+              <li v-for="answer, idy in getAnswers(faq?.answer?.[$i18n.locale])" :key="idy">{{answer}}</li>
+            </ul>
+            <!-- <p v-html="faq?.answer?.[$i18n.locale]" class="commonD mt-24 mb-12">
+            </p> -->
           </div>
 
         </div>
@@ -74,11 +77,30 @@ export default {
       curPage: 3,
       pages: 384,
       hghts: [],
-      allFAQS: this.$store.state.faq
+      // allFAQS: this.$store.state.faq
+      allFAQS: []
     }
+  },
+  mounted(){
+    this.getDivsHeight()
+    this.getAllFaqs()
   },
 
   methods: {
+    async getAllFaqs(){
+      await this.$api.get('/about/FAQ')
+      .then(resp => {
+        this.allFAQS = resp.data.documents
+        for(let i=1; i<=this.allFAQS.length; i++){
+          this.allFAQS[i-1].id = i
+        }
+      })
+    },
+
+    getAnswers(ans){
+      let temp = ans.split(';')
+      return temp
+    },
     switcher(id) {
       if(this.openAccrdn !== id) {
         this.openAccrdn = id
@@ -102,13 +124,11 @@ export default {
       return this.hghts.find(height => height.id == id)
     }
   },
-
-  mounted() {
-    this.getDivsHeight()
-  }
 }
 </script>
 
-<style>
-
+<style scoped>
+ul{
+  list-style: inside;
+}
 </style>

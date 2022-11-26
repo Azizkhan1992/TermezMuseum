@@ -12,13 +12,14 @@
 
       <div
         class="w-100 h-152p backgrnd-white pad-24p ovr-hidden bor-r-20 box-brb align-c justify-c gap-24 document-card"
-        v-for="doc in allDocuments"
-        :key="doc.id"
+        v-for="doc in Docs"
+        :key="doc._id"
       >
-        <img class="obj-fit-cov h-64p" :src="require('@/assets/static/fileIcons/' + doc.fileType + '.png')" alt="">
+      <img v-if="doc?.imgUrl" class="obj-fit-cov h-64p" :src="require(`../../assets/static/fileIcons/${doc.imgUrl}.png`)" alt="">
+        <img v-else src="@/assets/static/fileIcons/DOC.png" class="obj-fit-cov h-64p" alt="">
         <div class="w-100 d-f fd-c h-104p">
           
-          <p class="commonD bold h-60p">{{doc.title}}</p>
+          <p class="commonD bold h-60p">{{doc?.title?.[$i18n.locale]}}</p>
           
           <div class="w-100 mt-a gap-48 document-dates">
             <div class="w-a d-f fd-r align-c gap-12">
@@ -26,7 +27,7 @@
                 icon="calendar"
                 size="middle"
               />
-              <p class="helpers">{{doc.publishedDate}}</p>
+              <p class="helpers">{{doc?.createdAt | filterCreat}}</p>
             </div>
 
             <div class="w-a d-f fd-r align-c gap-12">
@@ -35,7 +36,7 @@
                 size="middle"
               />
               <p class="helpers">{{$t("downloads")}}:</p>
-              <p class="mainers">{{doc.downloadsNumber}}</p>
+              <p class="mainers">{{doc?.NumberOfDownloads}}</p>
             </div>
 
             <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr">
@@ -90,7 +91,40 @@ export default {
       },
       curPage: 3,
       pages: 384,
-      allDocuments: this.$store.state.documents
+      // allDocuments: this.$store.state.documents
+      allDocuments: [],
+      Docs: []
+    }
+  },
+  mounted(){
+    this.getAllDocs()
+  },
+
+  methods: {
+    async getAllDocs(){
+      await this.$api.get('/about/documents')
+      .then(resp => {
+        this.allDocuments = resp.data.result.results
+        this.getTypeDocs()
+      }), err => {console.log(err)}
+    },
+
+    getTypeDocs(){
+      if(this.allDocuments.length>0){
+        this.allDocuments.forEach(elem => {
+          const path = elem.documentUrl.path.split('.')
+          let url = path.pop()
+          elem.imgUrl = url.toUpperCase()
+          // console.log(elem)
+        })
+        this.Docs = this.allDocuments
+      }
+    }
+  },
+  filters: {
+    filterCreat(val){
+      let date = val.split('T')
+      return date[0]
     }
   }
 }

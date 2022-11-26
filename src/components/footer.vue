@@ -165,15 +165,15 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-24">
                   <a
-                    v-for="(social, idz) in contacts?.socialNetworks?.links[1]"
+                    v-for="(social, idz) in contacts?.socialNetworks?.links"
                     :key="idz"
                     :href="social?.link"
                     target="_blank"
-                    v-show="contacts?.socialNetworks?.links.length > 0"
+                    v-show="social"
                   >
                     <img
-                      v-if="social.name"
-                      :src="require('@/assets/icons/' + social.name + '.svg')"
+                      v-if="social?.name"
+                      :src="require('@/assets/icons/' + getName(social?.name) + '.svg')"
                       alt=""
                     />
                   </a>
@@ -287,17 +287,16 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-24">
                     <a
-                      v-for="(social, idz) in contacts?.socialNetworks
-                        ?.links[1]"
+                      v-for="(social, idz) in contacts?.socialNetworks?.links"
                       :key="idz"
                       :href="social?.link"
                       target="_blank"
-                      v-show="contacts?.socialNetworks?.links.length > 0"
+                      v-show="social?.name"
                     >
                       <img
-                        v-if="social.name"
+                        v-if="social?.name"
                         :src="
-                          require('@/assets/icons/' + social.name + '_blue.svg')
+                          require('@/assets/icons/' + getName(social?.name) + '_blue.svg')
                         "
                         alt=""
                       />
@@ -582,6 +581,11 @@ export default {
 
       this.weekEnd = day;
 
+    },
+    getName(name){
+      if(name){
+        return name.toLowerCase()
+      }
     },
     sectionSelector() {
       if (this.menuLinks.length > 0) {

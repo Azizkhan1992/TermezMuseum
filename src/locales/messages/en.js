@@ -136,7 +136,8 @@ const en = {
   awards: 'State awards',
   inPos: 'In position',
   since1: 'since',
-  year1: 'year'
+  year1: 'year',
+  fullY: 'y'
 }
 
 export default en

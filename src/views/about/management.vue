@@ -21,7 +21,7 @@
           <h3 class="commonT colorType h-30p line-h-36 mt-12">{{manager?.name[$i18n.locale]}}</h3>
           <h3 class="commonT colorType h-30p line-h-36 mt-12">{{manager?.secondName[$i18n.locale]}}</h3>
 
-          <h3 class="commonP mt-24 h-60p colorGreyD line-h-30 bold">{{manager?.responsibility.text[$i18n.locale]}}</h3>
+          <h3 class="commonP mt-24 h-60p colorGreyD line-h-30 bold">{{manager?.position.text[$i18n.locale]}}</h3>
 
           <div class="w-100 mt-12 gap-12 m__management_card_info">
             <Icons
@@ -148,7 +148,6 @@ export default {
       })
     },
     goToSingle(id) {
-      console.log(id)
       this.$router.push( {path: '/management/' + id})
     }
   }
