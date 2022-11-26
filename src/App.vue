@@ -3,7 +3,6 @@
 
     <preLoaderWindow
       v-if="state"
-      @click.native="off"
     />
 
     <component :is="layout">

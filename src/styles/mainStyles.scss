@@ -3973,6 +3973,15 @@ input {
 }
 @media (max-width: 1100px) {
 
+  .mobile-bg{
+    background: url('@/assets/temporary/appbg.png') no-repeat;
+    background-size: 100% 100% !important;
+
+    .back-img{
+      object-fit: contain;
+    }
+  }
+
   .commonD{
     i{
       font-size: 1rem !important;
@@ -5186,5 +5195,13 @@ input {
     &.word-break{
       display: inline-block;
       width: 10px;
+    }
+  }
+
+  .mobile-bg{
+    background: url('@/assets/temporary/appbg.png') no-repeat;
+
+    .back-img{
+      object-fit: contain;
     }
   }
