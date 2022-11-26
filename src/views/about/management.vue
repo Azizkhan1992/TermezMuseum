@@ -148,7 +148,6 @@ export default {
       })
     },
     goToSingle(id) {
-      console.log(id)
       this.$router.push( {path: '/management/' + id})
     }
   }
