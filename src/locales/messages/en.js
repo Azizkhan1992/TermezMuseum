@@ -137,7 +137,11 @@ const en = {
   inPos: 'In position',
   since1: 'since',
   year1: 'year',
-  fullY: 'y'
+  fullY: 'y',
+  modalT: 'Text error message',
+  misspelledP: 'URL of the page where the error was found',
+  feedbacksSubject: 'Feedback Subject',
+  enterMisspelledTextMistake: 'Enter a description of the mistake or the correct option'
 }
 
 export default en

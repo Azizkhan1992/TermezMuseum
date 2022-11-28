@@ -137,7 +137,11 @@ const ru = {
   inPos: 'В занимаемой должности',
   since1: 'с',
   year1: 'года',
-  fullY: 'г'
+  fullY: 'г',
+  modalT: 'Сообщение об ошибке в тексте',
+  misspelledP: 'Адрес страницы, где найдена ошибка',
+  feedbacksSubject: 'Тема обращения',
+  enterMisspelledTextMistake: 'Введите описание ошибки или правильный вариант'
 }
 
 export default ru
