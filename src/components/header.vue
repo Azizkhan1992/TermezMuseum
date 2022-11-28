@@ -49,19 +49,32 @@
       </div>
 
       <div class="navBar">
-        <a
-          @click="dropdown(menu)"
-          v-for="menu in menuLinks"
-          :key="menu.id"
-          :class="
-            path == menu?.url || (dropdownMenu && idChecker == menu.id)
-              ? 'up'
-              : 'down'
-          "
-        >
-          {{ menu?.name?.[$i18n.locale] }}
-          <Icons v-if="menu.category == 'section'" size="sm" icon="arrDown" />
-        </a>
+        <div v-for="menu in menuLinks" :key="menu.id">
+          <div
+            class="d-f gap-12 cur-ptr"
+            @click="dropdown(menu)"
+            v-if="menu?.subMenu.length > 0"
+            id="menu"
+            :class="{
+              up: dropdownMenu === true && idChecker === menu.id,
+              down: idChecker !== menu.id,
+            }"
+          >
+            <a id="menu">{{ menu?.name?.[$i18n.locale] }}</a>
+            <Icons
+              v-if="menu?.subMenu.length > 0"
+              size="sm"
+              icon="arrDown"
+              id="menu"
+              :class="{
+                active: dropdownMenu === true && idChecker === menu.id,
+              }"
+            />
+          </div>
+          <a v-else :href="menu?.url + '?lang=' + $i18n.locale">{{
+            menu?.name?.[$i18n.locale]
+          }}</a>
+        </div>
 
         <div class="language">
           <div
@@ -107,34 +120,42 @@
       </div>
     </div>
 
-    <div
-      @click="dropdown(openMenuPages)"
-      v-if="dropdownMenu"
-      class="closing-modal"
-    ></div>
-
-    <div class="dropdown-menu" :class="dropdownMenu ? 'open' : 'closed'">
-      <div class="left-section">
-        <div class="section-name">
-          <h1>{{ openMenuPages?.name?.[$i18n.locale] }}</h1>
+      <div
+        class="dropdown-menu"
+        v-for="drop in menuLinks"
+        :key="drop.id"
+        id="drp"
+        :class="{
+          open: dropdownMenu === true && drop._id === openMenuPages._id,
+          closed: dropdownMenu === false || drop._id !== openMenuPages._id,
+        }"
+      >
+        <div class="left-section">
+          <div class="section-name">
+            <h1>{{ openMenuPages?.name?.[$i18n.locale] }}</h1>
+          </div>
+          <div class="divider"></div>
+          <div class="menu-pages">
+            <router-link
+              @click.native="dropdownMenu = false"
+              tag="a"
+              v-for="(link, idx) in openMenuPages?.subMenu"
+              :key="idx"
+              :to="link.link"
+            >
+              {{ link?.name?.[$i18n.locale] }}
+            </router-link>
+          </div>
         </div>
-        <div class="divider"></div>
-        <div class="menu-pages">
-          <router-link
-            @click.native="dropdownMenu = false"
-            tag="a"
-            v-for="(link, idx) in openMenuPages?.subMenu"
-            :key="idx"
-            :to="link.link"
-          >
-            {{ link?.name?.[$i18n.locale] }}
-          </router-link>
+        <div
+          v-if="openMenuPages?.bgImg"
+          class="right-section"
+          :style="`background: url(${require('@/assets/static/bckgrnd/HeaderDropdown/' +
+            openMenuPages?.bgImg)}) no-repeat right`"
+        >
+          <div class="gradientCover"></div>
         </div>
       </div>
-      <div v-if="openMenuPages?.bgImg" class="right-section" :style="`background: url(${require('@/assets/static/bckgrnd/HeaderDropdown/'+openMenuPages?.bgImg)}) no-repeat right`">
-        <div  class="gradientCover" ></div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -250,20 +271,20 @@ export default {
           for (let i = 1; i <= this.menuLinks.length; i++) {
             this.menuLinks[i - 1].id = i;
           }
-          this.getDropImg()
+          this.getDropImg();
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    getDropImg(){
-      let i=0
-      this.menuLinks.forEach((el)=>{
-        if(el.category=='section'){
-          el.bgImg = this.dropImages[i]
+    getDropImg() {
+      let i = 0;
+      this.menuLinks.forEach((el) => {
+        if (el.category == "section") {
+          el.bgImg = this.dropImages[i];
           i++;
         }
-      })
+      });
     },
     changeLang(val) {
       this.languageSwitcher = false;
@@ -280,13 +301,21 @@ export default {
     dropdown(menu) {
       // console.log(menu);
       const selectedMenuId = menu.id;
+      let _t = this
 
-      if (menu?.category == "section") {
-        
+      document.addEventListener("click", function (e) {
+        if(e.target && e.target.id !== 'menu' && e.target.id !== 'drp'){
+          _t.dropdownMenu = false
+          _t.idChecker = ''
+        }
+      });
+
+      if (menu.category == "section") {
         if (this.idChecker === selectedMenuId) {
           this.idChecker = "";
           this.dropdownMenu = false;
         } else {
+          document.removeEventListener('click', function(){})
           this.idChecker = selectedMenuId;
           this.openMenuPages = menu;
           this.dropdownMenu = true;
@@ -344,7 +373,7 @@ export default {
       ) {
         setTimeout(() => {
           this.hideHeader();
-        }, 3000);
+        }, 6000);
       } else this.headerHidden = false;
     },
   },
@@ -358,7 +387,7 @@ export default {
     ) {
       setTimeout(() => {
         this.hideHeader();
-      }, 3000);
+      }, 5000);
     }
     this.$i18n.locale = this.$route.query.lang || "language_uzlatin";
   },

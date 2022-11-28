@@ -7,11 +7,8 @@
     />
 
     <div class="w-100 mb-60">
-      <p class="commonD">
-        Термезский археологический музей является единственным археологическим музеем в нашей стране и относится к числу специализированных музеев. Этот музей является одним из самых замечательных мест нашего города, в котором возрождается история древнего Сурханского оазиса на протяжении тысячелетий.
-        <br/>
-        <br/>
-        Термезский археологический музей состоит из вестибюля, 9 основных выставочных залов, нумизматического выставочного зала, выставочного зала, посвященного японскому археологу Като Кюдзо, небольшого выставочного зала и галереи под крыльцом. В музее также есть библиотека с редкими рукописями и литературой.
+      <p v-if="allPartners?.partnerTextDocument" class="commonD">
+        {{allPartners?.partnerTextDocument?.[$i18n.locale]}}
       </p>
     </div>
 
@@ -22,16 +19,16 @@
     
       <div 
         class="w-100 h-240p bor-r-20 ovr-hidden backgrnd-white partner-card"
-        v-for="partner in allPartners"
-        :key="partner.id"
+        v-for="partner in allPartners?.partners?.results"
+        :key="partner._id"
       >
         <div class="w-4 d-f pad-24p box-brb align-c justify-c backgrnd-greyD h-a">
-          <img class="h-100 w-100 obj-fit-con" :src="require('@/assets/temporary/' + partner.img +'.png')" alt="">
+          <img v-if="partner?.image?.path" class="h-100 w-100 obj-fit-con" :src="partner?.image?.path" alt="">
         </div>
 
         <div class="w-8 box-brb h-100 d-f fd-c pad-24p">
-          <h3 class="commonT colorType">{{partner.name}}</h3>
-          <p class="commonD mt-12 colorType">{{partner.description}}</p>
+          <h3 class="commonT colorType">{{partner?.title?.[$i18n.locale]}}</h3>
+          <p class="commonD mt-12 colorType">{{partner?.text?.[$i18n.locale]}}</p>
 
           <div class="w-a d-f fd-r align-c gap-12 mt-a">
             <Icons
@@ -39,7 +36,7 @@
               size="middle"
             />
             <p class="helpers">Website:</p>
-            <a target="_blanc" :href="partner.website" class="mainers">{{cuttingUrl(partner.website)}}</a>
+            <a target="_blanc" :href="partner?.url" class="mainers">{{partner?.url}}</a>
           </div>
 
           <div class="w-100 mt-24 gap-48 partner-phone">
@@ -49,7 +46,7 @@
               size="middle"
             />
             <p class="helpers">{{$t("phoneNumber")}}:</p>
-            <a :href="'tel:' + partner.phoneNumber" class="mainers">{{partner.phoneNumber}}</a>
+            <a :href="partner?.phoneNumber" class="mainers">{{partner?.phoneNumber}}</a>
           </div>
           <div class="w-a d-f fd-r align-c gap-12">
             <Icons
@@ -57,7 +54,7 @@
               size="middle"
             />
             <p class="helpers">{{$t("email")}}:</p>
-            <a :href="'mailto:' + partner.email" class="mainers">{{partner.email}}</a>
+            <a :href="partner?.email" class="mainers">{{partner?.email}}</a>
           </div>
           </div>
         </div>
@@ -74,7 +71,7 @@
     />
 
     <breadCrumbs
-      :currentPage="title[$i18n.locale]"
+      :currentPage="title?.[$i18n.locale]"
     />
   </div>
 </template>
@@ -102,12 +99,24 @@ export default {
         language_uzCyrillic:'Музей ҳамкорлари',
         language_en:'Museum partners',
       },
-      comments: this.$store.state.comments,
-      allPartners: this.$store.state.partners
+      // comments: this.$store.state.comments,
+      // comments: this.$store.state.comments,
+      // allPartners: this.$store.state.partners
+      allPartners: {}
     }
+  },
+  mounted(){
+    this.getPartners()
   },
 
   methods: {
+    async getPartners(){
+      await this.$api.get('/about/partners')
+      .then(resp => {
+        this.allPartners = resp.data
+        // console.log(resp.data)
+      })
+    },
     cuttingUrl(url) {
       const cutUrl = 'www.' + url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").slice(0, -1)
       return cutUrl

@@ -58,7 +58,7 @@
           <div class="w-100 fd-c gap-12">
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("workdays")}}:</p>
-              <p class="commonP colorType bold line-h-20">{{contacts?.schedule?.workingDays?.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays?.end?.[$i18n.locale]}}</p>
+              <p class="commonP colorType bold line-h-20">{{workDays[0]?.name?.[$i18n.locale]}} - {{workDays[1]?.name?.[$i18n.locale]}}</p>
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("workhours")}}:</p>
@@ -66,7 +66,7 @@
             </div>
             <div class="w-a d-f fd-r gap-12">
               <p class="commonP colorGreyD line-h-20">{{$t("dayoff")}}:</p>
-              <p class="commonP colorType bold line-h-20">{{weekout[$i18n.locale]}}</p>
+              <p v-show="week" class="commonP colorType bold line-h-20" v-for="week, i in weekEnd" :key="i">{{week?.name?.[$i18n.locale]}}</p>
             </div>
           </div>
         </div>
@@ -146,9 +146,10 @@
           <Icons
           v-for="item, idz in contacts?.socialNetworks?.links"
           :key="idz"
+          v-show="item"
             @click.native="goToSocial(socialNetworks[idz])"
             class="contactSocials cur-ptr"
-            icon="facebook"
+            :icon="checkNet(item?.name)"
             size="large"
           />
           <!-- <Icons
@@ -175,7 +176,7 @@
 
     <div class="w-100 fd-c mt-60 gap-24">
       <h4 class="commonT colorGreyD">{{$t("feedback")}}</h4>
-      <h4 class="commonD colorGreyD">{{txt[$i18n.locale]}}</h4>
+      <h4 class="commonD colorGreyD">{{contacts?.feedback?.text?.[$i18n.locale]}}</h4>
     </div>
 
     <div class="w-100 fd-c bor-r-20 ovr-hidden box-brb mt-24 backgrnd-white pad-24p">
@@ -333,6 +334,116 @@ export default {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       iconSize: [52, 74],
+      workDays: [],
+      weekEnd: [],
+      weekDays: [
+        
+        {
+          id: 1,
+          name: {
+            language_uzlatin: "Dushanba",
+            language_uzCyrillic: "Душанба",
+            language_ru: "Понеделник",
+            language_en: "Monday",
+          },
+          val: {
+            language_uzlatin: 'Du',
+            language_uzCyrillic: 'Ду',
+            language_ru: 'Пн',
+            language_en: 'Mn'
+          },
+        },
+        {
+          id: 2,
+          name: {
+            language_uzlatin: "Seshanba",
+            language_uzCyrillic: "Сешанба",
+            language_ru: "Вторник",
+            language_en: "Tuesday",
+          },
+          val: {
+            language_uzlatin: 'Se',
+            language_uzCyrillic: 'Се',
+            language_ru: 'Вт',
+            language_en: 'Tu'
+          },
+        },
+        {
+          id: 3,
+          name: {
+            language_uzlatin: "Chorshanba",
+            language_uzCyrillic: "Чоршанба",
+            language_ru: "Среда",
+            language_en: "Wednesday",
+          },
+          val: {
+            language_uzlatin: 'Chor',
+            language_uzCyrillic: 'Чор',
+            language_ru: 'Ср',
+            language_en: 'Wed'
+          },
+        },
+        {
+          id: 4,
+          name: {
+            language_uzlatin: "Payshanba",
+            language_uzCyrillic: "Пайшанба",
+            language_ru: "Четверг",
+            language_en: "Thursday",
+          },
+          val: {
+            language_uzlatin: 'Pay',
+            language_uzCyrillic: 'Пай',
+            language_ru: 'Чт',
+            language_en: 'Th'
+          },
+        },
+        {
+          id: 5,
+          name: {
+            language_uzlatin: "Juma",
+            language_uzCyrillic: "Жума",
+            language_ru: "Пятница",
+            language_en: "Friday",
+          },
+          val: {
+            language_uzlatin: 'Ju',
+            language_uzCyrillic: 'Жу',
+            language_ru: 'Пт',
+            language_en: 'Fr'
+          },
+        },
+        {
+          id: 6,
+          name: {
+            language_uzlatin: "Shanba",
+            language_uzCyrillic: "Шанба",
+            language_ru: "Суббота",
+            language_en: "Saturday",
+          },
+          val: {
+            language_uzlatin: 'Shan',
+            language_uzCyrillic: 'Шан',
+            language_ru: 'Суб',
+            language_en: 'Sa'
+          },
+        },
+        {
+          id: 7,
+          name: {
+            language_uzlatin: "Yakshanba",
+            language_uzCyrillic: "Якшанба",
+            language_ru: "Воскресение",
+            language_en: "Sunday",
+          },
+          val: {
+            language_uzlatin: "Yak",
+            language_uzCyrillic: 'Як',
+            language_ru: 'Вс',
+            language_en: 'Sn'
+          },
+        },
+      ],
 
     }
   },
@@ -348,11 +459,31 @@ export default {
       this.$api.get('/contact')
       .then(resp => {
         this.contacts = resp.data.result
+
+        this.getWorkDays(resp.data.result.schedule.workingDays);
+      this.getWeekend(resp.data.result.schedule.workingDays);
         console.log(this.contacts)
       }).catch(err => {console.log(err)})
     },
     goToSocial(obj) {
       window.open(obj.link, '_blank');
+    },
+    checkNet(name){
+      if(name){
+        return name.toLowerCase()
+      }
+    },
+    getWorkDays(val) {
+      this.workDays = this.weekDays.filter(
+        (e) => e.id == val.start || e.id == val.end
+      );
+    },
+    getWeekend(val) {
+      let day = this.weekDays.filter((e) => e.id < val.start || e.id > val.end);
+
+      this.weekEnd = day;
+
+      // console.log(this.weekEnd)
     },
 
     sendAppeal() {

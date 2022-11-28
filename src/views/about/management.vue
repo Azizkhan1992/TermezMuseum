@@ -12,7 +12,8 @@
         :key="idx"
         class="w-100 h-480p ovr-hidden bor-r-20 backgrnd-white gap-24 m__management_card"
       >
-        <img class="w-50 m__management_card_img" :src="manager?.img.path" alt="">
+        <img v-if="manager?.img?.path" class="w-50 m__management_card_img" :src="manager?.img.path" alt="">
+        <img v-else class="w-50 m__management_card_img" src="@/assets/temporary/manager-1.jpg" alt="">
 
         <div class="w-50 box-brb h-100 ovr-hidden pad-t-24p pad-b-24p pad-r-24p m__management_card_items">
 
@@ -20,7 +21,7 @@
           <h3 class="commonT colorType h-30p line-h-36 mt-12">{{manager?.name[$i18n.locale]}}</h3>
           <h3 class="commonT colorType h-30p line-h-36 mt-12">{{manager?.secondName[$i18n.locale]}}</h3>
 
-          <h3 class="commonP mt-24 h-60p colorGreyD line-h-30 bold">{{manager?.responsibility.text[$i18n.locale]}}</h3>
+          <h3 class="commonP mt-24 h-60p colorGreyD line-h-30 bold">{{manager?.position.text[$i18n.locale]}}</h3>
 
           <div class="w-100 mt-12 gap-12 m__management_card_info">
             <Icons
@@ -30,7 +31,7 @@
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
                 <p class="helpers mw-fit">{{$t("recDays")}}:</p>
-                <p class="mainers" v-for="day, idx in workDays" :key="idx">{{day.val}}</p>
+                <p class="mainers" >{{workDays[0]?.val}} - {{workDays[1]?.val}}</p>
               </div>
 
               <div class="w-100 gap-12">
@@ -67,7 +68,7 @@
           </div>
 
           <button
-            @click="goToSingle(manager.id)"
+            @click="goToSingle(manager._id)"
             class="prim h-48p mt-36"
           >
             <span>{{$t("more")}}</span>
@@ -78,7 +79,7 @@
     </div>
 
     <breadCrumbs
-      :currentPage="title[$i18n.locale]"
+      :currentPage="title?.[$i18n.locale]"
     />
 
   </div>
@@ -133,18 +134,18 @@ export default {
         this.managers.forEach(elem => {
           this.getWeekendDay(elem.workingTime)
           this.getWorkDays(elem.workingTime)
+          // console.log(this.managers)
         })
-        // console.log(this.managers)
       }).catch(err => {console.log(err)})
     },
     getWorkDays(time){
-      this.workDays = this.weekDays.slice(time.startDate, time.finishDate+1)
+      this.workDays = this.weekDays.filter(val => (val.id == time.startDate+1 || val.id == time.finishDate+1))
+      // console.log(this.workDays)
     },
     getWeekendDay(time){
       this.weekEnd = this.weekDays.filter(val => {
         return val.id>time.finishDate
       })
-      // console.log(this.weekEnd)
     },
     goToSingle(id) {
       this.$router.push( {path: '/management/' + id})

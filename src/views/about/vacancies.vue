@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-      :titleName="title[$i18n.locale]"
+      :titleName="title?.[$i18n.locale]"
       background="vacancies"
     />
 
@@ -12,13 +12,13 @@
 
       <div
         class="w-100 h-152p backgrnd-white pad-24p ovr-hidden bor-r-20 box-brb align-c justify-c gap-24 vacancy-card"
-        v-for="vac in allVacancies"
-        :key="vac.id"
+        v-for="vac, i in allVacancies"
+        :key="i"
       >
-        <img class="obj-fit-cov h-64p" :src="require('@/assets/static/fileIcons/' + vac.fileType + '.png')" alt="">
+      <img v-if="vac?.imgPath" class="obj-fit-cov h-64p" :src="require(`@/assets/static/fileIcons/${vac?.imgPath}`)" alt="">
         <div class="w-100 d-f fd-c h-104p">
           
-          <p class="commonD bold h-60p">{{vac.title}}</p>
+          <p class="commonD bold h-60p">{{vac?.title?.[$i18n.locale]}}</p>
           
           <div class="w-100 mt-a gap-48 document-dates">
             <div class="w-a d-f fd-r align-c gap-12">
@@ -26,7 +26,7 @@
                 icon="calendar"
                 size="middle"
               />
-              <p class="helpers">{{vac.publishedDate}}</p>
+              <p class="helpers">{{filPost(vac?.createdAt)}}<i>{{$t('fullY')}}</i></p>
             </div>
 
             <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr">
@@ -81,12 +81,179 @@ export default {
       },
       curPage: 3,
       pages: 384,
-      allVacancies: this.$store.state.vacancies
+      // allVacancies: this.$store.state.vacancies,
+      allVacancies: [],
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
+    }
+  },
+  mounted(){
+    this.getAllVacancies()
+  },
+
+
+  methods: {
+    async getAllVacancies(){
+      await this.$api.get('/about/vacancies')
+      .then(resp => {
+        const data = resp.data.result.results
+        this.getVacansiesDoc(data) 
+        console.log(this.allVacancies)
+      })
+    },
+    filPost(val) {
+      if (val) {
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDay();
+        let monId = month + 1;
+
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+
+        return day + " " + monthT + " " + year;
+      }
+    },
+    getVacansiesDoc(val){
+      val.forEach(element => {
+        let doctype = this.getDoc(element.documentUrl.path).toUpperCase()+'.png'
+        element.imgPath = doctype
+      });
+      this.allVacancies = val
+    },
+    getDoc(doc){
+      let temp = doc.split('.')
+      return temp[temp.length-1]
+    }
+  },
+  filters:{
+    filteredAt(val){
+      let temp = val.split('T')
+      return temp[0]
     }
   }
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+p{
+  i{
+    display: inline-block;
+    margin-left: 2px;
+    font-family: "Casper Reg";
+    font-style: normal;
+    font-size: 0.8rem;
+    line-height: 16px;
+    letter-spacing: 0.04em;
+    color: #a4abbd;
+  }
+}
 </style>

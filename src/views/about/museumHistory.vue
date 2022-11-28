@@ -9,39 +9,17 @@
 
     <h1 class="grandTitle mb-60">{{history?.title?.[$i18n.locale]}}</h1>
 
-    <p v-html="history?.text?.[$i18n.locale]" class="commonD"></p>
+    <p class="commonD spaced" v-html="history?.text?.[$i18n.locale]"></p>
 
-    <div class="w-100 history-images">
+    <div class="w-100 history-images m-history-img">
       <div v-for="item, idx in history.imageUrls" class="img-wrapper" :key="idx">
         <div class="dark-layer z-idx1"></div>
         <img :src="item.path" alt="" >
       </div>
     </div>
 
-    <!-- <div class="w-100 pos-rel ovr-hidden h-664p mt-60 bor-r-20 box-brb m__history_cards">
-      <div class="dark-layer z-idx1"></div>
-      <img class="back-img" src="@/assets/static/main.jpg" alt="">
-    </div>
-
-    <div class="w-100 gap-24 m__his_card_wrapper">
-      <div class="w-50 pos-rel ovr-hidden h-326p mt-24 bor-r-20 box-brb m__history_cards">
-        <div class="dark-layer z-idx1"></div>
-        <img class="back-img" src="@/assets/static/media.png" alt="">
-      </div>
-
-      <div class="w-50 pos-rel ovr-hidden h-326p mt-24 bor-r-20 box-brb m__history_cards">
-        <div class="dark-layer z-idx1"></div>
-        <img class="back-img" src="@/assets/static/museums-collection.png" alt="">
-      </div>
-    </div>
-
-    <div class="w-100 pos-rel ovr-hidden h-664p mt-24 bor-r-20 box-brb m__history_cards">
-      <div class="dark-layer z-idx1"></div>
-      <img class="back-img" src="@/assets/static/main.jpg" alt="">
-    </div> -->
-
     <breadCrumbs
-      :currentPage="title[$i18n.locale]"
+      :currentPage="title?.[$i18n.locale]"
     />
 
   </div>
@@ -122,6 +100,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

@@ -128,6 +128,20 @@ const en = {
   sendyourQuest: 'Send your questions, complaints and suggestions regarding the activities of the museum. We will reply to you as soon as possible',
   reqNumber: 'Your request number',
   thankFeedback: 'Thank you for your feedback. We will try to answer you as soon as possible',
+  respons: 'Responsibility',
+  workPl: 'Place of work, position',
+  birthY: 'Year of birth',
+  eduStage: 'Education',
+  speciality: 'Speciality',
+  awards: 'State awards',
+  inPos: 'In position',
+  since1: 'since',
+  year1: 'year',
+  fullY: 'y',
+  modalT: 'Text error message',
+  misspelledP: 'URL of the page where the error was found',
+  feedbacksSubject: 'Feedback Subject',
+  enterMisspelledTextMistake: 'Enter a description of the mistake or the correct option'
 }
 
 export default en

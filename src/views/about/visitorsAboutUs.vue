@@ -93,6 +93,7 @@
               icon="calendar"
               size="middle"
             />
+            
             <p class="commonP colorGreyD line-h-20">{{comment.publishedDate}}</p>
           </div>
 
