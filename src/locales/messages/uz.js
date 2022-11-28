@@ -137,6 +137,10 @@ const uz = {
   inPos: 'Lavozimda',
   since1: 'dan',
   year1: 'yil',
-  fullY: 'y'
+  fullY: 'y',
+  modalT: 'Matnda xatolik haqida xabar',
+  misspelledP: 'Matnda xatolik topilgan sahifa manzili',
+  feedbacksSubject: 'Ariza mavzusi',
+  enterMisspelledTextMistake: 'Xatoning tavsifini yoki to‘g‘ri variantini kiriting'
 }
 export default uz

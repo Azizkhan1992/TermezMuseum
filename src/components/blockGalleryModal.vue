@@ -49,11 +49,22 @@ export default {
   },
   mounted(){
     this.getImageStepper()
+    this.getPulls()
   },
 
   methods: {
     modalDeactive() {
       this.$emit("modalDeactive");
+    },
+    getPulls(){
+      document.addEventListener('keydown', (event) => {
+        if(event.keyCode === 37){
+          this.moveR()
+        }
+        else if(event.keyCode === 39){
+          this.moveL()
+        }
+      })
     },
     getImageStepper() {
 

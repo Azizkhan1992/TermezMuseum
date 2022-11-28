@@ -14,7 +14,7 @@ const ru = {
   workhours: 'Часы работы',
   contacts: 'Контакты',
   dayoff: 'Выходной',
-  socialNet: 'Подпишитесь на нас в',
+  socialNet: 'Мы в социальных сетях',
   address: 'Адрес',
   cookie: 'Файлы cookie',
   siteMap: 'Карта сайта',
@@ -111,7 +111,7 @@ const ru = {
   file: 'Файл',
   discipline: 'Дисциплина',
   numberProduct: 'Номер продукта',
-  countFiles: 'Количество файлов',  
+  countFiles: 'Количество файлов',
   countPicture: 'Количество изображений',
   countVideoFiles: 'Количество видео-файлов',
   look: 'Посмотреть',
@@ -137,7 +137,11 @@ const ru = {
   inPos: 'В занимаемой должности',
   since1: 'с',
   year1: 'года',
-  fullY: 'г'
+  fullY: 'г',
+  modalT: 'Сообщение об ошибке в тексте',
+  misspelledP: 'Адрес страницы, где найдена ошибка',
+  feedbacksSubject: 'Тема обращения',
+  enterMisspelledTextMistake: 'Введите описание ошибки или правильный вариант'
 }
 
 export default ru

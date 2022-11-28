@@ -137,7 +137,11 @@ const uzcyr = {
   inPos: 'Лавозимда',
   since1: 'дан',
   year1: 'йил',
-  fullY: 'й'
+  fullY: 'й',
+  modalT: 'Матнда хатолик ҳақида хабар',
+  misspelledP: 'Матнда хатолик топилган саҳифа манзили',
+  feedbacksSubject: 'Ариза мавзуси',
+  enterMisspelledTextMistake: 'Хатонинг тавсифини ёки тўғри вариантни киритинг'
 }
 
 export default uzcyr

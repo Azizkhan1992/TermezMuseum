@@ -176,7 +176,7 @@
 
     <div class="w-100 fd-c mt-60 gap-24">
       <h4 class="commonT colorGreyD">{{$t("feedback")}}</h4>
-      <h4 class="commonD colorGreyD">{{txt?.[$i18n.locale]}}</h4>
+      <h4 class="commonD colorGreyD">{{contacts?.feedback?.text?.[$i18n.locale]}}</h4>
     </div>
 
     <div class="w-100 fd-c bor-r-20 ovr-hidden box-brb mt-24 backgrnd-white pad-24p">
@@ -462,7 +462,7 @@ export default {
 
         this.getWorkDays(resp.data.result.schedule.workingDays);
       this.getWeekend(resp.data.result.schedule.workingDays);
-        // console.log(this.contacts)
+        console.log(this.contacts)
       }).catch(err => {console.log(err)})
     },
     goToSocial(obj) {
