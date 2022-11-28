@@ -16,6 +16,7 @@
 import additionalLayout from './layouts/additionalLayout.vue'
 import mainLayout from './layouts/mainLayout.vue'
 import preLoaderWindow from './components/preLoaderWindow.vue'
+// import googleOneTapSignin from "@/composables/googleOneTapSignin";
 
 export default {
   name: 'app',
@@ -48,6 +49,8 @@ export default {
       });
     },
 
+
+
     async off() {
       await
         this.$store.dispatch('preloaderOff')
@@ -58,6 +61,10 @@ export default {
   mounted() {
     this.getSelectionText()
     setTimeout(()=>{this.off()},1500)
+
+    // const { googleOptions, oneTapSignin, userData } = googleOneTapSignin()
+    // oneTapSignin(googleOptions)
+    // console.log(userData)
   }
 }
 </script>

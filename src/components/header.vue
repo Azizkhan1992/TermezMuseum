@@ -381,14 +381,14 @@ export default {
   mounted() {
     this.getMenuData();
     this.hidingHeader();
-    // if (
-    //   window.location.pathname === "/" &&
-    //   window.location.pathname !== "/contacts"
-    // ) {
-    //   setTimeout(() => {
-    //     this.hideHeader();
-    //   }, 3000);
-    // }
+    if (
+      window.location.pathname === "/" &&
+      window.location.pathname !== "/contacts"
+    ) {
+      setTimeout(() => {
+        this.hideHeader();
+      }, 5000);
+    }
     this.$i18n.locale = this.$route.query.lang || "language_uzlatin";
   },
 

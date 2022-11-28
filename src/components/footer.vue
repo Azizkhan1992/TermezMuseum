@@ -169,7 +169,7 @@
                     :key="idz"
                     :href="social?.link"
                     target="_blank"
-                    v-show="social"
+                    v-show="contacts?.socialNetworks?.links.length > 0"
                   >
                     <img
                       v-if="social?.name"
@@ -183,6 +183,7 @@
 
             <!-- Social Networks Stop -->
           </div>
+
           <div class="infoSection tablet">
             <!-- Address Start -->
 
@@ -234,6 +235,7 @@
                 </div>
               </div>
             </div>
+
             <div class="footer-contact">
               <h3 class="mt-64">{{ $t("contacts") }}</h3>
               <div class="infoPart mt-28">
@@ -313,7 +315,9 @@
 
       <div class="w-12 d-f fd-r gap-24 mt-24">
         <div class="w-100">
-          <p v-html="textCE?.[$i18n.locale]"></p>
+          <p v-html="textCE?.[$i18n.locale]">
+            
+          </p>
         </div>
 
         <div class="w-100 site-footer-text">
@@ -598,6 +602,9 @@ export default {
         }
       }
     },
+    getDays(start, finish) {
+      return this.weeks[start] + ' - ' +this.weeks[finish]
+    }
   },
 
   mounted() {

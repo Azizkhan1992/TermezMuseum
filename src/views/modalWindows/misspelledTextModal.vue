@@ -1,5 +1,5 @@
 <template>
-  <div class="modalBack">
+  <div class="modalBack" @click="closeMe">
     <div class="misspelled-content">
       <div class="misspelled-wrapper">
         <Icons

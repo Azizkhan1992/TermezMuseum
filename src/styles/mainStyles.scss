@@ -4215,6 +4215,11 @@ input {
 }
 @media (max-width: 900px) {
 
+  .misspelled-content{
+    width: calc(100vw - 200px) !important;
+    left: calc(100vw - 90%) !important;
+  }
+
   .commonD{
     i{
       font-size: 0.75rem !important;
@@ -4641,6 +4646,11 @@ input {
   }
 }
 @media (max-width: 470px) {
+
+  .misspelled-content{
+    width: calc(100vw - 100px) !important;
+    left: calc(100vw - 90%) !important;
+  }
 
   .commonD{
     i{
