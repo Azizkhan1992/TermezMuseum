@@ -4,17 +4,10 @@
       <div class="footer-top">
         <div class="d-f w-4 gap-24 mb-16 footer-logo-img">
         <footerLogo />
-  
+
         <div class="logo">
           <h4> {{logotxt1?.[$i18n.locale]}} <br> <span> {{logotxt2[$i18n.locale]}}</span> <br> {{logotxt3[$i18n.locale]}} </h4>
         </div>
-        <!-- <div class="w-100 fd-c justify-sb">
-          <p class="logoTitle">Государственный</p>
-
-          <p class="logoTitle">Музей Искусств</p>
-
-          <p class="logoTitle">Узбекистана</p>
-        </div> -->
       </div>
       <div class="w-8">
         <div class="w-4 d-f fd-r justify-sb site-footer-top-text">
@@ -35,6 +28,7 @@
         </div>
       </div>
       </div>
+
       <div class="footer-menu-block gap-24">
         <div class="w-9 fd-r gap-24 d-f">
           <div
@@ -78,7 +72,7 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">{{$t("workdays")}}:</p>
-                  <p class="accented">{{contacts?.schedule?.workingDays.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays.end?.[$i18n.locale]}}</p>
+                  <p class="accented">{{ getDays(contacts?.schedule?.workingDays.start, contacts?.schedule?.workingDays.end) }}</p>
                 </div>
 
                 <div class="d-f fd-r gap-12">
@@ -110,8 +104,9 @@
 
                 <div class="d-f fd-r gap-12">
                   <p class="secondaryText">Fax:</p>
-                  <a :href="item" v-for="item, idy in contacts?.contact?.fax" :key="idy" class="accented"
-                    >{{item}}</a
+                  <a :href="item" v-for="item, idy in contacts?.contact?.fax" :key="idy" class="accented">
+                    {{item}}
+                  </a
                   >
                 </div>
               </div>
@@ -138,17 +133,16 @@
               <div class="d-f fd-c gap-12">
                 <div class="d-f fd-r gap-24">
                   <a
-                    v-for="social, idz in contacts?.socialNetworks?.links"
+                    v-for="(social, idz) in contacts?.socialNetworks?.links"
                     :key="idz"
                     :href="social.link"
                     target="_blank"
-                    v-show="contacts?.socialNetworks?.links.length > 0"
                   >
                     <img
                       :src="
-                        require('@/assets/icons/' + social.network + '.svg')
+                        require('@/assets/icons/' + social?.network + '.svg')
                       "
-                      alt=""
+                      alt="err"
                     />
                   </a>
                 </div>
@@ -157,6 +151,7 @@
 
             <!-- Social Networks Stop -->
           </div>
+
           <div class="infoSection tablet">
             <!-- Address Start -->
 
@@ -178,7 +173,7 @@
                 <div class="d-f fd-c gap-12">
                   <div class="d-f fd-r gap-12">
                     <p class="secondaryText">{{$t("workdays")}}:</p>
-                    <p class="accented">{{contacts?.schedule?.workingDays?.start?.[$i18n.locale]}} - {{contacts?.schedule?.workingDays?.end?.[$i18n.locale]}}</p>
+                    <p class="accented">{{ getDays(contacts?.schedule?.workingDays?.start, contacts?.schedule?.workingDays?.end) }}</p>
                   </div>
 
                   <div class="d-f fd-r gap-12">
@@ -193,6 +188,7 @@
                 </div>
               </div>
             </div>
+
             <div class="footer-contact">
               <h3 class="mt-64">{{$t("contacts")}}</h3>
               <div class="infoPart mt-28">
@@ -227,11 +223,6 @@
             </div>
             <!-- Schedule Stop -->
 
-            <!-- Contacts Start -->
-
-
-            <!-- Contacts Stop -->
-
             <!-- Social Networks Start -->
             <div class="footer-contact">
               <h3 class="mt-64">{{$t("socialNet")}}</h3>
@@ -265,7 +256,7 @@
       <div class="w-12 d-f fd-r gap-24 mt-24">
         <div class="w-100">
           <p v-html="textCE?.[$i18n.locale]">
-            
+
           </p>
         </div>
 
@@ -331,22 +322,22 @@ export default {
     return {
       developers: "https://daac.uz/",
       contacts: {},
-      weekDays: [
-        {id: 1, name: 'Yakshanba', val: 'Yak'},
-        {id: 2, name: 'Dushanba', val: 'Du'},
-        {id: 3, name: 'Seshanba', val: 'Se'},
-        {id: 4, name: 'Chorshanba', val: 'Chor'},
-        {id: 5, name: 'Payshanba', val: 'Pay'},
-        {id: 6, name: 'Juma', val: 'Ju'},
-        {id: 7, name: 'Shanba', val: 'Shan'}
-      ],
+      weeks: {
+        1: 'По',
+        2: 'Вт',
+        3: 'Ср',
+        4: 'Че',
+        5: 'Пя',
+        6: 'Су',
+        7: 'Во',
+      },
       weekout: {
         language_uzCyrillic: "Якшанба",
         language_uzlatin: "Yakshanba",
         language_ru: "Воскресенье",
         language_en: "Sunday"
       },
-      
+
       textCE:{
         language_uzlatin: "© 2022 Barcha huquqlar himoyalangan. <br /> Veb-sayt materiallaridan foydalanganda manbaga havola kerak.",
         language_ru: "© 2022 Все права защищены. <br /> При использовании материалов веб-сайта, ссылка на источник обязательна.",
@@ -359,7 +350,7 @@ export default {
         language_uzCyrillic: "Матнда хатолик топдингизми? Уни танланг ва <span>Ctrl+Enter</span> тугмаларини босинг ва кейин маъмуриятни хабардор қилиш учун уни бизга юборинг.",
         language_en: "Did you find an error in the text? Select it and press <span>Ctrl+Enter</span>, and then send it to us to notify the administration.",
       },
-      
+
       logotxt1:{
         language_uzlatin: "Termiz",
         language_ru: "Термезский",
@@ -398,7 +389,7 @@ export default {
       this.$api.get('/contact')
       .then(resp => {
         this.contacts = resp.data.result
-        // console.log(this.contacts)
+        console.log(this.contacts)
       }).catch(err => {console.log(err)})
     },
     sectionSelector() {
@@ -410,6 +401,9 @@ export default {
         }
       }
     },
+    getDays(start, finish) {
+      return this.weeks[start] + ' - ' +this.weeks[finish]
+    }
   },
 
   mounted() {
