@@ -116,7 +116,7 @@ export default {
     },
     getMenu() {
       this.$api
-        .get("/menu")
+        .get("/menu/site")
         .then((resp) => {
           this.allMenu = resp?.data?.menuDocument;
           this.sectionSelector();

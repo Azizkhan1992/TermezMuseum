@@ -67,7 +67,7 @@ export default {
 
   methods: {
     getMapMenu(){
-      this.$api.get('/menu')
+      this.$api.get('/menu/site')
       .then(resp => {
         this.menuLinks = resp?.data?.menuDocument
         this.getSourcePages()
