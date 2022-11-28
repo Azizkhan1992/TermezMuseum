@@ -265,7 +265,7 @@ export default {
   methods: {
     getMenuData() {
       this.$api
-        .get("/menu")
+        .get("/menu/site")
         .then((resp) => {
           this.menuLinks = resp.data.menuDocument;
           for (let i = 1; i <= this.menuLinks.length; i++) {

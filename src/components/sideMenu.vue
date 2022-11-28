@@ -199,7 +199,7 @@ export default {
 
   methods: {
     getMobileMenu(){
-      this.$api.get('/menu')
+      this.$api.get('/menu/site')
       .then(resp=> {
         this.menuLinks = resp.data.menuDocument
         for(let i=1; i<= this.menuLinks.length; i++){
