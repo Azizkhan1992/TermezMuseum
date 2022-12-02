@@ -39,9 +39,33 @@
             <span>76 224-30-17</span>
           </a>
 
-          <button class="icon-btn">
-            <Icons icon="profile" size="24" />
+          <button id="authId" class="icon-btn" @click="googleSwitch">
+            <Icons id="authId" v-if="userInfo == ''" icon="profile" size="24" />
+
+            <div v-else class="w-100 h-100 pic" id="authId">
+              <img v-if="userInfo?.picture" :src="userInfo.picture" alt="" id="authId"/>
+            </div>
           </button>
+          <div
+            id="authId"
+            class="authorizationDrop"
+            :class="googleSwitcher ? 'open' : 'close'"
+          >
+            <div class="authOut">
+              <p v-if="userInfo == ''">{{ $t('authIn') }}</p>
+              <p v-else>{{ userInfo.name }}</p>
+            </div>
+
+            <div v-if="userInfo == ''" class="logIn">
+              <p>{{ $t("googleAuth") }}</p>
+              <div id="googleAuth" class="googleButton"></div>
+            </div>
+
+            <div v-else class="logOut" @click="logOut">
+              <p>{{$t('authOut')}}</p>
+              <Icons icon="logOut" size="32"/>
+            </div>
+          </div>
           <button @click="openSideMenu" class="burgerMenuBtn icon-btn">
             <Icons icon="burgerMenu" size="24" />
           </button>
@@ -161,6 +185,7 @@
 
 <script>
 import Icons from "./icons.vue";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "headerMenu",
@@ -172,6 +197,8 @@ export default {
   data() {
     return {
       headerHidden: false,
+      userInfo: '',
+      googleSwitcher: false,
       logotxt1: {
         language_uzlatin: "Termiz",
         language_ru: "Термезский",
@@ -286,6 +313,90 @@ export default {
         }
       });
     },
+
+    switcher(){
+      if(this.googleSwitcher == true){
+        this.googleSwitcher = false
+      } else return
+    },
+
+    googleSwitch(){
+      // this.googleSwitcher = !this.googleSwitcher
+      const _t = this
+      const idChecker = 'authId'
+      if(this.googleSwitcher == true){
+        this.googleSwitcher = false
+        document.removeEventListener('mouseup', this.switcher)
+      }else{
+        this.googleSwitcher = true
+        document.addEventListener('mouseup', function(e){
+          if(e.target && e.target.id !== idChecker && e.target.id !== 'sideBarMenuBlock' && e.target.tagName !== 'svg'){
+            _t.switcher()
+          }
+          
+        })
+      }
+    },
+
+    logOut(){
+      window.sessionStorage.userInfo = "''"
+      this.$router.go()
+    },
+
+    handleCredentialResponse(response) {
+      this.$store.state.userInfo = VueJwtDecode.decode(response.credential);
+      window.sessionStorage.userInfo = JSON.stringify(
+        VueJwtDecode.decode(response.credential)
+      );
+      this.$router.go()
+      // console.log(this.$store.state.userInfo);
+    },
+
+    auth(){
+      let _t = this;
+
+      // eslint-disable-next-line
+      google.accounts.id.initialize({
+        client_id:
+          "436134388058-4umgvtjbba54o7jp40pdb5b9tk7v0h5m.apps.googleusercontent.com",
+        callback: _t.handleCredentialResponse,
+        redirect_uri: "http://localhost:8080",
+        scope: ["profile", "email"],
+        ux_mode: "popup",
+        context: "signin",
+      });
+
+      // eslint-disable-next-line
+      google.accounts.id.renderButton(
+        document.getElementById("googleAuth"), 
+        { theme: "outline", type: 'icon', size: "large"} // customization attributes
+      );
+
+      // eslint-disable-next-line
+      google.accounts.id.prompt(); // also display the One Tap dialog
+    },
+
+    secondaryAuth(){
+      let _t = this;
+
+      // eslint-disable-next-line
+      google.accounts.id.initialize({
+        client_id:
+          "436134388058-4umgvtjbba54o7jp40pdb5b9tk7v0h5m.apps.googleusercontent.com",
+        callback: _t.handleCredentialResponse,
+        redirect_uri: "http://localhost:8080",
+        scope: ["profile", "email"],
+        ux_mode: "popup",
+        context: "signin",
+      });
+
+      // eslint-disable-next-line
+      google.accounts.id.renderButton(
+        document.getElementById("googleAuth"),
+        { theme: "outline", type: 'icon', size: "large" } // customization attributes
+      );
+    },
+
     changeLang(val) {
       this.languageSwitcher = false;
       this.$i18n.locale = val.lang;
@@ -390,6 +501,18 @@ export default {
       // }, 5000);
     }
     this.$i18n.locale = this.$route.query.lang || "language_uzlatin";
+    
+    if (window.sessionStorage.userInfo == undefined) {
+      this.userInfo = '';
+      this.auth();
+    } else if (window.sessionStorage.userInfo == "''") {
+      window.sessionStorage.userInfo = "''";
+      this.userInfo = ''
+      this.secondaryAuth();
+    } else {
+      this.userInfo = JSON.parse(window.sessionStorage.userInfo)
+      return
+    }
   },
 
   beforeDestroy() {

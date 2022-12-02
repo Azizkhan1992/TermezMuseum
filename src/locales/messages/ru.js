@@ -141,7 +141,13 @@ const ru = {
   modalT: 'Сообщение об ошибке в тексте',
   misspelledP: 'Адрес страницы, где найдена ошибка',
   feedbacksSubject: 'Тема обращения',
-  enterMisspelledTextMistake: 'Введите описание ошибки или правильный вариант'
+  enterMisspelledTextMistake: 'Введите описание ошибки или правильный вариант',
+  authIn: 'Вы еще не зарегистрированы',
+  googleAuth: 'Зарегистрируйтесь в Google',
+  authOut: 'Выход из системи',
+  museumHall: 'Схема музея',
+  year2: 'г',
+  secMuseum: 'раздел музея'
 }
 
 export default ru

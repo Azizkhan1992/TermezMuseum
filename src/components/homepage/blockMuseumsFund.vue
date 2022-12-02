@@ -1,5 +1,5 @@
 <template>
-  <div name="museumsFundBlock" class="block">
+  <div name="museumsFundBlock" class="block" v-show="fond !== undefined">
 
     <animatedTitle
       :animateAt="offTop"
@@ -58,8 +58,11 @@ export default {
       this.offTop = document.getElementsByName('museumsFundBlock')[0]?.offsetTop - 400
     },
     async getFondMuseum() {
-      const data = await this.$api('/home/fondMuseum');
-      this.fond = data.data.result
+      await this.$api.get('/home/fondMuseum/site')
+      .then(resp => {
+        this.fond = resp.data.result
+        // console.log(this.fond)
+      }), err => {console.log(err)}
     },
   },
 

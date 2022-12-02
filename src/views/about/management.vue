@@ -128,13 +128,13 @@ export default {
 
   methods: {
     getManagmentData(){
-      this.$api.get('/about/employee')
+      this.$api.get('/about/employee/site')
       .then(resp => {
-        this.managers = resp?.data?.result?.results
+        this.managers = resp.data.employees
+        // console.log(this.managers)
         this.managers.forEach(elem => {
           this.getWeekendDay(elem.workingTime)
           this.getWorkDays(elem.workingTime)
-          // console.log(this.managers)
         })
       }).catch(err => {console.log(err)})
     },

@@ -111,7 +111,7 @@ export default {
 
   methods: {
     async getPartners(){
-      await this.$api.get('/about/partners')
+      await this.$api.get('/about/partners/site')
       .then(resp => {
         this.allPartners = resp.data
         // console.log(resp.data)

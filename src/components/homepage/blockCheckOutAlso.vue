@@ -66,14 +66,13 @@ export default {
       this.offTop = document.getElementsByName('checkOutAlsoBlock')[0]?.offsetTop - 400
     },
     async getOtherMuseum() {
-      const data = await this.$api('/home/otherMuseums');
-      this.otherMuseums = data.data.otherWebsiteDocument
-
-      // console.log(this.otherMuseums)
-
-      for(let i=1; i<=  this.otherMuseums.length; i++){
+      await this.$api.get('/home/otherMuseums/site')
+      .then(resp => {
+        this.otherMuseums = resp.data.otherWebsiteDocument
+        for(let i=1; i<=  this.otherMuseums.length; i++){
         this.otherMuseums[i-1].id = i
       }
+      }),err => {console.log(err)}
     },
     prev() {
       clearInterval(this.playInterval)
