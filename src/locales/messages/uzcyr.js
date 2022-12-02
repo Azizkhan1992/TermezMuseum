@@ -141,7 +141,13 @@ const uzcyr = {
   modalT: 'Матнда хатолик ҳақида хабар',
   misspelledP: 'Матнда хатолик топилган саҳифа манзили',
   feedbacksSubject: 'Ариза мавзуси',
-  enterMisspelledTextMistake: 'Хатонинг тавсифини ёки тўғри вариантни киритинг'
+  enterMisspelledTextMistake: 'Хатонинг тавсифини ёки тўғри вариантни киритинг',
+  authIn: 'Сиз ҳали Рўйхатдан ўтмадингиз',
+  googleAuth: 'Google орқали рўйхатдан ўтинг',
+  authOut: 'Тизимдан чиқиш',
+  museumHall: 'Музей харитаси',
+  year2: 'й',
+  secMuseum: 'музей бўлими'
 }
 
 export default uzcyr

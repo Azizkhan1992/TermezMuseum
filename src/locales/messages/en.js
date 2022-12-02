@@ -141,7 +141,13 @@ const en = {
   modalT: 'Text error message',
   misspelledP: 'URL of the page where the error was found',
   feedbacksSubject: 'Feedback Subject',
-  enterMisspelledTextMistake: 'Enter a description of the mistake or the correct option'
+  enterMisspelledTextMistake: 'Enter a description of the mistake or the correct option',
+  authIn: 'You are not registered',
+  googleAuth: 'Sign up with Google',
+  authOut: 'Sign out',
+  museumHall: 'Museum map',
+  year2: 'y',
+  secMuseum: 'Section Museum'
 }
 
 export default en

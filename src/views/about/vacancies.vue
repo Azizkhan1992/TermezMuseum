@@ -202,11 +202,11 @@ export default {
 
   methods: {
     async getAllVacancies(){
-      await this.$api.get('/about/vacancies')
+      await this.$api.get('/about/vacancies/site')
       .then(resp => {
         const data = resp.data.result.results
         this.getVacansiesDoc(data) 
-        console.log(this.allVacancies)
+        // console.log(this.allVacancies)
       })
     },
     filPost(val) {

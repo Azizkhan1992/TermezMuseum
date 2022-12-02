@@ -102,10 +102,11 @@ export default {
 
   methods: {
     async getAllDocs(){
-      await this.$api.get('/about/documents')
+      await this.$api.get('/about/documents/site')
       .then(resp => {
         this.allDocuments = resp.data.result.results
         this.getTypeDocs()
+        // console.log(this.allDocuments)
       }), err => {console.log(err)}
     },
 

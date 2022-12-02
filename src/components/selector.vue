@@ -78,6 +78,10 @@ export default {
       } else return
     },
 
+    logProp(){
+      console.log(this.options)
+    },
+
     choosingOption() {
       this.chosenOption = this.options[0]
     },
@@ -106,6 +110,7 @@ export default {
   },
 
   mounted() {
+    this.logProp()
   },
 
   beforeDestroy() {
