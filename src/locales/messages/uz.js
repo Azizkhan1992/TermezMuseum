@@ -148,5 +148,6 @@ const uz = {
   museumHall: 'Muzey xaritasi',
   year2: 'y',
   secMuseum: 'muzey bo\'limi',
+  seeMore: 'Batafsil'
 }
 export default uz

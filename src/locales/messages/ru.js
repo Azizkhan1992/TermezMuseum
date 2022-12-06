@@ -147,7 +147,8 @@ const ru = {
   authOut: 'Выход из системи',
   museumHall: 'Схема музея',
   year2: 'г',
-  secMuseum: 'раздел музея'
+  secMuseum: 'раздел музея',
+  seeMore: 'Подробно'
 }
 
 export default ru

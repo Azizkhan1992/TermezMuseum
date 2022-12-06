@@ -147,7 +147,8 @@ const uzcyr = {
   authOut: 'Тизимдан чиқиш',
   museumHall: 'Музей харитаси',
   year2: 'й',
-  secMuseum: 'музей бўлими'
+  secMuseum: 'музей бўлими',
+  seeMore: 'Батафсил'
 }
 
 export default uzcyr

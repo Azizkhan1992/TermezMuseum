@@ -339,7 +339,7 @@ export default {
     },
 
     goToSingle() {
-      this.$router.push({ path: '/halls/' + 'Сурханский оазис в каменном веке'})
+      this.$router.push({ path: `/halls/${this.hall._id}_${this.hall?.title?.[this.$i18n.locale]}`})
     }
   }
 }

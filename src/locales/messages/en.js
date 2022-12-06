@@ -147,7 +147,8 @@ const en = {
   authOut: 'Sign out',
   museumHall: 'Museum map',
   year2: 'y',
-  secMuseum: 'Section Museum'
+  secMuseum: 'Section Museum',
+  seeMore: 'In detail'
 }
 
 export default en
