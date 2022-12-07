@@ -123,7 +123,7 @@ export default {
     getYear(date){
       let data = date.split('T')
       let year = new Date(data[0]).getFullYear()
-      console.log(year)
+      // console.log(year)
       return year
     }
   }

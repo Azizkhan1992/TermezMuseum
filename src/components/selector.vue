@@ -79,9 +79,9 @@ export default {
     },
 
     logProp(){
-      if(this.options.length>0){
-        console.log(this.options)
-      }
+      // if(this.options.length>0){
+      //   console.log(this.options)
+      // }
     },
 
     choosingOption() {
@@ -112,7 +112,7 @@ export default {
   },
 
   mounted() {
-    this.logProp()
+    // this.logProp()
   },
 
   beforeDestroy() {

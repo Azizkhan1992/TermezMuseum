@@ -296,7 +296,7 @@ export default {
         let temp = val.split("T");
         let year = new Date(temp[0]).getFullYear();
         let month = new Date(temp[0]).getMonth();
-        let day = new Date(temp[0]).getDay();
+        let day = new Date(temp[0]).getDate();
         let monId
         if(month !== 11){
           monId = month + 1;
