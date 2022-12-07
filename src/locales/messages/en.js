@@ -92,6 +92,7 @@ const en = {
   countStatues: 'Number of statues',
   countBook: "Number of books",
   buy2: "Buy",
+  goLink: "Go to link",
   langs: 'Languages',
   countPage: 'Number of pages',
   plannedEvents: 'Planned events',

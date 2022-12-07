@@ -92,6 +92,7 @@ const ru = {
   countStatues: 'Количество статуй',
   countBook: "Количество книг",
   buy2: "Приобрести",
+  goLink: "Перейти",
   langs: 'Языки',
   countPage: 'Количество страниц',
   plannedEvents: 'Запланированные мероприятия',

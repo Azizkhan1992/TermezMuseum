@@ -32,6 +32,7 @@ const uz = {
   year: 'Yil',
   author: 'Muallif',
   buy: 'Sotib olish',
+  goLink: "Havolaga o`tish",
   recDays: 'Qabul kunlari',
   recHours: 'Qabul vaqti',
   phoneNumber: 'Telefon raqami',
