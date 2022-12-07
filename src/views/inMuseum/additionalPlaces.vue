@@ -17,10 +17,9 @@
         :key="place.id"
         class="w-100 ovr-hidden pos-rel bor-r-20 h-610p"
       >
-
         <div class="w-4 z-idx2 d-f fd-c ml-a pad-t-48 pad-b-48 pad-r-24p box-brb">
-          <h3 class="commonT">{{place.title}}</h3>
-          <p class="commonD mt-24 colorWhite">{{place.description}}</p>
+          <h3 class="commonT">{{place.title?.[$i18n.locale]}}</h3>
+          <p class="commonD mt-24 colorWhite">{{place.text?.[$i18n.locale]}}</p>
 
           
 
@@ -36,12 +35,12 @@
               <div class="w-100 fd-c gap-12">
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("workdays")}}:</p>
-                  <p class="mainers colorWhite">{{place.info.workingDays}}</p>
+                  <p class="mainers colorWhite">{{place.text?.[$i18n.locale]}}</p>
                 </div>
 
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("workhours")}}:</p>
-                  <p class="mainers colorWhite">{{place.info.workingHours}}</p>
+                  <p class="mainers colorWhite">{{place.WorkingTime.endDay}}</p>
                 </div>
               </div>
             </div>
@@ -55,12 +54,10 @@
               <div class="w-100 fd-c gap-12">
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t('phoneNumber')}}:</p>
-                  <a :href="'tel:' + place.info.phoneNumber" class="mainers colorWhite">{{place.info.phoneNumber}}</a>
+                  <a :href="'tel:' + place.contact.phoneNumber" class="mainers colorWhite">{{place.contact.phoneNumber}}</a>
                 </div>
               </div>
             </div>
-
-
             <div class="w-100 mt-12 gap-12">
               <Icons
                 size="middle"
@@ -69,7 +66,7 @@
               <div class="w-100 fd-c gap-12">
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("email")}}:</p>
-                  <a :href="'mailto:' + place.info.email" class="mainers colorWhite">{{place.info.email}}</a>
+                  <a :href="'mailto:' + place.contact.email" class="mainers colorWhite">{{place.contact.email}}</a>
                 </div>
               </div>
             </div>
@@ -78,7 +75,7 @@
         </div>
 
         <div class="dark-layer-card-hrz z-idx1"></div>
-        <img class="back-img" :src="require('@/assets/temporary/' + place.img + '.jpg')" alt="">
+        <img class="back-img" :src="place.img.path" alt="">
       </div>
 
       <!-- Card Stop -->
@@ -116,6 +113,21 @@ export default {
       },
       allAddPlaces: this.$store.state.addPlaces
     }
+  },
+
+  methods: {
+    getSinglePlace(){
+      this.$api.get('/inmuseum/additional/site')
+          .then(resp=> {
+            this.allAddPlaces = resp.data.result
+            for(let i=1; i<= this.allAddPlaces.length; i++){
+              this.allAddPlaces[i-1].id = i
+            }
+          }).catch(err => {console.log(err)})
+    },
+  },
+  mounted() {
+    this.getSinglePlace()
   }
 }
 </script>
