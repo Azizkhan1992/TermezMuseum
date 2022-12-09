@@ -3981,6 +3981,109 @@ input {
   }
 }
 
+.visitM{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+  .visitI{
+    width: 50%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .visLogo{
+      width: 75%;
+      height: 15%;
+      display: flex;
+      align-items: center ;
+      column-gap: 48px;
+
+      img{
+        width: max-content;
+        height: fit-content;
+        object-fit: contain;
+      }
+
+      h4{
+        font-size: 1.5rem;
+        line-height: 36px;
+        font-weight: 400;
+        font-family: 'Caviar Reg';
+        letter-spacing: 0.08em;
+        color: rgba(47, 50, 50, 0.64);
+
+        span{
+          font-weight: 700;
+          color: #4582D3;
+          display: inline-block;
+          margin: 5px 0;
+        }
+      }
+    }
+
+    .visReg{
+      width: 75%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      column-gap: 48px;
+    }
+
+    .visBtns{
+      width: 75%;
+      height: 20%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      button{
+        width: 424px;
+        height: 48px;
+        border-radius: 12px;
+        font-size: 1rem;
+          line-height: 20px;
+          letter-spacing: 0.04em;
+          font-family: 'CaviarBold';
+
+        &.visBtnBack{
+          background: transparent;
+          border: 1px solid #4582D3;
+          color: #4582D3;
+          transition: all 0.25s ease-in-out ;
+
+          &:hover{
+            background: #4582D3;
+            color: #fff;
+          }
+        }
+
+        &.visBtnHome{
+          background: #4582D3;
+          border: 0;
+          color: #fff;
+          transition: all 0.25s ease-in-out;
+
+          &:hover{
+            background: #fff;
+            color: #4582D3;
+          }
+        }
+      }
+    }
+  }
+
+  .visMImg{
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+}
+
 
 @media (max-width: 1439px) {
 

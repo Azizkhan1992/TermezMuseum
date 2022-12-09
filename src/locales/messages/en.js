@@ -148,7 +148,13 @@ const en = {
   museumHall: 'Museum map',
   year2: 'y',
   secMuseum: 'Section Museum',
-  seeMore: 'In detail'
+  seeMore: 'In detail',
+  singlGoogleAuth: 'Sign in with Google',
+  goBack: 'Go back',
+  mainP: 'Main page',
+  sendUs: 'Feedback about the museum',
+  review: 'Review',
+  feed: 'Leave a review about your impressions when visiting the museum and we will publish your review for everyone who even visits our museum'
 }
 
 export default en
