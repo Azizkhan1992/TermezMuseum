@@ -32,6 +32,7 @@ const uzcyr = {
   year: 'Йил',
   author: 'Муаллиф',
   buy: 'Сотиб олиш',
+  goLink: "Хаволага отиш",
   recDays: 'Қабул кунлари',
   recHours: 'Қабул вақти',
   phoneNumber: 'Телефон рақами',
