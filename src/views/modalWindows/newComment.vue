@@ -23,8 +23,8 @@
 
 
           <div class="w-100 fd-c align-c gap-24">
-            <h3 class="commonT colorType">Отзыв о музее</h3>
-            <p class="commonP bold colorType">Оставьте отзыв о своих впечатлениях при посещении музея и мы опубликуем ваш отзыв для всех, кто хочет тоже посетить наш музей</p>
+            <h3 class="commonT colorType">{{$t('sendUs')}}</h3>
+            <p class="commonP bold colorType">{{$t('feed')}}</p>
           </div>
 
           <div class="w-100 mt-24 grid-2">
@@ -38,7 +38,7 @@
               <label
                 class="colorGreyD"
               >
-                Имя
+              {{$t('name')}}
               </label>
               <input
                 v-model="name"
@@ -54,7 +54,7 @@
               <label
                 class="colorGreyD"
               >
-                Фамилия
+              {{$t('surname')}}
               </label>
               <input
                 v-model="surName"
@@ -153,13 +153,16 @@
             <label
               class="colorGreyD"
             >
-              Отзыв
+            {{$t('review')}}
             </label>
             <textarea
               v-model="comment"
               class="w-100"
               placeholder="Введите ваш отзыв"
             ></textarea>
+
+            <p class="reviewT" v-if="checkComment == false">Iltimos, fikringiz matnini kiriting</p>
+            <p class="reviewT" v-if="checkComment1 == true">Izoh kamida 100 belgidan iborat bo‘lishi kerak</p>
           </div>
 
           <!-- Submit = False State Stop -->
@@ -172,7 +175,7 @@
           </div>
 
           <button
-            @click="submitted = !submitted"
+            @click="sendUs(1)"
             class="prim w-4 mt-a"
           >
             <span>Click me</span>
@@ -203,19 +206,144 @@ export default {
       name: '',
       surName: '',
       comment: '',
+      checker: 1,
+
+      checkComment: true,
+      checkComment1: false,
 
       submitted: false
     }
   },
 
   methods: {
+    sendUs(){
+      // console.log(this.checker)
+      if(this.checker == 1){
+        if(this.comment){
+        this.checkComment = true
+        if(this.comment.length>=100){
+          this.submitted = !this.submitted
+          this.$api.post('/about/comments/new', {
+            firstName: this.name,
+            lastName: this.surName,
+            text: this.comment
+          })
+        }
+        this.checker = ''
+
+        
+        
+      }
+      
+      else{
+        this.checkComment = false
+
+        // if(this.submitted == true){
+        //   console.log('Ups')
+        //   this.submitted = false,
+        //   this.name = '',
+        //   this.surName = '',
+        //   this.comment = ''
+        // }
+      }
+    }else{
+      // console.log(2, this.checker)
+      this.checker = 1
+      this.submitted = false
+      this.name = '',
+      this.surName = '',
+      this.comment = ''
+
+      if(this.comment){
+        this.checkComment = true
+        if(this.comment.length>=100){
+          this.submitted = !this.submitted
+          this.$api.post('/about/comments/new', {
+            firstName: this.name,
+            lastName: this.surName,
+            text: this.comment
+          })
+        }
+
+        
+
+        
+        
+      }
+      
+      else{
+        this.checkComment = false
+
+        // if(this.submitted == true){
+        //   console.log('Ups')
+        //   this.submitted = false,
+        //   this.name = '',
+        //   this.surName = '',
+        //   this.comment = ''
+        // }
+      }
+    }
+      },
     closeModal() {
       this.$emit('closeModal')
+    }
+  },
+  watch: {
+    'comment': function(val){
+      if(val){
+        // console.log(val.length)
+        this.checkComment = true
+
+        if(val.length>=100){
+          this.checkComment1 = false
+        }else{
+          this.checkComment1 = true
+          this.checkComment = true
+        }
+      }else{
+        this.checkComment = false
+        this.checkComment1 = false
+      }
     }
   }
 }
 </script>
 
 <style>
+.colorRed{
+  color: #eb194c;
+  transition: all 0.25s ease-in-out;
+}
 
+@keyframes Validate {
+  0%{
+    transform: translateX(2px);
+  }
+  20%{
+    transform: translateX(6px);
+  }
+  40%{
+    transform: translateX(0);
+  }
+  60%{
+    transform: translateX(-6px);
+  }
+  80%{
+    transform: translateX(-2px);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+
+.reviewT{
+  margin-top: 5px;
+  font-size: 1rem;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  color: #eb194c;
+  font-weight: 500;
+  font-family: 'Caviar';
+  animation: Validate 0.25s ease-in-out;
+}
 </style>

@@ -48,6 +48,12 @@ const routes = [
     component: () => import('../views/about/visitorsAboutUs.vue')
   },
   {
+    path: '/visitModal',
+    name: 'visit-modal',
+    meta: {layout: 'additional'},
+    component: () => import('@/views/about/visitorsModal.vue')
+  },
+  {
     path: '/visitors-about-us/:id',
     name: 'visitorsCommentSinglePage',
     meta: {layout: 'main'},

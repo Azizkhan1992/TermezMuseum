@@ -149,5 +149,12 @@ const uz = {
   museumHall: 'Muzey xaritasi',
   year2: 'y',
   secMuseum: 'muzey bo\'limi',
+  seeMore: 'Batafsil',
+  singlGoogleAuth: 'Google orqali tizimga kirish',
+  goBack: 'Ortga qaytish',
+  mainP: 'Bosh sahifa',
+  sendUs: 'Muzey haqida fikr-mulohazalar',
+  review: 'Fikr',
+  feed: 'Muzeyga tashrif buyurganingizda taassurotlaringiz haqida sharh qoldiring va biz sizning sharhingizni hatto muzeyimizga tashrif buyurgan har bir kishi uchun e\'lon qilamiz.'
 }
 export default uz

@@ -11,7 +11,7 @@
       <a
         v-for="menu, idx in menuList"
         :key="idx"
-        :href="menu?.link"
+        :href="menu?.link + '?lang=' + $i18n.locale"
         class="commonP colorGreyD line-h-20"
         :class="menu?.link == currentPage ? 'active' : ''"
       >

@@ -267,7 +267,7 @@ export default {
       if(opt){
         let tempArr = this.allHalls.filter(e => (e.id == opt.value))
         this.hall = tempArr[0]
-        console.log(this.hall)
+        // console.log(this.hall)
       }
     },
 
@@ -326,7 +326,7 @@ export default {
         let temp = val.split("T");
         let year = new Date(temp[0]).getFullYear();
         let month = new Date(temp[0]).getMonth();
-        let day = new Date(temp[0]).getDay();
+        let day = new Date(temp[0]).getDate();
         let monId
         if(month !== 11){
           monId = month + 1;
@@ -339,7 +339,7 @@ export default {
     },
 
     goToSingle() {
-      this.$router.push({ path: '/halls/' + 'Сурханский оазис в каменном веке'})
+      this.$router.push({ path: `/halls/${this.hall._id}_${this.hall?.title?.[this.$i18n.locale]}`})
     }
   }
 }

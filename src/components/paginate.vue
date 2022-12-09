@@ -3,7 +3,7 @@
     
     <div class="w-a d-f fd-r gap-24">
       <button
-        @click="counter"
+        @click="prev()"
         class="primPaginator w-2 h-48p gap-12"
         :disabled="currentPageNumber === 1 ? true : false"
       >
@@ -15,6 +15,7 @@
       </button>
 
       <button
+      @click="next()"
         class="primPaginator w-2 h-48p gap-12"
         :disabled="currentPageNumber === pages ? true : false"
       >
@@ -40,7 +41,7 @@
       </div>
 
       <div class="w-a">
-        <button class="primPaginator primPagGo w-2 h-48p gap-12">
+        <button @click="goingToPage" class="primPaginator primPagGo w-2 h-48p gap-12">
         <span>{{$t("go")}}</span>
         <Icons
           icon="arrRight"
@@ -66,14 +67,11 @@ export default {
   data() {
     return {
       goToPage: 1,
+      currentPageNumber: 1
     }
   },
 
   props: {
-    currentPageNumber: {
-      type: Number,
-      required: true
-    },
     pages: {
       type: Number,
       required: true
@@ -85,13 +83,67 @@ export default {
       this.goToPage = this.currentPageNumber
     },
 
-    counter() {
-      console.log('Nooooo');
+    goingToPage(){
+      if(this.goToPage > this.pages){
+        this.goToPage = this.pages
+        this.$emit('goingToPage')
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            page: this.pages
+          }
+        })
+      }else{
+        this.$emit('goingToPage')
+        console.log(this.goToPage)
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            page: this.goToPage
+          }
+        })
+      }
+    },
+
+    prev(){
+      this.$emit('prev')
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          page: this.currentPageNumber - 1
+        }
+      })
+      this.$router.go()
+    },
+    next(){
+      this.$emit('next')
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          page: this.currentPageNumber + 1
+        }
+      })
+      this.$router.go()
     }
+
   },
 
   mounted() {
     this.goToPageChanger()
+
+    if(this.$route.query.page === undefined){
+      this.currentPageNumber = 1
+      this.goToPage = 1
+    }else{
+      this.currentPageNumber = Number(this.$route.query.page)
+      this.goToPage = Number(this.$route.query.page)
+    }
+  },
+
+  watch: {
+    '$route'(){
+      this.$router.go()
+    }
   }
 }
 </script>
