@@ -30,7 +30,9 @@
               <p class="helpers">{{doc?.createdAt | filterCreat}}</p>
             </div>
 
-            <div class="w-a d-f fd-r align-c gap-12">
+            <div class="w-a d-f fd-r align-c gap-12"
+            
+            >
               <Icons
                 icon="download"
                 size="middle"
@@ -39,7 +41,9 @@
               <p class="mainers">{{doc?.NumberOfDownloads}}</p>
             </div>
 
-            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr">
+            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr"
+            @click="downloadNewFile(doc, doc?.documentUrl?.path, 'documents', $router)"  
+            >
               <Icons
                 icon="download"
                 size="middle"
@@ -57,8 +61,11 @@
     
 
     <paginate
-      :currentPageNumber="curPage"
+    v-if="length>5"
+      @goingToPage="goingToPage()"
       :pages="pages"
+      @prev="prev"
+      @next="next"
     />
 
     <breadCrumbs
@@ -73,6 +80,7 @@ import pageTitleAnimated from '@/components/pageTitleAnimated.vue'
 import breadCrumbs from '@/components/breadCrumbs.vue'
 import paginate from '@/components/paginate.vue'
 import Icons from '@/components/icons.vue'
+import downloadNewFile from '@/mixins/fileDownloader'
 
 export default {
   name: 'documentsPage',
@@ -89,25 +97,56 @@ export default {
         language_uzCyrillic: 'Ҳужжатлар',
         language_en: 'Documents',
       },
-      curPage: 3,
-      pages: 384,
+      pagination: {
+        curPage: 1,
+        limit: 5
+      },
+      length: 0,
+      docLen: '',
       // allDocuments: this.$store.state.documents
       allDocuments: [],
       Docs: []
     }
   },
+  mixins: [downloadNewFile],
+  computed:{
+    pages(){
+      return Math.ceil(this.length/this.pagination.limit)
+    }
+  },
   mounted(){
     this.getAllDocs()
+
+    if(this.$route.query.page == undefined){
+      this.pagination.curPage = 1
+    }else this.pagination.curPage = Number(this.$route.query.page)
   },
 
   methods: {
     async getAllDocs(){
-      await this.$api.get('/about/documents/site')
+
+      const params =  {
+        page: this.$route.query.page,
+        limit: this.pagination.limit
+      }
+
+      await this.$api.get(`/about/documents/site?page=${params.page}&limit=${params.limit}`)
       .then(resp => {
         this.allDocuments = resp.data.result.results
+        this.length = resp.data.length
         this.getTypeDocs()
-        // console.log(this.allDocuments)
+        // console.log(resp.data)
       }), err => {console.log(err)}
+    },
+
+    prev(){
+      this.getAllDocs()
+    },
+    next(){
+      this.getAllDocs()
+    },
+    goingToPage(){
+      this.getAllDocs()
     },
 
     getTypeDocs(){
@@ -119,6 +158,7 @@ export default {
           // console.log(elem)
         })
         this.Docs = this.allDocuments
+        // console.log(this.Docs)
       }
     }
   },

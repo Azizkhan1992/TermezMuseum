@@ -129,7 +129,6 @@
     </div>
 
     <paginate
-    v-if="(docLen>8)"
       @goingToPage="goingToPage()"
       :pages="pages"
       @prev="prev"
