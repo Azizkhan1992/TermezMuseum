@@ -2426,7 +2426,6 @@ export default new Vuex.Store({
     async getComments({state}, queryParams){
       await Api.get(`/about/comments?page=${queryParams.page}&limit=${queryParams.limit}&sorting=${queryParams.sorting}`)
       .then((resp) => {
-        console.log(resp.data)
         state.documentLength = resp.data.lengthDocument
         state.comments = resp.data.result
       }), err =>{console.log(err)}
