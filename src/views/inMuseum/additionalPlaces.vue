@@ -13,7 +13,7 @@
       <!-- Card Start -->
 
       <div
-        v-for="place, idx in allAddPlaces"
+        v-for="(place, idx) in allAddPlaces"
         :key="idx"
         class="w-100 ovr-hidden pos-rel bor-r-20 h-610p"
       >
