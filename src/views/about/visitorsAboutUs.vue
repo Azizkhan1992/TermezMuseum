@@ -129,7 +129,6 @@
     </div>
 
     <paginate
-    v-if="(docLen>8)"
       @goingToPage="goingToPage()"
       :pages="pages"
       @prev="prev"
@@ -325,7 +324,7 @@ export default {
       .then(()=>{
         this.comments = this.$store.state.comments
         this.docLen = this.$store.state.documentLength
-        console.log(this.comments)
+        // console.log(this.comments)
         // console.log(this.docLen)
       })
 
@@ -333,13 +332,13 @@ export default {
     },
 
     async reactingToComment(react){
-      console.log(react)
+      // console.log(react)
       if(window.sessionStorage.userInfo !== undefined && window.sessionStorage.userInfo !== "''"){
         if(react.reactionBy === ''){
           await this.$api.put(`about/comments/reaction/${react.id}`, {reactionType: react.reaction})
           .then(resp => {
             if(resp.status !== 401){
-              console.log(resp)
+              // console.log(resp)
               this.$router.go()
             }
             else{
@@ -350,7 +349,7 @@ export default {
           await this.$api.put(`about/comments/reaction/${react.id}`, {reactionType: react.reaction})
           .then(resp => {
             if(resp.status !== 401){
-              console.log(resp)
+              // console.log(resp)
               this.$router.go()
             }
             else{
@@ -361,7 +360,7 @@ export default {
           await this.$api.put(`about/comments/reaction/${react.id}`, {reactionType: `un${react.reaction}`})
           .then(resp => {
             if(resp.status !== 401){
-              console.log(resp)
+              // console.log(resp)
               this.$router.go()
             }
             else{
@@ -470,7 +469,7 @@ export default {
   box-sizing: border-box;
   cursor: pointer;
   &.pressed{
-    background: #b4a081;
+    background: #4582D3;
     // color: burlywood;
   }
 }

@@ -1,8 +1,11 @@
 <template>
-  <div class="mainPage">
+  <div class="mainPage"
+  @mouseup="stopRotate"
+    @touchend="mobileStopRotate"
+  >
     
     <div class="w-100 mt-120">
-      <h2 class="grandTitle txt-align-l">{{title}}</h2>
+      <h2 class="grandTitle txt-align-l">{{title?.[$i18n.locale]}}</h2>
     </div>
 
     <div class="w-100 h-24p mt-80">
@@ -28,14 +31,19 @@
     </div>
 
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p backgrnd-white">
-      <img src="@/assets/temporary/neandertal.jpg" alt="">
+    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p backgrnd-white playerWrapper">
+      <div class="w-100 threeDPlayer">
+        <div class="imgWrapper" @mousedown="beginRotate" @mousemove="move" @touchmove="resetMove" @touchstart="startRotate">
+          <img draggable="false" :src="require('@/assets/temporary/3DFiles/'+ filesToPlay[chosenImg].img + '.jpg')" alt="" :style="{'transform': 'scale('+zoom+')'}">
+        </div>
+      </div>
     </div>
 
     <div class="playerButtonBar">
       <Icons
+      @click.native="playing"
         class="cur-ptr"
-        icon="play"
+        :icon="playButton"
         size="large"
       />
 
@@ -43,18 +51,21 @@
         class="cur-ptr"
         icon="zoomIn"
         size="large"
+        @click.native="ZoomIn"
       />
 
       <Icons
         class="cur-ptr"
         icon="zoomOut"
         size="large"
+        @click.native="ZoomOut"
       />
 
       <Icons
         class="cur-ptr"
         icon="refresh"
         size="large"
+        @click.native="refresh"
       />
     </div>
 
@@ -88,6 +99,40 @@ export default {
   data() {
     return {
       title: this.$route.params.id,
+      playButton: 'play',
+      playInterval: '',
+      chosenImg: 0,
+      zoom: 1,
+      pressed: false,
+      initialPosition: '',
+      cursorPosition: '',
+
+      filesToPlay:[
+        {img: '01'},
+        {img: '02'},
+        {img: '03'},
+        {img: '04'},
+        {img: '05'},
+        {img: '06'},
+        {img: '07'},
+        {img: '08'},
+        {img: '09'},
+        {img: '10'},
+        {img: '11'},
+        {img: '12'},
+        {img: '13'},
+        {img: '14'},
+        {img: '15'},
+        {img: '16'},
+        {img: '17'},
+        {img: '18'},
+        {img: '19'},
+        {img: '20'},
+        {img: '21'},
+        {img: '22'},
+        {img: '23'},
+        {img: '24'}
+      ],
 
       articlesnfo: {
         pagesCount: 156,
@@ -115,10 +160,137 @@ export default {
         Вокруг передней части шеи есть бороздки, представляющие кожные складки. В горловине спереди и с обеих сторон пробиты отверстия. На правой стороне челюсти имеется большое отверстие неправильной формы.
       `,
     }
+  },
+
+  methods: {
+
+    refresh(){
+      clearInterval(this.playInterval)
+      this.playButton = 'play'
+      this.chosenImg = 0
+      this.zoom = 1
+    },
+    playing(){
+      if(this.playButton == 'play'){
+        this.playButton = 'pause'
+        this.playInterval = setInterval(() => {
+        this.animation()
+      }, 150)
+      }else if (this.playButton == 'pause'){
+        this.playButton = 'play'
+        clearInterval(this.playInterval)
+      }
+    },
+    animation(){
+      let len = this.filesToPlay.length
+
+      if(this.chosenImg>0){
+        this.chosenImg--
+      }else this.chosenImg = len-1
+    },
+    ZoomIn(){
+      if(this.zoom<4){
+        this.zoom++
+      }
+    },
+    ZoomOut(){
+      if(this.zoom>1){
+        this.zoom--
+      }
+    },
+    beginRotate($e){
+      this.initialPosition = $e.pageX
+      this.pressed = true
+      // console.log(this.initialPosition)
+    },
+    move($val){
+      this.cursorPosition = $val.pageX
+      const len = this.filesToPlay.length
+
+      if(this.pressed == true && this.cursorPosition <= this.initialPosition-20){
+        this.initialPosition = $val.pageX
+        if(this.chosenImg<len-1){
+          this.chosenImg++
+        }else this.chosenImg = 0
+      }
+      else if(this.pressed == true && this.cursorPosition >= this.initialPosition+20){
+        this.initialPosition = $val.pageX
+
+        if(this.chosenImg>0){
+          this.chosenImg--
+        }else this.chosenImg = len-1
+      }
+      // console.log(this.cursorPosition, this.initialPosition)
+    },
+    resetMove(e){
+      this.cursorPosition = e.pageX || e.changedTouches[0].pageX
+      const len = this.filesToPlay.length
+
+      if(this.pressed === true && this.cursorPosition <= this.initialPosition - 5) {
+        this.initialPosition = e.pageX || e.changedTouches[0].pageX
+
+        if(this.chosenImg < len - 1) {
+          this.chosenImg ++
+        } else this.chosenImg = 0
+      }
+      else if(this.pressed === true && this.cursorPosition >= this.initialPosition + 5) {
+        this.initialPosition = e.pageX || e.changedTouches[0].pageX
+
+        if(this.chosenImg > 0) {
+          this.chosenImg --
+        } else this.chosenImg = len - 1
+      }
+    },
+    startRotate(e){
+      this.initialPosition = e.pageX || e.changedTouches[0].pageX
+      this.pressed = true
+    },
+    stopRotate() {
+      this.pressed = false
+    },
+    mobileStopRotate() {
+      this.pressed = false
+    },
+  },
+  watch: {
+    pressed(){
+      if(this.pressed === true){
+        this.playButton = 'play'
+        clearInterval(this.playInterval)
+      }
+      // console.log(val)
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 
+.playerWrapper{
+  margin-top: 120px;
+    user-select: none;
+    width: 100vw;
+    height: auto;
+}
+.threeDPlayer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      
+      .imgWrapper {
+        background-color: #fff;
+        width: 1320px;
+        height: 720px;
+        border-radius: 40px;
+        overflow: hidden;
+        cursor: grab;
+    
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+    }
 </style>
