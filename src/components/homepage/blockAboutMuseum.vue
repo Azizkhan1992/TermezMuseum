@@ -44,8 +44,11 @@ export default {
       this.offTop = document.getElementsByName('aboutMuseumBlock')[0]?.offsetTop - 400
     },
     async getHis() {
-      const data = await this.$api.get('/home/about')
-      this.about = data.data.result
+     await this.$api.get('/home/about/site')
+      .then(resp => {
+        this.about = resp.data.result
+        // console.log(this.about)
+      }), err => {console.log(err)}
     },
     goAbout() {
       this.$router.push('/museum-history')

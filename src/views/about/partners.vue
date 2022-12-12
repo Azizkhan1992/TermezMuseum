@@ -66,8 +66,11 @@
       
 
     <paginate
-      :currentPageNumber="curPage"
+    v-if="length>4"
+      @goingToPage="goingToPage()"
       :pages="pages"
+      @prev="prev"
+      @next="next"
     />
 
     <breadCrumbs
@@ -91,8 +94,12 @@ export default {
 
   data() {
     return {
-      curPage: 3,
-      pages: 384,
+      pagination: {
+        curPage: 1,
+        limit: 4
+      },
+      length: 0,
+      docLen: '',
       title:{
         language_uzlatin:'Muzey hamkorlari',
         language_ru:'Партнеры музея',
@@ -107,15 +114,40 @@ export default {
   },
   mounted(){
     this.getPartners()
+
+    if(this.$route.query.page == undefined){
+      this.pagination.curPage = 1
+    }else this.pagination.curPage = Number(this.$route.query.page)
+  },
+  computed:{
+    pages(){
+      return Math.ceil(this.length/this.pagination.limit)
+    }
   },
 
   methods: {
     async getPartners(){
-      await this.$api.get('/about/partners')
+
+      const params = {
+        page: this.$route.query.page,
+        limit: this.pagination.limit
+      }
+
+      await this.$api.get(`/about/partners/site?page=${params.page}&limit=${params.limit}`)
       .then(resp => {
         this.allPartners = resp.data
-        // console.log(resp.data)
+        this.length = resp.data.length
+        // console.log(resp.data.length)
       })
+    },
+    prev(){
+      this.getPartners()
+    },
+    next(){
+      this.getPartners()
+    },
+    goingToPage(){
+      this.getPartners()
     },
     cuttingUrl(url) {
       const cutUrl = 'www.' + url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").slice(0, -1)

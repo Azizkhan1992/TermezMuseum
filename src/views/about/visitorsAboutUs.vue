@@ -15,24 +15,28 @@
       background="visitors-about-us"
     />
 
+    <VisitModal v-if="isVisitModal" @sendM="withM"/>
+
     <div class="w-100 mb-60 h-a align-c">
       <div class="w-a d-f fd-r gap-48">
         <p class="commonP colorGreyD">{{$t("numberReview")}}:</p>
-        <p class="commonP bold colorType">1 694</p>
+        <p class="commonP bold colorType">{{docLen}}</p>
       </div>
 
       <div class="w-a d-f fd-r gap-48 ml-120 align-c">
         <p class="commonP colorGreyD">{{$t("sort")}}:</p>
         <button
+        @click="changeSortingType('date')"
           class="ghost w-2 h-54p"
-          :class="sortedBy == 1 ? 'active' : ''"
+          :class="sortedBy == 'date' ? 'active' : ''"
         >
           <span>{{$t("pubDate")}}</span>
         </button>
 
         <button
+        @click="changeSortingType('like')"
           class="ghost w-2 h-54p"
-          :class="sortedBy == 2 ? 'active' : ''"
+          :class="sortedBy == 'like' ? 'active' : ''"
         >
           <span>{{$t("amountLikes")}}</span>
         </button>
@@ -43,7 +47,7 @@
       <h3 class="commonT colorGreyD">{{$t("wouldShare")}}</h3>
 
       <button
-        @click="modalIsOpen = true"
+        @click="addComment"
         class="prim w-3"
       >
         <span>{{$t("comment")}}</span>
@@ -55,37 +59,46 @@
       
       <div
         class="ovr-hidden d-f fd-c pos-rel pad-t-48 pad-b-24 pad-l-48 pad-r-48 box-brb w-100 backgrnd-white bor-r-20 h-358p"
-        v-for="comment in comments"
-        :key="comment.id"
+        v-show="comments.length>0"
+        v-for="comment, idx in comments"
+        :key="idx"
       >
         
         <p class="commonD truncate-5 w-100 h-150p">
-          {{comment.txt}}
+          {{comment?.text}}
         </p>
 
         <div class="w-100 mt-48 gap-12">
-          <p class="commonP colorType bold line-h-20">{{comment.author}}</p>
-          <p class="commonP colorGreyD line-h-20">from {{comment.country}}</p>
+          <p class="commonP colorType bold line-h-20">{{comment?.firstName}} {{comment?.lastName}}</p>
+          <!-- <p class="commonP colorGreyD line-h-20">from {{comment.country}}</p> -->
         </div>
 
         <div class="w-100 mt-48 gap-48">
           
-          <div class="w-a d-f fd-r align-c gap-12">
+          <div class="w-a d-f fd-r align-c gap-12 liked"
+          @click="reactingToComment({reaction: 'like', id: comment._id, reactionBy: comment.reactionBy})"
+          :class="{'pressed' : comment.reactionBy === 'like'}"
+          >
             <Icons
               class="cur-ptr"
               icon="like"
               size="middle"
+              :color="likeColor(comment.reactionBy)"
             />
-            <p class="commonP colorGreyD line-h-20">{{comment.likes}}</p>
+            <p class="commonP colorGreyD line-h-20" :class="{'colorPrimB': comment.reactionBy === 'like'}">{{comment?.numberOfLikes}}</p>
           </div>
 
-          <div class="w-a d-f fd-r align-c gap-12">
+          <div class="w-a d-f fd-r align-c gap-12 liked"
+          @click="reactingToComment({reaction: 'dislike', id: comment._id, reactionBy: comment.reactionBy})"
+          :class="{'pressed' : comment.reactionBy === 'dislike'}"
+          >
             <Icons
               class="cur-ptr"
               icon="dislike"
               size="middle"
+              :color="dislikeColor(comment.reactionBy)"
             />
-            <p class="commonP colorGreyD line-h-20">{{comment.dislikes}}</p>
+            <p class="commonP colorGreyD line-h-20" :class="{'colorPrimB' : comment.reactionBy === 'dislike'}">{{comment?.numberOfDislikes}}</p>
           </div>
 
           <div class="w-a d-f fd-r align-c gap-12">
@@ -94,11 +107,11 @@
               size="middle"
             />
             
-            <p class="commonP colorGreyD line-h-20">{{comment.publishedDate}}</p>
+            <p class="commonP colorGreyD line-h-20">{{filPost(comment?.createdAt) + " " + $t("year2")}}</p>
           </div>
 
           <div
-            @click="goToSingle(comment.id)"
+            @click="goToSingle(comment._id)"
             class="w-a d-f fd-r align-c cur-ptr gap-12 ml-a"
           >
             <p class="commonP colorGreyD line-h-20">{{$t("read")}}</p>
@@ -116,8 +129,10 @@
     </div>
 
     <paginate
-      :currentPageNumber="curPage"
+      @goingToPage="goingToPage()"
       :pages="pages"
+      @prev="prev"
+      @next="next"
     />
 
     <breadCrumbs
@@ -132,19 +147,27 @@ import breadCrumbs from '@/components/breadCrumbs.vue'
 import paginate from '@/components/paginate.vue'
 import Icons from '@/components/icons.vue'
 import newComment from '../modalWindows/newComment.vue'
+import VisitModal from '@/views/about/visitorsModal.vue'
 
 export default {
   name: 'visitorsAboutUsPage',
 
   components: {
-    pageTitleAnimated, breadCrumbs, Icons, paginate, newComment
+    pageTitleAnimated, breadCrumbs, Icons, paginate, newComment, VisitModal
   },
 
   data() {
     return {
       modalIsOpen: false,
+      userInfo: null,
       curPage: 3,
       pages: 384,
+      isVisitModal: false,
+      pagination: {
+        curPage: 1,
+        limit: 8
+      },
+      docLen: '',
       sortedBy: 1,
       title:{
         language_ru:'Посетители о нас',
@@ -152,22 +175,302 @@ export default {
         language_uzCyrillic:'Биз ҳақимизда ташриф буюрувчилар',
         language_en:'Visitors about us',
       },
-      comments: this.$store.state.comments
+      // comments: this.$store.state.comments
+      comments: [],
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
     }
   },
 
+  mounted(){
+    this.getAboutUs()
+    if(window.sessionStorage.userInfo){
+      this.userInfo = window.sessionStorage.userInfo
+      // console.log(this.userInfo)
+    }
+
+    if(this.$route.query.sorting == undefined  || this.$route.query.sorting == ''){
+      this.sortedBy = 'date'
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          sorting: 'date'
+        }
+      })
+    }else this.sortedBy = this.$route.query.sorting
+
+    if(this.$route.query.page == undefined){
+      this.pagination.curPage = 1
+    }else this.pagination.curPage = Number(this.$route.query.page)
+  },
+
   methods: {
+    getAboutUs(){
+      const params = {
+        page: this.$route.query.page,
+        limit: this.pagination.limit,
+        sorting: this.$route.query.sorting
+      }
+
+      this.$store.dispatch('getComments', params)
+      .then(()=>{
+        this.comments = this.$store.state.comments
+        this.docLen = this.$store.state.documentLength
+        // console.log(this.comments)
+        // console.log(this.docLen)
+      })
+
+
+    },
+
+    async reactingToComment(react){
+      // console.log(react)
+      if(window.sessionStorage.userInfo !== undefined && window.sessionStorage.userInfo !== "''"){
+        if(react.reactionBy === ''){
+          await this.$api.put(`about/comments/reaction/${react.id}`, {reactionType: react.reaction})
+          .then(resp => {
+            if(resp.status !== 401){
+              // console.log(resp)
+              this.$router.go()
+            }
+            else{
+              this.$router.push({path: '/visitModal'})
+            }
+          })
+        }else if(react.reactionBy !== '' && react.reaction !== react.reactionBy){
+          await this.$api.put(`about/comments/reaction/${react.id}`, {reactionType: react.reaction})
+          .then(resp => {
+            if(resp.status !== 401){
+              // console.log(resp)
+              this.$router.go()
+            }
+            else{
+              this.$router.push({path: '/visitModal'})
+            }
+          })
+        }else if(react.reactionBy !== '' && react.reaction === react.reactionBy){
+          await this.$api.put(`about/comments/reaction/${react.id}`, {reactionType: `un${react.reaction}`})
+          .then(resp => {
+            if(resp.status !== 401){
+              // console.log(resp)
+              this.$router.go()
+            }
+            else{
+              this.$router.push({path: '/visitModal'})
+            }
+          })
+        }
+        // console.log(react)
+      }else{
+        this.$router.push({
+          path: '/visitModal'
+        })
+      }
+    },
+    withM(){
+      this.isVisitModal = false
+    },
+    addComment(){
+      if(this.userInfo  && this.userInfo !== '' && window.sessionStorage.userInfo !== "''"){
+        this.modalIsOpen = true
+        // console.log(this.userInfo) 
+      }else{
+        this.$router.push({path: '/visitModal'})
+        // console.log('Ups')
+      }
+    },
+
+    goingToPage(){
+      this.getAboutUs()
+    },
+    prev(){
+      this.getAboutUs()
+    },
+    next(){
+      this.getAboutUs()
+    },
+
+    likeColor(like){
+      // console.log(like)
+      if(like == 'like'){
+        return 'white'
+      }else return 'burlywood'
+    },
+
+    dislikeColor(dislike){
+      // console.log(dislike)
+      if(dislike == 'dislike'){
+        return 'white'
+      }else return 'burlywood'
+    },
+
+    changeSortingType(type){
+      if(type !== this.sortedBy){
+        this.sortedBy = type
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            sorting: type
+          }
+        })
+        .then(()=>{
+          this.$router.go()
+        })
+      }
+    },
     goToSingle(id) {
       this.$router.push({ path: '/visitors-about-us/' + id})
     },
 
     closeModal() {
       this.modalIsOpen = false
-    }
+    },
+    filPost(val) {
+      if (val) {
+        
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        // console.log(day)
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else{monId = 11}
+
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+
+        return day + " " + monthT + " " + year;
+      }
+    },
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 
+.colorGreyD{
+  &.colorPrimB{
+    color: #fff !important;
+  }
+}
+
+.liked{
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  &.pressed{
+    background: #4582D3;
+    // color: burlywood;
+  }
+}
 </style>

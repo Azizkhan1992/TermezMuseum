@@ -110,7 +110,7 @@ export default {
       this.offTop = document.getElementsByName('homePageBlock')[0]?.offsetTop - 400
     },
     getLinksData(){
-      this.$api.get('/home/usefulLink')
+      this.$api.get('/home/usefulLink/site')
       .then(resp => {
         this.getUsefulLink = resp.data.usefulLinkDocument
         const cloned = JSON.parse(JSON.stringify(this.getUsefulLink))
@@ -118,6 +118,7 @@ export default {
         for(let i=1; i<=this.clonedLinks.length; i++){
           this.clonedLinks[i-1].id = i
         }
+        this.play()
 
       }).catch(err => {console.log(err)})
     },

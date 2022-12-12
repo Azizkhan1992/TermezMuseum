@@ -142,6 +142,19 @@ const uz = {
   modalT: 'Matnda xatolik haqida xabar',
   misspelledP: 'Matnda xatolik topilgan sahifa manzili',
   feedbacksSubject: 'Ariza mavzusi',
-  enterMisspelledTextMistake: 'Xatoning tavsifini yoki to‘g‘ri variantini kiriting'
+  enterMisspelledTextMistake: 'Xatoning tavsifini yoki to‘g‘ri variantini kiriting',
+  authIn: 'Siz hali Ro\'yxatdan o\'tmadingiz',
+  googleAuth: 'Google orqali ro\'yxatdan o\'ting',
+  authOut: 'Tizimdan chiqish',
+  museumHall: 'Muzey xaritasi',
+  year2: 'y',
+  secMuseum: 'muzey bo\'limi',
+  seeMore: 'Batafsil',
+  singlGoogleAuth: 'Google orqali tizimga kirish',
+  goBack: 'Ortga qaytish',
+  mainP: 'Bosh sahifa',
+  sendUs: 'Muzey haqida fikr-mulohazalar',
+  review: 'Fikr',
+  feed: 'Muzeyga tashrif buyurganingizda taassurotlaringiz haqida sharh qoldiring va biz sizning sharhingizni hatto muzeyimizga tashrif buyurgan har bir kishi uchun e\'lon qilamiz.'
 }
 export default uz

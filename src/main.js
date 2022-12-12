@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from '@/plugins/axios'
+import VueJwtDecode from 'vue-jwt-decode'
 
 
 
@@ -15,6 +16,7 @@ import Vuelidate from 'vuelidate'
 import {i18n} from "@/plugins/i18n"
 
 Vue.use( Vuelidate )
+Vue.use(VueJwtDecode)
 
 
 

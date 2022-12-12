@@ -88,12 +88,13 @@ export default {
 
   methods: {
     async getAllFaqs(){
-      await this.$api.get('/about/FAQ')
+      await this.$api.get('/about/FAQ/site')
       .then(resp => {
         this.allFAQS = resp.data.documents
         for(let i=1; i<=this.allFAQS.length; i++){
           this.allFAQS[i-1].id = i
         }
+        // console.log(this.allFAQS)
       })
     },
 

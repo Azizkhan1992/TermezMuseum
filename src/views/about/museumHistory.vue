@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     getMuseumHistory(){
-      this.$api.get('/about/history')
+      this.$api.get('/about/history/site')
       .then(resp => {
         this.history = resp.data.historyDocument
         // console.log(this.history)

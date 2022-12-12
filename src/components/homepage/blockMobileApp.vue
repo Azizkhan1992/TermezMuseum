@@ -93,7 +93,7 @@ export default {
       this.offTop = document.getElementsByName('mobileAppBlock')[0]?.offsetTop - 400
     },
     async getMobileApp() {
-      await this.$api.get('/home/mobileApp')
+      await this.$api.get('/home/mobileApp/site')
       .then(resp => {
         if(resp.data.mobileAppDocument){
           this.loading = true

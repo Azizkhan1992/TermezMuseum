@@ -29,7 +29,9 @@
               <p class="helpers">{{filPost(vac?.createdAt)}}<i>{{$t('fullY')}}</i></p>
             </div>
 
-            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr">
+            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr"
+            @click="downloadFile(vac?.documentUrl?.path)"
+            >
               <Icons
                 icon="download"
                 size="middle"
@@ -47,8 +49,11 @@
 
 
     <paginate
-      :currentPageNumber="curPage"
+    v-if="length>5"
+      @goingToPage="goingToPage()"
       :pages="pages"
+      @prev="prev"
+      @next="next"
     />
 
     <breadCrumbs
@@ -63,6 +68,7 @@ import pageTitleAnimated from '@/components/pageTitleAnimated.vue'
 import breadCrumbs from '@/components/breadCrumbs.vue'
 import paginate from '@/components/paginate.vue'
 import Icons from '@/components/icons.vue'
+import downloadFile from '@/mixins/fileDownloader'
 
 export default {
   name: 'vacanciesPage',
@@ -70,6 +76,7 @@ export default {
   components: {
     pageTitleAnimated, breadCrumbs, paginate, Icons
   },
+  mixins: [downloadFile],
 
   data() {
     return {
@@ -79,8 +86,12 @@ export default {
         language_ru: 'Вакансии',
         language_en: 'Vacancies',
       },
-      curPage: 3,
-      pages: 384,
+      pagination: {
+        curPage: 1,
+        limit: 5
+      },
+      length: 0,
+      docLen: '',
       // allVacancies: this.$store.state.vacancies,
       allVacancies: [],
       months: [
@@ -197,25 +208,56 @@ export default {
   },
   mounted(){
     this.getAllVacancies()
+
+    if(this.$route.query.page == undefined){
+      this.pagination.curPage = 1
+    }else this.pagination.curPage = Number(this.$route.query.page)
+  },
+
+  computed:{
+    pages(){
+      return Math.ceil(this.length/this.pagination.limit)
+    }
   },
 
 
   methods: {
     async getAllVacancies(){
-      await this.$api.get('/about/vacancies')
+
+      const params = {
+        page: this.$route.query.page,
+        limit: this.pagination.limit
+      }
+
+      await this.$api.get(`/about/vacancies/site?page=${params.page}&limit=${params.limit}`)
       .then(resp => {
         const data = resp.data.result.results
+        this.length = resp.data.length
         this.getVacansiesDoc(data) 
-        console.log(this.allVacancies)
+        // console.log(resp.data)
       })
+    },
+    prev(){
+      this.getAllVacancies()
+    },
+    next(){
+      this.getAllVacancies()
+    },
+    goingToPage(){
+      this.getAllVacancies()
     },
     filPost(val) {
       if (val) {
         let temp = val.split("T");
         let year = new Date(temp[0]).getFullYear();
         let month = new Date(temp[0]).getMonth();
-        let day = new Date(temp[0]).getDay();
-        let monId = month + 1;
+        let day = new Date(temp[0]).getDate();
+        // let monId = month + 1;
+
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else{monId = 11}
 
         let monthT = this.months[monId].monthName?.[this.$i18n.locale];
 

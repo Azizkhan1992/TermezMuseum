@@ -386,7 +386,7 @@ export default {
         let temp = val.split("T");
         let year = new Date(temp[0]).getFullYear();
         let month = new Date(temp[0]).getMonth();
-        let day = new Date(temp[0]).getDay();
+        let day = new Date(temp[0]).getDate();
         let monId = month + 1;
 
         let monthT = this.months[monId].monthName?.[this.$i18n.locale];
