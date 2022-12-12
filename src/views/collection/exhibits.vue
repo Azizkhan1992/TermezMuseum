@@ -3,45 +3,44 @@
 
 
     <pageTitleAnimated
-      :titleName="title[$i18n.locale]"
-      background="exhibits"
+        :titleName="title?.[$i18n.locale]"
+        background="exhibits"
     />
 
     <!-- Input Bar Start -->
+    <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb exh-fl">
 
-    <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb">
-      
       <div class="w-3 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("categoryExhibits")}}</label>
-        
+
         <selector
-          @optionChanged="optionChanged"
-          :options="this.options"
-          id="aaa"
+            @optionChanged="optionChanged"
+            :options="this.options"
+            id="aaa"
         />
       </div>
 
       <div class="w-3 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
-        
+
         <selector
-          @optionChanged="optionChanged"
-          :options="this.options"
-          id="bbb"
+            @optionChanged="optionChanged"
+            :options="this.options"
+            id="bbb"
         />
       </div>
-      
+
       <div class="w-6 d-f fd-c">
 
         <label class="colorGreyD mb-4">{{$t("section")}}</label>
 
         <iconedInput
-          v-model="search"
-          icon="search"
-          :placeholder="$t('enterTextSearch')"
+            v-model="search"
+            icon="search"
+            :placeholder="$t('enterTextSearch')"
         />
       </div>
-      
+
     </div>
 
     <!-- Input Bar Stop -->
@@ -51,38 +50,38 @@
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
-    <div class="w-100 grid-4 mt-60">
-    
-    <div
-      @click="goToSingle"
-      v-for="xhbt in allExhibits"
-      :key="xhbt.id"
-      class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p"
-    >
-      <div class="w-100 fd-c pad-24p">
-        <p class="commonP bold line-h-24 mt-a">{{xhbt.title}}</p>
-        
-        <div class="w-100 gap-12 mt-24">
-          <p class="helpers">{{$t("discoverIn")}}:</p>
-          <p class="mainers colorWhite">{{xhbt.year}}</p>
+    <div class="w-100 grid-4 mt-60 grid-1-900">
+
+      <div
+          @click="goToSingle"
+          v-for="(xhbt,ix) in allExhibits  "
+          :key="ix"
+          class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p"
+      >
+        <div class="w-100 fd-c pad-24p">
+          <p class="commonP bold line-h-24 mt-a">{{xhbt.title?.[$i18n.locale]}}</p>
+
+          <div class="w-100 gap-12 mt-24">
+            <p class="helpers">{{$t("discoverIn")}}:</p>
+            <p class="mainers colorWhite">{{xhbt.additional.foundDate}}</p>
+          </div>
         </div>
+
+        <div class="dark-layer-card z-idx1"></div>
+        <img class="back-img" :src="xhbt.mainImage.path" alt="">
       </div>
 
-      <div class="dark-layer-card z-idx1"></div>
-      <img class="back-img" :src="require('@/assets/temporary/' + xhbt.img + '.jpg')" alt="">
     </div>
- 
-  </div>
-      
+
 
 
     <paginate
-      :currentPageNumber="curPage"
-      :pages="pages"
+        :currentPageNumber="curPage"
+        :pages="pages"
     />
 
     <breadCrumbs
-      :currentPage="title[$i18n.locale]"
+        :currentPage="title?.[$i18n.locale]"
     />
 
 
@@ -105,9 +104,11 @@ export default {
 
   data() {
     return {
+      infoo:  null,
+      URL: process.env.VUE_APP_API,
       allExhibits: this.$store.state.exhibits,
       title: {
-        language_uzlatin: 'Ko\'rgazmalar',
+        language_uzlatin: 'Korgazmalar',
         language_uzCyrillic: 'Кўргазмалар',
         language_ru: 'Экспонаты',
         language_en: 'Exhibits',
@@ -133,6 +134,16 @@ export default {
   },
 
   methods: {
+    async getSingleExhibits(){
+      await this.$api.get('/collections/exhibits/site')
+          .then(resp => {
+            this.allExhibits = resp.data.result.results
+            for(let i=1; i<=this.allExhibits.length; i++){
+              this.allExhibits[i-1].id = i
+            }
+            console.log(this.allExhibits)
+          }), err => {console.log(err)}
+    },
     optionChanged(opt) {
       console.log(opt);
     },
@@ -140,7 +151,15 @@ export default {
     goToSingle() {
       this.$router.push({ path: '/exhibits/' + this.exhibitsID})
     }
+  },
+
+  mounted() {
+    this.getSingleExhibits()
+  },
+  created() {
   }
+
+
 }
 </script>
 
