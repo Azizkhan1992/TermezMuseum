@@ -19,12 +19,22 @@
       >
         <div class="w-4 z-idx2 d-f fd-c ml-a pad-t-48 pad-b-48 pad-r-24p box-brb">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <h3 class="commonT">{{place.title?.[$i18n.locale]}}</h3>
           <p class="commonD mt-24 colorWhite">{{place.text?.[$i18n.locale]}}</p>
 =======
           <h3 class="commonT">{{place?.title?.[$i18n.locale]}}</h3>
           <p class="commonD mt-24 colorWhite">{{place?.text?.[$i18n.locale]}}</p>
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+        <h3 class="commonT">{{place.title?.[$i18n.locale]}}</h3>
+          <p class="commonD mt-24 colorWhite">{{place.text?.[$i18n.locale]}}</p>
+
+          <h3 class="commonT">{{place?.title?.[$i18n.locale]}}</h3>
+          <p class="commonD mt-24 colorWhite">{{place?.text?.[$i18n.locale]}}</p>
+
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
 
           
 
@@ -41,19 +51,35 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("workdays")}}:</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <p class="mainers colorWhite">{{place.text?.[$i18n.locale]}}</p>
 =======
                   <p class="mainers colorWhite">{{place?.startDay[0]?.name?.[$i18n.locale]}} - {{place?.endDay[0]?.name?.[$i18n.locale]}}</p>
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+                  <p class="mainers colorWhite">{{place.text?.[$i18n.locale]}}</p>
+
+                  <p class="mainers colorWhite">{{place?.startDay[0]?.name?.[$i18n.locale]}} - {{place?.endDay[0]?.name?.[$i18n.locale]}}</p>
+
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
                 </div>
 
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("workhours")}}:</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <p class="mainers colorWhite">{{place.WorkingTime.endDay}}</p>
 =======
                   <p class="mainers colorWhite">{{place?.WorkingTime?.startTime}} - {{place?.WorkingTime?.endTime}}</p>
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+                  <p class="mainers colorWhite">{{place.WorkingTime.endDay}}</p>
+
+                  <p class="mainers colorWhite">{{place?.WorkingTime?.startTime}} - {{place?.WorkingTime?.endTime}}</p>
+
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
                 </div>
               </div>
             </div>
@@ -68,10 +94,18 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t('phoneNumber')}}:</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <a :href="'tel:' + place.contact.phoneNumber" class="mainers colorWhite">{{place.contact.phoneNumber}}</a>
 =======
                   <a :href="place?.contact?.phoneNumber" class="mainers colorWhite">{{place?.contact?.phoneNumber}}</a>
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+                  <a :href="'tel:' + place.contact.phoneNumber" class="mainers colorWhite">{{place.contact.phoneNumber}}</a>
+
+                  <a :href="place?.contact?.phoneNumber" class="mainers colorWhite">{{place?.contact?.phoneNumber}}</a>
+
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
                 </div>
               </div>
             </div>
@@ -84,10 +118,18 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("email")}}:</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <a :href="'mailto:' + place.contact.email" class="mainers colorWhite">{{place.contact.email}}</a>
 =======
                   <a :href="place?.contact?.email" class="mainers colorWhite">{{place?.contact?.email}}</a>
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+                  <a :href="'mailto:' + place.contact.email" class="mainers colorWhite">{{place.contact.email}}</a>
+
+                  <a :href="place?.contact?.email" class="mainers colorWhite">{{place?.contact?.email}}</a>
+
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
                 </div>
               </div>
             </div>
@@ -97,10 +139,18 @@
 
         <div class="dark-layer-card-hrz z-idx1"></div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <img class="back-img" :src="place.img.path" alt="">
 =======
         <img class="back-img" :src="place?.img?.path" alt="">
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+        <img class="back-img" :src="place.img.path" alt="">
+
+        <img class="back-img" :src="place?.img?.path" alt="">
+
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
       </div>
 
       <!-- Card Stop -->
@@ -250,6 +300,7 @@ export default {
   },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   methods: {
     getSinglePlace(){
       this.$api.get('/inmuseum/additional/site')
@@ -287,6 +338,24 @@ export default {
 
     },
 >>>>>>> 3b3085a154b56656d871147be6ceac61836145d5
+=======
+
+  methods: {
+    getSinglePlace() {
+      this.$api.get('/inmuseum/additional/site')
+          .then(resp => {
+            this.allAddPlaces = resp.data.result
+            for (let i = 1; i <= this.allAddPlaces.length; i++) {
+              this.allAddPlaces[i - 1].id = i
+            }
+          }).catch(err => {
+        console.log(err)
+      })
+    },
+  },
+  mounted() {
+    this.getSinglePlace()
+>>>>>>> e6c684aa21b63bfcfbf766b6d282e7bb27ad6afb
   }
 }
 </script>
