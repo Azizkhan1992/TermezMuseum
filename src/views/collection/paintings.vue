@@ -4,16 +4,13 @@
 
     <pageTitleAnimated
         :titleName="title?.[$i18n.locale]"
-        background="paintings"
+        background="exhibits"
     />
 
     <!-- Input Bar Start -->
-
     <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb exh-fl">
-
       <div class="w-3 d-f fd-c">
-        <label class="colorGreyD mb-4">{{$t("paintingGenre")}}</label>
-
+        <label class="colorGreyD mb-4">{{$t("categoryExhibits")}}</label>
         <selector
             @optionChanged="optionChanged"
             :options="this.options"
@@ -23,7 +20,6 @@
 
       <div class="w-3 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
-
         <selector
             @optionChanged="optionChanged"
             :options="this.options"
@@ -32,9 +28,7 @@
       </div>
 
       <div class="w-6 d-f fd-c">
-
         <label class="colorGreyD mb-4">{{$t("section")}}</label>
-
         <iconedInput
             v-model="search"
             icon="search"
@@ -47,18 +41,19 @@
     <!-- Input Bar Stop -->
 
     <div class="w-100 mt-80 gap-48">
-      <p class="commonP line-h-30 colorGreyD">{{$t("countPainting")}}:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countExibits")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
     <div class="w-100 grid-4 mt-60 grid-1-900">
 
       <div
-          @click="goToSingle"
-          v-for="(xhbt,ix) in allExhibits "
+          @click="goToSingle(xhbt._id)"
+          v-for="(xhbt,ix) in allExhibits"
           :key="ix"
           class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p"
       >
+
         <div class="w-100 fd-c pad-24p">
           <p class="commonP bold line-h-24 mt-a">{{xhbt.title?.[$i18n.locale]}}</p>
 
@@ -84,8 +79,6 @@
     <breadCrumbs
         :currentPage="title?.[$i18n.locale]"
     />
-
-
   </div>
 </template>
 
@@ -97,25 +90,26 @@ import iconedInput from '@/components/iconedInput.vue'
 import selector from '@/components/selector.vue'
 
 export default {
-  name: 'paintingsPage',
+  name: 'exhibitsPage',
 
   components: {
     pageTitleAnimated, breadCrumbs, paginate, iconedInput, selector
   },
-
   data() {
     return {
+      infoo:  null,
+      URL: process.env.VUE_APP_API,
       allExhibits: this.$store.state.exhibits,
-      title:{
-        language_uzlatin: 'Rasmlar',
-        language_uzCyrillic: 'Расмлар',
-        language_ru: 'Картины',
-        language_en: 'Paintings',
+      title: {
+        language_uzlatin: 'Korgazmalar',
+        language_uzCyrillic: 'Кўргазмалар',
+        language_ru: 'Экспонаты',
+        language_en: 'Exhibits',
       },
       curPage: 3,
       pages: 658,
       search: '',
-      paintingsID: 'Картина женщины в Тахаристане',
+      exhibitsID: 'Бюст неандертальца',
 
       options: [
         {value: '1', label: 'Option 1'},
@@ -131,9 +125,8 @@ export default {
       ],
     }
   },
-
   methods: {
-    async getSinglePaint(){
+    async getSingleExhibits(){
       await this.$api.get('/collections/paintings/site')
           .then(resp => {
             this.allExhibits = resp.data.result.results
@@ -146,17 +139,17 @@ export default {
     optionChanged(opt) {
       console.log(opt);
     },
-
-    goToSingle() {
-      this.$router.push({ path: '/paintings/' + this.paintingsID})
+    goToSingle(myid) {
+      this.$router.push({ path: '/paintings/' + this.exhibitsID, query: {exId: myid}})
     }
-  }
-  ,mounted() {
-    this.getSinglePaint()
+  },
+  mounted() {
+    this.getSingleExhibits()
+    console.log(this.exhibitsID)
+  },
+  created() {
   }
 }
 </script>
-
 <style>
-
 </style>

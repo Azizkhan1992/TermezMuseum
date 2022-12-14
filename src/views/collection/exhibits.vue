@@ -9,10 +9,8 @@
 
     <!-- Input Bar Start -->
     <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb exh-fl">
-
       <div class="w-3 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("categoryExhibits")}}</label>
-
         <selector
             @optionChanged="optionChanged"
             :options="this.options"
@@ -22,7 +20,6 @@
 
       <div class="w-3 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
-
         <selector
             @optionChanged="optionChanged"
             :options="this.options"
@@ -31,9 +28,7 @@
       </div>
 
       <div class="w-6 d-f fd-c">
-
         <label class="colorGreyD mb-4">{{$t("section")}}</label>
-
         <iconedInput
             v-model="search"
             icon="search"
@@ -53,11 +48,12 @@
     <div class="w-100 grid-4 mt-60 grid-1-900">
 
       <div
-          @click="goToSingle"
-          v-for="(xhbt,ix) in allExhibits  "
+          @click="goToSingle(xhbt._id)"
+          v-for="(xhbt,ix) in allExhibits"
           :key="ix"
           class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p"
       >
+
         <div class="w-100 fd-c pad-24p">
           <p class="commonP bold line-h-24 mt-a">{{xhbt.title?.[$i18n.locale]}}</p>
 
@@ -83,8 +79,6 @@
     <breadCrumbs
         :currentPage="title?.[$i18n.locale]"
     />
-
-
   </div>
 </template>
 
@@ -101,7 +95,6 @@ export default {
   components: {
     pageTitleAnimated, breadCrumbs, paginate, iconedInput, selector
   },
-
   data() {
     return {
       infoo:  null,
@@ -132,7 +125,6 @@ export default {
       ],
     }
   },
-
   methods: {
     async getSingleExhibits(){
       await this.$api.get('/collections/exhibits/site')
@@ -147,22 +139,17 @@ export default {
     optionChanged(opt) {
       console.log(opt);
     },
-
-    goToSingle() {
-      this.$router.push({ path: '/exhibits/' + this.exhibitsID})
+    goToSingle(myid) {
+      this.$router.push({ path: '/exhibits/' + this.exhibitsID, query: {exId: myid}})
     }
   },
-
   mounted() {
     this.getSingleExhibits()
+    console.log(this.exhibitsID)
   },
   created() {
   }
-
-
 }
 </script>
-
 <style>
-
 </style>

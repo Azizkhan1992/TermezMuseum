@@ -54,7 +54,7 @@
     <div class="w-100 grid-4 mt-60 grid-1-900">
 
       <div
-          @click="goToSingle"
+          @click="goToSingle(xhbt._id)"
           v-for="(xhbt,ix) in allExhibits"
           :key="ix"
           class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p"
@@ -147,8 +147,8 @@ export default {
       console.log(opt);
     },
 
-    goToSingle() {
-      this.$router.push({ path: '/statues/' + this.statuesID})
+    goToSingle(myid) {
+      this.$router.push({ path: '/statues/' + this.statuesID, query: {exId: myid}})
     }
   },
   mounted() {

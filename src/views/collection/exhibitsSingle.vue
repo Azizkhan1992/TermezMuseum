@@ -2,72 +2,161 @@
   <div class="mainPage">
 
     <div class="w-100 mt-120">
-      <h2 class="grandTitle">{{title}}</h2>
+      <h2 class="grandTitle">{{ allInfos.title?.[$i18n.locale] }}</h2>
     </div>
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p">
-      <img src="@/assets/temporary/neandertal.jpg" alt="">
+    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p exh-img">
+      <img :src="allInfos.mainImage.path" alt="">
     </div>
 
     <div class="w-100 mt-60">
-      <h4 v-html="description" class="commonD"></h4>
+      <h4 v-html="allInfos.text?.[$i18n.locale]" class="commonD"></h4>
     </div>
 
+    <div
+        class="w-100 pad-t-48 fd-c gap-36 pad-b-48 pad-r-24p pad-l-24p box-brb ovr-hidden bor-r-20 backgrnd-white mt-60">
 
-
-    <div class="w-100 pad-t-48 fd-c gap-36 pad-b-48 pad-r-24p pad-l-24p box-brb ovr-hidden bor-r-20 backgrnd-white mt-60">
-      
       <!-- Grid Start -->
 
       <div
-        class="w-100 gap-12 fd-c"
-        v-for="(rowInfo, idx) in chunkedInfo"
-        :key="idx"
+          class="w-100 gap-12 fd-c exh-si-900"
+
       >
         <div class="w-100 gap-24">
 
           <div
-            v-for="info in rowInfo"
-            :key="info.id"
-            class="customGrid-r-w w-100 d-f fd-c gap-8"
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
           >
-            <p class="commonP colorGreyD">{{info.title}}</p>
-            <p class="commonP bold colorType">{{info.description}}</p>
+            <p class="commonP colorGreyD">{{$t("nameexhb")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.title?.[$i18n.locale] }}</p>
           </div>
+
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("category")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.category.text?.[$i18n.locale]}}</p>
+          </div>
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("tags")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.tags[0].text?.[$i18n.locale]}}</p>
+          </div>
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("exhType")}}</p>
+
+            <p class="commonP bold colorType">{{ allInfos.additional.typeOfObject?.[$i18n.locale] }}</p>
+          </div>
+
 
         </div>
 
+
         <hr v-if="idx !== chunkedInfo.length - 1" class="divider">
+        <div class="w-100 gap-24">
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("exhAuth")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.author?.[$i18n.locale] }}</p>
+          </div>
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("dateCreate")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.createdAt }}</p>
+          </div>
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("createdPlace")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.createdPlace?.[$i18n.locale] }}</p>
+          </div>
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("discoverIn")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.foundDate }}</p>
+          </div>
+
+        </div>
+        <hr v-if="idx !== chunkedInfo.length - 1" class="divider">
+        <div class="w-100 gap-24">
+
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("discoverPlace")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.foundPlace?.[$i18n.locale] }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("usedMater")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.usedMaterial.text?.[$i18n.locale] }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("usedTechnology")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.usedTechnology.text?.[$i18n.locale] }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("sizeAndWeight")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.sizeAndWeight.height }}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.sizeAndWeight.width }}</p>
+          </div>
+        </div>
+        <hr v-if="idx !== chunkedInfo.length - 1" class="divider">
+        <div class="w-100 gap-24">
+
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("additionInfo")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.additionalInformation }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("theme")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.subject?.[$i18n.locale] }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("dateBought")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.purchasedDate }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("boughtFrom")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.purchasedFrom?.[$i18n.locale] }}</p>
+
+          </div>
+        </div>
+        <hr v-if="idx !== chunkedInfo.length - 1" class="divider">
+        <div class="w-100 gap-24">
+
+          <div
+              class="customGrid-r-w w-100 d-f fd-c gap-8"
+          >
+            <p class="commonP colorGreyD">{{$t("sponsorship")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.sponsorship?.[$i18n.locale] }}</p>
+          </div>
+          <div class="customGrid-r-w w-100 d-f fd-c gap-8">
+            <p class="commonP colorGreyD">{{$t("registNumber")}}</p>
+            <p class="commonP bold colorType">{{ allInfos.additional.registrationNumber }}</p>
+          </div>
+        </div>
       </div>
-
       <!-- Grid Stop -->
-
     </div>
 
     <div class="grid-2 w-100 mt-60">
-      <div class="w-100 h-432p bor-r-20 ovr-hidden">
-        <img class="w-100 h-100 obj-fit-cover" src="@/assets/temporary/1.png" alt="">
+      <div v-for="(photos,num) in allInfos.additional.additionalImages" :key="num" class="w-100 h-432p bor-r-20 ovr-hidden">
+        <img class="w-100 h-100 obj-fit-cover" :src="photos.path" alt="">
       </div>
 
-      <div class="w-100 h-432p bor-r-20 ovr-hidden">
-        <img class="w-100 h-100 obj-fit-cover" src="@/assets/temporary/2.png" alt="">
-      </div>
-
-      <div class="w-100 h-432p bor-r-20 ovr-hidden">
-        <img class="w-100 h-100 obj-fit-cover" src="@/assets/temporary/3.png" alt="">
-      </div>
-
-      <div class="w-100 h-432p bor-r-20 ovr-hidden">
-        <img class="w-100 h-100 obj-fit-cover" src="@/assets/temporary/4.png" alt="">
-      </div>
     </div>
 
 
-
     <breadCrumbs
-      :currentPage="title"
-      :prevPageName="prevPage.name"
-      :prevPageLink="prevPage.link"
+        :currentPage="title"
+        :prevPageName="prevPage.name"
+        :prevPageLink="prevPage.link"
     />
 
   </div>
@@ -85,7 +174,7 @@ export default {
 
   data() {
     return {
-      allInfos: this.$store.state.exhibitsInfo,
+      allInfos: [],
       title: this.$route.params.id,
       prevPage: {
         name: 'Экспонаты',
@@ -103,23 +192,27 @@ export default {
       chunkedInfo: [],
     }
   },
-
   methods: {
+    async getSingleExhibits() {
+      await this.$api.get('/collections/exhibits/site/' + this.$route.query.exId)
+          .then(resp => {
+            this.allInfos = resp.data.result
+          }), err => {
+        console.log(err)
+      }
+    },
     chunker() {
       const chunkSize = 4
-
       let opts = this.allInfos
-
       for (let i = 0; i < opts.length; i += chunkSize) {
         const chunk = opts.slice(i, i + chunkSize);
-
         this.chunkedInfo.push(chunk)
       }
     }
   },
-
   mounted() {
     this.chunker()
+    this.getSingleExhibits()
   }
 }
 </script>
