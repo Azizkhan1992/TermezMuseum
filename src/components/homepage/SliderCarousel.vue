@@ -50,7 +50,7 @@ export default {
         for(let i=1; i<= this.sliderItems.length; i++){
           this.sliderItems[i-1].id = i
         }
-        console.log(this.sliderItems)
+        // console.log(this.sliderItems)
       }).catch(err => {console.log(err)})
     },
     animation() {

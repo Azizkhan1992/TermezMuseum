@@ -2,16 +2,18 @@
   <div class="w-100 pos-rel">
     <input
       class="w-100"
+      @keyup.enter="iconClicked()"
       type="text"
-      :value="inputData"
-      @input="onInput"
       :placeholder="placeholder"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
     >
 
     <Icons
       class="pos-abs z-idx2 ml-a r-14 mt-12"
-      :icon="icon"
-      size=""
+      icon="search"
+      @click.native="iconClicked()"
+      size="middle"
     />
   </div>
 </template>
@@ -32,9 +34,13 @@ export default {
   },
 
   props: {
-    icon: String,
-    placeholder: String,
-    inputData: String
+    placeholder: {
+      type: String,
+      required: false
+    },
+    inputData: String,
+
+    value: {}
   },
 
   model: {
@@ -43,8 +49,8 @@ export default {
   },
 
   methods: {
-    onInput(e){
-      this.$emit('input', e.target.value)
+    iconClicked(){
+      this.$emit('iconClicked')
     }
   }
 }

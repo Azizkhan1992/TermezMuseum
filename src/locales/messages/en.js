@@ -155,7 +155,34 @@ const en = {
   mainP: 'Main page',
   sendUs: 'Feedback about the museum',
   review: 'Review',
-  feed: 'Leave a review about your impressions when visiting the museum and we will publish your review for everyone who even visits our museum'
+  feed: 'Leave a review about your impressions when visiting the museum and we will publish your review for everyone who even visits our museum',
+  all: "All",
+  months: {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  options: {
+    "title": "Title",
+    "tag": "Tag",
+    "tagы": "Tags",
+    "author": "Author"
+  },
+  placeholders: {
+    "enterSearchText": "Enter search text",
+    "enterMisspelledTextMistake": "Enter a description of the mistake or the correct option",
+    "find": "Find",
+    "enterElectronicMail": "Enter your email"
+  },
 }
 
 export default en

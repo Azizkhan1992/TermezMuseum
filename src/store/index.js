@@ -10,6 +10,9 @@ export default new Vuex.Store({
     userInfo: "''",
     comments: [],
     documentLength: '',
+    sortedYears: '',
+    events: '',
+    event: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2429,6 +2432,33 @@ export default new Vuex.Store({
         state.documentLength = resp.data.lengthDocument
         state.comments = resp.data.result
       }), err =>{console.log(err)}
+    },
+
+    async getEvents({state}, queryParams){
+      await Api.get(`/press/events/site?type=${queryParams.type}&searchWord=${queryParams.searchWord}&year=${queryParams.year}&month=${queryParams.month}&searchCategory=${queryParams.searchCategory}&page=${queryParams.page}&limit=${queryParams.limit}`)
+      .then((resp)=>{
+        let events = resp.data
+        state.events = events
+
+        // console.log(resp.data)
+
+
+        const rawYears = {
+          type: 'year',
+          options: [
+          ]
+        }
+
+        const years = events.heldYears.sort((a, b) => a.year - b.year)
+
+        const len = years.length
+
+        for (let i = 0; i < len; i ++) {
+          rawYears.options.push({value: years[i].year, label: years[i].year})
+        }
+
+        state.sortedYears = rawYears
+      })
     },
     preloaderOff({commit}) {
       commit('SET_PRELOADER_OFF')

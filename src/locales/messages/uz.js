@@ -155,6 +155,33 @@ const uz = {
   mainP: 'Bosh sahifa',
   sendUs: 'Muzey haqida fikr-mulohazalar',
   review: 'Fikr',
-  feed: 'Muzeyga tashrif buyurganingizda taassurotlaringiz haqida sharh qoldiring va biz sizning sharhingizni hatto muzeyimizga tashrif buyurgan har bir kishi uchun e\'lon qilamiz.'
+  feed: 'Muzeyga tashrif buyurganingizda taassurotlaringiz haqida sharh qoldiring va biz sizning sharhingizni hatto muzeyimizga tashrif buyurgan har bir kishi uchun e\'lon qilamiz.',
+  all: 'Hammasi',
+  months: {
+    "january": "Yanvar",
+    "february": "Fevral",
+    "march": "Mart",
+    "april": "Aprel",
+    "may": "May",
+    "june": "Iyun",
+    "july": "Iyul",
+    "august": "Avgust",
+    "september": "Sentyabr",
+    "october": "Oktyabr",
+    "november": "Noyabr",
+    "december": "Dekabr"
+  },
+  options: {
+    "title": "Sarlavha",
+    "tag": "Teg",
+    "tags": "Teglar",
+    "author": "Muallif"
+  },
+  placeholders: {
+    "enterSearchText": "Izlash matnini kiriting",
+    "enterMisspelledTextMistake": "Xatoning tavsifini yoki to‘g‘ri variantini kiriting",
+    "find": "Topish",
+    "enterElectronicMail": "Elektron manzilingizni kiriting"
+  },
 }
 export default uz

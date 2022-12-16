@@ -121,6 +121,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+ul{
+  &.open{
+    z-index: 299;
+  }
+}
 </style>
