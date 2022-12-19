@@ -183,5 +183,6 @@ const uz = {
     "find": "Topish",
     "enterElectronicMail": "Elektron manzilingizni kiriting"
   },
+  materialsForMediasAllInOne: "OAV uchun materiallar (barcha fayllar yagona arxivda)",
 }
 export default uz

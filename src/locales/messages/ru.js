@@ -183,6 +183,7 @@ const ru = {
     "find": "Найти",
     "enterElectronicMail": "Введите электронную почту"
   },
+  materialsForMediasAllInOne: "Материалы для СМИ (все файлы в одном архиве)",
 }
 
 export default ru

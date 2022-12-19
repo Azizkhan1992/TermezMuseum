@@ -183,6 +183,7 @@ const uzcyr = {
     "find": "Топиш",
     "enterElectronicMail": "Электрон манзилингизни киритинг"
   },
+  materialsForMediasAllInOne: "ОАВ учун материаллар (барча файллар ягона архивда)",
 }
 
 export default uzcyr

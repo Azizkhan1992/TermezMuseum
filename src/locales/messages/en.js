@@ -183,6 +183,7 @@ const en = {
     "find": "Find",
     "enterElectronicMail": "Enter your email"
   },
+  materialsForMediasAllInOne: "Materials for the media (all files in one archive)",
 }
 
 export default en
