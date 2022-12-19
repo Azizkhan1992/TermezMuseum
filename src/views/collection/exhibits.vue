@@ -59,12 +59,12 @@
 
           <div class="w-100 gap-12 mt-24">
             <p class="helpers">{{$t("discoverIn")}}:</p>
-            <p class="mainers colorWhite">{{xhbt.additional.foundDate}}</p>
+            <p class="mainers colorWhite">{{xhbt?.additional?.foundDate}}</p>
           </div>
         </div>
 
         <div class="dark-layer-card z-idx1"></div>
-        <img class="back-img" :src="xhbt.mainImage.path" alt="">
+        <img class="back-img" :src="xhbt?.mainImage?.path" alt="">
       </div>
 
     </div>
@@ -133,7 +133,7 @@ export default {
             for(let i=1; i<=this.allExhibits.length; i++){
               this.allExhibits[i-1].id = i
             }
-            console.log(this.allExhibits)
+            // console.log(this.allExhibits)
           }), err => {console.log(err)}
     },
     optionChanged(opt) {
@@ -145,7 +145,7 @@ export default {
   },
   mounted() {
     this.getSingleExhibits()
-    console.log(this.exhibitsID)
+    // console.log(this.exhibitsID)
   },
   created() {
   }

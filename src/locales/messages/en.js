@@ -184,6 +184,21 @@ const en = {
     "enterElectronicMail": "Enter your email"
   },
   materialsForMediasAllInOne: "Materials for the media (all files in one archive)",
+  nameexhb: 'Name:',
+  exhType: 'Object type:',
+  exhAuth: 'Author:',
+  dateCreate: 'Date of creation:',
+  createdPlace: 'Place of creation:',
+  discoverPlace: 'Finding place:',
+  usedMater: 'Material:',
+  usedTechnology: 'Manufacturing technology:',
+  sizeAndWeight: 'Dimensions and weight:',
+  additionInfo: 'Additional Information:',
+  theme: 'Subject:',
+  dateBought: 'Date of purchase:',
+  boughtFrom: 'Purchased from:',
+  sponsorship: 'Sponsorship:',
+  registNumber: 'Registration number:'
 }
 
 export default en

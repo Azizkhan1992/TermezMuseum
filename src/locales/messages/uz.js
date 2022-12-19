@@ -184,5 +184,20 @@ const uz = {
     "enterElectronicMail": "Elektron manzilingizni kiriting"
   },
   materialsForMediasAllInOne: "OAV uchun materiallar (barcha fayllar yagona arxivda)",
+  nameexhb: 'Nomi:',
+  exhType: 'Ob\'ekt turi:',
+  exhAuth: 'Muallif:',
+  dateCreate: 'Yaratilgan sana:',
+  createdPlace: 'Yaratilgan joy:',
+  discoverPlace: 'Topilgan joy',
+  usedMater: 'Material:',
+  usedTechnology: 'Ishlab chiqarish texnologiyasi:',
+  sizeAndWeight: 'O\'lchamlari va vazni:',
+  additionInfo: 'Qo\'shimcha ma\'lumot:',
+  theme: 'Mavzu:',
+  dateBought: 'Sotib olingan sana:',
+  boughtFrom: 'Sotib olingan:',
+  sponsorship: 'Homiylik:',
+  registNumber: 'Ro\'yxatga olish raqami:'
 }
 export default uz

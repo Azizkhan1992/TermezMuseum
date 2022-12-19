@@ -18,7 +18,7 @@
             </div>
           </div>
 
-          <button class="prdBtn">
+          <button class="prdBtn" @click="goToPage(event)">
             {{$t('seeMore')}}
           </button>
         </div>
@@ -80,6 +80,10 @@ export default {
       let year = new Date(temp[0]).getFullYear()
       // console.log(year)
       return year
+    },
+    goToPage(val){
+      // console.log(val)
+      this.$router.push({path: `/${val.typeOfPride}s/` + val.title[this.$i18n.locale], query: {exId: val._id}})
     }
   },
 

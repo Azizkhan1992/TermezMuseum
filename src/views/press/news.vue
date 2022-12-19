@@ -12,12 +12,19 @@
       
       <div class="w-2 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("year")}}</label>
+
+        <dropDown
+        @changeOption="changeYear"
+          :options="year"
+          :current="chosenYear"
         
-        <selector
+        />
+        
+        <!-- <selector
           @optionChanged="optionChanged"
           :options="this.options"
           id="aaSel"
-        />
+        /> -->
       </div>
 
       <div class="w-2 d-f fd-c">
@@ -71,30 +78,32 @@
 
       <!-- Card Big Start -->
 
-      <div class="w-100 h-420p mt-60 bor-r-20 gap-24 ovr-hidden backgrnd-white">
-        <div class="w-50 pos-rel">
+      <div class="news-wr">
+
+        <div class="w-100 h-420p mt-60 bor-r-20 gap-24 ovr-hidden backgrnd-white news-items" v-for="news, idx in allNews" :key="idx">
+        <div class="w-50 pos-rel news-img">
           <img
             @click="goToSingle"
-            class="back-img cur-ptr" src="@/assets/temporary/samovar.jpg" alt=""
+            class="back-img cur-ptr" :src="news?.mainImage?.common?.path" alt=""
           >
         </div>
 
-        <div class="w-50 d-f fd-c box-brb pad-r-24p pad-t-24p pad-b-24p">
+        <div class="w-50 d-f fd-c box-brb pad-r-24p pad-t-24p pad-b-24p news-title">
           <h4
             @click="goToSingle"
             class="commonT cur-ptr colorType h-108p"
           >
-            This is title
+            {{ news?.title?.[$i18n.locale] }}
           </h4>
 
           <p
             @click="goToSingle"
             class="commonP cur-ptr colorGreyD mt-24 line-h-30 h-90p"
+            v-html="news?.text?.[$i18n.locale]"
           >
-            This is description
           </p>
 
-          <div class="w-100 gap-12 mt-a ovr-hidden">
+          <div class="w-100 gap-12 ovr-hidden">
             <button class="newsCardTag">
               <span>
                 Click me
@@ -128,7 +137,7 @@
             </button>
           </div>
 
-          <div class="w-100 justify-sb mt-48">
+          <div class="w-100 justify-sb">
             
             <div class="w-100 d-f fd-r gap-24">
               <div class="w-a d-f fd-r align-c gap-12">
@@ -159,88 +168,13 @@
           </div>
         </div>
       </div>
+      </div>
 
       <!-- Card Big Stop -->
 
       <!-- Card Grid Start -->
 
-      <div class="grid-3 w-100 mt-24">
-
-        <!-- Card Sm Start -->
-
-        <div class="w-4 ovr-hidden bor-r-20 backgrnd-white h-420p">
-          <div class="w-100 pos-rel h-220p">
-            <img
-              @click="goToSingle"
-              class="back-img cur-ptr" src="@/assets/static/museums-collection.png" alt=""
-            >
-          </div>
-
-          <div class="w-100 fd-c pad-24p h-200p ovr-hidden box-brb">
-            <h4
-              @click="goToSingle"
-              class="commonP cur-ptr colorType line-h-30 bold h-60p"
-            >
-              This is title
-            </h4>
-
-            <div class="w-100 gap-12 mt-a ovr-hidden">
-              <button class="newsCardTag sm">
-                <span>
-                  Click me
-                  Click me
-                  Click me
-                </span>
-              </button>
-
-              <button class="newsCardTag sm">
-                <span>
-                  Click me
-                </span>
-              </button>
-
-              <button class="newsCardTag last">
-                <span>
-                  + 7
-                </span>
-              </button>
-            </div>
-
-            <div class="w-100 justify-sb mt-24">
-            
-              <div class="w-100 d-f fd-r gap-24">
-                <div class="w-a d-f fd-r align-c gap-12">
-                  <Icons
-                    icon="calendar"
-                    size="middle"
-                  />
-                  <p class="helpers">22 июнь 2022г</p>
-                </div>
-
-                <div class="w-a d-f fd-r align-c gap-12">
-                  <Icons
-                    icon="eye"
-                    size="middle"
-                  />
-                  <p class="helpers">{{$t("viewed")}} 1 396</p>
-                </div>
-
-                <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr">
-                  <Icons
-                    icon="share"
-                    size="middle"
-                  />
-                </div>
-              </div>
-              
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Card Sm Stop -->
-
-      </div>
+      
 
       <!-- Card Grid Stop -->
     
@@ -264,12 +198,13 @@ import paginate from '@/components/paginate.vue'
 import iconedInput from '@/components/iconedInput.vue'
 import selector from '@/components/selector.vue'
 import Icons from '@/components/icons.vue'
+import dropDown from '@/components/dropDown.vue'
 
 export default {
   name: 'exhibitionsPage',
 
   components: {
-    pageTitleAnimated, breadCrumbs, paginate, iconedInput, selector, Icons
+    pageTitleAnimated, breadCrumbs, paginate, iconedInput, selector, Icons, dropDown
   },
 
   data() {
@@ -316,6 +251,16 @@ export default {
           },
         ],
 
+        year: {
+        type: 'year',
+        options: [
+          {value: 'all', label: this.$t('all')}
+        ]
+      },
+      chosenYear: {value: 'all', label: this.$t('all')},
+
+      allNews: [],
+
       options: [
         {value: '1', label: 'Option 1'},
         {value: '2', label: 'Option 2'},
@@ -331,7 +276,53 @@ export default {
     }
   },
 
+  mounted(){
+    this.getNews()
+  },
+
   methods: {
+    getNews(){
+      const params = {
+        year: this.$route.query.year
+      }
+
+      this.$store.dispatch('getNews', params)
+      .then(()=>{
+        this.allNews = this.$store.state.news.result.results
+
+        let years = this.$store.state.newsYears
+
+        years.options.unshift({value: 'all', label: this.$t('all')})
+
+        this.year = years
+        // console.log(this.allNews)
+      })
+      .finally(() => {
+        if(this.$route.query.year == undefined || this.$route.query.year == '') {
+          this.$router.push({
+            query: {
+              ...this.$route.query,
+              year: this.chosenYear.value
+            }
+          })
+          this.chosenYear = this.year.options.find(year => year.value == this.$route.query.year)
+        } else this.chosenYear = this.year.options.find(year => year.value == this.$route.query.year)
+
+        this.topTags = this.$store.state.events.topTags
+        // console.log(this.$store.state.events)
+      })
+    },
+
+    changeYear(option) {
+      this.chosenYear = option
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          year: this.chosenYear.value
+        }
+      })
+      this.getEvents()
+    },
     optionChanged(opt) {
       console.log(opt);
     },
@@ -340,12 +331,71 @@ export default {
       this.$router.push({ path: '/news/' + this.eventsID})
     }
   },
-
-  mounted() {
-  }
 }
 </script>
 
-<style>
+<style lang="scss">
+.news-wr{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
 
+  .news-items{
+    width: 31%;
+    flex-direction: column;
+    align-items: center;
+
+    .news-img{
+      width: 100%;
+      height: calc(50% - 12px);
+    }
+
+    .news-title{
+      width: 100%;
+      height: calc(50% - 12px);
+      padding: 0;
+      justify-content: space-around;
+
+      .commonT{
+        font-size: 1rem;
+        line-height: 30px;
+      }
+
+      .commonP{
+        display: none;
+      }
+    }
+
+    &:nth-child(1){
+      width: 100%;
+      flex-direction: row;
+
+      .news-img{
+        width: calc(50% - 12px);
+        height: 100%;
+      }
+      .news-title{
+        width: calc(50% - 12px);
+        height: 100%;
+        padding-top: 12px;
+
+        h4.commonT{
+          width: 90% !important;
+        }
+
+        .commonP{
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          max-height: 90px;
+          pre{
+            white-space: pre-wrap;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

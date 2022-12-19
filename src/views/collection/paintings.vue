@@ -145,7 +145,7 @@ export default {
   },
   mounted() {
     this.getSingleExhibits()
-    console.log(this.exhibitsID)
+    // console.log(this.exhibitsID)
   },
   created() {
   }

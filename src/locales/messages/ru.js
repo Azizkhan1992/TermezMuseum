@@ -184,6 +184,21 @@ const ru = {
     "enterElectronicMail": "Введите электронную почту"
   },
   materialsForMediasAllInOne: "Материалы для СМИ (все файлы в одном архиве)",
+  nameexhb: 'Название:',
+  exhType: 'Тип объекта:',
+  exhAuth: 'Автор:',
+  dateCreate: 'Дата создания:',
+  createdPlace: 'Место создания:',
+  discoverPlace: 'Место находки:',
+  usedMater: 'Материал:',
+  usedTechnology: 'Технология изготовления:',
+  sizeAndWeight: 'Размеры и вес:',
+  additionInfo: 'Дополнительная информация:',
+  theme: 'Тематика:',
+  dateBought: 'Дата приобретения:',
+  boughtFrom: 'Приобретен от:',
+  sponsorship: 'Спонсирование:',
+  registNumber: 'Регистрационный номер:'
 }
 
 export default ru

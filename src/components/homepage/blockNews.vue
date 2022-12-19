@@ -7,7 +7,7 @@
     />
 
     <div class="wrapper-h mb-60">
-      <button class="prim w-3 a-left">
+      <button class="prim w-3 a-left" @click="go">
         <span>{{ $t("allNews") }}</span>
       </button>
 
@@ -91,6 +91,10 @@ export default {
       const data = await this.$api('/press/news');
       this.news = data.data.result.results
     },
+
+    go(){
+      this.$router.push('/news')
+    }
   },
 
   mounted() {

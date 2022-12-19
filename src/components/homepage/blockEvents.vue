@@ -8,7 +8,7 @@
 
     <div class="w-100 h-420p gap-24">
 <!-- First item -->
-      <div class="wc-4 ovr-hidden bor-r-20 pos-rel" v-if="events?.[0]">
+      <div class="wc-4 ovr-hidden bor-r-20 pos-rel" @click="go" v-if="events?.[0]">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
           <h3>{{events?.[0]?.title?.[$i18n.locale]}}</h3>
@@ -41,7 +41,7 @@
 <!-- First item -->
 
 <!-- Second item -->
-      <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel" v-if="events?.[1]">
+      <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel" @click="go" v-if="events?.[1]">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
           <h3>{{events?.[1]?.title?.[$i18n.locale]}}</h3>
@@ -75,7 +75,7 @@
 
     <div class="w-100 h-420p gap-24 mt-24">
 <!-- Third item -->
-      <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel" v-if="events?.[2]">
+      <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel" @click="go" v-if="events?.[2]">
 
         <div class="w-100 w--48p mt-a z-idx2 mr-s-24">
           <h3>{{events?.[2]?.title?.[$i18n.locale]}}</h3>
@@ -326,6 +326,9 @@ export default {
         return day + " " + monthT + " " + year;
       }
     },
+    go(){
+      this.$router.push('/exhibits')
+    }
   },
 
   mounted() {

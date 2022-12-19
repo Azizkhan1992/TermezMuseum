@@ -184,6 +184,21 @@ const uzcyr = {
     "enterElectronicMail": "Электрон манзилингизни киритинг"
   },
   materialsForMediasAllInOne: "ОАВ учун материаллар (барча файллар ягона архивда)",
+  nameexhb: 'Номи',
+  exhType: 'Объект тури',
+  exhAuth: 'Муаллиф:',
+  dateCreate: 'Яратилган сана:',
+  createdPlace: 'Яратилган жой:',
+  discoverPlace: 'Топилган жой',
+  usedMater: 'Материал:',
+  usedTechnology: 'Ишлаб чиқариш технологияси:',
+  sizeAndWeight: 'Ўлчамлари ва вазни:',
+  additionInfo: 'Қўшимча маълумот:',
+  theme: 'Мавзу:',
+  dateBought: 'Сотиб олинган сана:',
+  boughtFrom: 'Сотиб олинган:',
+  sponsorship: 'Ҳомийлик:',
+  registNumber: 'Рўйхатга олиш рақами:'
 }
 
 export default uzcyr

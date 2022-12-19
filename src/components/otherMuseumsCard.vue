@@ -7,6 +7,7 @@
       hiddenL ? 'hidden-l' : '' ||
       shown ? 'shown' : ''
     "
+    @click="goToPage(link)"
   >
     <div class="dark-layer-solid"></div>
     <img class="back-img" :src="img" alt="err">
@@ -44,7 +45,13 @@ export default {
     link: String,
     hiddenR: Boolean,
     hiddenL: Boolean,
-  }
+  },
+  methods: {
+    goToPage(link){
+      window.open(link, "_blank");
+      // console.log(link)
+    }
+  },
 }
 </script>
 

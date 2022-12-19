@@ -156,7 +156,9 @@
                 <p class="helpers">{{filPost(item?.createdAt) + " " + $t("year2")}}</p>
               </div>
 
-              <div class="w-a d-f fd-r align-c gap-12 cur-ptr">
+              <div class="w-a d-f fd-r align-c gap-12 cur-ptr"
+              @click="shareIt(item)"
+              >
                 <Icons
                   icon="share"
                   size="middle"
@@ -506,7 +508,6 @@ export default {
 
   methods: {
     getEvents(){
-      // console.log(this.$route.query.year)
       const params = {
         type: this.$route.query.type,
         year: this.$route.query.year,
@@ -516,13 +517,13 @@ export default {
         page: this.$route.query.page,
         limit: this.pagination.limit
       }
-      // console.log(this.$route.query.type)
       this.$store.dispatch('getEvents', params)
       .then(() => {
         // console.log(resp)
         this.allEvents = this.$store.state.events.result.results
         
         let years = this.$store.state.sortedYears
+        // console.log(years)
 
         years.options.unshift({value: 'all', label: this.$t('all')})
         
@@ -636,6 +637,24 @@ export default {
 
     goingToPage() {
       this.getEvents()
+    },
+
+    async shareIt(event) {
+      // console.log(event)
+      if(navigator.canShare) {
+        navigator.share({
+          title: event.title?.[this.$i18n.locale],
+          text: event.text?.[this.$i18n.locale],
+          url: `${window.location.pathname}/${event._id}`
+        })
+      } else {
+        try {
+          await navigator.clipboard.writeText(`${window.location.pathname}/${event._id}`);
+          alert('Copied');
+        } catch($e) {
+          alert('Cannot copy');
+        }
+      }
     },
 
     filPost(val) {
