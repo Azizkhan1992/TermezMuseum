@@ -462,7 +462,7 @@ export default {
 
         this.getWorkDays(resp.data.result.schedule.workingDays);
       this.getWeekend(resp.data.result.schedule.workingDays);
-        console.log(this.contacts)
+        // console.log(this.contacts)
       }).catch(err => {console.log(err)})
     },
     goToSocial(obj) {

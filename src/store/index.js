@@ -15,6 +15,13 @@ export default new Vuex.Store({
     event: '',
     news: '',
     newsYears: '',
+    newsTags: '',
+    countNews: '',
+    exhibits: '',
+    categories: '',
+    countExh: '',
+    paints: '',
+    countPaints: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -728,104 +735,104 @@ export default new Vuex.Store({
       },
     ],
 
-    exhibits: [
-      {
-        id: 1,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-1'
-      },
-      {
-        id: 2,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-2'
-      },
-      {
-        id: 3,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-3'
-      },
-      {
-        id: 4,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-4'
-      },
-      {
-        id: 5,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-4'
-      },
-      {
-        id: 6,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-3'
-      },
-      {
-        id: 7,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-2'
-      },
-      {
-        id: 8,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-1'
-      },
-      {
-        id: 9,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-1'
-      },
-      {
-        id: 10,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-2'
-      },
-      {
-        id: 11,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-3'
-      },
-      {
-        id: 12,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-4'
-      },
-      {
-        id: 13,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-4'
-      },
-      {
-        id: 14,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-3'
-      },
-      {
-        id: 15,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-2'
-      },
-      {
-        id: 16,
-        title: 'Бюст неандертальца',
-        year: '1956 г.',
-        img: 'exhibit-1'
-      },
-    ],
+    // exhibits: [
+    //   {
+    //     id: 1,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-1'
+    //   },
+    //   {
+    //     id: 2,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-2'
+    //   },
+    //   {
+    //     id: 3,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-3'
+    //   },
+    //   {
+    //     id: 4,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-4'
+    //   },
+    //   {
+    //     id: 5,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-4'
+    //   },
+    //   {
+    //     id: 6,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-3'
+    //   },
+    //   {
+    //     id: 7,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-2'
+    //   },
+    //   {
+    //     id: 8,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-1'
+    //   },
+    //   {
+    //     id: 9,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-1'
+    //   },
+    //   {
+    //     id: 10,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-2'
+    //   },
+    //   {
+    //     id: 11,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-3'
+    //   },
+    //   {
+    //     id: 12,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-4'
+    //   },
+    //   {
+    //     id: 13,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-4'
+    //   },
+    //   {
+    //     id: 14,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-3'
+    //   },
+    //   {
+    //     id: 15,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-2'
+    //   },
+    //   {
+    //     id: 16,
+    //     title: 'Бюст неандертальца',
+    //     year: '1956 г.',
+    //     img: 'exhibit-1'
+    //   },
+    // ],
 
     addPlaces: [
       {
@@ -2462,7 +2469,7 @@ export default new Vuex.Store({
       })
     },
     async getNews({state}, queryParams){
-      await Api.get(`/press/news/site?year=${queryParams.year}&month=${queryParams.month}`)
+      await Api.get(`/press/news/site?year=${queryParams.year}&month=${queryParams.month}&searchWord=${queryParams.searchWord}&searchCategory=${queryParams.searchCategory}&page=${queryParams.page}&limit=${queryParams.limit}`)
       .then(resp => {
 
         let news = resp.data
@@ -2485,8 +2492,41 @@ export default new Vuex.Store({
         }
         
         state.newsYears = rawYears
-        // console.log(state.newsYears)
+        state.newsTags = resp.data.topTags
+        state.countNews = resp.data.NumberOfNews
+        // console.log(resp.data)
       }), err => {console.log(err)}
+      },
+
+      async getExhibits({state}, queryParams){
+        await Api.get('/settings/category/active')
+      .then((data) => {
+        let categories = data.data.result
+        state.categories = categories
+
+        // console.log(categories)
+      })
+        await Api.get(`/collections/exhibits/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.exhibits = resp.data
+          state.countExh = resp.data.NumberOfExhibitions
+          // console.log(resp.data)
+        }), err => {console.log(err)}
+      },
+
+      async getPaints({state}){
+        await Api.get('/settings/category/active')
+      .then((data) => {
+        let categories = data.data.result
+        state.categories = categories
+
+        // console.log(categories)
+      })
+        await Api.get('collections/paintings/site')
+        .then(resp => {
+          state.paints = resp.data
+          state.countPaints = resp.data.NumberOfPaints
+        })
       },
     preloaderOff({commit}) {
       commit('SET_PRELOADER_OFF')

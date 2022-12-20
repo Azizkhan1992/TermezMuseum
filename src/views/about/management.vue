@@ -25,18 +25,19 @@
 
           <div class="w-100 mt-12 gap-12 m__management_card_info">
             <Icons
+            v-if="manager?.workingTime"
               size="middle"
               icon="clock"
             />
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
-                <p class="helpers mw-fit">{{$t("recDays")}}:</p>
-                <p class="mainers" >{{workDays[0]?.val}} - {{workDays[1]?.val}}</p>
+                <p class="helpers mw-fit" v-if="manager?.workingTime">{{$t("recDays")}}:</p>
+                <p class="mainers" v-if="manager?.workingTime">{{workDays[0]?.val}} - {{workDays[1]?.val}}</p>
               </div>
 
               <div class="w-100 gap-12">
-                <p class="helpers mw-fit">{{$t("recHours")}}:</p>
-                <p class="mainers">{{manager?.workingTime?.startTime}} - {{manager?.workingTime?.finishTime}}</p>
+                <p class="helpers mw-fit" v-if="manager?.workingTime">{{$t("recHours")}}:</p>
+                <p class="mainers" v-if="manager?.workingTime">{{manager?.workingTime?.startTime}} - {{manager?.workingTime?.finishTime}}</p>
               </div>
             </div>
           </div>
@@ -123,6 +124,8 @@ export default {
   },
 
   mounted(){
+    
+
     this.getManagmentData()
   },
 
@@ -131,10 +134,12 @@ export default {
       this.$api.get('/about/employee/site')
       .then(resp => {
         this.managers = resp.data.employees
-        console.log(this.managers)
+        // console.log(this.managers)
         this.managers.forEach(elem => {
-          this.getWeekendDay(elem.workingTime)
+          if(elem.workingTime){
+            this.getWeekendDay(elem.workingTime)
           this.getWorkDays(elem.workingTime)
+          }
         })
       }).catch(err => {console.log(err)})
     },

@@ -8,26 +8,39 @@
     />
 
     <!-- Input Bar Start -->
-    <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb exh-fl">
-      <div class="w-3 d-f fd-c">
+    <div class="w-100 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb exh-fl mob-select">
+      <div class="w-3 d-f fd-c mob-inp">
         <label class="colorGreyD mb-4">{{$t("categoryExhibits")}}</label>
-        <selector
+
+        <dropDown
+        :options="exhibitsCategories"
+          :current="exhibitsCategories.options[0]"
+          @changeOption="changeCategory"
+        />
+        <!-- <selector
             @optionChanged="optionChanged"
             :options="this.options"
             id="aaa"
-        />
+        /> -->
       </div>
 
-      <div class="w-3 d-f fd-c">
+      <div class="w-3 d-f fd-c mob-inp">
         <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
-        <selector
+
+        <dropDown
+          :options="searchCategories"
+          :current="searchCategories.options[0]"
+          @changeOption="changeSearchCategory"
+        />
+
+        <!-- <selector
             @optionChanged="optionChanged"
             :options="this.options"
             id="bbb"
-        />
+        /> -->
       </div>
 
-      <div class="w-6 d-f fd-c">
+      <div class="w-6 d-f fd-c mob-inp">
         <label class="colorGreyD mb-4">{{$t("section")}}</label>
         <iconedInput
             v-model="search"
@@ -42,24 +55,24 @@
 
     <div class="w-100 mt-80 gap-48">
       <p class="commonP line-h-30 colorGreyD">{{$t("countExibits")}}:</p>
-      <p class="commonP line-h-30 bold colorType">1 694</p>
+      <p class="commonP line-h-30 bold colorType">{{ len }}</p>
     </div>
 
-    <div class="w-100 grid-4 mt-60 grid-1-900">
+    <div class="w-100 grid-4 mt-60 grid-1-900 mobile-items">
 
       <div
           @click="goToSingle(xhbt._id)"
           v-for="(xhbt,ix) in allExhibits"
           :key="ix"
-          class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p"
+          class="w-100 bor-r-20 cur-ptr box-brb ovr-hidden pos-rel h-480p exh-items"
       >
 
         <div class="w-100 fd-c pad-24p">
           <p class="commonP bold line-h-24 mt-a">{{xhbt.title?.[$i18n.locale]}}</p>
 
           <div class="w-100 gap-12 mt-24">
-            <p class="helpers">{{$t("discoverIn")}}:</p>
-            <p class="mainers colorWhite">{{xhbt?.additional?.foundDate}}</p>
+            <p v-if="xhbt?.additional?.foundDate" class="helpers">{{$t("discoverIn")}}:</p>
+            <p v-if="xhbt?.additional?.foundDate" class="mainers colorWhite">{{filPost(xhbt?.additional?.foundDate) + " " + $t("year2")  }}</p>
           </div>
         </div>
 
@@ -72,8 +85,12 @@
 
 
     <paginate
-        :currentPageNumber="curPage"
-        :pages="pages"
+    v-if="(len>8)"
+      @next="next"
+      @prev="prev"
+      @goingToPage="goingToPage()"
+      :currentPageNumber="pagination.curPage"
+      :pages="pages"
     />
 
     <breadCrumbs
@@ -87,29 +104,161 @@ import pageTitleAnimated from '@/components/pageTitleAnimated.vue'
 import breadCrumbs from '@/components/breadCrumbs.vue'
 import paginate from '@/components/paginate.vue'
 import iconedInput from '@/components/iconedInput.vue'
-import selector from '@/components/selector.vue'
+// import selector from '@/components/selector.vue'
+import dropDown from '@/components/dropDown.vue'
 
 export default {
   name: 'exhibitsPage',
 
   components: {
-    pageTitleAnimated, breadCrumbs, paginate, iconedInput, selector
+    pageTitleAnimated, breadCrumbs, paginate, iconedInput, dropDown
   },
   data() {
     return {
       infoo:  null,
       URL: process.env.VUE_APP_API,
-      allExhibits: this.$store.state.exhibits,
+      // allExhibits: this.$store.state.exhibits,
+      allExhibits: [],
       title: {
         language_uzlatin: 'Korgazmalar',
         language_uzCyrillic: 'Кўргазмалар',
         language_ru: 'Экспонаты',
         language_en: 'Exhibits',
       },
-      curPage: 3,
-      pages: 658,
+      searchCategories: {
+        type: 'search',
+        options: [
+          {value: 'title', label: this.$t('options.title')},
+          {value: 'tag', label: this.$t('options.tag')}
+        ]
+      },
+      pagination: {
+        curPage: 1,
+        limit: 8,
+      },
+      len: '',
       search: '',
       exhibitsID: 'Бюст неандертальца',
+
+      exhibitsCategories: {
+        type: 'exhibits',
+        options: [
+          {
+            value: 'all',
+            label: this.$t('all')
+          },
+        ]
+      },
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
 
       options: [
         {value: '1', label: 'Option 1'},
@@ -125,25 +274,96 @@ export default {
       ],
     }
   },
+  computed: {
+    pages() {
+      return Math.ceil(this.len / this.pagination.limit)
+    }
+  },
   methods: {
-    async getSingleExhibits(){
-      await this.$api.get('/collections/exhibits/site')
-          .then(resp => {
-            this.allExhibits = resp.data.result.results
-            for(let i=1; i<=this.allExhibits.length; i++){
-              this.allExhibits[i-1].id = i
-            }
-            // console.log(this.allExhibits)
-          }), err => {console.log(err)}
+    getSingleExhibits(){
+      const params = {
+        page: this.$route.query.page,
+        limit: this.pagination.limit
+      }
+      this.$store.dispatch('getExhibits', params)
+      .then(() => {
+        this.allExhibits = this.$store.state.exhibits.result.results
+
+        this.len = this.$store.state.countExh
+
+        const len = this.$store.state.categories.length
+        for(let i=0; i<len; i++){
+          this.exhibitsCategories.options.push({
+            value: this.$store.state.categories[i].text.language_en,
+            label: this.$store.state.categories[i].text?.[this.$i18n.locale],
+            _id: this.$store.state.categories[i]._id
+          })
+        }
+        // console.log(this.allExhibits)
+      })
+      // await this.$api.get('/collections/exhibits/site')
+      //     .then(resp => {
+      //       this.allExhibits = resp.data.result.results
+      //       for(let i=1; i<=this.allExhibits.length; i++){
+      //         this.allExhibits[i-1].id = i
+      //       }
+      //       // console.log(this.allExhibits)
+      //     }), err => {console.log(err)}
+    },
+
+    changeCategory(option) {
+      // console.log(option)
+      this.category = option._id
+    },
+
+    changeSearchCategory(option) {
+      this.searchCategory = option.value
     },
     optionChanged(opt) {
       console.log(opt);
     },
     goToSingle(myid) {
       this.$router.push({ path: '/exhibits/' + this.exhibitsID, query: {exId: myid}})
-    }
+    },
+    next() {
+      this.getSingleExhibits()
+    },
+
+    prev() {
+      this.getSingleExhibits()
+    },
+
+    filPost(val) {
+      if (val) {
+        
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else{monId = 11}
+
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+
+        return day + " " + monthT + " " + year;
+      }
+    },
+
+    goingToPage() {
+      this.getSingleExhibits()
+    },
   },
   mounted() {
+    if(this.$route.query.page == undefined || this.$route.query.page == ''){
+      this.$router.push({
+        query:{
+          ...this.$route.query,
+          page : this.pagination.curPage
+        }
+      })
+    }else this.pagination.curPage = this.$route.query.page
     this.getSingleExhibits()
     // console.log(this.exhibitsID)
   },
@@ -151,5 +371,40 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
+
+@media screen and (max-width: 899px) {
+  .mob-select{
+    width: 100% !important;
+    height: 312px !important;
+    flex-direction: column !important;
+
+    .mob-inp{
+      width: 100% !important;
+
+      ul{
+        &.open{
+          z-index: 399;
+        }
+      }
+    }
+  }
+
+  .mobile-items{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+@media screen and (max-width: 1099px) and (min-width: 900px) {
+  .mobile-items{
+    grid-template-columns: repeat(2, calc(50% - 24px));
+    grid-row: 1/2 !important;
+
+    .exh-items{
+      width: 390px !important;
+      height: 560px !important;
+    }
+  }
+}
 </style>

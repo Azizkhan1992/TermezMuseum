@@ -21,8 +21,8 @@
       >
         <div class="w-4 z-idx2 d-f fd-c ml-a pad-t-48 pad-b-48 pad-r-24p box-brb">
 
-          <h3 class="commonT">{{place.title?.[$i18n.locale]}}</h3>
-          <p class="commonD mt-24 colorWhite">{{place.text?.[$i18n.locale]}}</p>
+          <!-- <h3 class="commonT">{{place.title?.[$i18n.locale]}}</h3>
+          <p class="commonD mt-24 colorWhite">{{place.text?.[$i18n.locale]}}</p> -->
 
           <h3 class="commonT">{{place?.title?.[$i18n.locale]}}</h3>
           <p class="commonD mt-24 colorWhite">{{place?.text?.[$i18n.locale]}}</p>
@@ -43,7 +43,7 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("workdays")}}:</p>
 
-                  <p class="mainers colorWhite">{{place.text?.[$i18n.locale]}}</p>
+                  <!-- <p class="mainers colorWhite">{{place.text?.[$i18n.locale]}}</p> -->
 
                   <p class="mainers colorWhite">{{place?.startDay[0]?.name?.[$i18n.locale]}} - {{place?.endDay[0]?.name?.[$i18n.locale]}}</p>
 
@@ -52,7 +52,7 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("workhours")}}:</p>
 
-                  <p class="mainers colorWhite">{{place.WorkingTime.endDay}}</p>
+                  <!-- <p class="mainers colorWhite">{{place.WorkingTime.endDay}}</p> -->
 
                   <p class="mainers colorWhite">{{place?.WorkingTime?.startTime}} - {{place?.WorkingTime?.endTime}}</p>
 
@@ -70,7 +70,7 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t('phoneNumber')}}:</p>
 
-                  <a :href="'tel:' + place.contact.phoneNumber" class="mainers colorWhite">{{place.contact.phoneNumber}}</a>
+                  <!-- <a :href="'tel:' + place.contact.phoneNumber" class="mainers colorWhite">{{place.contact.phoneNumber}}</a> -->
 
                   <a :href="place?.contact?.phoneNumber" class="mainers colorWhite">{{place?.contact?.phoneNumber}}</a>
 
@@ -86,7 +86,7 @@
                 <div class="w-100 gap-12">
                   <p class="helpers mw-fit">{{$t("email")}}:</p>
 
-                  <a :href="'mailto:' + place.contact.email" class="mainers colorWhite">{{place.contact.email}}</a>
+                  <!-- <a :href="'mailto:' + place.contact.email" class="mainers colorWhite">{{place.contact.email}}</a> -->
 
                   <a :href="place?.contact?.email" class="mainers colorWhite">{{place?.contact?.email}}</a>
 
@@ -99,7 +99,7 @@
 
         <div class="dark-layer-card-hrz z-idx1"></div>
 
-        <img class="back-img" :src="place.img.path" alt="">
+        <!-- <img class="back-img" :src="place.img.path" alt=""> -->
 
         <img class="back-img" :src="place?.img?.path" alt="">
 
@@ -260,9 +260,22 @@ export default {
             for (let i = 1; i <= this.allAddPlaces.length; i++) {
               this.allAddPlaces[i - 1].id = i
             }
+            this.getWorkDays(resp.data.result);
+            // console.log(this.allAddPlaces)
           }).catch(err => {
         console.log(err)
       })
+    },
+
+    getWorkDays(val) {
+      // console.log(val)
+
+      for(let i=0; i<=val.length-1; i++){
+        val[i].startDay = this.weekDays.filter(e => e.id == val[i].WorkingTime.startDay)
+        val[i].endDay = this.weekDays.filter(e => e.id == val[i].WorkingTime.endDay)
+      }
+      // console.log(val)
+
     },
   },
   mounted() {

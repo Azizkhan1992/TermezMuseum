@@ -18,7 +18,7 @@
             <p class="placeholder">{{ $t("search") }}...</p>
           </div>
 
-          <button class="icon-btn">
+          <button v-if="staticHeader !== undefined" class="icon-btn glass">
             <Icons icon="glasses" size="24" />
           </button>
 
@@ -26,15 +26,15 @@
             <Icons icon="sitemap" size="24" />
           </button>
 
-          <button class="icon-btn">
+          <button v-if="staticHeader !== undefined" class="icon-btn">
             <Icons icon="vr" size="24" />
           </button>
 
-          <button class="accent-btn">
+          <button v-if="staticHeader !== undefined" class="accent-btn">
             <span>{{ $t("onTicket") }}</span>
           </button>
 
-          <a href="tel: +998900073118" class="icon-txt-btn">
+          <a v-if="staticHeader !== undefined" href="tel: +998900073118" class="icon-txt-btn">
             <Icons icon="phone" size="middle" />
             <span>76 224-30-17</span>
           </a>
@@ -197,6 +197,7 @@ export default {
   data() {
     return {
       headerHidden: false,
+      staticHeader: undefined,
       userInfo: '',
       googleSwitcher: false,
       logotxt1: {
@@ -303,6 +304,14 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+
+    async getStaticHeader(){
+      await this.$api.get('/staticHeader')
+      .then(resp => {
+        this.staticHeader = resp.data
+        // console.log(resp.data)
+      }), err => {console.log(err)}
     },
     getDropImg() {
       let i = 0;
@@ -492,6 +501,7 @@ export default {
   mounted() {
     this.getMenuData();
     this.hidingHeader();
+    // this.getStaticHeader()
     if (
       window.location.pathname === "/" &&
       window.location.pathname !== "/contacts"
@@ -521,4 +531,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.glass{
+
+}
+</style>
