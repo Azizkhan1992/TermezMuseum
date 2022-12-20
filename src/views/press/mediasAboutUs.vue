@@ -68,7 +68,7 @@
       <p class="commonP colorGreyD bold line-h-20">{{ $t("top5Tag") }}:</p>
 
       <button class="top5TagBtn" v-for="el,index in topTags" :key="index">
-        <span>{{ el.name[$i18n.locale] }}</span>
+        <span>{{ el._id }}</span>
       </button>
     </div>
 
@@ -328,17 +328,17 @@ export default {
       await this.$api.get('/press/mmsarticle/site')
           .then(resp => {
             this.allNews = resp.data.result.results
-
+            this.topTags = resp.data.TopMMSDocuments
             for (let i = 1; i <= this.allNews.length; i++) {
               this.allNews[i - 1].id = i
             }
              console.log(this.allNews)
+             console.log(this.topTags)
+
           }), err => {
         console.log(err)
       }
     },
-
-
     goToSingle() {
       this.$router.push({path: `/news/lang=${this.$i18n.locale}` + this.eventsID})
     }
