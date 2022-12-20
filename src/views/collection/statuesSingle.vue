@@ -145,6 +145,8 @@
       </div>
 
     </div>
+
+
     <breadCrumbs
         :currentPage="title"
         :prevPageName="prevPage.name"
