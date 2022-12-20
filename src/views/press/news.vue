@@ -2,21 +2,14 @@
   <div class="mainPage">
 
     <pageTitleAnimated
-        :titleName="title?.[$i18n.locale]"
-        background="news"
+      :titleName="title[$i18n.locale]"
+      background="news"
     />
 
     <!-- Input Bar Start -->
-    <div class="tabsParent2 exh-fl">
-      <selector
-          @optionChanged="optionChanged"
-          :options="this.typeEventOptions"
-          id="aaSel"
-      />
-    </div>
 
     <div class="w-100 mt-60 z-idx100 fd-r gap-24 backgrnd-white bor-r-20 pad-24p box-brb mobile-flex">
-
+      
       <div class="w-2 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("year")}}</label>
 
@@ -32,60 +25,58 @@
           :options="this.options"
           id="aaSel"
         /> -->
-
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">{{ $t("month") }}</label>
-
+        <label class="colorGreyD mb-4">{{$t("month")}}</label>
+        
         <selector
-            @optionChanged="optionChanged"
-            :options="this.options"
-            id="bbSel"
+          @optionChanged="optionChanged"
+          :options="this.options"
+          id="bbSel"
         />
       </div>
 
       <div class="w-2 d-f fd-c">
-        <label class="colorGreyD mb-4">{{ $t("categorySearch") }}</label>
-
+        <label class="colorGreyD mb-4">{{$t("categorySearch")}}</label>
+        
         <selector
-            @optionChanged="optionChanged"
-            :options="this.options"
-            id="ccSel"
+          @optionChanged="optionChanged"
+          :options="this.options"
+          id="ccSel"
         />
       </div>
-
+      
       <div class="w-6 d-f fd-c">
 
-        <label class="colorGreyD mb-4">{{ $t("section") }}</label>
+        <label class="colorGreyD mb-4">{{$t("section")}}</label>
 
         <iconedInput
-            v-model="search"
-            icon="search"
-            :placeholder="$t('enterTextSearch')"
+          v-model="search"
+          icon="search"
+          :placeholder="$t('enterTextSearch')"
         />
       </div>
-
+      
     </div>
-
 
     <!-- Input Bar Stop -->
 
 
     <div class="w-100 h-48p mt-60 align-c gap-24 flex-wrap h-auto">
-      <p class="commonP colorGreyD bold line-h-20">{{ $t("top5Tag") }}:</p>
+      <p class="commonP colorGreyD bold line-h-20">{{$t("top5Tag")}}:</p>
 
       <button class="top5TagBtn" v-for="el,index in topTags" :key="index">
-        <span>{{ el._id }}</span>
+        <span>{{el.name[$i18n.locale]}}</span>
       </button>
     </div>
 
     <div class="w-100 gap-48 mt-80">
-      <p class="commonP line-h-30 colorGreyD">{{ $t("countPublicate") }}:</p>
+      <p class="commonP line-h-30 colorGreyD">{{$t("countPublicate")}}:</p>
       <p class="commonP line-h-30 bold colorType">1 694</p>
     </div>
 
-    <!-- Card Big Start -->
+      <!-- Card Big Start -->
 
       <div class="news-wr">
 
@@ -105,8 +96,7 @@
             {{ news?.title?.[$i18n.locale] }}
           </h4>
 
-
-        <p
+          <p
             @click="goToSingle"
             class="commonP cur-ptr colorGreyD mt-24 line-h-30 h-90p"
             v-html="news?.text?.[$i18n.locale]"
@@ -115,115 +105,59 @@
 
           <div class="w-100 gap-12 ovr-hidden">
             <button class="newsCardTag">
-
               <span>
-               {{ tags[idx] }}
+                Click me
+                Click me
+                Click me
               </span>
-          </button>
+            </button>
 
+            <button class="newsCardTag">
+              <span>
+                Click me
+              </span>
+            </button>
 
-          <button class="newsCardTag last">
+            <button class="newsCardTag">
+              <span>
+                Click me
+              </span>
+            </button>
+
+            <button class="newsCardTag">
+              <span>
+                Click me
+              </span>
+            </button>
+
+            <button class="newsCardTag last">
               <span>
                 + 7
               </span>
-          </button>
-        </div>
-
-        <div class="w-100 justify-sb mt-48 mt-24-900">
-
-          <div class="w-100 d-f fd-r gap-24 nw-card-btm">
-            <div class="w-a d-f fd-r align-c gap-12">
-              <Icons
-                  icon="calendar"
-                  size="middle"
-              />
-              <p class="helpers">{{ allNews[0].createdAt }}</p>
-            </div>
-
-            <div class="w-a d-f fd-r align-c gap-12">
-              <Icons
-                  icon="eye"
-                  size="middle"
-              />
-              <p class="helpers">{{ $t("viewed") }} {{ allNews[0].numberOfViews }}</p>
-            </div>
-
-            <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr">
-              <Icons
-                  icon="share"
-                  size="middle"
-              />
-              <p class="helpers">{{ $t("share") }}</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Card Big Stop -->
-
-    <!-- Card Grid Start -->
-
-    <div class="grid-3 w-100 mt-24 grid-1-900 nw-lcard">
-
-      <!-- Card Sm Start -->
-
-      <div v-for="(item,ind) in allNews.slice(1) " :key="ind" class="w-4 ovr-hidden bor-r-20 backgrnd-white h-420p">
-        <div class="w-100 pos-rel h-220p">
-          <img
-              @click="goToSingle"
-              class="back-img cur-ptr" :src="item.mainImage.common.path" alt=""
-          >
-        </div>
-
-        <div class="w-100 fd-c pad-24p h-200p ovr-hidden box-brb h-un-900">
-          <h4
-              @click="goToSingle"
-              class="commonP cur-ptr colorType line-h-30 bold h-60p"
-          >
-            {{ item.title?.[$i18n.locale] }}
-          </h4>
-
-          <div class="w-100 gap-12 mt-a ovr-hidden ev-sn-tg">
-            <button v-for="(tagss,idx) in item.tags" :key="idx" class="newsCardTag sm">
-                <span>
-                 {{tagss[idx]}}
-                </span>
-            </button>
-
-
-
-            <button class="newsCardTag last">
-                <span>
-                  + 7
-                </span>
             </button>
           </div>
 
           <div class="w-100 justify-sb">
             
-
             <div class="w-100 d-f fd-r gap-24">
               <div class="w-a d-f fd-r align-c gap-12">
                 <Icons
-                    icon="calendar"
-                    size="middle"
+                  icon="calendar"
+                  size="middle"
                 />
-                <p class="helpers">{{item.createdAt}}</p>
+                <p class="helpers">22 июнь 2022г</p>
               </div>
 
               <div class="w-a d-f fd-r align-c gap-12">
                 <Icons
-                    icon="eye"
-                    size="middle"
+                  icon="eye"
+                  size="middle"
                 />
-                <p class="helpers">{{ $t("viewed") }} {{ item.numberOfViews }}</p>
+                <p class="helpers">{{$t("viewed")}} 1 396</p>
               </div>
 
               <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr">
                 <Icons
-
                   icon="share"
                   size="middle"
                 />
@@ -242,21 +176,16 @@
 
       
 
-
-      <!-- Card Sm Stop -->
-
-    </div>
-
-    <!-- Card Grid Stop -->
-
+      <!-- Card Grid Stop -->
+    
 
     <paginate
-        :currentPageNumber="curPage"
-        :pages="pages"
+      :currentPageNumber="curPage"
+      :pages="pages"
     />
 
     <breadCrumbs
-        :currentPage="title?.[$i18n.locale]"
+      :currentPage="title[$i18n.locale]"
     />
 
   </div>
@@ -280,7 +209,6 @@ export default {
 
   data() {
     return {
-      allNews: [],
       title: {
         language_uzlatin: 'Yangiliklar',
         language_uzCyrillic: 'Янгиликлар',
@@ -294,34 +222,34 @@ export default {
 
       chosenTab: 1,
       topTags: [
-        {
-          id: 1,
-          name: {
-            language_uzlatin: "Muhim",
-            language_ru: "Важно",
-            language_uzCyrillic: "Муҳим",
-            language_en: "Important",
+          {
+            id: 1,
+            name: {
+              language_uzlatin: "Muhim",
+              language_ru: "Важно",
+              language_uzCyrillic: "Муҳим",
+              language_en: "Important",
+            },
           },
-        },
-        {
-          id: 2,
-          name: {
-            language_uzlatin: "Konkurs",
-            language_ru: "Конкурс",
-            language_uzCyrillic: "Конкурс",
-            language_en: "Competition",
+          {
+            id: 2,
+            name: {
+              language_uzlatin: "Konkurs",
+              language_ru: "Конкурс",
+              language_uzCyrillic: "Конкурс",
+              language_en: "Competition",
+            },
           },
-        },
-        {
-          id: 3,
-          name: {
-            language_uzlatin: "O'zbekiston tarixi",
-            language_ru: "История Узбекистана",
-            language_uzCyrillic: "Ўзбекистон тарихи",
-            language_en: "History of Uzbekistan",
+          {
+            id: 3,
+            name: {
+              language_uzlatin: "O'zbekiston tarixi",
+              language_ru: "История Узбекистана",
+              language_uzCyrillic: "Ўзбекистон тарихи",
+              language_en: "History of Uzbekistan",
+            },
           },
-        },
-      ],
+        ],
 
         year: {
         type: 'year',
@@ -331,6 +259,7 @@ export default {
       },
       chosenYear: {value: 'all', label: this.$t('all')},
 
+      allNews: [],
 
       options: [
         {value: '1', label: 'Option 1'},
@@ -343,10 +272,6 @@ export default {
         {value: '8', label: 'Option 8'},
         {value: '9', label: 'Option 9'},
         {value: '10', label: 'Option 10'},
-      ],
-      typeEventOptions: [
-        {value: '1', label: 'Запланированные мероприятия'},
-        {value: '2', label: 'Проведенные мероприятия'},
       ],
     }
   },
@@ -401,23 +326,9 @@ export default {
     optionChanged(opt) {
       console.log(opt);
     },
-    async getSingleNews() {
-      await this.$api.get('/press/news')
-          .then(resp => {
-            this.allNews = resp.data.result.results
-            this.topTags = resp.data.TopMMSDocuments
-            for (let i = 1; i <= this.allNews.length; i++) {
-              this.allNews[i - 1].id = i
-            }
-            console.log(this.allNews)
-            console.log(this.topTags)
 
-          }), err => {
-        console.log(err)
-      }
-    },
     goToSingle() {
-      this.$router.push({path: `/news/lang=${this.$i18n.locale}` + this.eventsID})
+      this.$router.push({ path: '/news/' + this.eventsID})
     }
   },
 }
