@@ -29,12 +29,18 @@
 
       <div class="w-2 d-f fd-c">
         <label class="colorGreyD mb-4">{{$t("month")}}</label>
+
+        <dropDown
+        @changeOption="changeMonth"
+        :options="month"
+          :current="chosenYear"
+        />
         
-        <selector
+        <!-- <selector
           @optionChanged="optionChanged"
           :options="this.options"
           id="bbSel"
-        />
+        /> -->
       </div>
 
       <div class="w-2 d-f fd-c">
@@ -258,8 +264,28 @@ export default {
         ]
       },
       chosenYear: {value: 'all', label: this.$t('all')},
+      chosenMonth: {value: 'all', label: this.$t('all')},
+      chosenSearchCategory: {value:'title', label: this.$t('options.title')},
 
       allNews: [],
+      month: {
+        type: 'month',
+        options: [
+          {value: 'all', label: this.$t('all')},
+          {value: '0', label: this.$t('months.january')},
+          {value: '1', label: this.$t('months.february')},
+          {value: '2', label: this.$t('months.march')},
+          {value: '3', label: this.$t('months.april')},
+          {value: '4', label: this.$t('months.may')},
+          {value: '5', label: this.$t('months.june')},
+          {value: '6', label: this.$t('months.july')},
+          {value: '7', label: this.$t('months.august')},
+          {value: '8', label: this.$t('months.september')},
+          {value: '9', label: this.$t('months.october')},
+          {value: '10', label: this.$t('months.november')},
+          {value: '11', label: this.$t('months.december')}
+        ]
+      }, 
 
       options: [
         {value: '1', label: 'Option 1'},
@@ -283,7 +309,8 @@ export default {
   methods: {
     getNews(){
       const params = {
-        year: this.$route.query.year
+        year: this.$route.query.year,
+        month: this.$route.query.month
       }
 
       this.$store.dispatch('getNews', params)
@@ -319,6 +346,16 @@ export default {
         query: {
           ...this.$route.query,
           year: this.chosenYear.value
+        }
+      })
+      this.getEvents()
+    },
+    changeMonth(option){
+      this.chosenMonth = option
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          month: this.chosenMonth.value
         }
       })
       this.getEvents()

@@ -2462,7 +2462,7 @@ export default new Vuex.Store({
       })
     },
     async getNews({state}, queryParams){
-      await Api.get(`/press/news/site?year=${queryParams.year}`)
+      await Api.get(`/press/news/site?year=${queryParams.year}&month=${queryParams.month}`)
       .then(resp => {
 
         let news = resp.data

@@ -49,7 +49,7 @@
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
                 <p class="helpers mw-fit">{{$t("phoneNumber")}}:</p>
-                <a :href="manager?.contact.phoneNumber" class="mainers">{{manager?.contact.phoneNumber}}</a>
+                <a :href="manager?.contact?.phoneNumber" class="mainers">{{manager?.contact?.phoneNumber}}</a>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
             <div class="w-100 fd-c gap-12">
               <div class="w-100 gap-12">
                 <p class="helpers mw-fit">{{$t("email")}}:</p>
-                <a :href="manager?.contact.email" class="mainers">{{manager?.contact.email}}</a>
+                <a :href="manager?.contact?.email" class="mainers">{{manager?.contact?.email}}</a>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default {
       this.$api.get('/about/employee/site')
       .then(resp => {
         this.managers = resp.data.employees
-        // console.log(this.managers)
+        console.log(this.managers)
         this.managers.forEach(elem => {
           this.getWeekendDay(elem.workingTime)
           this.getWorkDays(elem.workingTime)
