@@ -57,7 +57,7 @@
                 :key="is" class="mainers bold">{{languegess.name?.[$i18n.locale]}}</p>
           </div>
           <button class="prim w-100 mt-a">
-             <span>{{ book.fileObject.link ? $t("goLink") : $t("buy2")}}</span>
+             <span>{{ book?.fileObject?.link ? $t("goLink") : $t("buy2")}}</span>
           </button>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default {
             for(let i=1; i<=this.allBooks.length; i++){
               this.allBooks[i-1].id = i
             }
-            console.log(this.allBooks)
+            // console.log(this.allBooks)
           }), err => {console.log(err)}
     },
     optionChanged(opt) {

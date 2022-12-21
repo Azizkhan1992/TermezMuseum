@@ -12,7 +12,7 @@
 
     <div class="w-100 mt-80 gap-48">
       <p class="commonP line-h-30 colorGreyD">{{$t("countExibits")}}:</p>
-      <p class="commonP line-h-30 bold colorType">{{allExhNum}}</p>
+      <p class="commonP line-h-30 bold colorType">{{len}}</p>
     </div>
 
     <div class="w-100 grid-4 mt-60 singlDescHall">
@@ -26,8 +26,8 @@
           <p class="commonP bold line-h-24 mt-a">{{xhbt?.title?.[$i18n.locale]}}</p>
           
           <div class="w-100 gap-12 mt-24">
-            <p class="helpers">{{$t("discoverIn")}}:</p>
-            <p class="mainers colorWhite">{{getYear(xhbt?.additional?.createdDate)+ ' ' + $t('year2')}}</p>
+            <p v-if="xhbt?.additional?.createdDate" class="helpers">{{$t("discoverIn")}}:</p>
+            <p v-if="xhbt?.additional?.createdDate" class="mainers colorWhite">{{getYear(xhbt?.additional?.createdDate)+ ' ' + $t('year2')}}</p>
           </div>
         </div>
 
@@ -39,7 +39,11 @@
 
 
     <paginate
-      :currentPageNumber="curPage"
+    v-if="(len>10)"
+      @next="next"
+      @prev="prev"
+      @goingToPage="goingToPage()"
+      :currentPageNumber="pagination.curPage"
       :pages="pages"
     />
 
@@ -81,8 +85,11 @@ export default {
         link: '/sections'
       },
       title: this.$route.params.id,
-      curPage: 3,
-      pages: 657,
+      pagination: {
+        curPage: 1,
+        limit: 10,
+      },
+      len: '',
       description: `
         Зал посвящен к археологическим находкам в Сурханском оазисе каменного века и имеет огромную коллекцию самых разных и дорогих экспонатов в виде статуй, картин и тд.
         <br/><br/>
@@ -91,6 +98,15 @@ export default {
     }
   },
   mounted(){
+
+    if(this.$route.query.page == undefined || this.$route.query.page == ''){
+      this.$router.push({
+        query:{
+          ...this.$route.query,
+          page : this.pagination.curPage
+        }
+      })
+    }else this.pagination.curPage = this.$route.query.page
     this.getSingleSect()
     this.getSectExhibits()
   },
@@ -98,6 +114,9 @@ export default {
     getRouteId(){
       let temp = this.routeId.split('_')
       return temp[0]
+    },
+    pages() {
+      return Math.ceil(this.len / this.pagination.limit)
     }
   },
   methods: {
@@ -109,21 +128,40 @@ export default {
       }), err => {console.log(err)}
     },
     async getSectExhibits(){
-      await this.$api.get('/collections/exhibits/site')
-      .then(resp => {
-        this.allExhibits = resp.data.result.results
-        for(let i=1; i<=this.allExhibits.length; i++){
-          this.allExhibits[i-1].id = i
-        }
-        this.allExhNum = resp.data.NumberOfExhibitions
+      const params = {
+        page: this.$route.query.page,
+        limit: this.pagination.limit
+      }
+      this.$store.dispatch('getSectionSingle', params)
+      .then(() => {
+
+        this.allExhibits = this.$store.state.sectionItems
+        this.len = this.$store.state.sectionItemsNum
+        // this.allExhibits = resp.data.result.results
+        // for(let i=1; i<=this.allExhibits.length; i++){
+        //   this.allExhibits[i-1].id = i
+        // }
+        // this.allExhNum = resp.data.NumberOfExhibitions
         // console.log(resp.data.NumberOfExhibitions)
       }), err => {console.log(err)}
     },
     getYear(date){
-      let data = date.split('T')
-      let year = new Date(data[0]).getFullYear()
+      let year
+      if(date){
+        let data = date.split('T')
+         year = new Date(data[0]).getFullYear()
+      }
       // console.log(year)
       return year
+    },
+    next(){
+      this.getSectExhibits()
+    },
+    prev(){
+      this.getSectExhibits()
+    },
+    goingToPage(){
+      this.getSectExhibits()
     }
   }
 }

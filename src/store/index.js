@@ -24,6 +24,10 @@ export default new Vuex.Store({
     countPaints: '',
     statues: '',
     countStatues: '',
+    hallItems: '',
+    hallItemsNum: '',
+    sectionItems: '',
+    sectionItemsNum: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2546,6 +2550,24 @@ export default new Vuex.Store({
         state.countStatues = resp.data.NumberOfPaintings
         // console.log(state.statues)
       })
+      },
+
+      async getHallSingle({state}, queryParams){
+        await Api.get(`/collections/exhibits/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.hallItems = resp.data.result.results
+          state.hallItemsNum = resp.data.NumberOfExhibitions
+          // console.log(resp.data)
+        })
+      },
+
+      async getSectionSingle({state}, queryParams){
+        await Api.get(`/collections/exhibits/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.sectionItems = resp.data.result.results
+          state.sectionItemsNum = resp.data.NumberOfExhibitions
+          // console.log(resp.data)
+        })
       },
     preloaderOff({commit}) {
       commit('SET_PRELOADER_OFF')
