@@ -476,7 +476,7 @@ export default {
           month: this.chosenMonth.value
         }
       })
-      this.getEvents()
+      this.getNews()
     },
     changeCategory(option) {
       this.chosenSearchCategory = option
@@ -486,7 +486,7 @@ export default {
           searchCategory: this.chosenSearchCategory.value
         }
       })
-      this.getEvents()
+      this.getNews()
     },
     searchEvent() {
       if(this.$route.query.search !== this.searchWord) {
@@ -497,7 +497,7 @@ export default {
           }
         })
         .then(() => {
-          this.getEvents()
+          this.getNews()
         })
       }
     },
@@ -518,9 +518,9 @@ export default {
         this.getEvents()
       } else return
     },
-    optionChanged(opt) {
-      console.log(opt);
-    },
+    // optionChanged(opt) {
+    //   console.log(opt);
+    // },
 
     next() {
       this.getEvents()

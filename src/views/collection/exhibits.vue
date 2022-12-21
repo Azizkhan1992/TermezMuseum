@@ -13,9 +13,9 @@
         <label class="colorGreyD mb-4">{{$t("categoryExhibits")}}</label>
 
         <dropDown
-        :options="exhibitsCategories"
-          :current="exhibitsCategories.options[0]"
-          @changeOption="changeCategory"
+          :options="exhibitsCategories"
+            :current="chosenCategory"
+            @changeOption="changeCategory"
         />
         <!-- <selector
             @optionChanged="optionChanged"
@@ -29,7 +29,7 @@
 
         <dropDown
           :options="searchCategories"
-          :current="searchCategories.options[0]"
+          :current="chosenSearchCategory"
           @changeOption="changeSearchCategory"
         />
 
@@ -43,9 +43,10 @@
       <div class="w-6 d-f fd-c mob-inp">
         <label class="colorGreyD mb-4">{{$t("section")}}</label>
         <iconedInput
-            v-model="search"
-            icon="search"
-            :placeholder="$t('enterTextSearch')"
+        @iconClicked="searchEvent"
+          v-model="searchWord"
+          :placeholder="this.$t('placeholders.enterSearchText')"
+          :value="searchWord"
         />
       </div>
 
@@ -137,7 +138,7 @@ export default {
         limit: 8,
       },
       len: '',
-      search: '',
+      searchWord: '',
       exhibitsID: 'Бюст неандертальца',
 
       exhibitsCategories: {
@@ -259,6 +260,8 @@ export default {
           },
         },
       ],
+      chosenSearchCategory: {value:'title', label: this.$t('options.title')},
+      chosenCategory: {value: 'all', label: this.$t('all')},
 
       options: [
         {value: '1', label: 'Option 1'},
@@ -282,22 +285,29 @@ export default {
   methods: {
     getSingleExhibits(){
       const params = {
+        category: this.$route.query.category,
+        searchCategory: this.$route.query.searchCategory,
+        searchWord: this.$route.query.search,
         page: this.$route.query.page,
         limit: this.pagination.limit
       }
+      // console.log(params.searchCategory)
       this.$store.dispatch('getExhibits', params)
       .then(() => {
         this.allExhibits = this.$store.state.exhibits.result.results
 
         this.len = this.$store.state.countExh
+        // console.log(this.$store.state.categories)
 
         const len = this.$store.state.categories.length
-        for(let i=0; i<len; i++){
+        if(this.exhibitsCategories.options.length == 1){
+          for(let i=0; i<len; i++){
           this.exhibitsCategories.options.push({
             value: this.$store.state.categories[i].text.language_en,
             label: this.$store.state.categories[i].text?.[this.$i18n.locale],
             _id: this.$store.state.categories[i]._id
           })
+        }
         }
         // console.log(this.allExhibits)
       })
@@ -312,12 +322,50 @@ export default {
     },
 
     changeCategory(option) {
+      this.chosenCategory = option
       // console.log(option)
-      this.category = option._id
+      if(option.value == 'all'){
+        this.$router.push({
+        query: {
+          ...this.$route.query,
+          category: option.value
+        }
+      })
+      }else{
+        this.$router.push({
+        query: {
+          ...this.$route.query,
+          category: option._id
+        }
+      })
+      }
+      this.getSingleExhibits()
     },
 
     changeSearchCategory(option) {
-      this.searchCategory = option.value
+      // console.log(option)
+      this.chosenSearchCategory = option
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          searchCategory: option.value
+        }
+      })
+      this.getSingleExhibits()
+    },
+
+    searchEvent(){
+      if(this.$route.query.search !== this.searchWord) {
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            search: this.searchWord
+          }
+        })
+        .then(() => {
+          this.getSingleExhibits()
+        })
+      }
     },
     optionChanged(opt) {
       console.log(opt);
@@ -356,6 +404,25 @@ export default {
     },
   },
   mounted() {
+    if(this.$route.query.searchCategory == undefined || this.$route.query.searchCategory == ''){
+      this.$router.push({
+        query:{
+          ...this.$route.query,
+          searchCategory: this.searchCategories.options[0].value
+        }
+      })
+      this.chosenSearchCategory = this.searchCategories.options.find(chosen => chosen.value === this.$route.query.searchCategory)
+    } else this.chosenSearchCategory = this.searchCategories.options.find(chosen => chosen.value === this.$route.query.searchCategory)
+
+    if(this.$route.query.search == undefined || this.$route.query.search !== ''){
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          search: this.searchWord
+        }
+      })
+      this.searchWord = this.$route.query.search
+    }else this.searchWord = this.$route.query.search
     if(this.$route.query.page == undefined || this.$route.query.page == ''){
       this.$router.push({
         query:{
@@ -364,6 +431,17 @@ export default {
         }
       })
     }else this.pagination.curPage = this.$route.query.page
+
+    if(this.$route.query.category == undefined || this.$route.query.category == ''){
+      this.$router.push({
+        query: {
+          ...this.$route.query, 
+          category: this.exhibitsCategories.options[0].value
+        }
+      })
+      this.chosenCategory = this.exhibitsCategories.options.find(category => category.value === this.$route.query.category)
+      // console.log(this.chosenSearchCategory)
+    } else this.chosenCategory = this.exhibitsCategories.options.find(category => category.value == this.$route.query.category)
     this.getSingleExhibits()
     // console.log(this.exhibitsID)
   },

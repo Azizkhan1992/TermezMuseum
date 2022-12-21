@@ -22,6 +22,8 @@ export default new Vuex.Store({
     countExh: '',
     paints: '',
     countPaints: '',
+    statues: '',
+    countStatues: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2506,7 +2508,7 @@ export default new Vuex.Store({
 
         // console.log(categories)
       })
-        await Api.get(`/collections/exhibits/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        await Api.get(`/collections/exhibits/site?category=${queryParams.category}&searchWord=${queryParams.searchWord}&page=${queryParams.page}&limit=${queryParams.limit}&searchCategory=${queryParams.searchCategory}`)
         .then(resp => {
           state.exhibits = resp.data
           state.countExh = resp.data.NumberOfExhibitions
@@ -2514,7 +2516,7 @@ export default new Vuex.Store({
         }), err => {console.log(err)}
       },
 
-      async getPaints({state}){
+      async getPaints({state}, queryParams){
         await Api.get('/settings/category/active')
       .then((data) => {
         let categories = data.data.result
@@ -2522,11 +2524,28 @@ export default new Vuex.Store({
 
         // console.log(categories)
       })
-        await Api.get('collections/paintings/site')
+        await Api.get(`collections/paintings/site?category=${queryParams.category}&searchWord=${queryParams.searchWord}&page=${queryParams.page}&limit=${queryParams.limit}&searchCategory=${queryParams.searchCategory}`)
         .then(resp => {
           state.paints = resp.data
           state.countPaints = resp.data.NumberOfPaints
         })
+      },
+
+      async getStatues({state}, queryParams){
+        await Api.get('/settings/category/active')
+      .then((data) => {
+        let categories = data.data.result
+        state.categories = categories
+
+        // console.log(categories)
+      })
+
+      await Api.get(`/collections/statue/site?category=${queryParams.category}&searchWord=${queryParams.searchWord}&page=${queryParams.page}&limit=${queryParams.limit}&searchCategory=${queryParams.searchCategory}`)
+      .then(resp => {
+        state.statues = resp.data.result.results
+        state.countStatues = resp.data.NumberOfPaintings
+        // console.log(state.statues)
+      })
       },
     preloaderOff({commit}) {
       commit('SET_PRELOADER_OFF')
