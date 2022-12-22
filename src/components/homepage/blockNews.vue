@@ -14,7 +14,7 @@
       <topTags :topTags="this.topTags" />
     </div>
 
-    <div class="news-wr">
+    <div class="news-wrapper">
       <div class="news-items" v-for="item, idx in news" :key="idx" @click="go(item)">
         <div class="img-wr">
           <img :src="item?.mainImage?.common?.path" alt="">
@@ -45,6 +45,7 @@
                   size="middle"
                 />
                 <p class="helpers">{{$t("viewed")}} {{ item?.numberOfViews }}</p>
+                <p class="views"> {{ item?.numberOfViews }}</p>
               </div>
 
           <div class="w-a d-f fd-r align-c cur-ptr gap-8 share-wr" @click="shareIt">
@@ -311,7 +312,7 @@ export default {
 </script>
 
 <style lang="scss">
-.news-wr{
+.news-wrapper{
   width: 100%;
   height: auto;
   display: flex;
@@ -335,6 +336,14 @@ export default {
       height: calc(50% - 12px);
       flex-direction: column;
       justify-content: space-between;
+
+      p.helpers{
+          display: block;
+        }
+
+        p.views{
+          display: none;
+        }
 
       .mr-s-24{
         margin-right: 0;
@@ -400,6 +409,8 @@ p.creat{
       .news-title{
         width: calc(50% - 12px);
         height: 100%;
+        padding: 16px;
+        box-sizing: border-box;
 
         p.news-desc{
         font-size: 1rem;
@@ -428,6 +439,85 @@ p.creat{
         }
       }
 
+    }
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .news-wrapper{
+    flex-direction: column;
+
+
+    .news-items{
+      height: 584px;
+      width: 100%;
+
+      .news-title{
+
+        .share-wr{
+
+          p.commonP{
+            display: none;
+          }
+        }
+
+        p.helpers{
+          display: none;
+        }
+
+        p.views{
+          display: block;
+        }
+
+        p.news-desc{
+          font-size: 1rem;
+        font-weight: 400;
+        line-height: 25px;
+        width: 95%;
+        height: 55px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        color: #A4ABBD;
+        }
+      }
+
+      &:first-child{
+        flex-direction: column;
+        align-items: center;
+
+        p.news-desc{
+        height: 55px !important;
+        -webkit-line-clamp: 2 !important;
+        overflow: hidden;
+        color: #A4ABBD;
+        }
+
+        .img-wr{
+          width: 100%;
+          height: calc(50% - 12px);
+        }
+        .news-title{
+          width: 95%;
+          height: calc(50% - 12px);
+          padding: 8px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1099px) and (min-width: 900px) {
+  .news-wrapper{
+    
+    .news-items{
+      width: calc(50% - 12px);
+
+
+      &:last-child{
+        display: none;
+      }
     }
   }
 }
