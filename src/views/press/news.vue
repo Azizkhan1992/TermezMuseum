@@ -86,31 +86,29 @@
 
     <div class="w-100 gap-48 mt-80">
       <p class="commonP line-h-30 colorGreyD">{{$t("countPublicate")}}:</p>
-      <p class="commonP line-h-30 bold colorType">{{ allNews.length }}</p>
+      <p class="commonP line-h-30 bold colorType">{{ len }}</p>
     </div>
 
       <!-- Card Big Start -->
 
       <div class="news-wr">
 
-        <div class="w-100 h-420p mt-60 bor-r-20 gap-24 ovr-hidden backgrnd-white news-items" v-for="news, idx in allNews" :key="idx">
+        <div class="w-100 h-420p mt-60 bor-r-20 gap-24 ovr-hidden backgrnd-white news-items" v-for="news, idx in allNews" :key="idx" @click="goToSingle(news)">
         <div class="w-50 pos-rel news-img">
           <img
-            @click="goToSingle"
+            
             class="back-img cur-ptr" :src="news?.mainImage?.common?.path" alt=""
           >
         </div>
 
         <div class="w-50 d-f fd-c box-brb pad-r-24p pad-t-24p pad-b-24p news-title">
           <h4
-            @click="goToSingle"
             class="commonT cur-ptr colorType h-90p"
           >
             {{ news?.title?.[$i18n.locale] }}
           </h4>
 
           <p
-            @click="goToSingle"
             class="commonP cur-ptr colorGreyD mt-24 line-h-30 h-90p"
             v-html="news?.text?.[$i18n.locale]"
           >
@@ -162,7 +160,7 @@
                   icon="calendar"
                   size="middle"
                 />
-                <p class="helpers">22 июнь 2022г</p>
+                <p class="helpers">{{ filPost(news?.createdAt) + " " + $t("year2") }}</p>
               </div>
 
               <div class="w-a d-f fd-r align-c gap-12">
@@ -170,7 +168,7 @@
                   icon="eye"
                   size="middle"
                 />
-                <p class="helpers">{{$t("viewed")}} 1 396</p>
+                <p class="helpers">{{$t("viewed")}} {{ news?.numberOfViews }}</p>
               </div>
 
               <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr share"
@@ -315,6 +313,116 @@ export default {
           {value: 'tags', label: this.$t('options.tags')}
         ]
       },
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
 
       // options: [
       //   {value: '1', label: 'Option 1'},
@@ -534,9 +642,26 @@ export default {
       this.getEvents()
     },
 
-    goToSingle() {
-      this.$router.push({ path: '/news/' + this.eventsID})
-    }
+    goToSingle(val) {
+      this.$router.push({ path: '/news/' + this.eventsID + '_' + val._id})
+    },
+    filPost(val) {
+      if (val) {
+        
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else {monId = 11}
+        
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+        
+        return day + " " + monthT + " " + year;
+      }
+    },
   },
 }
 </script>
@@ -582,6 +707,10 @@ export default {
       .news-img{
         width: calc(50% - 12px);
         height: 100%;
+
+        img{
+          object-fit: contain;
+        }
       }
       .news-title{
         width: calc(50% - 12px);

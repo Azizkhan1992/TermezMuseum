@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <div class="w-100 mt-120">
-      <h2 class="grandTitle txt-align-l">{{title}}</h2>
+      <h2 class="grandTitle txt-align-l">{{allInfos?.title?.[$i18n.locale]}}</h2>
     </div>
 
     <div class="w-100 fd-c gap-24 mt-80">
@@ -13,7 +13,7 @@
             icon="calendar"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">22 июнь 2022г</p>
+          <p class="commonP colorGreyD line-h-20">{{ filPost(allInfos?.createdAt) + " " + $t("year2") }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24">
@@ -21,7 +21,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  {{ allInfos?.numberOfViews }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24">
@@ -30,7 +30,7 @@
             icon="like"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">1 694</p>
+          <p class="commonP colorGreyD line-h-20">{{ allInfos?.numberOfLikes }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24">
@@ -39,10 +39,12 @@
             icon="dislike"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">26</p>
+          <p class="commonP colorGreyD line-h-20">{{ allInfos?.numberOfDislikes }}</p>
         </div>
 
-        <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
+        <div class="w-a d-f fd-r align-c gap-24 cur-ptr"
+        @click="shareIt(allInfos)"
+        >
           <Icons
             icon="share"
             size=""
@@ -61,12 +63,12 @@
 
     </div>
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p">
-      <img src="@/assets/temporary/neandertal.jpg" alt="">
+    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p img-wr">
+      <img :src="allInfos?.mainImage?.common?.path" alt="">
     </div>
 
     <div class="w-100 mt-60">
-      <h4 v-html="description" class="commonD"></h4>
+      <h4 v-html="allInfos?.text?.[$i18n.locale]" class="commonD"></h4>
     </div>
 
     <!-- Static Block Start -->
@@ -140,7 +142,8 @@
 
 
     <breadCrumbs
-      :currentPage="title"
+    v-if="allInfos?.title"
+      :currentPage="allInfos?.title?.[$i18n.locale]"
       :prevPageName="prevPage.name[$i18n.locale]"
       :prevPageLink="prevPage.link"
     />
@@ -168,11 +171,123 @@ export default {
 
   data() {
     return {
-      allInfos: this.$store.state.exhibitsInfo,
-      title: this.$route.params.id,
+      // allInfos: this.$store.state.exhibitsInfo,
+      allInfos: {},
+      // title: this.$route.params.id,
       
       hiddenR: 1,
       playInterval: '',
+      ID: this.$route.params.id,
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
 
       prevPage: {
         name:  {
@@ -239,10 +354,58 @@ export default {
       ) {
         return true
       } else return false
+    },
+    getId(){
+      let temp = this.ID.split('_')
+      // console.log(temp[1])
+      return temp[1]
     }
   },
 
   methods: {
+
+    async getSingleNews(){
+      await this.$api.get(`press/news/site/${this.getId}`)
+      .then(resp => {
+        this.allInfos = resp.data.result
+        // console.log(this.allInfos)
+      }), err => {console.log(err)}
+    },
+    filPost(val) {
+      if (val) {
+        
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else {monId = 11}
+        
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+        
+        return day + " " + monthT + " " + year;
+      }
+    },
+    async shareIt(event) {
+      // console.log(event)
+      if(navigator.canShare) {
+        navigator.share({
+          title: event.title?.[this.$i18n.locale],
+          text: event.text?.[this.$i18n.locale],
+          url: `${window.location.pathname}/${event._id}`
+        })
+      } else {
+        try {
+          await navigator.clipboard.writeText(`${window.location.pathname}/${event._id}`);
+          alert('Copied');
+        } catch($e) {
+          alert('Cannot copy');
+        }
+      }
+    },
+
     prev() {
       clearInterval(this.playInterval)
 
@@ -311,6 +474,7 @@ export default {
   },
 
   mounted() {
+    this.getSingleNews()
     if(this.imgs.length >= 5) {
       this.play()
     }
@@ -318,6 +482,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.img-wr{
+  height: fit-content;
+  img{
+    width: 100%;
+    object-fit: contain;
+  }
+}
 </style>

@@ -28,6 +28,8 @@ export default new Vuex.Store({
     hallItemsNum: '',
     sectionItems: '',
     sectionItemsNum: '',
+    libraryItems: '',
+    countBooks: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2566,6 +2568,16 @@ export default new Vuex.Store({
         .then(resp => {
           state.sectionItems = resp.data.result.results
           state.sectionItemsNum = resp.data.NumberOfExhibitions
+          // console.log(resp.data)
+        })
+      },
+
+      async getLibrary({state}, queryParams){
+        await Api.get(`collections/books/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.libraryItems = resp.data.result.results
+          state.countBooks = resp.data.result.lengthDocument
+
           // console.log(resp.data)
         })
       },
