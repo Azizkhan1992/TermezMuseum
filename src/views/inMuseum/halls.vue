@@ -12,7 +12,9 @@
       <label class="colorGreyD mb-4">{{$t("hall")}}</label>
       
       <selector
+      v-if="currentOpt !== ''"
         @optionChanged="optionChanged"
+        :currentOpt="this.currentOpt"
         :options="this.options"
         id="aaa"
       />
@@ -71,12 +73,14 @@
               <p class="mainers">{{allDocuments?.NumberOfDownloads}}</p>
             </div>
 
-            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr">
+            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr"
+            @click="downloadFile( allDocuments.documentPath)"
+            >
               <Icons
                 icon="download"
                 size="middle"
               />
-              <p @click="download" class="helpers colorPrim">{{$t("downloadDoc")}}</p>
+              <p  class="helpers colorPrim">{{$t("downloadDoc")}}</p>
             </div>
           </div>
 
@@ -100,6 +104,7 @@ import pageTitleAnimated from '@/components/pageTitleAnimated.vue'
 import breadCrumbs from '@/components/breadCrumbs.vue'
 import selector from '@/components/selector.vue'
 import Icons from '@/components/icons.vue'
+import downloadFile from '@/mixins/fileDownloader'
 
 export default {
   name: 'hallsPage',
@@ -226,6 +231,7 @@ export default {
           },
         },
       ],
+      currentOpt: '',
       options: [
         // {value: '1', label: 'Option 1'},
         // {value: '2', label: 'Option 2'},
@@ -258,6 +264,7 @@ export default {
       hall: {}
     }
   },
+  mixins: [downloadFile],
   mounted(){
     this.getMuseumHalls()
   },
@@ -265,7 +272,8 @@ export default {
   methods: {
     optionChanged(opt) {
       if(opt){
-        let tempArr = this.allHalls.filter(e => (e.id == opt.value))
+        // console.log(opt, this.allHalls)
+        let tempArr = this.allHalls.filter(e => (e.id == opt.value+1))
         this.hall = tempArr[0]
         // console.log(this.hall)
       }
@@ -281,44 +289,20 @@ export default {
         }
         this.hall = this.allHalls[0]
         this.getOptions()
-        // console.log(this.allHalls)
+        // console.log(this.allDocuments )
       }), err => {console.log(err)}
     },
 
     getOptions(){
-      for(let i=1; i<=this.allHalls.length; i++){
-        let temp = {value: i, label: `Option ${i}`}
+      // console.log(this.allHalls)
+      for(let i=0; i<=this.allHalls.length-1; i++){
+        let temp = {value: i, label: `${this.allHalls[i]?.title?.[this.$i18n.locale]}`}
         this.options.push(temp)
       }
+      this.currentOpt = this.options[0]
+
       // console.log(this.options)
     },
-
-    download() {
-      const apiUrl = this.allDocuments.documentPath
-      // let link = {...payload}
-      return this.$api({
-          method: "GET",
-          // data: link,
-          url: apiUrl,
-          responseType: 'blob'
-      }).then(response => {
-          let file = (new Blob([response.data]))
-          let fileURL = window.URL.createObjectURL(new Blob([file]))
-          let fileLink = document.createElement("a")
-          fileLink.href = fileURL
-          // var fileType = payload.link && payload.link.split(".")[payload.link.split(".").length-1]
-          // var fileName = payload.link && payload.link.split(".")[payload.link.split(".").length-2]
-          // console.log(payload)
-          // fileLink.setAttribute("download", ${fileName}.${fileType})
-          // document.body.appendChild(fileLink)
-    
-          fileLink.click()
-          return "fileUploaded"
-        }).catch((err)=>{
-          console.log(err);
-          return err
-      })
-  },
 
     filPost(val) {
       if (val) {

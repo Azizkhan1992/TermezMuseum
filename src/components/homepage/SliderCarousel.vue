@@ -18,7 +18,7 @@
       <h3 class="title">{{slideItem?.title[$i18n.locale]}}</h3>
       
       <button
-        @click="moveToPage(slideItem.link)"
+        @click="moveToPage(slideItem?.link)"
       >
         <span>{{$t("more")}}</span>
       </button>
@@ -79,6 +79,7 @@ export default {
     },
 
     moveToPage(link) {
+      // console.log(link)
       const currentPage = this.$route.path
 
       if(link !== currentPage) {

@@ -5,9 +5,10 @@
     <button
       class="tag-btn"
       v-for="tag in topTags"
-      :key="tag.id"
+      :key="tag._id"
+      @click="goToNews(tag.text)"
     >
-      <span>{{tag.name[$i18n.locale]}}</span>
+      <span>{{tag?.text?.[$i18n.locale]}}</span>
     </button>
 
 
@@ -20,6 +21,20 @@ export default {
 
   props: {
     topTags: Array
+  },
+  methods: {
+    goToNews(tag){
+      let temp = tag?.[this.$i18n.locale]
+      this.$router.push({
+        path: '/news',
+        query: {
+          ...this.$route.query, 
+          searchCategory: 'tags',
+          search: temp
+        }
+      })
+      // console.log(temp)
+    }
   }
 }
 </script>

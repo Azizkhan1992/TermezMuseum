@@ -56,11 +56,15 @@ export default {
   data() {
     return {
       open: false,
-      chosenOption: {value: '1', label: 'Option 1'},
+      chosenOption: {},
     }
   },
 
   props: {
+    currentOpt: {
+      type: Object,
+      default: () => {}
+    },
     options: {
       type: Array,
       require: true
@@ -89,6 +93,7 @@ export default {
     },
 
     changingOption(opt) {
+      // console.log(opt)
       this.chosenOption = opt
       this.$emit('optionChanged', opt)
     },
@@ -113,6 +118,8 @@ export default {
 
   mounted() {
     // this.logProp()
+    this.chosenOption = this.currentOpt
+    // console.log(this.chosenOption)
   },
 
   beforeDestroy() {

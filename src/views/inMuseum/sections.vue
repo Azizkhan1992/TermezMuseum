@@ -12,8 +12,10 @@
       <label class="colorGreyD mb-4">{{$t("section")}}</label>
       
       <selector
+      v-if="currentOpt !== ''"
         @optionChanged="optionChanged"
         :options="this.options"
+        :currentOpt="this.currentOpt"
         id="aaa"
       />
       
@@ -70,12 +72,14 @@
               <p class="mainers">{{allDocuments?.NumberOfDownloads}}</p>
             </div>
 
-            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr">
+            <div class="w-a d-f fd-r align-c gap-12 ml-a cur-ptr"
+            @click="downloadFile( allDocuments.documentPath)"
+            >
               <Icons
                 icon="download"
                 size="middle"
               />
-              <p @click="download" class="helpers colorPrim">{{$t("downloadDoc")}}</p>
+              <p class="helpers colorPrim">{{$t("downloadDoc")}}</p>
             </div>
           </div>
 
@@ -99,6 +103,7 @@ import pageTitleAnimated from '@/components/pageTitleAnimated.vue'
 import breadCrumbs from '@/components/breadCrumbs.vue'
 import selector from '@/components/selector.vue'
 import Icons from '@/components/icons.vue'
+import downloadFile from '@/mixins/fileDownloader'
 
 export default {
   name: 'sectionsPage',
@@ -115,6 +120,7 @@ export default {
         language_en: 'Sections',
         language_ru: 'Разделы',
       },
+      currentOpt: '',
       options: [
         // {value: '1', label: 'Option 1'},
         // {value: '2', label: 'Option 2'},
@@ -257,6 +263,7 @@ export default {
       ]
     }
   },
+  mixins: [downloadFile],
   mounted(){
     this.getSections()
   },
@@ -264,7 +271,7 @@ export default {
   methods: {
     optionChanged(opt) {
       if(opt){
-        let tempArr = this.museumSection.filter(e => (e.id == opt.value))
+        let tempArr = this.museumSection.filter(e => (e.id == opt.value+1))
         this.Section = tempArr[0]
       }
       // console.log(opt);
@@ -284,10 +291,12 @@ export default {
       }), err => {console.log(err)}
     },
     getOptions(){
-      for(let i=1; i<=this.museumSection.length; i++){
-        let temp = {value: i, label: `Option ${i}`}
+      for(let i=0; i<=this.museumSection.length-1; i++){
+        let temp = {value: i, label: `${this.museumSection[i]?.title?.[this.$i18n.locale]}`}
         this.options.push(temp)
       }
+      this.currentOpt = this.options[0]
+      // console.log(this.currentOpt)
     },
 
     filPost(val) {
@@ -307,32 +316,6 @@ export default {
         return day + " " + monthT + " " + year;
       }
     },
-    download() {
-      const apiUrl = this.allDocuments.documentPath
-      // let link = {...payload}
-      return this.$api({
-          method: "GET",
-          // data: link,
-          url: apiUrl,
-          responseType: 'blob'
-      }).then(response => {
-          let file = (new Blob([response.data]))
-          let fileURL = window.URL.createObjectURL(new Blob([file]))
-          let fileLink = document.createElement("a")
-          fileLink.href = fileURL
-          // var fileType = payload.link && payload.link.split(".")[payload.link.split(".").length-1]
-          // var fileName = payload.link && payload.link.split(".")[payload.link.split(".").length-2]
-          // console.log(payload)
-          // fileLink.setAttribute("download", ${fileName}.${fileType})
-          // document.body.appendChild(fileLink)
-    
-          fileLink.click()
-          return "fileUploaded"
-        }).catch((err)=>{
-          console.log(err);
-          return err
-      })
-  },
 
     goToSingle() {
       this.$router.push({ path: `/sections/${this.Section._id}_${this.Section?.title?.[this.$i18n.locale]}`})

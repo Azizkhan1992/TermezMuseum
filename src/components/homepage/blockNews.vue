@@ -11,7 +11,7 @@
         <span>{{ $t("allNews") }}</span>
       </button>
 
-      <topTags :topTags="this.topTags" />
+      <topTags :topTags="topTags" />
     </div>
 
     <div class="news-wrapper">
@@ -48,7 +48,7 @@
                 <p class="views"> {{ item?.numberOfViews }}</p>
               </div>
 
-          <div class="w-a d-f fd-r align-c cur-ptr gap-8 share-wr" @click="shareIt">
+          <div class="w-a d-f fd-r align-c cur-ptr gap-8 share-wr" @click.stop="shareIt(item)">
                     <Icons
                       icon="share"
                       color="a4abbd"
@@ -209,35 +209,7 @@ export default {
           },
         },
       ],
-      topTags: [
-          {
-            id: 1,
-            name: {
-              language_uzlatin: "Muhim",
-              language_ru: "Важно",
-              language_uzCyrillic: "Муҳим",
-              language_en: "Important",
-            },
-          },
-          {
-            id: 2,
-            name: {
-              language_uzlatin: "Konkurs",
-              language_ru: "Конкурс",
-              language_uzCyrillic: "Конкурс",
-              language_en: "Competition",
-            },
-          },
-          {
-            id: 3,
-            name: {
-              language_uzlatin: "O'zbekiston tarixi",
-              language_ru: "История Узбекистана",
-              language_uzCyrillic: "Ўзбекистон тарихи",
-              language_en: "History of Uzbekistan",
-            },
-          },
-        ],
+      topTags: [],
       news: [],
     };
   },
@@ -250,13 +222,14 @@ export default {
       await this.$api.get('/press/news/site')
       .then(resp => {
         let len = resp.data.result.results.length
+        this.topTags = resp.data.topTags
 
         if(len>4){
           this.news = resp.data.result.results.slice(0, 4)
         }else{
           this.news = resp.data.result.results
         }
-        // console.log(this.news)
+        // console.log(resp.data.topTags)
       }), err => {console.log(err)}
       // const data = await this.$api('/press/news/site');
       // console.log(data)
@@ -281,16 +254,16 @@ export default {
       }
     },
 
-    async shareIt() {
+    async shareIt(news) {
       if(navigator.canShare) {
         navigator.share({
-          title: 'Title to be shared',
-          text: 'Text to be shared',
-          url: 'URL to be shared'
+          title: news.title?.[this.$i18n.locale],
+          text: news.text?.[this.$i18n.locale],
+          url: `${window.location.pathname}news/${news._id}`
         })
       } else {
         try {
-          await navigator.clipboard.writeText('mytext');
+          await navigator.clipboard.writeText(`${window.location.pathname}news/${news._id}`);
           alert('Copied');
         } catch($e) {
           alert('Cannot copy');

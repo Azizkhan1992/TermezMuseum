@@ -27,7 +27,7 @@ export default{
 
 
         downloadNewFile(file, fileURL, linkname, route){
-            // console.log(linkname, route)
+            console.log(linkname, route)
 
             axios({
                 method: 'post',
