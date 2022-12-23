@@ -16,7 +16,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  {{ singleImages?.numberOfViews }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -31,12 +31,15 @@
     </div>
 
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p backgrnd-white playerWrapper">
+    <div class="pos-rel playerWrapper" @mousedown="beginRotate" @mousemove="move" @touchmove="resetMove" @touchstart="startRotate">
       <div class="w-100 threeDPlayer">
-        <div class="imgWrapper" @mousedown="beginRotate" @mousemove="move" @touchmove="resetMove" @touchstart="startRotate">
-          <img draggable="false" :src="require('@/assets/temporary/3DFiles/'+ filesToPlay[chosenImg].img + '.jpg')" alt="" :style="{'transform': 'scale('+zoom+')'}">
+        <div class="imgWrapper pos-abs" v-for="img, idx in filesToPlay" :key="idx" :style="{
+            zIndex: idx === chosenImg ? '10': '-1'
+          }">
+          <img draggable="false" :src="imageURL(idx)" :id="idx+1+'.3D'" alt="" :style="{transform: idx === chosenImg ? 'scale('+zoom+')' : '1'}">
         </div>
       </div>
+      
     </div>
 
     <div class="playerButtonBar">
@@ -78,7 +81,7 @@
 
     <breadCrumbs
       :prevPageLink="prevPage.link"
-      :prevPageName="prevPage.name[$i18n.locale]"
+      :prevPageName="prevPage?.name?.[$i18n.locale]"
       :currentPage="title"
     />
 
@@ -107,6 +110,22 @@ export default {
       initialPosition: '',
       cursorPosition: '',
 
+      articlesnfo: {
+        pagesCount: 156,
+        publishedDate: '22 июнь 2022г',
+        discipline: 'Технология исполнения',
+        productNumber: 'F1U31-PGE-UZ'
+      },
+      prevPage: {
+        name: {
+          language_uzlatin: '3D fayllar',
+          language_uzCyrillic: '3D файллар',
+          language_ru: '3D файлы',
+          language_en: '3D files',
+        },
+        link: '/3d-files'
+      },
+      singleImages: {},
       filesToPlay:[
         {img: '01'},
         {img: '02'},
@@ -134,22 +153,6 @@ export default {
         {img: '24'}
       ],
 
-      articlesnfo: {
-        pagesCount: 156,
-        publishedDate: '22 июнь 2022г',
-        discipline: 'Технология исполнения',
-        productNumber: 'F1U31-PGE-UZ'
-      },
-      prevPage: {
-        name: {
-          language_uzlatin: '3D fayllar',
-          language_uzCyrillic: '3D файллар',
-          language_ru: '3D файлы',
-          language_en: '3D files',
-        },
-        link: '/3d-files'
-      },
-
       description: `
         Головка из латуни (цинковая латунь с высоким содержанием свинца) отлита с использованием техники выплавляемого воска (cire perdue). Голова немного меньше в натуральную величину и выполнена в натуралистическом стиле. Головной убор, напоминающий корону, сложной конструкции. Основная трубчатая часть короны проходит вокруг головы трехслойной композицией. Верхний слой имеет полосу из четырех горизонтальных прямоугольников, представляющих собой плоские дискообразные бусины, увенчанные трубчатой бусиной, окрашенной в красный цвет, и кисточкой. Центральный слой имеет ряд вертикальных прямоугольников, представляющих собой трубчатые бусины с кисточками. Нижний слой имеет ряд розеток, окрашенных в красный цвет. Основная трубчатая часть короны также имеет выступающую дугу вокруг лба, состоящую из небольших трубчатых бусин, окаймленных рядом окрашенных в красный цвет перьев. На задней части тульи находится шейный чехол. В центральной части переплета восемнадцать вертикальных элементов, прорезанных для обозначения плетения со следами черной краски. Внизу и по бокам есть ряд розеток, окрашенных в красный цвет. Спереди над центральной короной возвышается гребень. Он представляет собой конический медальон с центральной выпуклостью, окруженный семью концентрическими кольцами, вероятно, представляющими собой бусины. За медальоном возвышается элемент плетения, оканчивающийся заостренным яйцевидным кончиком; оба элемента имеют следы черной краски.
         <br/>
@@ -161,9 +164,25 @@ export default {
       `,
     }
   },
-
-  methods: {
-
+  mounted(){
+    this.get3dFiles()
+  },
+  computed:{
+    get3dId(){
+      let temp = this.$route.params.id.split('_')
+      // console.log(temp[1])
+      return temp[1]
+    }
+  },
+  methods:{
+    async get3dFiles(){
+      await this.$api.get(`/media/3dfiles/site/${this.get3dId}`)
+      .then(resp => {
+        // this.singleImages = resp.data.result.results.pop()
+        this.singleImages = resp.data.result
+        // console.log(resp.data.result)
+      }), err => {console.log(err)}
+    },
     refresh(){
       clearInterval(this.playInterval)
       this.playButton = 'play'
@@ -251,6 +270,12 @@ export default {
     mobileStopRotate() {
       this.pressed = false
     },
+    imageURL(idx){
+      // console.log(this.singleImages.img?.[idx]?.path, idx)
+      if(this.singleImages.img) {
+        return this.singleImages?.img?.[idx]?.path
+      }
+    }
   },
   watch: {
     pressed(){
@@ -265,18 +290,17 @@ export default {
 </script>
 
 <style lang="scss">
-
 .playerWrapper{
   margin-top: 120px;
     user-select: none;
     width: 100vw;
-    height: auto;
+    height: 720px;
 }
 .threeDPlayer {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: auto;
+      height: 720px;
       
       .imgWrapper {
         background-color: #fff;
@@ -290,6 +314,33 @@ export default {
           height: 100%;
           width: 100%;
           object-fit: contain;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1439px) and (min-width: 1200px) {
+      .threeDPlayer{
+
+        .imgWrapper{
+          width: 1080px !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1199px) and (min-width: 900px) {
+      .threeDPlayer{
+
+        .imgWrapper{
+          width: 810px !important ;
+        }
+      }
+    }
+
+    @media screen and (max-width: 899px) {
+      .threeDPlayer{
+
+        .imgWrapper{
+          width: calc(100% - 64px) !important;
         }
       }
     }

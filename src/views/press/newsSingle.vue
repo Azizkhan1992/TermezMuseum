@@ -1,6 +1,8 @@
 <template>
   <div class="mainPage">
 
+    <visitorsModal v-if="isVisitModal" @sendM="withM"/>
+
     <div class="w-100 mt-120">
       <h2 class="grandTitle txt-align-l">{{allInfos?.title?.[$i18n.locale]}}</h2>
     </div>
@@ -24,22 +26,30 @@
           <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  {{ allInfos?.numberOfViews }}</p>
         </div>
 
-        <div class="w-a d-f fd-r align-c gap-24">
+        <div class="w-a d-f fd-r align-c gap-24 liked"
+        @click="reactingToComment({reaction: 'like', id: allInfos._id, reactionBy: allInfos.reactionBy})"
+        :class="{'pressed' : allInfos.reactionBy === 'like'}"
+        >
           <Icons
             class="cur-ptr"
             icon="like"
             size=""
+            :color="likeColor(allInfos.reactionBy)"
           />
-          <p class="commonP colorGreyD line-h-20">{{ allInfos?.numberOfLikes }}</p>
+          <p class="commonP colorGreyD colorPrimB line-h-20" :class="allInfos.reactionBy === 'like' ? 'colorPrimB' : 'colorB'">{{ allInfos?.numberOfLikes }}</p>
         </div>
 
-        <div class="w-a d-f fd-r align-c gap-24">
+        <div class="w-a d-f fd-r align-c gap-24 liked"
+        @click="reactingToComment({reaction: 'dislike', id: allInfos._id, reactionBy: allInfos.reactionBy})"
+        :class="{'pressed' : allInfos.reactionBy === 'dislike'}"
+        >
           <Icons
             class="cur-ptr"
             icon="dislike"
             size=""
+            :color="dislikeColor(allInfos.reactionBy)"
           />
-          <p class="commonP colorGreyD line-h-20">{{ allInfos?.numberOfDislikes }}</p>
+          <p class="commonP colorGreyD colorPrimB line-h-20" :class="allInfos.reactionBy === 'dislike' ? 'colorPrimB' : 'colorB'">{{ allInfos?.numberOfDislikes }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr"
@@ -157,6 +167,7 @@ import Icons from '@/components/icons.vue'
 import ImageCard from '@/components/imageCard.vue'
 import PaginatorDots from '@/components/paginatorDots.vue'
 import Subscriber from '@/components/subscriber.vue'
+import visitorsModal from '../about/visitorsModal.vue'
 
 export default {
   name: 'newsSinglePage',
@@ -166,7 +177,8 @@ export default {
     Icons,
     ImageCard,
     PaginatorDots,
-    Subscriber
+    Subscriber,
+    visitorsModal
 },
 
   data() {
@@ -288,6 +300,7 @@ export default {
           },
         },
       ],
+      isVisitModal: false,
 
       prevPage: {
         name:  {
@@ -387,6 +400,66 @@ export default {
         
         return day + " " + monthT + " " + year;
       }
+    },
+    async reactingToComment(react){
+      // console.log(react)
+      if(window.sessionStorage.userInfo !== undefined && window.sessionStorage.userInfo !== "''"){
+        if(react.reactionBy === ''){
+          await this.$api.put(`press/news/reaction/${react.id}`, {reactionType: react.reaction})
+          .then(resp => {
+            if(resp.status !== 401){
+              // console.log(resp)
+              this.$router.go()
+            }
+            else{
+              this.$router.push({path: '/visitModal'})
+            }
+          })
+        }else if(react.reactionBy !== '' && react.reaction !== react.reactionBy){
+          await this.$api.put(`press/news/reaction/${react.id}`, {reactionType: react.reaction})
+          .then(resp => {
+            if(resp.status !== 401){
+              // console.log(resp)
+              this.$router.go()
+            }
+            else{
+              this.$router.push({path: '/visitModal'})
+            }
+          })
+        }else if(react.reactionBy !== '' && react.reaction === react.reactionBy){
+          await this.$api.put(`press/news/reaction/${react.id}`, {reactionType: `un${react.reaction}`})
+          .then(resp => {
+            if(resp.status !== 401){
+              // console.log(resp)
+              this.$router.go()
+            }
+            else{
+              this.$router.push({path: '/visitModal'})
+            }
+          })
+        }
+        // console.log(react)
+      }else{
+        this.$router.push({
+          path: '/visitModal'
+        })
+      }
+    },
+    likeColor(like){
+      // console.log(like)
+      if(like == 'like'){
+        return 'white'
+      }else return 'burlywood'
+    },
+
+    dislikeColor(dislike){
+      // console.log(dislike)
+      if(dislike == 'dislike'){
+        return 'white'
+      }else return 'burlywood'
+    },
+    withM(){
+      this.isVisitModal = false
     },
     async shareIt(event) {
       // console.log(event)
@@ -488,6 +561,27 @@ export default {
   img{
     width: 100%;
     object-fit: contain;
+  }
+}
+
+.colorGreyD{
+  &.colorPrimB{
+    color: #fff !important;
+
+    &.colorB{
+      color: #a4abbd !important;
+    }
+  }
+}
+
+.liked{
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  &.pressed{
+    background: #4582D3;
+    // color: burlywood;
   }
 }
 </style>

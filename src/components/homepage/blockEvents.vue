@@ -73,7 +73,7 @@
 <!-- Second item -->
     </div>
 
-    <div class="w-100 h-420p gap-24 mt-24">
+    <div class="w-100 h-420p gap-24 mt-24" v-if="events?.[2]">
 <!-- Third item -->
       <div class="w-8 df-c ovr-hidden bor-r-20 pos-rel" @click="go" v-if="events?.[2]">
 

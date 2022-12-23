@@ -30,6 +30,10 @@ export default new Vuex.Store({
     sectionItemsNum: '',
     libraryItems: '',
     countBooks: '',
+    photoGallery: '',
+    photoGalleryLen: '',
+    all3DFiles: '',
+    all3DFilesLen: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2573,10 +2577,28 @@ export default new Vuex.Store({
       },
 
       async getLibrary({state}, queryParams){
-        await Api.get(`collections/books/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        await Api.get(`/collections/books/site?page=${queryParams.page}&limit=${queryParams.limit}`)
         .then(resp => {
           state.libraryItems = resp.data.result.results
           state.countBooks = resp.data.result.lengthDocument
+
+          // console.log(resp.data)
+        })
+      },
+      async getPhotoGallery({state}, queryParams){
+        // console.log(queryParams)
+        await Api.get(`/media/photos/site?visiblePage=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.photoGallery = resp.data.values.results
+          state.photoGalleryLen = resp.data.values.lengthDocument
+          // console.log(state.photoGallery)
+        })
+      },
+      async getAll3D({state}, queryParams){
+        await Api.get(`/media/3dfiles/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.all3DFiles = resp.data.result.results
+          state.all3DFilesLen = resp.data.result.lengthDocument
 
           // console.log(resp.data)
         })

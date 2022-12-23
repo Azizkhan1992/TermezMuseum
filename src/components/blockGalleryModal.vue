@@ -1,5 +1,5 @@
 <template>
-  <div class="modall-gallery" @click="modalDeactive()">
+  <div class="modall-gallery" @click="modalDeactive">
     <div class="modal-slider-content">
       <button class="left-btn" @click.stop="moveL">
         <Icons icon="arrLeft" size="24  " />
@@ -33,29 +33,42 @@ export default {
   name: "gallery-modal",
   components: { Icons },
   props: {
-    modalImages: {
+    images: {
       type: Array,
       default: () => [],
     },
-    selectedId: {
+    activeImgId: {
       type: Number,
       default: 1,
     },
+    activeMImgId: {
+      type: [String, Number],
+      default: 1,
+    },
+    activeMediaId: {
+      type: [Number, String],
+      default: 1
+    }
   },
   data() {
     return {
-      imgStepper: 1,
+      modalImages: [],
+      imgStepper: 0,
     };
   },
-  mounted(){
-    this.getImageStepper()
+
+  mounted() {
+    this.getModalImages();
+    this.getImageStepper();
+    this.getMobImgItem();
     this.getPulls()
+    // this.logProp()
   },
 
   methods: {
-    modalDeactive() {
-      this.$emit("modalDeactive");
-    },
+    // logProp() {
+    //   console.log(this.activeMImgId);
+    // },
     getPulls(){
       document.addEventListener('keydown', (event) => {
         if(event.keyCode === 37){
@@ -66,9 +79,27 @@ export default {
         }
       })
     },
+    getMobImgItem() {
+      if (this.activeMImgId && this.activeMImgId !== 1) {
+        let item = this.modalImages.filter((e) => e._id == this.activeMImgId);
+        this.imgStepper = item[0].id;
+      }
+    },
+    // getMediaItems(){
+    //   if(this.activeMediaId){
+    //     console.log(this.modalImages)
+    //   }
+    // },
+    getModalImages() {
+      if (this.images.length > 0) {
+        this.modalImages = this.images;
+      }
+    },
     getImageStepper() {
-
-      this.imgStepper = this.selectedId;
+      this.imgStepper = this.activeImgId;
+    },
+    modalDeactive() {
+      this.$emit("modalDeactive");
     },
     moveR() {
       if (this.imgStepper < this.modalImages.length) {
@@ -113,7 +144,7 @@ export default {
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      background: #4582d3;
+      background: #4582D3;
       border: 0;
 
       &:hover {

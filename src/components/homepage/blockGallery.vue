@@ -1,46 +1,85 @@
 <template>
-  <div name="galleryBlock" class="block" v-show="gallery.length > 0">
+  <div name="galleryBlock" class="block" v-show="getPhoto.length > 0">
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this?.title[$i18n.locale]"
+      :titleName="this?.title?.[$i18n.locale]"
     />
 
-    <div class="wr-100 gap-24">
-      <div class="gallery-content">
-        <div class="gallery-items" v-for="(img, idx) in gallery" :key="idx" @click.stop="selectedImg(img)">
-          <img :src="img?.path" alt="" />
+    <div class="wr-100 gap-24 gallery-items-wr">
+      <div class="gallery-museum-d">
+        <div class="img-wrapper" v-for="(img, idx) in cuttedPhotos" :key="idx" @click.stop="selected(img)">
+          <img v-if="img?.path" :src="img?.path" alt="" />
         </div>
-      </div>
-    </div>
 
-    <blockGalleryModal v-if="isModal" :selectedId='selectedImgId' :modalImages="gallery" @modalDeactive="modalDeactive"/>
+        
+      </div>
+
+      
+
+      <div class="gallery-mobile-wrapper">
+        <div class="img-wrapper">
+          <div
+            class="gallery-items"
+            v-for="img in clonedPhotos"
+            :key="img.id"
+            :class="checkClass(img.id)"
+            @click.stop="selectMImg(img)"
+          >
+            <img :src="img?.path" alt="" />
+          </div>
+        </div>
+
+        <paginatorDots
+          class="d3-paginate"
+          :topMargin="false"
+          @left="prev"
+          @right="next"
+        />
+      </div>
+
+      <blockGalleryModal
+        v-if="isModal"
+        :images="cuttedPhotos"
+        :activeImgId="activeImgId"
+        :activeMImgId="activeMImgId"
+        @modalDeactive="modalDeactive"
+        />
+    </div>
   </div>
 </template>
 
 <script>
-import blockGalleryModal from '@/components/blockGalleryModal.vue'
 import animatedTitle from "../animatedTitle.vue";
+import paginatorDots from "../paginatorDots.vue";
+import blockGalleryModal from "../blockGalleryModal.vue";
 
 export default {
   name: "blockGallery",
 
   components: {
     animatedTitle,
-    blockGalleryModal
+    paginatorDots,
+    blockGalleryModal,
   },
 
   data() {
     return {
       offTop: 1,
+      stepper: 1,
+      playInterval: "",
       title: {
         language_uzlatin: "Galereya",
         language_ru: "Галерея",
         language_uzCyrillic: "Галерея",
         language_en: "Gallery",
       },
-      gallery: [],
-      selectedImgId: 1,
-      isModal: false
+      getPhoto: [],
+      cuttedPhotos: [],
+      clonedPhotos: [],
+      URL: process.env.VUE_APP_API,
+      isModal: false,
+      activeImgId: 0,
+      activeMImgId: ''
     };
   },
 
@@ -49,269 +88,328 @@ export default {
       this.offTop =
         document.getElementsByName("galleryBlock")[0]?.offsetTop - 400;
     },
-    async getGallery() {
+    async getOtherPhotos() {
       await this.$api.get("/media/photos").then((resp) => {
-        this.gallery = resp.data.values[0].results;
-        for(let i=1; i<=this.gallery.length; i++){
-          this.gallery[i-1].id = i
-        }
-        // console.log(this.gallery);
+        this.getPhoto = resp.data.values[0].results;
+        this.cuttedPhotos = this.getPhoto.slice(0, 6);
+        let cutted = this.getPhoto.slice(0, 6);
+        let cloned = JSON.parse(JSON.stringify(cutted));
+        this.getClonedItems(cloned);
+        this.play();
       }),
         (err) => {
           console.log(err);
         };
     },
 
-    selectedImg(img){
-      if(img){
-        this.isModal = true
-        this.selectedImgId = img.id
+    getClonedItems(val) {
+      this.clonedPhotos = [...this.cuttedPhotos, ...val];
+      for (let i = 1; i <= this.clonedPhotos.length; i++) {
+        this.clonedPhotos[i - 1].id = i;
       }
+    },
+
+    selected(img){
+      this.isModal = true
+      this.activeImgId =img.id
+    },
+
+    selectMImg(img){
+      this.isModal = true
+      this.activeMImgId = img._id
     },
     modalDeactive(){
       this.isModal = false
-    }
+    },
+    checkClass(id) {
+      if (id == this.clonedPhotos[0].id || id == this.clonedPhotos[1].id) {
+        return "hidden-left";
+      } else if (id == this.clonedPhotos[2].id) {
+        return "hidden-left-shown";
+      } else if (id == this.clonedPhotos[3].id) {
+        return "shown";
+      } else if (id == this.clonedPhotos[4].id) {
+        return "hidden-right-shown";
+      } else return "hidden-right";
+    },
+
+    prev() {
+      clearInterval(this.playInterval);
+      let item = this.clonedPhotos.pop();
+      this.clonedPhotos.unshift(item);
+
+      this.play();
+    },
+    next() {
+      clearInterval(this.playInterval);
+      let item = this.clonedPhotos.shift();
+      this.clonedPhotos.push(item);
+
+      this.play();
+    },
+
+    play() {
+      this.playInterval = setInterval(() => {
+        this.animation();
+      }, 4000);
+    },
+    animation() {
+      let slideLen = this.clonedPhotos.length;
+      let firstItem = this.clonedPhotos.shift();
+
+      this.clonedPhotos.push(firstItem);
+
+      if (this.stepper < slideLen - 1) {
+        this.stepper++;
+      } else this.stepper = 0;
+    },
   },
 
   mounted() {
     this.getOffsetTop();
-    this.getGallery();
+    this.getOtherPhotos();
+  },
+
+  beforeDestroy() {
+    clearInterval(this.playInterval);
   },
 };
 </script>
 
 <style lang="scss">
-.gallery-content {
-  width: 100%;
-  margin-top: 60px;
+.gallery-mobile-wrapper {
+  display: none;
+
+  .paginatorWrapper {
+    width: auto;
+  }
+}
+.gallery-museum-d {
   display: grid;
-  grid-template-columns: repeat(3, calc(100% / 3 - 24px));
+  width: 100%;
+  grid-template-columns: repeat(3, calc((100% - 24px) / 3));
   grid-gap: 24px;
+  position: relative;
 
-  .gallery-items {
+  .img-wrapper {
+    // width: 100%;
+    width: auto !important;
+    border-radius: 32px;
     position: relative;
-
-    &::after {
-      content: "";
-      width: 100%;
-      aspect-ratio: 1/1;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.26);
-      border-radius: 20px;
-    }
+    cursor: pointer;
 
     img {
       width: 100%;
       height: 100%;
+      border-radius: 32px;
       object-fit: cover;
-      border-radius: 20px;
+    }
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 32px;
+      background: rgba(0, 0, 0, 0.26);
     }
 
     &:nth-child(1) {
-      grid-column: 1/3;
+      grid-column: 1/1;
       grid-row: 1/3;
-      width: 870px;
-      aspect-ratio: 1/1;
+      height: 800px;
     }
     &:nth-child(2) {
       grid-column: 1/1;
       grid-row: 3/3;
-      width: 420px;
-      aspect-ratio: 1/1;
+      height: 320px;
     }
     &:nth-child(3) {
-      grid-column: 1/1;
-      grid-row: 4/4;
-      width: 420px;
-      aspect-ratio: 1/1;
+      grid-column: 2/2;
+      grid-row: 1/1;
+      height: 320px;
     }
     &:nth-child(4) {
-      grid-column: 3/3;
-      grid-row: 1/1;
-      width: 420px;
-      aspect-ratio: 1/1;
+      grid-column: 2/2;
+      grid-row: 2/4;
+      height: 800px;
     }
     &:nth-child(5) {
       grid-column: 3/3;
-      grid-row: 2/2;
-      width: 420px;
-      aspect-ratio: 1/1;
+      grid-row: 1/3;
+      height: 800px;
     }
     &:nth-child(6) {
-      grid-column: 2/4;
-      grid-row: 3/5;
-      width: 870px;
-      aspect-ratio: 1/1;
+      grid-column: 3/3;
+      grid-row: 3/3;
+      height: 320px;
     }
   }
 }
 
-@media screen and (max-width: 1439px) and (min-width: 1101px) {
-  .gallery-items {
-    &:nth-child(1),
-    &:nth-child(6) {
-      width: 712px !important;
-    }
-    &:nth-child(2),
-    &:nth-child(3),
-    &:nth-child(4),
-    &:nth-child(5) {
-      width: 344px !important;
-    }
+@media screen and (max-width: 900px) and (min-width: 470px) {
+  .gallery-museum-d {
+    display: none;
   }
-}
 
-@media screen and (max-width: 1100px) and (min-width: 900px) {
-  .gallery-content {
-    grid-template-columns: repeat(2, calc(100% / 2 - 24px)) !important;
-    justify-content: space-around;
-
-    .gallery-items {
-      &::after {
-        width: 100%;
-        height: 100% !important;
-      }
-
-      &:nth-child(1) {
-        grid-column: 1/1 !important;
-        grid-row: 1/3 !important;
-        width: 390px !important;
-        height: 804px !important;
-      }
-      &:nth-child(2) {
-        grid-column: 1/1;
-        grid-row: 3/3;
-        height: 390px !important;
-        width: 390px !important;
-      }
-      &:nth-child(3) {
-        grid-column: 1/1;
-        grid-row: 4/4;
-        height: 390px !important;
-        width: 390px !important;
-      }
-      &:nth-child(4) {
-        grid-column: 2/2 !important;
-        grid-row: 1/1;
-        height: 390px !important;
-        width: 390px !important;
-      }
-      &:nth-child(5) {
-        grid-column: 2/2 !important;
-        grid-row: 2/2;
-        height: 390px !important;
-        width: 390px !important;
-      }
-      &:nth-child(6) {
-        grid-column: 2/2 !important;
-        grid-row: 3/5 !important;
-        width: 390px !important;
-        height: 804px !important;
-      }
-    }
+  .gallery-items-wr {
+    width: 100vw !important;
   }
-}
 
-@media screen and (max-width: 899px) and (min-width: 471px) {
-  .gallery-content {
-    grid-template-columns: repeat(2, calc(100% / 2 - 24px)) !important;
-    justify-content: space-around;
+  .gallery-mobile-wrapper {
+    display: block;
+    width: 100%;
+    z-index: 1;
+    // width: 100vw !important;
 
-    .gallery-items {
-      &::after {
-        width: 100%;
-        height: 100% !important;
-      }
+    .img-wrapper {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 60px;
+      z-index: 1;
 
-      &:nth-child(1) {
-        grid-column: 1/1 !important;
-        grid-row: 1/3 !important;
-        width: 171px !important;
-        height: 366px !important;
-      }
-      &:nth-child(2) {
-        grid-column: 1/1;
-        grid-row: 3/3;
-        height: 171px !important;
-        width: 171px !important;
-      }
-      &:nth-child(3) {
-        grid-column: 1/1;
-        grid-row: 4/4;
-        height: 171px !important;
-        width: 171px !important;
-      }
-      &:nth-child(4) {
-        grid-column: 2/2 !important;
-        grid-row: 1/1;
-        height: 171px !important;
-        width: 171px !important;
-      }
-      &:nth-child(5) {
-        grid-column: 2/2 !important;
-        grid-row: 2/2;
-        height: 171px !important;
-        width: 171px !important;
-      }
-      &:nth-child(6) {
-        grid-column: 2/2 !important;
-        grid-row: 3/5 !important;
-        width: 171px !important;
-        height: 366px !important;
+      .gallery-items {
+        width: 320px;
+        height: 480px;
+        border-radius: 32px;
+        position: relative;
+        transition: all 0.65s ease-in-out;
+        z-index: 10;
+        cursor: pointer;
+
+        &::after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 32px;
+          background: rgba(0, 0, 0, 0.26);
+        }
+
+        &.hidden-left {
+          margin-left: -320px;
+          transform: scale(0.5);
+          z-index: 0;
+          opacity: 0.7;
+        }
+
+        &.hidden-left-shown {
+          margin-left: -200px;
+          transform: scale(0.7);
+        }
+
+        &.hidden-right-shown {
+          margin-right: -160px;
+          transform: scale(0.7);
+          z-index: 0;
+        }
+
+        &.hidden-right {
+          margin-right: -320px;
+          opacity: 0.1;
+          // display: none;
+          z-index: -1;
+          transform: scale(0.5);
+        }
+
+        &.shown {
+          margin: 0;
+          z-index: 10;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 32px;
+          object-fit: cover;
+        }
       }
     }
   }
 }
 
 @media screen and (max-width: 470px) {
-  .gallery-content {
-    grid-template-columns: repeat(2, calc(100% / 2 - 24px)) !important;
-    justify-content: space-around;
+  .gallery-museum-d {
+    display: none;
+  }
 
-    .gallery-items {
-      &::after {
-        width: 100%;
-        height: 100% !important;
-      }
+  .gallery-items-wr {
+    width: 100vw;
+  }
+  .gallery-mobile-wrapper {
+    display: block;
+    width: 100% !important;
+    overflow: hidden;
 
-      &:nth-child(1) {
-        grid-column: 1/1 !important;
-        grid-row: 1/3 !important;
-        width: 155px !important;
-        height: 344px !important;
-      }
-      &:nth-child(2) {
-        grid-column: 1/1;
-        grid-row: 3/3;
-        height: 160px !important;
-        width: 155px !important;
-      }
-      &:nth-child(3) {
-        grid-column: 1/1;
-        grid-row: 4/4;
-        height: 160px !important;
-        width: 155px !important;
-      }
-      &:nth-child(4) {
-        grid-column: 2/2 !important;
-        grid-row: 1/1;
-        height: 160px !important;
-        width: 155px !important;
-      }
-      &:nth-child(5) {
-        grid-column: 2/2 !important;
-        grid-row: 2/2;
-        height: 160px !important;
-        width: 155px !important;
-      }
-      &:nth-child(6) {
-        grid-column: 2/2 !important;
-        grid-row: 3/5 !important;
-        width: 155px !important;
-        height: 344px !important;
+    .img-wrapper {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 60px;
+
+      .gallery-items {
+        width: 200px;
+        height: 380px;
+        border-radius: 32px;
+        position: relative;
+        transition: all 0.65s ease-in-out;
+
+        &::after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 32px;
+          background: rgba(0, 0, 0, 0.26);
+        }
+
+        &.hidden-left {
+          margin-left: -200px;
+          transform: scale(0.5);
+          z-index: 0;
+          opacity: 0.7;
+        }
+
+        &.hidden-left-shown {
+          margin-left: -120px;
+          transform: scale(0.7);
+          opacity: 1;
+        }
+
+        &.hidden-right-shown {
+          margin-right: -100px;
+          transform: scale(0.7);
+          z-index: 0;
+          opacity: 1;
+        }
+
+        &.hidden-right {
+          margin-right: -200px;
+          opacity: 0.5;
+          transform: scale(0.5);
+          z-index: -1;
+        }
+
+        &.shown {
+          margin: 0;
+          z-index: 3;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 32px;
+          object-fit: cover;
+        }
       }
     }
   }
