@@ -7,7 +7,7 @@
       <h2 class="grandTitle txt-align-l">{{allInfos?.title?.[$i18n.locale]}}</h2>
     </div>
 
-    <div class="w-100 fd-c gap-24 mt-80">
+    <div class="w-100 fd-c gap-24 mt-80 desc-like-wr">
       
       <div class="w-a d-f fd-r gap-64">
         <div class="w-a d-f fd-r align-c gap-24">
@@ -66,11 +66,79 @@
       <div class="w-a d-f fd-r gap-24 align-c">
         <p class="commonP colorGreyD line-h-20">{{$t("tags")}}:</p>
 
-        <button class="singlePageTags" v-for="el,index in topTags" :key="index">
-          <span>{{el.name[$i18n.locale]}}</span>
+        <button class="singlePageTags" v-for="el,index in topTags" :key="index" @click="choosenTag(el)">
+          <span>{{el?.text?.[$i18n.locale]}}</span>
         </button>
       </div>
 
+    </div>
+
+    <div class="mob-like-wr">
+
+      <div class="mob-title-items">
+        <div class="w-a d-f fd-r align-c gap-24">
+          <Icons
+            icon="calendar"
+            size=""
+          />
+          <p class="commonP colorGreyD line-h-20">{{ filPost(allInfos?.createdAt) + " " + $t("year2") }}</p>
+        </div>
+
+        <div class="w-a d-f fd-r align-c gap-24">
+          <Icons
+            icon="eye"
+            size=""
+          />
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  {{ allInfos?.numberOfViews }}</p>
+        </div>
+      <div class="w-a d-f fd-r align-c gap-24 cur-ptr"
+        @click="shareIt(allInfos)"
+        >
+          <Icons
+            icon="share"
+            size=""
+          />
+          <p class="commonP colorGreyD line-h-20">{{$t("share")}}</p>
+        </div>
+      </div>
+
+      <div class="w-a d-f fd-r gap-24 align-c mob-tags">
+        <p class="commonP colorGreyD line-h-20">{{$t("tags")}}:</p>
+
+        <button class="singlePageTags" v-for="el,index in topTags" :key="index" @click="choosenTag(el)">
+          <span>{{el?.text?.[$i18n.locale]}}</span>
+        </button>
+      </div>
+
+      <div class="mob-like-dislike">
+        <div class="w-a d-f fd-r align-c gap-24 liked"
+        @click="reactingToComment({reaction: 'like', id: allInfos._id, reactionBy: allInfos.reactionBy})"
+        :class="{'pressed' : allInfos.reactionBy === 'like'}"
+        >
+          <Icons
+            class="cur-ptr"
+            icon="like"
+            size=""
+            :color="likeColor(allInfos.reactionBy)"
+          />
+          <p class="commonP colorGreyD colorPrimB line-h-20" :class="allInfos.reactionBy === 'like' ? 'colorPrimB' : 'colorB'">{{ allInfos?.numberOfLikes }}</p>
+        </div>
+
+        <div class="w-a d-f fd-r align-c gap-24 liked"
+        @click="reactingToComment({reaction: 'dislike', id: allInfos._id, reactionBy: allInfos.reactionBy})"
+        :class="{'pressed' : allInfos.reactionBy === 'dislike'}"
+        >
+          <Icons
+            class="cur-ptr"
+            icon="dislike"
+            size=""
+            :color="dislikeColor(allInfos.reactionBy)"
+          />
+          <p class="commonP colorGreyD colorPrimB line-h-20" :class="allInfos.reactionBy === 'dislike' ? 'colorPrimB' : 'colorB'">{{ allInfos?.numberOfDislikes }}</p>
+        </div>
+      </div>
+
+        
     </div>
 
     <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p img-wr">
@@ -312,33 +380,33 @@ export default {
         link: '/news'
       },
       topTags: [
-          {
-            id: 1,
-            name: {
-              language_uzlatin: "Muhim",
-              language_ru: "Важно",
-              language_uzCyrillic: "Муҳим",
-              language_en: "Important",
-            },
-          },
-          {
-            id: 2,
-            name: {
-              language_uzlatin: "Konkurs",
-              language_ru: "Конкурс",
-              language_uzCyrillic: "Конкурс",
-              language_en: "Competition",
-            },
-          },
-          {
-            id: 3,
-            name: {
-              language_uzlatin: "O'zbekiston tarixi",
-              language_ru: "История Узбекистана",
-              language_uzCyrillic: "Ўзбекистон тарихи",
-              language_en: "History of Uzbekistan",
-            },
-          },
+          // {
+          //   id: 1,
+          //   name: {
+          //     language_uzlatin: "Muhim",
+          //     language_ru: "Важно",
+          //     language_uzCyrillic: "Муҳим",
+          //     language_en: "Important",
+          //   },
+          // },
+          // {
+          //   id: 2,
+          //   name: {
+          //     language_uzlatin: "Konkurs",
+          //     language_ru: "Конкурс",
+          //     language_uzCyrillic: "Конкурс",
+          //     language_en: "Competition",
+          //   },
+          // },
+          // {
+          //   id: 3,
+          //   name: {
+          //     language_uzlatin: "O'zbekiston tarixi",
+          //     language_ru: "История Узбекистана",
+          //     language_uzCyrillic: "Ўзбекистон тарихи",
+          //     language_en: "History of Uzbekistan",
+          //   },
+          // },
         ],
       description: `
         Головка из латуни (цинковая латунь с высоким содержанием свинца) отлита с использованием техники выплавляемого воска (cire perdue). Голова немного меньше в натуральную величину и выполнена в натуралистическом стиле. Головной убор, напоминающий корону, сложной конструкции. Основная трубчатая часть короны проходит вокруг головы трехслойной композицией. Верхний слой имеет полосу из четырех горизонтальных прямоугольников, представляющих собой плоские дискообразные бусины, увенчанные трубчатой бусиной, окрашенной в красный цвет, и кисточкой. Центральный слой имеет ряд вертикальных прямоугольников, представляющих собой трубчатые бусины с кисточками. Нижний слой имеет ряд розеток, окрашенных в красный цвет. Основная трубчатая часть короны также имеет выступающую дугу вокруг лба, состоящую из небольших трубчатых бусин, окаймленных рядом окрашенных в красный цвет перьев. На задней части тульи находится шейный чехол. В центральной части переплета восемнадцать вертикальных элементов, прорезанных для обозначения плетения со следами черной краски. Внизу и по бокам есть ряд розеток, окрашенных в красный цвет. Спереди над центральной короной возвышается гребень. Он представляет собой конический медальон с центральной выпуклостью, окруженный семью концентрическими кольцами, вероятно, представляющими собой бусины. За медальоном возвышается элемент плетения, оканчивающийся заостренным яйцевидным кончиком; оба элемента имеют следы черной краски.
@@ -369,9 +437,9 @@ export default {
       } else return false
     },
     getId(){
-      let temp = this.ID.split('_')
-      // console.log(temp[1])
-      return temp[1]
+      let temp = this.ID.split('/')
+      // console.log(temp)
+      return temp[0]
     }
   },
 
@@ -381,6 +449,7 @@ export default {
       await this.$api.get(`press/news/site/${this.getId}`)
       .then(resp => {
         this.allInfos = resp.data.result
+        this.topTags = resp.data.result.tags
         // console.log(this.allInfos)
       }), err => {console.log(err)}
     },
@@ -494,6 +563,19 @@ export default {
       this.play()
     },
 
+    choosenTag(tag){
+      // console.log(tag)
+      let temp = tag?.text?.[this.$i18n.locale]
+      this.$router.push({
+        path: '/news',
+        query: {
+          ...this.$route.query, 
+          searchCategory: 'tags',
+          search: temp
+        }
+      })
+    },
+
     next() {
       clearInterval(this.playInterval)
 
@@ -582,6 +664,53 @@ export default {
   &.pressed{
     background: #4582D3;
     // color: burlywood;
+  }
+}
+.desc-like-wr{
+    display: flex;
+  }
+
+  .mob-like-wr{
+    display: none;
+  }
+
+
+
+@media screen and (max-width: 899px) {
+  .desc-like-wr{
+    display: none;
+  }
+
+  .mob-like-wr{
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    width: 100%;
+    margin-top: 24px;
+
+    .mob-title-items{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 12px;
+    }
+
+    .mob-tags{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      p.commonP{
+        width: 100%;
+      }
+    }
+
+    .mob-like-dislike{
+      width: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 }
 </style>

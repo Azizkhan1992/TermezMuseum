@@ -34,6 +34,15 @@ export default new Vuex.Store({
     photoGalleryLen: '',
     all3DFiles: '',
     all3DFilesLen: '',
+    vrTourItems: '',
+    vrLen: '',
+    videoGallery: '',
+    videosLen: '',
+    videosYear: '',
+    mmasArticles: '',
+    mmasLen: '',
+    mmasYear: '',
+    mmsTopTags: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2599,6 +2608,68 @@ export default new Vuex.Store({
         .then(resp => {
           state.all3DFiles = resp.data.result.results
           state.all3DFilesLen = resp.data.result.lengthDocument
+
+          // console.log(resp.data)
+        })
+      },
+      async getVrTour({state}, queryParams){
+        await Api.get(`/media/vrtour/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.vrTourItems = resp.data.vrTourDocuments.results
+          state.vrLen = resp.data.vrTourDocuments.lengthDocument
+          // console.log(resp.data.vrTourDocuments)
+        })
+      },
+
+      async getVideos({state}, queryParams){
+        await Api.get(`/media/video/site?page=${queryParams.page}&limit=${queryParams.limit}&year=${queryParams.year}&month=${queryParams.month}&searchCategory=${queryParams.searchCategory}&searchWord=${queryParams.searchWord}`)
+        .then(resp => {
+          state.videoGallery = resp.data.result
+          state.videosLen = resp.data.numberOfVideos
+
+          const rawYears = {
+            type: 'year',
+            options: [
+            ]
+          }
+  
+          const years = resp.data.heldYears.sort((a, b) => a.year - b.year)
+  
+          const len = years.length
+  
+          for (let i = 0; i < len; i ++) {
+            rawYears.options.push({value: years[i].year, label: years[i].year})
+          }
+  
+          state.videosYear = rawYears
+
+          // console.log(resp.data.result)
+        })
+      },
+
+      async getMediasArticle({state}, queryParams){
+        await Api.get(`/press/mmsarticle/site?page=${queryParams.page}&limit=${queryParams.limit}&year=${queryParams.year}&month=${queryParams.month}&searchCategory=${queryParams.searchCategory}&searchWord=${queryParams.searchWord}`)
+        .then(resp => {
+          state.mmasArticles = resp.data.result.results
+          state.mmasLen = resp.data.NumberOfMMSArticles
+
+          const rawYears = {
+            type: 'year',
+            options: [
+            ]
+          }
+  
+          const years = resp.data.heldYears.sort((a, b) => a.year - b.year)
+  
+          const len = years.length
+  
+          for (let i = 0; i < len; i ++) {
+            rawYears.options.push({value: years[i].year, label: years[i].year})
+          }
+  
+          state.mmasYear = rawYears
+
+          state.mmsTopTags = resp.data.TopMMSDocuments
 
           // console.log(resp.data)
         })

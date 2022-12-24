@@ -175,7 +175,8 @@ const ru = {
     "title": "Название",
     "tag": "Тег",
     "tags": "Теги",
-    "author": "Автор"
+    "author": "Автор",
+    "source": "Источник"
   },
   placeholders: {
     "enterSearchText": "Введите текст поиска",

@@ -7,7 +7,7 @@
     />
 
     <div class="wrapper-h mb-60">
-      <button class="prim w-3 a-left" @click="go">
+      <button class="prim w-3 a-left" @click="goAllNews">
         <span>{{ $t("allNews") }}</span>
       </button>
 
@@ -234,6 +234,9 @@ export default {
       // const data = await this.$api('/press/news/site');
       // console.log(data)
       // this.news = data.data.result.results
+    },
+    goAllNews(){
+      this.$router.push({path: '/news'})
     },
 
     filPost(val) {

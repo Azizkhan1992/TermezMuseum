@@ -175,7 +175,8 @@ const en = {
     "title": "Title",
     "tag": "Tag",
     "tagы": "Tags",
-    "author": "Author"
+    "author": "Author",
+    "source": "Source"
   },
   placeholders: {
     "enterSearchText": "Enter search text",

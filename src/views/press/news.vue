@@ -643,7 +643,7 @@ export default {
     },
 
     goToSingle(val) {
-      this.$router.push({ path: '/news/' + this.eventsID + '_' + val._id})
+      this.$router.push({ path: '/news/'+ val._id})
     },
     filPost(val) {
       if (val) {

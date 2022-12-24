@@ -175,7 +175,8 @@ const uz = {
     "title": "Sarlavha",
     "tag": "Teg",
     "tags": "Teglar",
-    "author": "Muallif"
+    "author": "Muallif",
+    "source": "Manba"
   },
   placeholders: {
     "enterSearchText": "Izlash matnini kiriting",

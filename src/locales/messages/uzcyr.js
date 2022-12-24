@@ -175,7 +175,8 @@ const uzcyr = {
     "title": "Сарлавҳа",
     "tag": "Тег",
     "tags": "Теглар",
-    "author": "Муаллиф"
+    "author": "Муаллиф",
+    "source": "Манба"
   },
   placeholders: {
     "enterSearchText": "Излаш матнини киритинг",
