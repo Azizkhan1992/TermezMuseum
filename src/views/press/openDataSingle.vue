@@ -52,140 +52,33 @@
       <div class="fat">
         <p class="fontCas">5</p>
         <p class="fontCas">{{ $t('ownerPhone') }}</p>
-        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale] }}</p>
+        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale]?.phoneNumber }}</p>
       </div>
       <div class="unfat">
         <p class="fontCas">6</p>
         <p class="fontCas">{{ $t('downData') }}</p>
-        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale] }}</p>
+        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale]?.linkToDataSource }}</p>
       </div>
       <div class="fat">
         <p class="fontCas">7</p>
         <p class="fontCas">{{ $t('firstPublish') }}</p>
-        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale] }}</p>
+        <p class="fontCas">{{filPost(chosenOpenData?.createdAt)}}</p>
       </div>
       <div class="unfat">
         <p class="fontCas">8</p>
         <p class="fontCas">{{ $t('lastPublish') }}</p>
-        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale] }}</p>
+        <p class="fontCas">{{ filPost(chosenOpenData?.updatedAt) }}</p>
       </div>
       <div class="fat">
         <p class="fontCas">9</p>
         <p class="fontCas">{{ $t('addInfo') }}</p>
-        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale] }}</p>
+        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale]?.additionalInformation }}</p>
       </div>
     </div>
 
     <!-- Open Data Single Table First Start -->
 
-    <!-- v-if="chosenOpenData.typeOfData == '1'" -->
-    <!-- <table
-      class="openDataSingleOne mt-60 backgrnd-white pad-24p ovr-hidden box-brb bor-r-20"
-    >
-      <th
-        class="head"
-      >
-        
-        <div class="num">
-          <h4>№</h4>
-        </div>
-        
-        <div class="description">
-          <h4>{{$t("description")}}</h4>
-        </div>
 
-        <div class="content">
-          <h4>{{$t("content")}}</h4>
-        </div>
-
-      </th>
-      
-      <tr
-        v-for="data in chosenOpenData.content"
-        :key="data.id"
-        class="tableRow"
-      >
-        <div class="dataNum">
-          <h4>{{data.id}}</h4>
-        </div>
-
-        <div class="dataDescription">
-          <h4>{{data.title}}</h4>
-        </div>
-
-        <div class="dataContent">
-          <h4 v-if="Array.isArray(data.content) == false">{{data.content}}</h4>
-
-          <div v-else class="dataContentLinks">
-            <div
-              v-for="file in data.content"
-              :key="file.id"
-            >
-              <p v-if="file.type !== 'link'">
-                {{$t("downloadFile")}} ({{file.type}})
-              </p>
-              <a
-                v-else
-                href=""
-                target="_blanc"
-              >
-                {{$t("sourceLink")}}
-              </a>
-            </div>
-          </div>
-        </div>
-      </tr>
-    </table> -->
-
-    <!-- Open Data Single Table First Stop -->
-
-    <!-- Open Data Single Table Second Start -->
-
-    <!-- v-else-if="chosenOpenData.typeOfData == '2'" -->
-    <!-- <table
-      class="openDataSingleTwo mt-60 backgrnd-white pad-24p ovr-hidden box-brb bor-r-20"
-    >
-      <th
-        class="head"
-      >
-        
-        <div class="num">
-          <h4>№</h4>
-        </div>
-        
-        <div class="description">
-          <h4>{{$T("reportTitle")}}</h4>
-        </div>
-
-        <div class="content">
-          <h4>{{$t("file")}}</h4>
-        </div>
-
-      </th>
-      
-      <tr
-        v-for="data in chosenOpenData.content"
-        :key="data.id"
-        class="tableRow"
-      >
-        <div class="dataNum">
-          <h4>{{data.id}}</h4>
-        </div>
-
-        <div class="dataDescription">
-          <h4>{{data.title}}</h4>
-        </div>
-
-        <div class="dataContent">
-          <a
-            href=""
-            target="_blanc"
-          >
-            {{$t("downloadFile")}} ({{data.file.type}})
-          </a>
-        </div>
-      </tr>
-    </table> -->
 
     <!-- Open Data Single Table Second Stop -->
 
@@ -193,12 +86,12 @@
       <div class="updateRow">
         <div class="w-50 d-f fd-r gap-24">
           <p class="published">{{$t("datePublicate")}}:</p>
-          <p class="publishedDate">{{chosenOpenData?.createdAt}}</p>
+          <p class="publishedDate">{{filPost(chosenOpenData?.createdAt)}}</p>
         </div>
 
         <div class="w-50 d-f fd-r gap-24">
           <p class="published">{{$t("lastUpdateDate")}}:</p>
-          <p class="publishedDate">{{chosenOpenData?.updatedAt}}</p>
+          <p class="publishedDate">{{filPost(chosenOpenData?.updatedAt)}}</p>
         </div>
       </div>
     </div>
@@ -236,7 +129,123 @@ export default {
           language_ru: 'Открытые данные',
           language_en: 'Open data',
         },
-        link: '/open-data'
+        link: '/opendata'
+      },
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
+      year: {
+        language_uzlatin: 'y',
+        language_uzCyrillic: 'й',
+        language_en: 'y',
+        language_ru: 'г'
       }
     }
   },
@@ -256,7 +265,28 @@ export default {
         this.chosenOpenData = resp.data.result
         console.log(this.chosenOpenData)
       }).catch(err => {console.log(err)})
-    }
+    },
+    filPost(val) {
+      if (val) {
+        // console.log(val)
+        let hour = new Date(val).getHours()
+        let minut = new Date(val).getMinutes()
+        
+        let temp = val.split("T");
+        // console.log(val, new Date(val).getHours())
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else{monId = 11}
+
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+
+        return day + " " + monthT + " " + year + ' ' +  `${this.year?.[this.$i18n.locale]}` + '  ' + hour + " : " + minut;
+      }
+    },
   },
 
   mounted() {

@@ -204,7 +204,7 @@ const routes = [
     component: () => import('../views/press/mediasAboutUsSingle.vue')
   },
   {
-    path: '/open-data',
+    path: '/opendata',
     name: 'openDataPage',
     meta: {layout: 'main'},
     component: () => import('../views/press/openData.vue')

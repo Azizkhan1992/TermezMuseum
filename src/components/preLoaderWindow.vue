@@ -31,8 +31,8 @@ export default {
         language_en: 'Termez',
       },
       title2:{
-        language_uzlatin: 'Arxeologik',
-        language_uzCyrillic: 'Археологик',
+        language_uzlatin: 'Arxeologiya',
+        language_uzCyrillic: 'Археология',
         language_ru: 'Археологический',
         language_en: 'Archaeological',
       },
