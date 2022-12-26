@@ -207,13 +207,13 @@ export default {
         language_en: "Termez",
       },
       logotxt2: {
-        language_uzlatin: "Arxeologik",
+        language_uzlatin: "Arxeologiya",
         language_ru: "Археологический",
-        language_uzCyrillic: "Археологик",
+        language_uzCyrillic: "Археология",
         language_en: "Archaeological",
       },
       logotxt3: {
-        language_uzlatin: "Muzey",
+        language_uzlatin: "Muzeyi",
         language_ru: "Музей",
         language_uzCyrillic: "Музей",
         language_en: "Museum",

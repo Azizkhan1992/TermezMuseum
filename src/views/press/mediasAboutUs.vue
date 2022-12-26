@@ -98,76 +98,6 @@
 
     <!-- Card Big Start -->
 
-    <!-- <div class="w-100 h-420p mt-60 bor-r-20 gap-24 ovr-hidden backgrnd-white nw-card">
-      <div class="w-50 pos-rel">
-        <img
-            @click="goToSingle"
-            class="back-img cur-ptr" :src="allNews[0].mainImage.common.path" alt=""
-        >
-      </div>
-
-      <div class="w-50 d-f fd-c box-brb pad-r-24p pad-t-24p pad-b-24p">
-        <h4
-            @click="goToSingle"
-            class="commonT cur-ptr colorType h-108p"
-        >
-          {{ allNews[0].title?.[$i18n.locale] }}
-        </h4>
-
-        <p
-            v-html="this.allNews[0].text?.[$i18n.locale]"
-            @click="goToSingle"
-            class="commonP cur-ptr colorGreyD mt-24 line-h-30 h-90p"
-        >
-
-        </p>
-
-        <div class="w-100 gap-12 mt-a ovr-hidden">
-          <button v-for="(tags,idx) in allNews[0].tags" :key="idx" class="newsCardTag">
-              <span>
-               {{ tags[idx] }}
-              </span>
-          </button>
-
-
-          <button class="newsCardTag last">
-              <span>
-                + 7
-              </span>
-          </button>
-        </div>
-
-        <div class="w-100 justify-sb mt-48 mt-24-900">
-
-          <div class="w-100 d-f fd-r gap-24 nw-card-btm">
-            <div class="w-a d-f fd-r align-c gap-12">
-              <Icons
-                  icon="calendar"
-                  size="middle"
-              />
-              <p class="helpers">{{ allNews[0].createdAt }}</p>
-            </div>
-
-            <div class="w-a d-f fd-r align-c gap-12">
-              <Icons
-                  icon="eye"
-                  size="middle"
-              />
-              <p class="helpers">{{ $t("viewed") }} {{ allNews[0].numberOfViews }}</p>
-            </div>
-
-            <div class="w-a d-f fd-r align-c ml-a gap-12 cur-ptr">
-              <Icons
-                  icon="share"
-                  size="middle"
-              />
-              <p class="helpers">{{ $t("share") }}</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div> -->
 
     <!-- Card Big Stop -->
 
@@ -177,17 +107,16 @@
 
       <!-- Card Sm Start -->
 
-      <div v-for="(item,ind) in allNews " :key="ind" class="ovr-hidden bor-r-20 backgrnd-white h-420p mms-items" >
+      <div v-for="(item,ind) in allNews " :key="ind" class="ovr-hidden bor-r-20 backgrnd-white h-420p mms-items"
+      @click="goToSingle(item)" >
         <div class="w-100 pos-rel h-220p">
           <img
-              @click="goToSingle"
               class="back-img cur-ptr" :src="item?.mainImage?.common?.path" alt=""
           >
         </div>
 
         <div class="w-100 fd-c pad-24p h-200p ovr-hidden box-brb h-un-900">
           <h4
-              @click="goToSingle"
               class="commonP cur-ptr colorType line-h-30 bold h-60p"
           >
             {{ item?.title?.[$i18n.locale] }}
@@ -206,7 +135,7 @@
 
             <button class="newsCardTag last">
                 <span>
-                  + 7
+                  {{ item?.source }}
                 </span>
             </button>
           </div>
@@ -564,7 +493,7 @@ export default {
         this.topTags = this.$store.state.mmsTopTags
 
         this.len = len
-        // console.log(this.topTags)
+        // console.log(this.allNews)
       }).finally(() =>{
         if(this.$route.query.year == undefined || this.$route.query.year == '') {
           this.$router.push({
@@ -640,8 +569,9 @@ export default {
       // console.log(temp)
       this.getSingleNews()
     },
-    goToSingle() {
-      this.$router.push({path: `/news/lang=${this.$i18n.locale}` + this.eventsID})
+    goToSingle(val) {
+      // console.log(val)
+      this.$router.push({path: `/medias-about-us/lang=${this.$i18n.locale}` + val.title?.[this.$i18n.locale] + '_' + val._id})
     },
     prev(){
       this.getSingleNews()
@@ -682,6 +612,17 @@ export default {
 </script>
 
 <style lang="scss">
+
+.newsCardTag.last{
+  width: fit-content !important;
+  max-width: fit-content;
+
+  span{
+    display: inline-block;
+    width: max-content !important;
+    max-width: fit-content;
+  }
+}
 
 
 .nw-lcard{

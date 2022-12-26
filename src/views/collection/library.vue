@@ -12,7 +12,7 @@
       <p class="commonP line-h-30 bold colorType">{{ len }}</p>
     </div>
 
-    <div class="w-100 grid-2 mt-60">
+    <div class="w-100 grid-2 mt-60 mob-lib">
 
       <!-- Card Start -->
 
@@ -21,7 +21,7 @@
           v-for="book in allBooks"
           :key="book.id"
       >
-        <div class="w-100 pos-rel">
+        <div class="w-100 pos-rel lib-img-wr">
           <div class="books-tag mt-a ml-a">
             <p
                 :class="book.free = true ? 'Free':'paid for' "
@@ -31,7 +31,7 @@
           </div>
           <img class="back-img" :src="book?.img?.path" alt="">
         </div>
-        <div class="w-100 fd-c pad-t-48 pad-b-48 pad-r-24p box-brb">
+        <div class="w-100 fd-c pad-t-48 pad-b-48 pad-r-24p box-brb lib-title-wr">
           <h3 class="commonT h-72p colorType">{{book?.title?.[$i18n.locale]}}</h3>
           <p class="commonP mt-24 h-60p bold colorGreyD">{{book?.text?.[$i18n.locale]}}</p>
 
@@ -173,6 +173,34 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.mob-lib{
 
+  .lib-card{
+    flex-direction: column;
+    height: 1012px;
+
+    .lib-img-wr{
+      width: 100%;
+      height: calc(60% - 12px) !important;
+    }
+
+    .lib-title-wr{
+      width: 100%;
+      height: calc(40% - 12px) !important;
+      padding: 24px !important;
+
+      h3.commonT{
+        font-size: 1.15rem !important;
+        height: 36px !important;
+      }
+
+      p.commonP{
+        font-size: 1rem !important;
+        line-height: 20px !important;
+        height: 30px !important;
+      }
+    }
+  }
+}
 </style>

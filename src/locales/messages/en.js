@@ -199,7 +199,17 @@ const en = {
   dateBought: 'Date of purchase:',
   boughtFrom: 'Purchased from:',
   sponsorship: 'Sponsorship:',
-  registNumber: 'Registration number:'
+  registNumber: 'Registration number:',
+  eventR: 'Event report',
+  idName: 'Data identification number:',
+  dataName: 'Data name:',
+  contentData: 'Data content:',
+  ownerData: 'Data owner:',
+  ownerPhone: 'Owner Phone Number:',
+  downData: 'Data (link for download):',
+  firstPublish: 'First publishing date:',
+  lastPublish: 'Last publishing date:',
+  addInfo: 'Additional information:'
 }
 
 export default en

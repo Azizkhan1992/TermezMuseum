@@ -199,6 +199,16 @@ const uz = {
   dateBought: 'Sotib olingan sana:',
   boughtFrom: 'Sotib olingan:',
   sponsorship: 'Homiylik:',
-  registNumber: 'Ro\'yxatga olish raqami:'
+  registNumber: 'Ro\'yxatga olish raqami:',
+  eventR: 'Tadbir hisoboti',
+  idName: 'Ma\'lumotlarning identifikatsiya raqami:',
+  dataName: 'Ma\'lumotlar nomi:',
+  contentData: 'Ma\'lumotlar tarkibi:',
+  ownerData: 'Ma\'lumotlar egasi:',
+  ownerPhone: 'Ma\'lumotlar egasining telefon nomeri:',
+  downData: 'Ma\'lumotlar (yuklab olish uchun havola):',
+  firstPublish: 'Birinchi chop etilgan vaqti:',
+  lastPublish: 'Oxirgi chop etilgan vaqti:',
+  addInfo: 'Qo\'shimcha ma\'lumotlar:'
 }
 export default uz

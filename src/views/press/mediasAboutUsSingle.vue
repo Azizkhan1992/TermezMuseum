@@ -2,18 +2,18 @@
   <div class="mainPage">
 
     <div class="w-100 mt-120">
-      <h2 class="grandTitle txt-align-l">{{title}}</h2>
+      <h2 class="grandTitle txt-align-l">{{allInfos?.title?.[$i18n.locale]}}</h2>
     </div>
 
-    <div class="w-100 fd-c gap-24 mt-80">
+    <div class="w-100 fd-c gap-24 mt-80 medias-singl-items">
       
-      <div class="w-a d-f fd-r gap-64">
+      <div class="w-a d-f fd-r gap-64 items-wr">
         <div class="w-a d-f fd-r align-c gap-24">
           <Icons
             icon="calendar"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">22 июнь 2022г</p>
+          <p class="commonP colorGreyD line-h-20">{{ filPost(allInfos?.createdAt) + " " + $t("year2") }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24">
@@ -21,7 +21,7 @@
             icon="eye"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  1 358</p>
+          <p class="commonP colorGreyD line-h-20">{{$t("viewed")}}  {{ allInfos?.numberOfViews }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -29,25 +29,29 @@
             icon="link"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">kun.uz</p>
+          <p class="commonP colorGreyD line-h-20">{{ allInfos?.source }}</p>
         </div>
 
-        <div class="w-a d-f fd-r align-c gap-24">
+        <div class="w-a d-f fd-r align-c gap-24"
+        v-if="allInfos?.reactionBy"
+        >
           <Icons
             class="cur-ptr"
             icon="like"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">1 694</p>
+          <p class="commonP colorGreyD line-h-20">{{ allInfos?.likes }}</p>
         </div>
 
-        <div class="w-a d-f fd-r align-c gap-24">
+        <div class="w-a d-f fd-r align-c gap-24"
+        v-if="allInfos?.reactionBy"
+        >
           <Icons
             class="cur-ptr"
             icon="dislike"
             size=""
           />
-          <p class="commonP colorGreyD line-h-20">26</p>
+          <p class="commonP colorGreyD line-h-20">{{ allInfos?.disLikes }}</p>
         </div>
 
         <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
@@ -61,17 +65,17 @@
 
     </div>
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p">
-      <img src="@/assets/temporary/neandertal.jpg" alt="">
+    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p medias-singl">
+      <img :src="allInfos?.mainImage?.common?.path" alt="">
     </div>
 
     <div class="w-100 mt-60">
-      <h4 v-html="description" class="commonD"></h4>
+      <h4 v-html="allInfos?.text?.[$i18n.locale]" class="commonD"></h4>
     </div>
 
     <div class="w-100 gap-24 mt-60">
       <h3 class="commonT colorGreyD line-h-36">{{$t("infoSource")}}:</h3>
-      <a href="" class="mediasAboutUsLink commonT colorGreyD line-h-36">kun.uz</a>
+      <a href="" class="mediasAboutUsLink commonT colorGreyD line-h-36">{{ allInfos?.source }}</a>
     </div>
 
     <!-- Static Block Start -->
@@ -145,7 +149,8 @@
 
 
     <breadCrumbs
-      :currentPage="title"
+    v-if="allInfos?.title"
+      :currentPage="allInfos?.title?.[$i18n.locale]"
       :prevPageName="prevPage.name[$i18n.locale]"
       :prevPageLink="prevPage.link"
     />
@@ -173,7 +178,8 @@ export default {
 
   data() {
     return {
-      allInfos: this.$store.state.exhibitsInfo,
+      // allInfos: this.$store.state.exhibitsInfo,
+      allInfos: {},
       title: this.$route.params.id,
       
       hiddenR: 1,
@@ -188,6 +194,116 @@ export default {
         },
         link: '/medias-about-us'
       },
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
       description: `
         Головка из латуни (цинковая латунь с высоким содержанием свинца) отлита с использованием техники выплавляемого воска (cire perdue). Голова немного меньше в натуральную величину и выполнена в натуралистическом стиле. Головной убор, напоминающий корону, сложной конструкции. Основная трубчатая часть короны проходит вокруг головы трехслойной композицией. Верхний слой имеет полосу из четырех горизонтальных прямоугольников, представляющих собой плоские дискообразные бусины, увенчанные трубчатой бусиной, окрашенной в красный цвет, и кисточкой. Центральный слой имеет ряд вертикальных прямоугольников, представляющих собой трубчатые бусины с кисточками. Нижний слой имеет ряд розеток, окрашенных в красный цвет. Основная трубчатая часть короны также имеет выступающую дугу вокруг лба, состоящую из небольших трубчатых бусин, окаймленных рядом окрашенных в красный цвет перьев. На задней части тульи находится шейный чехол. В центральной части переплета восемнадцать вертикальных элементов, прорезанных для обозначения плетения со следами черной краски. Внизу и по бокам есть ряд розеток, окрашенных в красный цвет. Спереди над центральной короной возвышается гребень. Он представляет собой конический медальон с центральной выпуклостью, окруженный семью концентрическими кольцами, вероятно, представляющими собой бусины. За медальоном возвышается элемент плетения, оканчивающийся заостренным яйцевидным кончиком; оба элемента имеют следы черной краски.
         <br/>
@@ -215,10 +331,39 @@ export default {
       ) {
         return true
       } else return false
+    },
+    getID(){
+      let temp = this.title.split('_')
+      return temp[2]
     }
   },
 
   methods: {
+    async getSingleMedias(){
+      await this.$api.get(`/press/mmsarticle/${this.getID}`)
+      .then(resp => {
+        this.allInfos = resp.data.result
+        // console.log(this.allInfos)
+      })
+    },
+
+    filPost(val) {
+      if (val) {
+        
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else {monId = 11}
+        
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+        
+        return day + " " + monthT + " " + year;
+      }
+    },
     prev() {
       clearInterval(this.playInterval)
 
@@ -287,6 +432,7 @@ export default {
   },
 
   mounted() {
+    this.getSingleMedias()
     if(this.imgs.length >= 5) {
       this.play()
     }
@@ -294,6 +440,32 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.medias-singl{
+  height: fit-content;
 
+  img{
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 899px){
+  .mainPage{
+    .w-100{
+
+      h2.grandTitle{
+        line-height: 42px;
+      }
+    }
+
+    .medias-singl-items{
+
+      .items-wr{
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+  }
+}
 </style>

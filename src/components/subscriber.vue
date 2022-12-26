@@ -7,7 +7,7 @@
       class="alert"
       :class="alertClass"
     >
-      <p class="colorWhite">{{respMessage}}</p>
+      <p class="colorWhite">{{respMessage?.[$i18n.locale]}}</p>
     </div>
       <div class="wr-100 mb-24">
         <div class="w-50">
@@ -87,7 +87,14 @@ export default {
           let message = resp.data.message
           // console.log(2222, resp)
           if(message == 'succesful added'){
-            this.respMessage = 'You are succesfully subscribed'
+            // const subsc = message?.[this.$i18n.locale]
+            // console.log(message)
+            this.respMessage = {
+              language_uzlatin: 'Siz ro\'yxatdan muvaffaqiyatli o\'tdingiz',
+              language_ru: 'Вы успешно зарегистрировались',
+              language_uzCyrillic: 'Сиз рўйхатдан муваффақиятли ўтдингиз',
+              language_en: 'You have successfully registered'
+            }
             this.customAlertOn = true
             this.alertClass = 'success'
             this.usersEmail = ''
@@ -96,7 +103,12 @@ export default {
           // console.log(resp.data.message)
         }).catch(err => {
           if(err.response.data.message == 'this email was already subscribed'){
-            this.respMessage = 'You are already subscribed'
+            this.respMessage = {
+              language_uzlatin: 'Siz avval ro\'yxatdan o\'tgansiz',
+              language_uzCyrillic: 'Сиз аввал рўйхатдан ўтгансиз',
+              language_en: 'You have already registered',
+              language_ru: 'Вы уже зарегистрированы'
+            }
             this.customAlertOn = true
             this.alertClass = 'warning'
             this.usersEmail = ''

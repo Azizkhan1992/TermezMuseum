@@ -1,5 +1,5 @@
 <template>
-  <div name="newsBlock" class="block" v-if="news.length > 0"
+  <div name="newsBlock" class="block" v-show="news.length > 0"
   >
     <animatedTitle
       :animateAt="this.offTop"
@@ -276,7 +276,7 @@ export default {
 
     go(val){
       // console.log(val) 
-      this.$router.push({ path: '/news/' + this.eventsID + '_' + val._id})
+      this.$router.push({ path: '/news/'  + val._id})
     }
   },
 

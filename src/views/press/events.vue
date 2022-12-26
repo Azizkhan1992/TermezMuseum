@@ -137,12 +137,12 @@
       <!-- Card Start -->
 
       <div class="w-100 h-320p bor-r-20 gap-24 ovr-hidden backgrnd-white cw-t" v-for="item, idy in allEvents" :key="idy">
-        <div class="w-4 pos-rel">
+        <div class="w-4 pos-rel event-img-wr">
           <div class="dark-layer-solid z-idx1"></div>
           <img class="back-img" :src="item?.img?.path" alt="">
         </div>
 
-        <div class="w-8c d-f fd-c box-brb pad-l-24p pad-r-48 pad-t-48 pad-b-48">
+        <div class="w-8c d-f fd-c box-brb pad-l-24p pad-r-48 pad-t-48 pad-b-48 event-title-wr">
           <h4 class="commonT colorGreyD">{{item?.title?.[$i18n.locale]}}</h4>
 
           <div class="w-100 justify-sb mt-a mobile-flex">
@@ -687,10 +687,11 @@ export default {
       // console.log(val)
       this.choosenType = val.value
       this.getEvents()
-      console.log(val)
+      // console.log(val)
     },
 
     goToSingle(id) {
+      // console.log(this.choosenType)
       this.$router.push({ path: `/events/${id}`, query: {...this.$route.query ,type: this.choosenType}})
     }
   },
@@ -700,6 +701,21 @@ export default {
 <style lang="scss">
 
 @media screen and (max-width: 899px) {
+
+  .events{
+    .cw-t{
+
+      .event-img-wr{
+        width: 100% !important;
+        height: calc(50% - 12px) !important;
+      }
+      .event-title-wr{
+        width: 100% !important;
+        height: calc(50% - 12px) !important;
+        padding: 0 12px 12px 12px !important;
+      }
+    }
+  }
   .tabsParent2{
     width: 100%;
     margin-bottom: 40px;
@@ -810,7 +826,27 @@ export default {
     display: none;
   }
 }
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1200px){
+  .mobile-events{
+    display: none;
+  }
+  .events{
+
+    .cw-t{
+
+      .event-title-wr{
+
+        .mobile-flex{
+
+          button.prim{
+            width: 312px !important;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 900px) and (max-width: 1099px) {
   .mobile-events{
   display: none;
 }
@@ -820,6 +856,35 @@ export default {
 }
 .events{
   flex-direction: column;
+
+  .cw-t{
+    .event-img-wr{
+      width: calc(50% - 12px);
+    }
+
+    .event-title-wr{
+      width: calc(50% - 12px);
+      padding: 12px 12px 12px 0;
+
+      h4.commonT{
+        font-size: 1rem !important;
+        line-height: 24px;
+      }
+
+      .mobile-flex{
+
+        .gap-48{
+          flex-direction: column;
+        }
+
+        button.prim{
+          align-self: flex-end;
+          width: 180px;
+        }
+      }
+    }
+
+  }
 }
 .tab-bar{
 

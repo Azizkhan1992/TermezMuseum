@@ -130,7 +130,7 @@ export default {
       },
       chosenCategory: {value: 'all', label: this.$t('all')},
       title: {
-        language_uzlatin: 'Korgazmalar',
+        language_uzlatin: 'Ko\'rgazmalar',
         language_uzCyrillic: 'Кўргазмалар',
         language_ru: 'Экспонаты',
         language_en: 'Exhibits',

@@ -2,10 +2,10 @@
   <div class="mainPage">
 
     <div class="w-100 mt-120">
-      <h2 class="grandTitle txt-align-l">{{title}}</h2>
+      <h2 class="grandTitle txt-align-l">{{allInfos?.title?.[$i18n.locale]}}</h2>
     </div>
 
-    <div class="w-100 fd-c gap-24 mt-80">
+    <div class="w-100 fd-c gap-24 mt-80 singl-items">
       
       <div class="w-a d-f fd-r gap-64">
         <div class="w-a d-f fd-r align-c gap-24">
@@ -15,12 +15,12 @@
           />
 
           <div class="w-100 gap-12 align-c">
-            <p class="commonP colorGreyD line-h-20">22 июнь 2022г</p>
+            <p class="commonP colorGreyD line-h-20">{{ filPost(allInfos?.eventStartDate) + " " + $t("year2")}}</p>
             <Icons
               icon="tailArrRight"
               size=""
             />
-            <p class="commonP colorGreyD line-h-20">22 июнь 2022г</p>
+            <p class="commonP colorGreyD line-h-20">{{ filPost(allInfos?.eventEndDate) + " " + $t("year2")}}</p>
           </div>
         </div>
 
@@ -33,30 +33,30 @@
         </div>
       </div>
 
-      <div class="w-a d-f fd-r gap-24 align-c">
+      <div class="w-a d-f fd-r gap-24 align-c singl-tags">
         <p class="commonP colorGreyD line-h-20">{{$t("tags")}}:</p>
 
-        <button class="singlePageTags" v-for="el,index in topTags" :key="index">
-          <span>{{el.name[$i18n.locale]}}</span>
+        <button class="singlePageTags" v-for="el,index in allInfos?.tags" :key="index" @click="goToTag(el)">
+          <span>{{el?.text?.[$i18n.locale]}}</span>
         </button>
       </div>
 
     </div>
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p">
-      <img src="@/assets/temporary/neandertal.jpg" alt="">
+    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p singlExhbt-wr">
+      <img :src="allInfos?.img?.path" alt="">
     </div>
 
     <div class="w-100 mt-60">
-      <h4 v-html="description" class="commonD"></h4>
+      <h4 v-html="allInfos?.text?.[$i18n.locale]" class="commonD"></h4>
     </div>
 
     <div class="w-100">
-      <h3 class="commonT colorGreyD mt-60 line-h-36">Отчет проведения выставки</h3>
+      <h3 v-if="allInfos?.report?.visible" class="commonT colorGreyD mt-60 line-h-36">{{ $t('eventR') }}</h3>
     </div>
 
     <div class="w-100 mt-24">
-      <h4 v-html="description" class="commonD"></h4>
+      <h4 v-if="allInfos?.report?.visible" v-html="allInfos?.report?.text?.[$i18n.locale]" class="commonD"></h4>
     </div>
 
     <!-- Static Block Start -->
@@ -158,7 +158,8 @@ export default {
 
   data() {
     return {
-      allInfos: this.$store.state.exhibitsInfo,
+      // allInfos: this.$store.state.exhibitsInfo,
+      allInfos: {},
       title: this.$route.params.id,
       
       hiddenR: 1,
@@ -213,6 +214,116 @@ export default {
         {id: 4, img: '4'},
         {id: 5, img: '5'},
       ],
+      months: [
+        {
+          id: 1,
+          monthName: {
+            language_uzlatin: "Yanvar",
+            language_uzCyrillic: "Январ",
+            language_en: "January",
+            language_ru: "Январь",
+          },
+        },
+        {
+          id: 2,
+          monthName: {
+            language_uzlatin: "Fevral",
+            language_uzCyrillic: "Феврал",
+            language_en: "February",
+            language_ru: "Февраль",
+          },
+        },
+        {
+          id: 3,
+          monthName: {
+            language_uzlatin: "Mart",
+            language_uzCyrillic: "Март",
+            language_en: "March",
+            language_ru: "Март",
+          },
+        },
+        {
+          id: 4,
+          monthName: {
+            language_uzlatin: "Aprel",
+            language_uzCyrillic: "Aпрел",
+            language_en: "April",
+            language_ru: "Апреля",
+          },
+        },
+        {
+          id: 5,
+          monthName: {
+            language_uzlatin: "May",
+            language_uzCyrillic: "Май",
+            language_en: "May",
+            language_ru: "Май",
+          },
+        },
+        {
+          id: 6,
+          monthName: {
+            language_uzlatin: "Iyun",
+            language_uzCyrillic: "Июн",
+            language_en: "June",
+            language_ru: "Июнь",
+          },
+        },
+        {
+          id: 7,
+          monthName: {
+            language_uzlatin: "Iyul",
+            language_uzCyrillic: "Июл",
+            language_en: "July",
+            language_ru: "Июль",
+          },
+        },
+        {
+          id: 8,
+          monthName: {
+            language_uzlatin: "Avgust",
+            language_uzCyrillic: "Август",
+            language_en: "August",
+            language_ru: "Август",
+          },
+        },
+        {
+          id: 9,
+          monthName: {
+            language_uzlatin: "Sentabr",
+            language_uzCyrillic: "Сентабр",
+            language_en: "September",
+            language_ru: "Сентябрь",
+          },
+        },
+        {
+          id: 10,
+          monthName: {
+            language_uzlatin: "Oktabr",
+            language_uzCyrillic: "Октабр",
+            language_en: "Oktober",
+            language_ru: "Октябрь",
+          },
+        },
+        {
+          id: 11,
+          monthName: {
+            language_uzlatin: "Noyabr",
+            language_uzCyrillic: "Ноябр",
+            language_en: "November",
+            language_ru: "Ноябрь",
+          },
+        },
+        {
+          id: 12,
+          monthName: {
+            language_uzlatin: "Dekabr",
+            language_uzCyrillic: "Декабр",
+            language_en: "December",
+            language_ru: "Декабрь",
+          },
+        },
+      ],
     }
   },
 
@@ -224,10 +335,51 @@ export default {
       ) {
         return true
       } else return false
+    },
+    getID(){
+      let temp = this.title.split('_')
+      // console.log(temp)
+      return temp[1]
     }
   },
 
   methods: {
+    async getSingleExhibit(){
+      await this.$api.get(`press/exhibition/site/${this.getID}`)
+      .then(resp => {
+        this.allInfos = resp.data.result
+        // console.log(this.allInfos)
+      })
+      // console.log(this.getID)
+    },
+    goToTag(tag){
+      let temp = tag.text?.[this.$i18n.locale]
+      // console.log(temp)
+      this.$router.push({path: '/exhibitions', query:{
+        ...this.$route.query,
+        search: temp,
+        page: 1,
+        type: this.$route.query.type
+      }})
+    },
+    filPost(val) {
+      // console.log(val)
+      if (val) {
+        
+        let temp = val.split("T");
+        let year = new Date(temp[0]).getFullYear();
+        let month = new Date(temp[0]).getMonth();
+        let day = new Date(temp[0]).getDate();
+        let monId
+        if(month !== 11){
+          monId = month + 1;
+        }else{monId = 11}
+
+        let monthT = this.months[monId].monthName?.[this.$i18n.locale];
+
+        return day + " " + monthT + " " + year;
+      }
+    },
     prev() {
       clearInterval(this.playInterval)
 
@@ -296,6 +448,7 @@ export default {
   },
 
   mounted() {
+    this.getSingleExhibit()
     if(this.imgs.length >= 5) {
       this.play()
     }
@@ -303,6 +456,52 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.singlExhbt-wr{
+  height: fit-content;
 
+  img{
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 899px){
+  .mainPage{
+
+    .singl-event{
+      height: fit-content;
+
+      img{
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .w-100{
+      h2.grandTitle{
+        line-height: 44px;
+      }
+    }
+
+    .singl-items{
+      height: auto;
+
+      .singl-tags{
+          flex-wrap: wrap;
+
+          p.commonP{
+            width: 100%;
+          }
+        }
+
+      .gap-64{
+        gap: 24px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        
+      }
+    }
+  }
+}
 </style>

@@ -1,26 +1,28 @@
 <template>
-  <div name="vrTour" class="block" v-if="threeD.length > 0">
+  <div name="vrTour" class="block" v-show="threeD">
 
     <animatedTitle
       :animateAt="this.offTop"
-      :titleName="this.title[$i18n.locale]"
+      :titleName="this.title?.[$i18n.locale]"
     />
 
     <div class="wr-100 gap-24">
       <div class="w-50">
         <span class="vr-text">
-            {{text[$i18n.locale]}}
+            {{threeD?.title?.[$i18n.locale]}}
         </span>
 
         <button
           class="prim w-4 mt-a"
+          @click="goToVr(threeD.link)"
         >
           <span>{{$t("gotoView")}}</span>
         </button>
       </div>
 
-      <div class="w-50">
-        <img class="vr" src="@/assets/static/vr.jpg" alt="">
+      <div class="w-50 vr-img-wr">
+        <img class="vr" :src="threeD?.img?.path" alt="">
+        <img class="vrIcon" src="@/assets/static/vrIcon.png" alt="">
       </div>
     </div>
 
@@ -52,7 +54,7 @@ export default {
         language_uzlatin: `Uyingizdan chiqmasdan Surxondaryoning o'tmishiga sayohat qilib, ta'riflab bo'lmas taassurotlar olishni xohlaysizmi? Unda sizni 3D muzey ekskursiyasiga taklif qilamiz.`,
         language_en: 'Do you want to travel into the past of Surkhandarya and get indescribable impressions without leaving your home? Then we invite you to the 3D Museum Tour.',
       },
-      threeD: [],
+      threeD: {},
     }
   },
 
@@ -60,10 +62,20 @@ export default {
     getOffsetTop() {
       this.offTop = document.getElementsByName('vrTour')[0]?.offsetTop - 400
     },
-    async getThreeD() {
-      const data = await this.$api('/home/threeD');
-      this.threeD = data.data.result
+    getThreeD() {
+      const params = {
+        page: 1,
+        limit: 1
+      }
+      this.$store.dispatch('getVrTour', params)
+      .then(() => {
+        this.threeD = this.$store.state.vrTourItems[0]
+        // console.log(this.threeD)
+      })
     },
+    goToVr(link){
+      window.open(link, "_blank")
+    }
   },
 
   mounted() {
@@ -73,6 +85,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.vr-img-wr{
+  position: relative;
+  align-items: center;
+  justify-content: center;
 
+  .vrIcon{
+    position: absolute;
+    top: 45%;
+  }
+}
 </style>

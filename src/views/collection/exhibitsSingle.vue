@@ -22,7 +22,7 @@
           class="w-100 gap-12 fd-c exh-si-900"
 
       >
-        <div class="w-100 gap-24">
+        <div class="w-100 gap-24 exh-items">
 
           <div
               class="customGrid-r-w w-100 d-f fd-c gap-8"
@@ -54,7 +54,7 @@
 
 
         <hr  class="divider">
-        <div class="w-100 gap-24">
+        <div class="w-100 gap-24 exh-items">
           <div
               class="customGrid-r-w w-100 d-f fd-c gap-8"
           >
@@ -77,12 +77,13 @@
               class="customGrid-r-w w-100 d-f fd-c gap-8"
           >
             <p class="commonP colorGreyD">{{$t("discoverIn")}}</p>
-            <p class="commonP bold colorType">{{filPost(allInfos?.additional?.foundDate) + " " + $t("year2")  }}</p>
+            <p v-if="allInfos?.additional?.foundDate
+            " class="commonP bold colorType">{{filPost(allInfos?.additional?.foundDate) + " " + $t("year2")  }}</p>
           </div>
 
         </div>
         <hr class="divider">
-        <div class="w-100 gap-24">
+        <div class="w-100 gap-24 exh-items">
 
           <div
               class="customGrid-r-w w-100 d-f fd-c gap-8"
@@ -105,7 +106,7 @@
           </div>
         </div>
         <hr  class="divider">
-        <div class="w-100 gap-24">
+        <div class="w-100 gap-24 exh-items">
 
           <div
               class="customGrid-r-w w-100 d-f fd-c gap-8"
@@ -119,7 +120,7 @@
           </div>
           <div class="customGrid-r-w w-100 d-f fd-c gap-8">
             <p class="commonP colorGreyD">{{$t("dateBought")}}</p>
-            <p class="commonP bold colorType">{{ allInfos?.additional?.purchasedDate }}</p>
+            <p class="commonP bold colorType">{{filPost(allInfos?.additional?.purchasedDate) + " " + $t("year2") }}</p>
           </div>
           <div class="customGrid-r-w w-100 d-f fd-c gap-8">
             <p class="commonP colorGreyD">{{$t("boughtFrom")}}</p>
@@ -128,7 +129,7 @@
           </div>
         </div>
         <hr  class="divider">
-        <div class="w-100 gap-24">
+        <div class="w-100 gap-24 exh-items">
 
           <div
               class="customGrid-r-w w-100 d-f fd-c gap-8"
@@ -304,6 +305,7 @@ export default {
   },
   methods: {
     async getSingleExhibits() {
+      // console.log(this.$route.query.exId)
       await this.$api.get('/collections/exhibits/site/' + this.$route.query.exId)
           .then(resp => {
             this.allInfos = resp.data.result
@@ -345,6 +347,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.exh-img{
+  height: fit-content;
 
+  img{
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 899px){
+  .exh-si-900{
+    .exh-items{
+      flex-direction: column;
+
+      .w-100{
+        width: 100% !important;
+      }
+    }
+  }
+}
 </style>
