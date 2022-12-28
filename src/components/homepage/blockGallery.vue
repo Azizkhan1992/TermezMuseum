@@ -7,7 +7,7 @@
 
     <div class="wr-100 gap-24 gallery-items-wr">
       <div class="gallery-museum-d">
-        <div class="img-wrapper" v-for="(img, idx) in cuttedPhotos" :key="idx" @click.stop="selected(img)">
+        <div class="img-wrapper-gallery" v-for="(img, idx) in cuttedPhotos" :key="idx" @click.stop="selected(img)">
           <img v-if="img?.path" :src="img?.path" alt="" />
         </div>
 
@@ -191,7 +191,7 @@ export default {
   grid-gap: 24px;
   position: relative;
 
-  .img-wrapper {
+  .img-wrapper-gallery {
     // width: 100%;
     width: auto !important;
     border-radius: 32px;
@@ -265,7 +265,7 @@ export default {
     z-index: 1;
     // width: 100vw !important;
 
-    .img-wrapper {
+    .img-wrapper-gallery {
       display: flex;
       width: 100%;
       overflow: hidden;
@@ -349,7 +349,7 @@ export default {
     width: 100% !important;
     overflow: hidden;
 
-    .img-wrapper {
+    .img-wrapper-gallery {
       display: flex;
       flex-direction: row;
       margin-bottom: 60px;

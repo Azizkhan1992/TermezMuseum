@@ -57,7 +57,10 @@
       <div class="unfat">
         <p class="fontCas">6</p>
         <p class="fontCas">{{ $t('downData') }}</p>
-        <p class="fontCas">{{ chosenOpenData?.model1?.[$i18n.locale]?.linkToDataSource }}</p>
+        <div class="down-wr">
+          <p class="fontCas" v-for="down, idy in chosenOpenData?.model1?.[$i18n.locale]?.files" :key="idy" @click="downloadFile(down.serverUrl, down.path)">{{ $t('downloadFile') }} ({{ docTypeDetector(down.path).toUpperCase() }})</p>
+          <a class="openDown fontCas" v-if="chosenOpenData?.model1?.[$i18n.locale]?.linkToDataSource !== ''" :href="checkHREFInfo()">{{ chosenOpenData?.model1?.[$i18n.locale]?.linkToDataSource }}</a>
+        </div>
       </div>
       <div class="fat">
         <p class="fontCas">7</p>
@@ -110,6 +113,8 @@
 <script>
 import Icons from '@/components/icons.vue'
 import breadCrumbs from '@/components/breadCrumbs.vue'
+import axios from 'axios'
+import docTypeDetector from '@/mixins/docTypeDetector'
 
 export default {
   name: 'openDataSinglePage',
@@ -249,6 +254,7 @@ export default {
       }
     }
   },
+  mixins: [docTypeDetector],
 
   computed: {
     getID(){
@@ -263,8 +269,33 @@ export default {
       await this.$api.get(`/press/opendata/${this.getID}`)
       .then(resp => {
         this.chosenOpenData = resp.data.result
-        // console.log(this.chosenOpenData)
+        console.log(this.chosenOpenData)
       }).catch(err => {console.log(err)})
+    },
+    downloadFile(name, path){
+      axios({
+        method: 'get',
+        url: path,
+        data: {
+          document: 'file'
+        },
+        responseType: 'arraybuffer'
+      })
+      .then(resp => {
+        const title = name.split('/')[2]
+        const url = window.URL.createObjectURL(new Blob([resp.data]))
+        const link = document.createElement('a')
+
+        link.href = url
+        link.setAttribute('download', title)
+        document.body.appendChild(link)
+        link.click()
+      })
+    },
+    checkHREFInfo() {
+      if(this.chosenOpenData.model1?.[this.$i18n.locale].linkToDataSource.includes('@') === true) {
+        return 'mailto:'+this.chosenOpenData.model1?.[this.$i18n.locale].linkToDataSource
+      } else return this.chosenOpenData?.model1?.[this.$i18n.locale].linkToDataSource
     },
     filPost(val) {
       if (val) {
@@ -363,6 +394,27 @@ export default {
     box-sizing: border-box;
     justify-content: space-between;
 
+    .down-wr{
+      width: calc(50% - 24px);
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+
+      p.fontCas{
+        width: 100%;
+        cursor: pointer;
+      }
+      a.openDown{
+        font-size: 1rem;
+        text-decoration: none;
+        border: 0;
+        line-height: 20px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #2f3232;
+      }
+    }
+
     p{
       width: calc(50% - 24px);
       font-size: 1rem;
@@ -375,6 +427,69 @@ export default {
         width: 36px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .openSingl{
+
+    .openHeader{
+      display: none;
+    }
+
+    .fat{
+      flex-wrap: wrap;
+      row-gap: 12px;
+
+      .fontCas{
+
+        &:nth-child(2){
+          width: 85%;
+        }
+
+        &:nth-child(3){
+          width: 100%;
+        }
+      }
+    }
+    .unfat{
+      flex-wrap: wrap;
+      row-gap: 12px;
+
+      .down-wr{
+        width: 100% ;
+      }
+
+      .fontCas{
+
+        &:nth-child(2){
+          width: 85%;
+        }
+        &:nth-child(3){
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .dataUpdateInfo{
+    .updateRow{
+      background: #fff;
+      padding: 0;
+      flex-direction: column;
+
+      .w-50{
+        width: 100%;
+        background: #dde0e7;
+        border-radius: 4px;
+        padding: 22px 24px;
+        box-sizing: border-box;
+        flex-direction: column;
+      }
+    }
+  }
+  .grandTitle{
+    line-height: 42px;
   }
 }
 </style>

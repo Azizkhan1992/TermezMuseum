@@ -4620,7 +4620,7 @@ p.error-title{
     }
   }
 }
-@media (max-width: 900px) {
+@media (max-width: 899px) {
 
   .visitM{
     flex-direction: column-reverse;
@@ -5012,9 +5012,6 @@ p.error-title{
         display: none;
       }
     }
-    .site-footer-text {
-      display: unset;
-    }
     .fd-r {
       flex-direction: row;
     }
@@ -5038,9 +5035,6 @@ p.error-title{
     .w-8 {
       width: 100%;
       flex-wrap: wrap;
-    }
-    .site-footer-text {
-      display: flex;
     }
   }
   .scrollToTop {
@@ -5788,9 +5782,9 @@ p.error-title{
 
   .misspelled-content{
     width: calc(100vw - 600px);
-    height: calc(100vh - 200px);
+    height: fit-content;
     position: absolute;
-    top: 10%;
+    top: 6%;
     left: calc(100vw - 80%);
     background: #fff;
     border: 12px solid #4582D3;

@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="d-f fd-r gap-12">
-                  <p class="secondaryText">{{ $t("dayoff") }}:</p>
+                  <p v-show="weekEnd.length>0" class="secondaryText">{{ $t("dayoff") }}:</p>
                   <p
                     v-show="weekEnd.length>0"
                     class="accented"
@@ -147,7 +147,7 @@
             <div class="infoPart mt-12">
               <Icons icon="mail" size="middle" color="white" />
               <div class="d-f fd-c gap-12">
-                <div class="d-f fd-r gap-12">
+                <div class="d-f fd-r gap-12 wr">
                   <p class="secondaryText">Email:</p>
                   <a :href="contacts?.contact?.email" class="accented">{{
                     contacts?.contact?.email
@@ -222,7 +222,7 @@
                   </div>
 
                   <div class="d-f fd-r gap-12">
-                    <p class="secondaryText">{{ $t("dayoff") }}:</p>
+                    <p v-show="weekEnd.length>0" class="secondaryText">{{ $t("dayoff") }}:</p>
                     <p
                       v-show="weekEnd.length>0"
                       v-for="(day, k) in weekEnd"
@@ -267,7 +267,7 @@
               <div class="infoPart mt-12">
                 <Icons icon="mail" size="middle" color="white" />
                 <div class="d-f fd-c gap-12">
-                  <div class="d-f fd-r gap-12">
+                  <div class="d-f fd-r gap-12 wr">
                     <p class="secondaryText">Email:</p>
                     <a :href="contacts?.contact?.email" class="accented">{{
                       contacts?.contact?.email
@@ -580,9 +580,9 @@ export default {
       );
     },
     getWeekend(val) {
-      // console.log(val.end)
       let day = this.weekDays.filter((e) => e.id < val.start || e.id > val.end);
-
+      
+      // console.log(day)
       this.weekEnd = day;
 
     },
@@ -614,4 +614,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.wr{
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 899px) {
+  .site-footer-text{
+    display: none;
+  }
+}
+</style>
