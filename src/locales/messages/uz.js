@@ -209,6 +209,11 @@ const uz = {
   downData: 'Ma\'lumotlar (yuklab olish uchun havola):',
   firstPublish: 'Birinchi chop etilgan vaqti:',
   lastPublish: 'Oxirgi chop etilgan vaqti:',
-  addInfo: 'Qo\'shimcha ma\'lumotlar:'
+  addInfo: 'Qo\'shimcha ma\'lumotlar:',
+  price: 'Tovar narxi',
+  goodsTitle: 'Mahsulotning qisqacha tavsifi',
+  inStock: 'Omborda mavjud',
+  delivery: 'Yetkazib berish',
+  buyWhere: 'Qayerdan sotib olsam bo\'ladi'
 }
 export default uz

@@ -49,6 +49,13 @@ export default new Vuex.Store({
     allExhibitsTopTags: '',
     openData: '',
     openDataLen: '',
+    articles: '',
+    articlesLen: '',
+    AllShop: '',
+    AllShopLen: '',
+    bankCards: '',
+    bankCardsLen: '',
+    bankContent: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2714,6 +2721,32 @@ export default new Vuex.Store({
           state.openDataLen = resp.data.opendataDocuments.lengthDocument
           // console.log(resp.data.opendataDocuments)
         })
+      },
+      async getArticles({state}, queryParams){
+        await Api.get(`/press/article/site?page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.articles = resp.data.result.results
+          state.articlesLen = resp.data.result.lengthDocument
+          // console.log(resp.data)
+        })
+      },
+      async getAllShopItems({state}, queryParams){
+        await Api.get(`/services/shop/site?searchWord=${queryParams.search}&page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.AllShop = resp.data.result.results
+          state.AllShopLen = resp.data.NumberOfItems
+
+          // console.log(resp.data)
+        })
+      },
+      async getBankCards({state}, queryParams){
+        await Api.get(`/services/cards/site?category=${queryParams.category}&page=${queryParams.page}&limit=${queryParams.limit}`)
+        .then(resp => {
+          state.bankCards = resp.data.cardDocuments.results
+          state.bankCardsLen = resp.data.cardDocuments.lengthDocument
+          state.bankContent = resp.data.contentDocument
+          // console.log(resp.data)
+        }).catch(err => {console.log(err)})
       },
     preloaderOff({commit}) {
       commit('SET_PRELOADER_OFF')

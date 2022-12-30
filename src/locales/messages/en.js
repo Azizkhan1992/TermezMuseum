@@ -209,7 +209,12 @@ const en = {
   downData: 'Data (link for download):',
   firstPublish: 'First publishing date:',
   lastPublish: 'Last publishing date:',
-  addInfo: 'Additional information:'
+  addInfo: 'Additional information:',
+  price: 'Price',
+  goodsTitle: 'Brief product description',
+  inStock: 'In stock',
+  delivery: 'Delivery',
+  buyWhere: 'Where can I buy'
 }
 
 export default en

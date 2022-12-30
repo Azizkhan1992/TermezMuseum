@@ -13,18 +13,18 @@
       <p class="commonP line-h-30 bold colorType">{{allLogoFiles?.materials?.length}}</p>
     </div>
 
-    <div class="grid-3 mt-60 r-gap-60 w-100">
+    <div class="grid-3 mt-60 r-gap-60 w-100 material-wr">
       <div
         v-for="logo in allLogoFiles?.materials"
         :key="logo.id"
-        class="w-100 fd-c"
+        class="w-100 fd-c item-wr"
       >
         <div class="logoForMedias pos-rel w-4 d-f h-230p bor-r-20 ovr-hidden backgrnd-white align-c justify-c">
           <img class="logoForMediasImg" :src="logo?.mainImage?.path" alt="">
         </div>
 
         <div
-          class="logoForMediasFiles fd-c gap-24 w-100 mt-48"
+          class="logoForMediasFiles fd-c gap-24 w-100 mt-48 down-wr"
         >
           <div
             v-for="file in logo?.images"
@@ -52,7 +52,7 @@
     <!-- Card Start -->
 
     <div
-      class="w-100 h-152p backgrnd-white mt-60 pad-24p ovr-hidden bor-r-20 box-brb align-c justify-c gap-24"
+      class="w-100 h-152p backgrnd-white mt-60 pad-24p ovr-hidden bor-r-20 box-brb align-c justify-c gap-24 all-materials-down"
     >
       <img class="obj-fit-cov h-64p" :src="require('@/assets/static/fileIcons/' + 'ZIP' + '.png')" alt="">
       <div class="w-100 d-f fd-c h-104p">
@@ -332,6 +332,52 @@ axios({
 }
 </script>
 
-<style>
+<style lang="scss">
 
+.down-wr{
+  .w-100{
+    .gap-12{
+      p{
+        cursor: pointer;
+      }
+    }
+  }
+}
+@media screen and (max-width: 899px) {
+  .material-wr{
+    display: flex !important;
+    flex-direction: column !important;
+
+  }
+
+  .mainPage{
+
+    .all-materials-down{
+      height: 210px;
+
+      img{
+        width: calc(20% - 12px);
+      }
+
+      .h-104p{
+        width: calc(80% - 12px);
+        row-gap: 12px;
+        align-self: flex-start;
+
+        p{
+          line-height: 20px;
+        }
+
+        .w-100{
+          flex-direction: column;
+          gap: 8px;
+
+          .ml-a{
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

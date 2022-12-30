@@ -269,7 +269,7 @@ export default {
       await this.$api.get(`/press/opendata/${this.getID}`)
       .then(resp => {
         this.chosenOpenData = resp.data.result
-        console.log(this.chosenOpenData)
+        // console.log(this.chosenOpenData)
       }).catch(err => {console.log(err)})
     },
     downloadFile(name, path){

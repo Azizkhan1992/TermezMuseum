@@ -2,7 +2,7 @@
   <div class="mainPage">
 
     <div class="w-100 mt-120">
-      <h2 class="grandTitle txt-align-l">{{title}}</h2>
+      <h2 class="grandTitle txt-align-l">{{prevPage.name?.[$i18n.locale]}}</h2>
     </div>
 
     <div class="w-100 mt-80 gap-48">
@@ -93,7 +93,8 @@ export default {
 
   data() {
     return {
-      allBanks: this.$store.state.banks,
+      // allBanks: this.$store.state.banks,
+      allBanks: {},
       title: this.$route.params.id,
 
       prevPage: {
@@ -115,6 +116,17 @@ export default {
         <br/>
         Вокруг передней части шеи есть бороздки, представляющие кожные складки. В горловине спереди и с обеих сторон пробиты отверстия. На правой стороне челюсти имеется большое отверстие неправильной формы.
       `,
+    }
+  },
+  mounted(){
+    this.getSingleCard()
+  },
+  methods: {
+    getSingleCard(){
+      this.$api.get(`/services/cards/site/${this.title}`)
+      .then(resp => {
+        console.log(resp)
+      }).catch(err => {console.log(err)})
     }
   }
 }
