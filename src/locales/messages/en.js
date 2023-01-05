@@ -119,7 +119,7 @@ const en = {
   countItem: 'Amount of items',
   category: 'Category',
   ticketPrice: 'Adult ticket price',
-  childrenTicketPrice: 'Ticket price for children (0-8 years old)',
+  childrenTicketPrice: 'Ticket price for children',
   expectEvents: 'Expected events',
   noEvents: 'There are no events scheduled currently. Thank you for your interest in helping the Museum!',
   cardType: 'Card type',
@@ -214,7 +214,9 @@ const en = {
   goodsTitle: 'Brief product description',
   inStock: 'In stock',
   delivery: 'Delivery',
-  buyWhere: 'Where can I buy'
+  buyWhere: 'Where can I buy',
+  clickMe: 'Click me',
+  toYears: "years old",
 }
 
 export default en

@@ -387,7 +387,11 @@ export default {
         let year = new Date(temp[0]).getFullYear();
         let month = new Date(temp[0]).getMonth();
         let day = new Date(temp[0]).getDate();
-        let monId = month + 1;
+        let monId;
+
+        if(month !== 11){
+          monId = month + 1;
+        }else {monId = 11}
 
         let monthT = this.months[monId].monthName?.[this.$i18n.locale];
 

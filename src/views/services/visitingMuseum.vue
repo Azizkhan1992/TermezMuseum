@@ -8,19 +8,19 @@
 
 
     <div class="w-100">
-      <h4 v-html="description" class="commonD"></h4>
+      <h4 v-html="visitInfo?.description?.[$i18n.locale]" class="commonD"></h4>
     </div>
 
-    <div class="w-100 mt-60 gap-24">
+    <div class="w-100 mt-60 gap-24 mobile-visit">
       <div class="w-50">
         <div class="w-100 fd-c gap-12">
           <h4 class="commonT colorGreyD">{{$t('workdays')}}:</h4>
-          <h4 class="commonD bold colorType">Понедельник-Суббота</h4>
+          <h4 class="commonD bold colorType">{{ visitInfo?.startDay?.[0]?.name?.[$i18n.locale] }} - {{ visitInfo?.endDay?.[0]?.name?.[$i18n.locale] }}</h4>
         </div>
 
         <div class="w-100 fd-c gap-12 mt-60">
           <h4 class="commonT colorGreyD">{{$t('workhours')}}:</h4>
-          <h4 class="commonD bold colorType">09:00 - 18:00</h4>
+          <h4 class="commonD bold colorType">{{ visitInfo?.workingTime?.startTime }} - {{ visitInfo?.workingTime?.endTime }}</h4>
         </div>
       </div>
 
@@ -28,22 +28,22 @@
         <div class="w-100 fd-c gap-12">
           <h4 class="commonT colorGreyD">{{$t("ticketPrice")}}:</h4>
           <div class="w-a d-f fd-r gap-8">
-            <h4 class="commonD bold colorType">25 000.00</h4>
+            <h4 class="commonD bold colorType">{{ visitInfo?.tickePricetForAdult }}</h4>
             <h4 class="commonD colorGreyD">UZS</h4>
           </div>
         </div>
 
         <div class="w-100 fd-c gap-12 mt-60">
-          <h4 class="commonT colorGreyD">{{$t("childrenTicketPrice")}} (0-8 лет):</h4>
+          <h4 class="commonT colorGreyD">{{$t("childrenTicketPrice")}} ({{ visitInfo?.freeAgeRange?.from }}-{{ visitInfo?.freeAgeRange?.to }} {{ $t('toYears') }}):</h4>
           <div class="w-a d-f fd-r gap-8">
-            <h4 class="commonD bold colorType">15 000.00</h4>
+            <h4 class="commonD bold colorType">{{ visitInfo?.ticketPriceForChild }}</h4>
             <h4 class="commonD colorGreyD">UZS</h4>
           </div>
         </div>
       </div>
     </div>
 
-    <button class="w-4 prim mt-60">
+    <button class="w-4 prim mt-60" v-if="visitInfo?.link && visitInfo?.link !== ''" @click="goToBuy">
       <span>{{$t('buy')}}</span>
     </button>
 
@@ -74,46 +74,160 @@ export default {
         language_ru: 'Посещение музея',
         language_en: 'Visiting museum',
       },
-      description: `
-        Термезский археологический музей является единственным археологическим музеем в нашей стране и относится к числу специализированных музеев. Этот музей является одним из самых замечательных мест нашего города, в котором возрождается история древнего Сурханского оазиса на протяжении тысячелетий.
-        <br/><br/>
-        Термезский археологический музей состоит из вестибюля, 9 основных выставочных залов, нумизматического выставочного зала, выставочного зала, посвященного японскому археологу Като Кюдзо, небольшого выставочного зала и галереи под крыльцом. В музее также есть библиотека с редкими рукописями и литературой.
-        <br/><br/>
-        В вестибюле находки от эпохи бронзы (3-2 тыс. лет до н.э.) до 15 века н.э.;
-        <br/>
-        Выставочный зал Като Кюдзо — выставочный зал, посвященный жизни и научным исследованиям японского ученого Като Кюдзо.
-        <br/>
-        Зал I называется «Сурханский оазис в каменном веке» (100-3 тыс. лет). В этом зале размещены экспонаты периодов палеолита, мезолита, неолита и энеолита.
-        <br/>
-        Зал II носит название «Сурханский оазис в эпоху бронзы» (3-2 тыс. лет до н.э.) и экспонируются экспонаты, относящиеся к этому периоду.
-        <br/>
-        Зал III носит название «Древнебактрийская культура» (начало I тыс. до н.э. – конец IV в. до н.э.) и состоит из образцов материальной культуры, относящихся к позднему бронзовому и раннему железному периодам Сурханского оазиса.
-        <br/>
-        Зал IV - Бактрийская культура Александра Македонского и эллинистического государства (329 г. до н.э. - середина 2 в. до н.э.) Зал содержит экспонаты от нашествия Александра Македонского до распада Греко-Бактрийского царства, воплощенные в нем самом.
-        <br/>
-        Зал V называется «Культура Кушанского царства Древней Бактрии» (I в. до н.э. – III вв. н.э.) и содержит экспонаты этого периода.
-        <br/>
-        Зал VI называется «Северный Тохаристан в раннем средневековье». В этом зале находятся находки, относящиеся к IV-VIII векам.
-        <br/>
-        Зал VII – так называемый «Северный Тохаристан в развитом средневековье» (первая четверть IX-XIII вв.), размещены экспонаты, относящиеся к этому периоду.
-        <br/>
-        Зал VIII - так называемый "Культура Термеза и Чаганьяна периода Амира Темура и государства Тимуридов" (1370-е годы, начало XVI века), вниманию зрителей представлены археологические объекты этих периодов.
-        <br/>
-        Зал IX носит название «Сурханский оазис в XVI-начале XX веков» и в этом зале размещены шедевры нашей материальной культуры, относящиеся к этому периоду.
-        <br/>
-        Ценные предметы и находки, связанные с нумизматикой, занимают место в выставочном зале нумизматики.
-        <br/>
-        Масштабные экспонаты расположены в галерее под крыльцом.
-        <br/>
-        В библиотеке более 3700 рукописей, исторической литературы и книг по искусству.
-        <br/><br/>
-        По состоянию на 2020 год общее количество экспонатов в фонде Термезского археологического музея составляет более 100 тысяч. Из них более 70 000 экспонатов археологии и около 30 000 экспонатов, принадлежащих нумизматическому фонду.
-      `
+      visitInfo: '',
+      weekDays: [
+        {
+          id: 1,
+          name: {
+            language_uzlatin: "Dushanba",
+            language_uzCyrillic: "Душанба",
+            language_ru: "Понеделник",
+            language_en: "Monday",
+          },
+          val: {
+            language_uzlatin: "Du",
+            language_uzCyrillic: "Ду",
+            language_ru: "Пн",
+            language_en: "Mn",
+          },
+        },
+        {
+          id: 2,
+          name: {
+            language_uzlatin: "Seshanba",
+            language_uzCyrillic: "Сешанба",
+            language_ru: "Вторник",
+            language_en: "Tuesday",
+          },
+          val: {
+            language_uzlatin: "Se",
+            language_uzCyrillic: "Се",
+            language_ru: "Вт",
+            language_en: "Tu",
+          },
+        },
+        {
+          id: 3,
+          name: {
+            language_uzlatin: "Chorshanba",
+            language_uzCyrillic: "Чоршанба",
+            language_ru: "Среда",
+            language_en: "Wednesday",
+          },
+          val: {
+            language_uzlatin: "Chor",
+            language_uzCyrillic: "Чор",
+            language_ru: "Ср",
+            language_en: "Wed",
+          },
+        },
+        {
+          id: 4,
+          name: {
+            language_uzlatin: "Payshanba",
+            language_uzCyrillic: "Пайшанба",
+            language_ru: "Четверг",
+            language_en: "Thursday",
+          },
+          val: {
+            language_uzlatin: "Pay",
+            language_uzCyrillic: "Пай",
+            language_ru: "Чт",
+            language_en: "Th",
+          },
+        },
+        {
+          id: 5,
+          name: {
+            language_uzlatin: "Juma",
+            language_uzCyrillic: "Жума",
+            language_ru: "Пятница",
+            language_en: "Friday",
+          },
+          val: {
+            language_uzlatin: "Ju",
+            language_uzCyrillic: "Жу",
+            language_ru: "Пт",
+            language_en: "Fr",
+          },
+        },
+        {
+          id: 6,
+          name: {
+            language_uzlatin: "Shanba",
+            language_uzCyrillic: "Шанба",
+            language_ru: "Суббота",
+            language_en: "Saturday",
+          },
+          val: {
+            language_uzlatin: "Shan",
+            language_uzCyrillic: "Шан",
+            language_ru: "Суб",
+            language_en: "Sa",
+          },
+        },
+        {
+          id: 7,
+          name: {
+            language_uzlatin: "Yakshanba",
+            language_uzCyrillic: "Якшанба",
+            language_ru: "Воскресение",
+            language_en: "Sunday",
+          },
+          val: {
+            language_uzlatin: "Yak",
+            language_uzCyrillic: "Як",
+            language_ru: "Вс",
+            language_en: "Sn",
+          },
+        },
+      ],
+      workDays: []
+    }
+  },
+  mounted(){
+    this.getVisiting()
+  },
+  
+  methods: {
+    getVisiting(){
+      this.$store.dispatch('getVisitingMuseum')
+      .then(() => {
+        this.visitInfo = this.$store.state.visitInfo
+        
+        // console.log(this.visitInfo)
+          this.getWorkDays()
+          
+      })
+    },
+    getWorkDays(){
+      this.visitInfo.startDay = this.weekDays.filter(
+          (e) => e.id == this.visitInfo.workingTime.startDay
+        );
+        this.visitInfo.endDay = this.weekDays.filter(
+          (e) => e.id == this.visitInfo.workingTime.endDay
+        );
+      // console.log(this.workDays)
+    },
+    goToBuy(){
+      window.open(this.visitInfo.link, '_blank')
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@media screen and (max-width: 899px) {
+  .mobile-visit{
+  flex-direction: column;
 
+  .w-50{
+    width: 100%;
+
+    .mt-60{
+      margin-top: 24px;
+    }
+  }
+}
+}
 </style>

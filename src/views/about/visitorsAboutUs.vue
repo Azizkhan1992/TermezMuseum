@@ -17,13 +17,13 @@
 
     <VisitModal v-if="isVisitModal" @sendM="withM"/>
 
-    <div class="w-100 mb-60 h-a align-c">
-      <div class="w-a d-f fd-r gap-48">
+    <div class="w-100 mb-60 h-a align-c mobile-us">
+      <div class="w-a d-f fd-r gap-48 show">
         <p class="commonP colorGreyD">{{$t("numberReview")}}:</p>
         <p class="commonP bold colorType">{{docLen}}</p>
       </div>
 
-      <div class="w-a d-f fd-r gap-48 ml-120 align-c">
+      <div class="w-a d-f fd-r gap-48 ml-120 align-c mobile-sort">
         <p class="commonP colorGreyD">{{$t("sort")}}:</p>
         <button
         @click="changeSortingType('date')"
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="w-100 mb-60 align-c gap-120">
+    <div class="w-100 mb-60 align-c gap-120 send-us">
       <h3 class="commonT colorGreyD">{{$t("wouldShare")}}</h3>
 
       <button
@@ -73,7 +73,7 @@
           <!-- <p class="commonP colorGreyD line-h-20">from {{comment.country}}</p> -->
         </div>
 
-        <div class="w-100 mt-48 gap-48">
+        <div class="w-100 mt-48 gap-48 mobile-us-items">
           
           <div class="w-a d-f fd-r align-c gap-12 liked"
           @click="reactingToComment({reaction: 'like', id: comment._id, reactionBy: comment.reactionBy})"
@@ -129,6 +129,7 @@
     </div>
 
     <paginate
+    v-if="(docLen>8)"
       @goingToPage="goingToPage()"
       :pages="pages"
       @prev="prev"
@@ -160,8 +161,6 @@ export default {
     return {
       modalIsOpen: false,
       userInfo: null,
-      curPage: 3,
-      pages: 384,
       isVisitModal: false,
       pagination: {
         curPage: 1,
@@ -291,7 +290,7 @@ export default {
   },
 
   mounted(){
-    this.getAboutUs()
+
     if(window.sessionStorage.userInfo){
       this.userInfo = window.sessionStorage.userInfo
       // console.log(this.userInfo)
@@ -307,9 +306,18 @@ export default {
       })
     }else this.sortedBy = this.$route.query.sorting
 
-    if(this.$route.query.page == undefined){
-      this.pagination.curPage = 1
+    if(this.$route.query.page == undefined || this.$route.query.page == ''){
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          page: this.pagination.curPage
+        }
+      })
     }else this.pagination.curPage = Number(this.$route.query.page)
+
+
+    this.getAboutUs()
+    
   },
 
   methods: {
@@ -322,15 +330,81 @@ export default {
 
       this.$store.dispatch('getComments', params)
       .then(()=>{
+        // console.log(this.comments)
         this.comments = this.$store.state.comments
         this.docLen = this.$store.state.documentLength
-        // console.log(this.comments)
         // console.log(this.docLen)
       })
 
 
+
+      // await this.$api.get('/about/comments')
+      // .then(resp => {
+      //   this.comments = resp.data.result
+      //   for(let i=1; i<=this.comments.length; i++){
+      //     this.comments[i-1].id = i
+      //   }
+      //   console.log(this.comments)
+      // }),err => {console.log(err)}
     },
 
+    goingToPage(){
+      this.getAboutUs()
+    },
+    prev(){
+      this.getAboutUs()
+    },
+    next(){
+      this.getAboutUs()
+    },
+    goToSingle(id) {
+      this.$router.push({ path: '/visitors-about-us/' + id})
+    },
+
+    closeModal() {
+      this.modalIsOpen = false
+    },
+
+    withM(){
+      this.isVisitModal = false
+    },
+    addComment(){
+      if(this.userInfo  && this.userInfo !== '' && window.sessionStorage.userInfo !== "''"){
+        this.modalIsOpen = true
+        // console.log(this.userInfo) 
+      }else{
+        this.$router.push({path: '/visitModal'})
+        // console.log('Ups')
+      }
+    },
+    likeColor(like){
+      if(like == 'like'){
+        return 'white'
+      }else return 'burlywood'
+      // console.log(like)
+    },
+
+    dislikeColor(dislike){
+      // console.log(dislike)
+      if(dislike == 'dislike'){
+        return 'white'
+      }else return 'burlywood'
+    },
+
+    changeSortingType(type){
+      if(type !== this.sortedBy){
+        this.sortedBy = type
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            sorting: type
+          }
+        })
+        .then(()=>{
+          this.$router.go()
+        })
+      }
+    },
     async reactingToComment(react){
       // console.log(react)
       if(window.sessionStorage.userInfo !== undefined && window.sessionStorage.userInfo !== "''"){
@@ -375,64 +449,6 @@ export default {
         })
       }
     },
-    withM(){
-      this.isVisitModal = false
-    },
-    addComment(){
-      if(this.userInfo  && this.userInfo !== '' && window.sessionStorage.userInfo !== "''"){
-        this.modalIsOpen = true
-        // console.log(this.userInfo) 
-      }else{
-        this.$router.push({path: '/visitModal'})
-        // console.log('Ups')
-      }
-    },
-
-    goingToPage(){
-      this.getAboutUs()
-    },
-    prev(){
-      this.getAboutUs()
-    },
-    next(){
-      this.getAboutUs()
-    },
-
-    likeColor(like){
-      // console.log(like)
-      if(like == 'like'){
-        return 'white'
-      }else return 'burlywood'
-    },
-
-    dislikeColor(dislike){
-      // console.log(dislike)
-      if(dislike == 'dislike'){
-        return 'white'
-      }else return 'burlywood'
-    },
-
-    changeSortingType(type){
-      if(type !== this.sortedBy){
-        this.sortedBy = type
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            sorting: type
-          }
-        })
-        .then(()=>{
-          this.$router.go()
-        })
-      }
-    },
-    goToSingle(id) {
-      this.$router.push({ path: '/visitors-about-us/' + id})
-    },
-
-    closeModal() {
-      this.modalIsOpen = false
-    },
     filPost(val) {
       if (val) {
         
@@ -471,6 +487,58 @@ export default {
   &.pressed{
     background: #4582D3;
     // color: burlywood;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .mobile-us{
+    flex-direction: column;
+    row-gap: 24px;
+    align-items: flex-start;
+
+    .mobile-sort{
+      margin-left: 0;
+      flex-wrap: wrap;
+      row-gap: 24px;
+      gap: 12px;
+
+      p.commonP{
+        width: 100%;
+      }
+
+      button.ghost{
+        width: 161px;
+
+        span{
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+  .send-us{
+    flex-direction: column;
+    gap: 48px;
+    align-items: flex-start;
+
+    h3.commonT{
+      font-size: 1rem !important;
+    }
+  }
+
+  .grid-2{
+    .h-358p{
+      height: 506px;
+
+      .mobile-us-items{
+    flex-wrap: wrap;
+    gap: 36px;
+    justify-content: space-between;
+
+    .ml-a{
+      margin-left: calc(50% - 48px);
+    }
+  }
+    }
   }
 }
 </style>

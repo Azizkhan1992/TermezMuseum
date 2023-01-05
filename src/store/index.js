@@ -56,6 +56,8 @@ export default new Vuex.Store({
     bankCards: '',
     bankCardsLen: '',
     bankContent: '',
+    visitInfo: '',
+    applicationNumber: '',
 
     menuLinks: [
       {id: 1, name: {ru:'Главная страница',uz:'Bosh sahifa',uzcyr:'Бош саҳифа',en:'Main page'}, bg: 'about-museum', link: '/', page: false},
@@ -2746,6 +2748,20 @@ export default new Vuex.Store({
           state.bankCardsLen = resp.data.cardDocuments.lengthDocument
           state.bankContent = resp.data.contentDocument
           // console.log(resp.data)
+        }).catch(err => {console.log(err)})
+      },
+      async getVisitingMuseum({state}){
+        await Api.get('/services/visiting/site')
+        .then(resp => {
+          state.visitInfo = resp.data.result
+          // console.log(resp.data)
+        })
+      },
+      async sendAppeal({ state }, appeal) {
+        await Api.post('/send/feedback', appeal)
+        .then((data) => {
+          let response = data.data
+          state.applicationNumber = response
         }).catch(err => {console.log(err)})
       },
     preloaderOff({commit}) {

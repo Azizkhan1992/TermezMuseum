@@ -119,7 +119,7 @@ const uzcyr = {
   countItem: 'Махсулотлар сони',
   category: 'Категорияси',
   ticketPrice: 'Катталар учун чипта нархи',
-  childrenTicketPrice: 'Болалар учун чипта нархи (0-8 ёш)',
+  childrenTicketPrice: 'Болалар учун чипта нархи',
   expectEvents: 'Кутилаётган тадбирлар',
   noEvents: 'Ҳозирда кутилаётган тадбирлар мавжуд эмас. Музейга ёрдам беришга қизиқишингиз учун ташаккур!',
   cardType: 'Карта тури',
@@ -214,7 +214,9 @@ const uzcyr = {
   goodsTitle: 'Маҳсулотнинг қисқача тавсифи',
   inStock: 'Омборда мавжуд',
   delivery: 'Етказиб бериш',
-  buyWhere: 'Қаердан сотиб олсам бўлади'
+  buyWhere: 'Қаердан сотиб олсам бўлади',
+  clickMe: 'Тўлов',
+  toYears: "ёш",
 }
 
 export default uzcyr

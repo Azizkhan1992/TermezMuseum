@@ -25,7 +25,7 @@
           <p class="commonP colorGreyD line-h-20">{{ $t('viewed') }}: {{ articlesnfo?.NumberOfViews }}</p>
         </div>
 
-        <div class="w-a d-f fd-r align-c gap-24 cur-ptr">
+        <div class="w-a d-f fd-r align-c gap-24 cur-ptr" @click="shareIt">
           <Icons
             icon="share"
             size=""
@@ -101,8 +101,8 @@
       </div>
     </div>
 
-    <button class="w-4 prim mt-60">
-      <span>Click me</span>
+    <button class="w-4 prim mt-60" @click="goToPay">
+      <span>{{ $t('clickMe') }}</span>
     </button>
 
 
@@ -168,7 +168,7 @@ export default {
       .then(resp =>{
         this.articlesnfo = resp.data.itemDocument
         this.singleImgs = resp.data.itemDocument.img
-        // console.log(this.singleImgs)
+        // console.log(this.articlesnfo)
         for(let i=1; i<=this.singleImgs.length; i++){
           this.singleImgs[i-1].id = i
         }
@@ -193,6 +193,25 @@ export default {
         this.hiddenLeftChecker++
       }else this.hiddenLeftChecker = 1
       // console.log(this.singleImgs)
+    },
+    goToPay(){
+      window.open(this.articlesnfo.link, '_blanc')
+    },
+    async shareIt() {
+      if(navigator.canShare) {
+        navigator.share({
+          title: this.articlesnfo?.name?.[this.$i18n.locale],
+          text: this.articlesnfo?.text?.[this.$i18n.locale],
+          url: window.location.href
+        })
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          alert('Copied');
+        } catch($e) {
+          alert('Cannot copy');
+        }
+      }
     }
   }
 }

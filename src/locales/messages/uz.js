@@ -119,7 +119,7 @@ const uz = {
   countItem: 'Maxsulotlar soni',
   category: 'Kategoriyasi',
   ticketPrice: 'Kattalar uchun chipta narxi',
-  childrenTicketPrice: 'Bolalar uchun chipta narxi (0-8 yosh)',
+  childrenTicketPrice: 'Bolalar uchun chipta narxi',
   expectEvents: 'Kutilayotgan tadbirlar',
   noEvents: 'Hozirda kutilayotgan tadbirlar mavjud emas. Muzeyga yordam berishga qiziqishingiz uchun tashakkur!',
   cardType: 'Karta turi',
@@ -214,6 +214,8 @@ const uz = {
   goodsTitle: 'Mahsulotning qisqacha tavsifi',
   inStock: 'Omborda mavjud',
   delivery: 'Yetkazib berish',
-  buyWhere: 'Qayerdan sotib olsam bo\'ladi'
+  buyWhere: 'Qayerdan sotib olsam bo\'ladi',
+  clickMe: 'To\'lov',
+  toYears: "yosh",
 }
 export default uz

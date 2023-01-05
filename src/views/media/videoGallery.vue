@@ -600,7 +600,7 @@ export default {
       else
       this.videoID = link.split('/')[3]
       this.playerOn = true
-      console.log(this.videoID)
+      // console.log(this.videoID)
     },
     closeVideoPlayer() {
       this.playerOn = false

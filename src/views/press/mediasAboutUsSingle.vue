@@ -466,6 +466,7 @@ export default {
         gap: 24px;
       }
     }
+
   }
 }
 </style>

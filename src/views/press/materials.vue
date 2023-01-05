@@ -348,6 +348,13 @@ axios({
     display: flex !important;
     flex-direction: column !important;
 
+    .item-wr{
+
+      .logoForMedias{
+        width: 100%;
+      }
+    }
+
   }
 
   .mainPage{

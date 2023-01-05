@@ -119,7 +119,7 @@ const ru = {
   countItem: 'Количество товаров',
   category: 'Категория',
   ticketPrice: 'Стоимость билета для взрослых',
-  childrenTicketPrice: 'Стоимость билета для детей (0-8 лет)',
+  childrenTicketPrice: 'Стоимость билета для детей',
   expectEvents: 'Ожидаемые мероприятия',
   noEvents: 'На данный момент запланированных мероприятий нет. Спасибо за Ваш интерес к помощи Музею!',
   cardType: 'Вид карты',
@@ -214,7 +214,9 @@ const ru = {
   goodsTitle: 'Краткое описание товара',
   inStock: 'В наличии',
   delivery: 'Доставка',
-  buyWhere: 'Где можно приобрести'
+  buyWhere: 'Где можно приобрести',
+  clickMe: 'Нажми',
+  toYears: "лет",
 }
 
 export default ru

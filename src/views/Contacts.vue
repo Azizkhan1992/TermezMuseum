@@ -147,7 +147,7 @@
           v-for="item, idz in contacts?.socialNetworks?.links"
           :key="idz"
           v-show="item"
-            @click.native="goToSocial(socialNetworks[idz])"
+            @click.native="goToSocial(contacts.socialNetworks.links[idz])"
             class="contactSocials cur-ptr"
             :icon="checkNet(item?.name)"
             size="large"
@@ -444,6 +444,12 @@ export default {
           },
         },
       ],
+      send: {
+        language_uzlatin: 'Jo\'natildi',
+        language_uzCyrillic: 'Жўнатилди',
+        language_en: 'Sent',
+        language_ru: 'Отправлено'
+      }
 
     }
   },
@@ -466,6 +472,7 @@ export default {
       }).catch(err => {console.log(err)})
     },
     goToSocial(obj) {
+      // console.log(obj)
       window.open(obj.link, '_blank');
     },
     checkNet(name){
@@ -491,6 +498,25 @@ export default {
         this.$v.$touch()
         return
       }
+
+      const newAppeal = {
+        firstName: this.name,
+        lastName: this.surName,
+        middleName: this.secondName,
+        text: this.text,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        subject: this.appealTitle,
+      }
+      // console.log(newAppeal)
+
+      this.$store.dispatch('sendAppeal', newAppeal)
+      .then(() => {
+        this.number = this.$store.state.applicationNumber.applicationNumber
+      })
+      .then(() => {
+        alert(this.send?.[this.$i18n.locale])
+      })
     }
   },
 
