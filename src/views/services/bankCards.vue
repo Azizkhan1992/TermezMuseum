@@ -264,7 +264,7 @@ export default {
         }
       })
       this.getBankcards()
-      console.log(val)
+      // console.log(val)
     },
     prev(){
       this.getBankcards()

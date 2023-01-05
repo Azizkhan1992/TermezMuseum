@@ -38,7 +38,7 @@
 
 
 
-    <div class="w-100 ovr-hidden bor-r-20 mt-60 h-920p carousel-container">
+    <div v-if="singleImgs.length>1" class="w-100 ovr-hidden bor-r-20 mt-60 h-920p carousel-container">
       <div class="carousel-wr" :style="{'width': `${singleImgs.length * 100}%`}">
         <div class="carousel-items" v-for="img in singleImgs" :key="img.id"
         :class="img.id == hiddenLeftChecker ? 'hidden-left' : ''"
@@ -46,6 +46,10 @@
           <img :src="img?.path" alt="">
         </div>
       </div>
+    </div>
+
+    <div v-else class="single-img mt-60">
+      <img :src="singleImgs[0]?.path" alt="">
     </div>
 
     <paginatorDots v-if="isPaginator"/>
@@ -164,6 +168,7 @@ export default {
       .then(resp =>{
         this.articlesnfo = resp.data.itemDocument
         this.singleImgs = resp.data.itemDocument.img
+        // console.log(this.singleImgs)
         for(let i=1; i<=this.singleImgs.length; i++){
           this.singleImgs[i-1].id = i
         }
@@ -194,6 +199,17 @@ export default {
 </script>
 
 <style lang="scss">
+.mainPage{
+  .single-img{
+    width: 100%;
+    height: fit-content;
+
+    img{
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
 .carousel-container{
   overflow: hidden;
   position: relative;
